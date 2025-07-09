@@ -1436,11 +1436,7 @@ def main():
 
     # Create references page
     references_path = output_dir / "09-references.qmd"
-    references_content = """---
-title: "References"
-unnumbered: true
----
-
+    references_content = create_section_frontmatter() + """
 # References {.unnumbered}
 
 ::: {#refs}

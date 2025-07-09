@@ -655,7 +655,7 @@ def create_quarto_config(output_dir):
         },
         "book": {
             "title": "General Purpose Models for the Chemical Sciences",
-            "author": "Nawaf Alampara, Anagha Aneesh, Martiño Ríos-García, Adrian Mirza, Mara Schilling-Wilhelmi, Meiling Sun, Gordan Prastalo, Ali Asghar Aghajani, Kevin Maik Jablonka",
+            "author": "Nawaf Alampara, Anagha Aneesh, Martiño Ríos-García, Adrian Mirza, Mara Schilling-Wilhelmi, Ali Asghar Aghajani, Meiling Sun, Gordan Prastalo, Kevin Maik Jablonka",
             "date": "today",
             "page-footer": {
                 "left": (
@@ -690,7 +690,6 @@ def create_quarto_config(output_dir):
                 "number-sections": True,
                 "highlight-style": "github",
                 "code-link": True,
-                "template-partials": ["helpers/toc.html"],
                 "toc-title": "On this page",
                 "code-overflow": "wrap",
             }

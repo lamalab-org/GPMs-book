@@ -270,7 +270,7 @@ def extract_title_from_section(content):
     return "Untitled"
 
 
-def create_section_frontmatter(title, section_name):
+def create_section_frontmatter():
     """Create YAML frontmatter for a section."""
     return f"""---
 format:
@@ -469,9 +469,7 @@ title: "{title}"
                 markdown_content = "\n".join(lines[frontmatter_end + 1 :])
 
         # Add our frontmatter
-        final_content = (
-            markdown_content  # create_section_frontmatter(title, section_path.stem) +
-        )
+        final_content = create_section_frontmatter() + markdown_content
 
         # Clean up any remaining citation formatting issues
         final_content = clean_citation_formatting_in_markdown(final_content)
@@ -520,8 +518,10 @@ def create_index_page(main_tex_path, output_path, extract_media_dir):
         abstract = clean_latex_content(abstract)
 
     # Create index content
-    index_content = create_section_frontmatter() + f"""
-# {title} {.unnumbered}
+    index_content = (
+        create_section_frontmatter()
+        + f"""
+# {title} {{.unnumbered}}
 
 ## Abstract
 
@@ -582,6 +582,7 @@ This book covers the following topics:
 8. [Outlook and Conclusions](08-outlook_conclusions.qmd)
 9. [References](09-references.qmd)
 """
+    )
 
     # Clean up any remaining citation formatting issues in the index content
     index_content = clean_citation_formatting_in_markdown(index_content)

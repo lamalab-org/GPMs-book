@@ -7,6 +7,10 @@ book:
     \ Mara Schilling-Wilhelmi, Meiling Sun, Gordan Prastalo, Ali Asghar Aghajani,\
     \ Kevin Maik Jablonka"
   date: today
+  page-footer:
+    left: <img src="https://raw.githubusercontent.com/lamalab-org/lamalab.github.io/main/static/png-file.png"
+      alt="Lab for AI in Materials Science logo" style="height:5.0rem;vertical-align:middle;margin-right:0.4rem;">
+    right: "Copyright \xA9 2025 Lab for AI in Materials Science"
   chapters:
   - index.qmd
   - 01-introduction.qmd

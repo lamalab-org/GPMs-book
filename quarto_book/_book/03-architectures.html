@@ -484,17 +484,7 @@ xyz representation Stoichiometry, geometry Exact spatial detail. It is high dime
 <section id="sec:next_token_prediction" class="level4" data-number="5.4.3.2">
 <h4 data-number="5.4.3.2" class="anchored" data-anchor-id="sec:next_token_prediction"><span class="header-section-number">5.4.3.2</span> Next Token Prediction</h4>
 <p>Many forms of data, such as text, can be represented as sequences of tokens. One of the most powerful <span data-acronym-label="ssl" data-acronym-form="singular+short">ssl</span> tasks for such sequential data is next-token prediction. Here, the core objective is for a model to anticipate and generate the subsequent token in a given sequence, based on the contextual information provided by preceding tokens. Because text unfolds naturally in a sequence, it offers the reference information the model needs in order to learn. This approach has been applied to chemical and material representations by treating molecular string representations (<span data-acronym-label="smiles" data-acronym-form="plural+short">smiless</span>, <span data-acronym-label="selfies" data-acronym-form="plural+short">selfiess</span>, etc.) or material representations as sequences [<span class="citation" data-cites="adilov2021generative">Adilov (<a href="09-references.html#ref-adilov2021generative" role="doc-biblioref">2021</a>)</span>; <span class="citation" data-cites="wang2023cmolgpt">Ye Wang et al. (<a href="09-references.html#ref-wang2023cmolgpt" role="doc-biblioref">2023</a>)</span>; <span class="citation" data-cites="schwaller2019molecular">Schwaller et al. (<a href="09-references.html#ref-schwaller2019molecular" role="doc-biblioref">2019</a>)</span>; <span class="citation" data-cites="alampara2024mattext">Alampara, Miret, and Jablonka (<a href="09-references.html#ref-alampara2024mattext" role="doc-biblioref">2024</a>)</span>]. During training, the model constantly adjusts itself to maximize the likelihood (trying to make good predictions more probable and bad predictions less probable). In this context, likelihood refers to the probability of observing the actual subsequent token given the preceding tokens in the sequence . This is accomplished by making each prediction based on the preceding input, which establishes the conditional context (see <a href="#eq:nexttoken" data-reference-type="ref+Label" data-reference="eq:nexttoken">[eq:nexttoken]</a>).</p>
-<div class="tcolorbox">
-<p><span id="eq:nexttoken" data-label="eq:nexttoken"></span></p>
-<div class="center">
-<div class="minipage">
-<p><span class="math display">\[\mathcal{L} =
--\mathbb{E} \left[ \sum_{t=1}^{T}
-\log P(\eqnmarkbox[PositiveColor]{pred}{x_t} | \eqnmarkbox[NegativeColor]{context}{x_{&lt;t}})
-\right]
-\label{eq:cross_entropy}\]</span></p>
-</div>
-</div>
+<p><img src="media/eq_images/nexttoken.png" alt="Tcolorbox: eq:nexttoken" width="100%"></p>
 <ul>
 <li><p><strong>Prediction Term</strong> (Blue): The target token <span class="math inline">\(x_t\)</span> that the model is trying to predict at each position.</p></li>
 <li><p><strong>Context Tokens</strong> (Maroon): The set of tokens <span class="math inline">\(x_{\text{context}}\)</span> the model uses to make its prediction. The definition of this context depends on the SSL task:</p>
@@ -506,7 +496,6 @@ xyz representation Stoichiometry, geometry Exact spatial detail. It is high dime
 <li><p><strong>The Logarithm’s Role</strong>: The negative logarithm (<span class="math inline">\(\log P\)</span>) heavily penalizes highly confident wrong answers (low <span class="math inline">\(P\)</span>, high loss) and lightly rewards confident correct answers (high <span class="math inline">\(P\)</span>, low loss).</p></li>
 <li><p><strong>Overall Loss Structure</strong>: Cross-entropy loss that encourages the model to assign high probability to the correct next token at each position, given all previous tokens.</p></li>
 </ul>
-</div>
 </section>
 <section id="sec:denoising" class="level4" data-number="5.4.3.3">
 <h4 data-number="5.4.3.3" class="anchored" data-anchor-id="sec:denoising"><span class="header-section-number">5.4.3.3</span> Denoising</h4>
@@ -522,29 +511,13 @@ xyz representation Stoichiometry, geometry Exact spatial detail. It is high dime
 <h4 data-number="5.4.4.1" class="anchored" data-anchor-id="sec:instance_discrimination"><span class="header-section-number">5.4.4.1</span> Instance Discrimination</h4>
 <p>Instance Discrimination is arguably the most dominant paradigm in recent contrastive learning. Each instance (sample) in the dataset is treated as its own distinct class. This is typically achieved using contrastive loss functions like <code>InfoNCE</code> see <a href="#eq:infonce" data-reference-type="ref+Label" data-reference="eq:infonce">[eq:infonce]</a>. [<span class="citation" data-cites="oord2018representation">Oord, Li, and Vinyals (<a href="09-references.html#ref-oord2018representation" role="doc-biblioref">2018</a>)</span>] As detailed in <a href="#eq:infonce" data-reference-type="ref+Label" data-reference="eq:infonce">[eq:infonce]</a>, the loss function is formulated as a categorical cross-entropy loss where the task is to classify the positive sample correctly among a set of negatives plus the positive itself.</p>
 <p>In materials and chemistry, this can involve aligning the textual representation of a structure with a graphical representation, image, or other visual method to represent a molecule. The model could also learn from augmentations of a structure, such as being given several valid <span data-acronym-label="smiles" data-acronym-form="singular+short">smiles</span> strings that all describe the identical molecule. Furthermore, this approach can involve contrasting variations of a crystal structure against entirely different molecules or materials, enabling the model to grasp the subtle similarities and stark differences between them.</p>
-<div class="tcolorbox">
-<div class="center">
-<div class="minipage">
-<p><span class="math display">\[\label{eq:infonce}
-%\mathcal{L}_{\text{InfoNCE}}
-\hspace*{-2em}
-\mathcal{L} =
-%\hspace*{-3em}
--\mathbb{E} \left[ \log \frac{
-\eqnmarkbox[PositiveColor]{pos}{\exp({\text{sim}(f(\mathbf{x}_i), f(\mathbf{x}_i^+))/\tikzmarknode{tau1}{\tau}})}
-}{
-\eqnmarkbox[PositiveColor]{pos2}{\exp({\text{sim}(f(\mathbf{x}_i), f(\mathbf{x}_i^+))/\tau})} +
-\eqnmarkbox[NegativeColor]{neg}{\sum_{j=1}^{N} \exp({\text{sim}(f(\mathbf{x}_i), f(\mathbf{x}_j^-))/\tikzmarknode{tau2}{\tau}})}
-} \right]\]</span></p>
-</div>
-</div>
+<p><img src="media/eq_images/infonce.png" alt="Tcolorbox: eq:infonce" width="100%"></p>
 <ul>
 <li><p><strong>Positive Pair Term</strong> (Blue): Measures similarity between an anchor sample <span class="math inline">\(\mathbf{x}_i\)</span> and its positive pair <span class="math inline">\(\mathbf{x}_i^+\)</span> (e.g., different view of the same molecule).</p></li>
 <li><p><strong>Negative Pairs Term</strong> (Maroon): Sum of similarities between anchor sample <span class="math inline">\(\mathbf{x}_i\)</span> and all negative pairs <span class="math inline">\(\mathbf{x}_j^-\)</span> (e.g., different molecules).</p></li>
 <li><p><strong>Temperature Parameter</strong> <span class="math inline">\(\boldsymbol{\tau}\)</span> : Controls the sharpness of the distribution. Lower values make the model more sensitive to hard negatives.</p></li>
 <li><p><strong>Overall Loss Structure</strong> : A negative log probability that encourages the model to maximize similarity for positive pairs while minimizing it for negative pairs.</p></li>
 </ul>
-</div>
 </section>
 <section id="sec:clustering_cl" class="level4" data-number="5.4.4.2">
 <h4 data-number="5.4.4.2" class="anchored" data-anchor-id="sec:clustering_cl"><span class="header-section-number">5.4.4.2</span> Clustering-based Contrastive Learning</h4>
@@ -578,25 +551,7 @@ The core principle remains: <em>learning on large datasets to build generalizabl
 <p>Post-training alignment workflows commonly use <span data-acronym-label="rl" data-acronym-form="singular+short">rl</span>, as the classic loss-minimization approaches—simply fine-tuning on more “correct” examples—can struggle to capture more nuanced, hard-to-label objectives[<span class="citation" data-cites="Huan2025mathLLM">Huan et al. (<a href="09-references.html#ref-Huan2025mathLLM" role="doc-biblioref">2025</a>)</span>]; when the goal is to steer the model toward more intangible qualities, formulating loss functions and collecting a pre-labeled dataset become very challenging. In <span data-acronym-label="rl" data-acronym-form="singular+short">rl</span>-based alignment, the model is treated as an agent that takes actions (generates text in the case of an <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span>) in a trial-and-error environment and receives a reward signal based on the actions it chooses. The <span data-acronym-label="rl" data-acronym-form="singular+short">rl</span> objective is to maximize this reward by changing the model’s behavior. In the case of <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span>, this means compelling it to generate text with the preferred properties. This process transforms the model into a goal-oriented one, where the goal can be to generate stable molecules, solve tasks step by step, or utilize tools, depending on the reward function.</p>
 <p>During alignment, the foundational embeddings for basic concepts (e.g., a carbon atom) learned during pre-training remain largely intact. This initial state is critical; without a robust, pre-trained <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span>, the <span data-acronym-label="rl" data-acronym-form="singular+short">rl</span> process would be forced to blindly explore an intractably vast space, making it highly unlikely to discover preferred sequences (that it could then reinforce).</p>
 <p>The mapping from an input to its final representation is adjusted to become “reward-aware”. For example, the representation of a molecule might now encode not just its chemical structure, but also its potential to become a high-reward final molecule (stable and soluble molecule) [<span class="citation" data-cites="narayanan2025training">Narayanan et al. (<a href="09-references.html#ref-narayanan2025training" role="doc-biblioref">2025</a>)</span>]. The representation space retains its overall shape (<a href="#fig:training_workflow" data-reference-type="ref+Label" data-reference="fig:training_workflow">1</a>), but the model learns a new way to navigate it, guided by the reward.</p>
-<div class="tcolorbox">
-<p><span id="eq:rl" data-label="eq:rl"></span></p>
-<div class="center">
-<div class="minipage">
-<p><span class="math display">\[\label{eq:rl_objective}
-\hspace*{-1em}
-\pi(a|s) = \eqnmarkbox[PolicyColor]{policy}{P_{\text{LLM}}} \left( \eqnmarkbox[ActionColor]{action}{\text{next tokens}} \mid \eqnmarkbox[StateColor]{context}{\text{context}} \right)
-\rightarrow \text{Maximize } \eqnmarkbox[RewardColor]{reward}{\mathbb{E}[R]}\]</span></p>
-</div>
-</div>
-<ul>
-<li><p><strong>State (<span class="math inline">\(s\)</span>)</strong> (Blue): The sequence of tokens generated so far, including the original prompt and any partial response. Represents the current context that the model uses to make decisions.</p></li>
-<li><p><strong>Action (<span class="math inline">\(a\)</span>)</strong> (Maroon): The next token that the model chooses to generate from its vocabulary. This is the discrete decision the agent makes at each step.</p></li>
-<li><p><strong>Policy (<span class="math inline">\(\pi\)</span> or <span class="math inline">\(P_{\text{LLM}}\)</span>)</strong> (Red): The <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span> itself, whose parameters define the probability distribution over possible following tokens given the current state. This is what gets optimized during training.</p></li>
-<li><p><strong>Reward (<span class="math inline">\(R\)</span>)</strong> (Peach): A numerical score assigned to complete generated sequences, measuring how well the output achieves the desired goal. Used only during training to guide parameter updates.</p></li>
-<li><p><strong>Expectation (<span class="math inline">\(\mathbb{E}\)</span>)</strong> (Peach): The average cumulative reward, calculated over many possible sequences that could be generated by the current policy.</p></li>
-<li><p><strong>Training Objective</strong>: Adjust the model’s parameters to maximize the expected cumulative reward (<span class="math inline">\(\mathbb{E}[R]\)</span>) over complete sequences, enabling the generation of high-quality outputs.</p></li>
-</ul>
-</div>
+<p><img src="media/eq_images/rl_objective.png" alt="Reinforcement Learning Framework" width="100%"></p>
 <section id="the-challenge-of-reward-design" class="level3" data-number="5.7.1">
 <h3 data-number="5.7.1" class="anchored" data-anchor-id="the-challenge-of-reward-design"><span class="header-section-number">5.7.1</span> The Challenge of Reward Design</h3>
 <p>A critical factor for the success of this framework is the design of the reward function. The training process is most stable and effective when rewards are <em>verifiable</em> and based on objective, computable metrics. In contrast, training with <em>sparse</em> rewards (where feedback is infrequent) or <em>fuzzy</em> signals (where the goal is subjective or ill-defined) makes the credit assignment problem significantly more difficult. This is a central challenge in aligning models with complex human preferences, as crafting precise reward functions that capture the full nuance of a desired behavior remains an active area of research [<span class="citation" data-cites="ouyang2022training">Ouyang et al. (<a href="09-references.html#ref-ouyang2022training" role="doc-biblioref">2022</a>)</span>].</p>
@@ -1615,6 +1570,19 @@ Zou, Yunheng, Austin H. Cheng, Abdulrahman Aldossary, Jiaru Bai, Shi Xuan Leong,
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="https://raw.githubusercontent.com/lamalab-org/lamalab.github.io/main/static/png-file.png" alt="Lab for AI in Materials Science logo" style="height:1.4rem;vertical-align:middle;margin-right:0.4rem;"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Copyright © 2025 Lab for AI in Materials Science</p>
+</div>
+  </div>
+</footer>
 
 
 

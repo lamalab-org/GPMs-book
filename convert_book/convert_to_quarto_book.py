@@ -585,14 +585,27 @@ def create_helpers_directory(output_dir):
 def create_quarto_config(output_dir):
     """Create the _quarto.yml configuration file."""
     config = {
-        'project': {
-            'type': 'book',
-            'title': 'General Purpose Models for the Chemical Sciences'
-        },
-        'book': {
+    'project': {
+        'type': 'book',
+        'title': 'General Purpose Models for the Chemical Sciences'
+    },
+
+    'book': {
             'title': 'General Purpose Models for the Chemical Sciences',
             'author': 'Nawaf Alampara, Anagha Aneesh, Martiño Ríos-García, Adrian Mirza, Mara Schilling-Wilhelmi, Meiling Sun, Gordan Prastalo, Ali Asghar Aghajani, Kevin Maik Jablonka',
             'date': 'today',
+    
+            'page-footer': {
+                'left': (
+                    '<img src="https://raw.githubusercontent.com/lamalab-org/'
+                    'lamalab.github.io/main/static/png-file.png" '
+                    'alt="Lab for AI in Materials Science logo" '
+                    'style="height:1.4rem;vertical-align:middle;'
+                    'margin-right:0.4rem;">'
+                ),
+                'right': 'Copyright © 2025 Lab for AI in Materials Science'
+            },
+    
             'chapters': [
                 'index.qmd',
                 '01-introduction.qmd',
@@ -604,9 +617,11 @@ def create_quarto_config(output_dir):
                 '07-safety.qmd',
                 '08-outlook_conclusions.qmd',
                 '09-references.qmd'
-            ],
+            ]
         },
+    
         'bibliography': 'references.bib',
+    
         'format': {
             'html': {
                 'theme': 'cosmo',
@@ -621,10 +636,12 @@ def create_quarto_config(output_dir):
                 'code-overflow': 'wrap'
             }
         },
+    
         'execute': {
             'freeze': 'auto'
         }
     }
+
     
     config_path = output_dir / '_quarto.yml'
     with open(config_path, 'w', encoding='utf-8') as f:
@@ -852,9 +869,9 @@ def clean_citation_formatting_in_markdown(content):
     
     return content
 
-def replace_tcolorbox_equations_with_images(file_path, eq_images_dir="../docs/eq_images", media_dir="media"):
+def replace_boxes_with_images(file_path, eq_images_dir="../docs/eq_images", media_dir="media"):
     """
-    Replace tcolorbox equations with images.
+    Replace tcolorbox equations and promptbox blocks with images.
     
     Args:
         file_path: Path to the markdown file to update
@@ -862,75 +879,227 @@ def replace_tcolorbox_equations_with_images(file_path, eq_images_dir="../docs/eq
         media_dir: The media directory name in output
     """
     if not file_path.exists():
+        print(f"Warning: File {file_path} does not exist")
         return
     
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # Define equation mappings based on labels
-    equation_mappings = {
+    # Define image mappings based on labels - extract label from eq:label or box: label format
+    image_mappings = {
         'eq:nexttoken': 'nexttoken.png',
         'eq:infonce': 'infonce.png', 
-        'eq:rl_objective': 'rl_objective.png'
+        'eq:rl_objective': 'rl_objective.png',
+        'eq:cot_prompting': 'cot_prompting.png',
+        'box:cot_prompting': 'cot_prompting.png',
+        'box: cot_prompting': 'cot_prompting.png',
+        # Add any other mappings here as needed
+        'nexttoken': 'nexttoken.png',
+        'infonce': 'infonce.png',
+        'rl_objective': 'rl_objective.png',
+        'cot_prompting': 'cot_prompting.png'
     }
     
     # Pattern to match tcolorbox sections with equations
-    lines = content.split('\n')
-    new_lines = []
-    i = 0
+    # This pattern matches the entire tcolorbox block from ::::: tcolorbox to :::::
+    tcolorbox_pattern = r'::::: tcolorbox\s*\n(.*?)\n:::::'
     
-    while i < len(lines):
-        line = lines[i]
+    # Pattern to match promptbox sections
+    # This pattern matches the entire promptbox block from ::: promptbox to :::
+    promptbox_pattern = r'::: promptbox\s*\n(.*?)\n:::'
+    
+    def replace_box_block(match, box_type='tcolorbox'):
+        block_content = match.group(1)
         
-        # Check if this line starts a tcolorbox block
-        if line.strip() == '::::: tcolorbox':
-            # Find the end of this tcolorbox block
-            tcolorbox_start = i
-            tcolorbox_end = None
-            
-            # Look for the closing :::::
-            for j in range(i + 1, len(lines)):
-                if lines[j].strip() == ':::::':
-                    tcolorbox_end = j
-                    break
-            
-            if tcolorbox_end:
-                # Extract the content of the tcolorbox block
-                tcolorbox_content = '\n'.join(lines[tcolorbox_start:tcolorbox_end + 1])
-                
-                # Check if this tcolorbox contains any of our target equations
-                equation_found = None
-                for eq_label_check, image_file_check in equation_mappings.items():
-                    if f'#{eq_label_check}' in tcolorbox_content and f'label="{eq_label_check}"' in tcolorbox_content:
-                        equation_found = (eq_label_check, image_file_check)
+        # Check for specific cases first - such as RL framework
+        if box_type == 'tcolorbox' and ('Reinforcement Learning Framework' in block_content or 'rl_objective' in block_content):
+            # This is the RL framework box
+            img_tag = f'<img src="{media_dir}/eq_images/rl_objective.png" width="100%" alt="Reinforcement Learning Framework" />'
+            print(f"Replacing RL framework tcolorbox with rl_objective.png image")
+            return img_tag
+        
+        # Extract the label from the block - try different patterns
+        label = None
+        
+        # Pattern 1: []{#eq:label label="eq:label"} or []{#box:label label="box:label"}
+        label_match = re.search(r'\[]\{#([^}]+)\s+label="([^"]+)"\}', block_content)
+        if label_match:
+            label = label_match.group(2)  # Use the label value
+        
+        # Pattern 2: label="eq:label" or label="box:label"
+        if not label:
+            label_match = re.search(r'label="([^"]+)"', block_content)
+            if label_match:
+                label = label_match.group(1)
+        
+        # Pattern 3: #eq:label or #box:label
+        if not label:
+            if box_type == 'tcolorbox':
+                label_match = re.search(r'#(eq:[^\s}]+)', block_content)
+                if not label_match:
+                    # Also check for \label{eq:label} inside equation environments
+                    equation_label_match = re.search(r'\\begin\{equation\}.*?\\label\{(eq:[^\}]+)\}', block_content, re.DOTALL)
+                    if equation_label_match:
+                        label = equation_label_match.group(1)
+            else:  # promptbox
+                label_match = re.search(r'#(box:[^\s}]+)', block_content)
+            if label_match:
+                label = label_match.group(1)
+        
+        # Pattern 4: \label{eq:label} or \label{box:label}
+        if not label:
+            # We need to check for all \label commands, as the main block might have a different label
+            # than the equation or content inside it
+            label_matches = re.findall(r'\\label\{([^}]+)\}', block_content)
+            if label_matches:
+                # Check if any of the labels have our target patterns
+                for potential_label in label_matches:
+                    if 'eq:' in potential_label or 'box:' in potential_label:
+                        # Prioritize equation or box labels over others
+                        label = potential_label
                         break
                 
-                if equation_found:
-                    eq_label_found, image_file_found = equation_found
-                    
-                    # Replace the entire tcolorbox block with an HTML image with width="100%"
-                    image_html = f'<img src="{media_dir}/eq_images/{image_file_found}" alt="{eq_label_found}" width="100%" id="{eq_label_found}" />'
-                    new_lines.append(image_html)
-                    
-                    print(f"Replaced tcolorbox with equation {eq_label_found} with image {image_file_found}")
-                    
-                    # Skip to after the tcolorbox block
-                    i = tcolorbox_end + 1
-                    continue
-            
-            # If we didn't find a matching tcolorbox or couldn't process it, keep the original line
-            new_lines.append(line)
-        else:
-            new_lines.append(line)
+                # If no specialized label found, use the first one
+                if not label and label_matches:
+                    label = label_matches[0]
         
-        i += 1
+        if not label:
+            # If no label found, try to identify which content type it is
+            if box_type == 'tcolorbox':
+                if 'nexttoken' in block_content.lower():
+                    label = 'eq:nexttoken'
+                elif 'infonce' in block_content.lower():
+                    label = 'eq:infonce'
+                elif 'rl_objective' in block_content.lower() or 'rl objective' in block_content.lower() or 'eq:rl_objective' in block_content.lower():
+                    label = 'eq:rl_objective'
+                elif 'cot_prompting' in block_content.lower() or 'cot prompting' in block_content.lower():
+                    label = 'eq:cot_prompting'
+            else:  # promptbox
+                if 'cot_prompting' in block_content.lower() or 'cot prompting' in block_content.lower():
+                    label = 'box: cot_prompting'
+            
+            if not label:
+                # If still no match, print the content for debugging and return original block
+                print(f"Warning: No label found in {box_type} block and couldn't infer type")
+                print(f"Block content preview: {block_content[:200]}...")  # Print first 200 chars for debugging
+                return match.group(0)
+        
+        # Remove prefix if it exists to check the mapping
+        clean_label = label
+        if label.startswith('eq:'):
+            clean_label = label.replace('eq:', '')
+        elif label.startswith('box:'):
+            clean_label = label.replace('box:', '')
+        elif label.startswith('box: '):
+            clean_label = label.replace('box: ', '')
+        
+        # First try with the full label
+        image_filename = None
+        if label in image_mappings:
+            image_filename = image_mappings[label]
+        # Then try with the clean label (without prefix)
+        elif clean_label in image_mappings:
+            image_filename = image_mappings[clean_label]
+        
+        if image_filename:
+            # Create HTML img tag with width="100%"
+            img_tag = f'<img src="{media_dir}/eq_images/{image_filename}" width="100%" alt="{box_type.capitalize()}: {label}" />'
+            
+            # Extract any descriptive text that comes after the equation or prompt
+            description = ""
+            
+            if box_type == 'tcolorbox':
+                # For equations, extract text after the math block
+                math_end_pattern = r'(\$\$.*?\$\$|\\\[.*?\\\]|\\begin\{equation\}.*?\\end\{equation\})'
+                math_match = re.search(math_end_pattern, block_content, re.DOTALL)
+                
+                if math_match:
+                    # Get everything after the math block
+                    after_math = block_content[math_match.end():].strip()
+                    
+                    # Remove any closing LaTeX environments
+                    after_math = re.sub(r':::\s*::::', '', after_math)
+                    after_math = re.sub(r':::', '', after_math)
+                    after_math = after_math.strip()
+                    
+                    if after_math and not after_math.startswith(':::'):
+                        description = f"\n\n{after_math}"
+            
+            print(f"Replacing {box_type} {label} with image {image_filename}")
+            return f"{img_tag}{description}"
+        else:
+            # If no corresponding image, return original block but warn
+            print(f"Warning: No image mapping found for label '{label}'. Available mappings: {list(image_mappings.keys())}")
+            return match.group(0)
     
-    # Update content with the new lines
-    content = '\n'.join(new_lines)
+    # Apply the replacement for tcolorbox equations
+    original_content = content
+    replace_tcolorbox = lambda match: replace_box_block(match, 'tcolorbox')
+    content = re.sub(tcolorbox_pattern, replace_tcolorbox, content, flags=re.DOTALL)
+    
+    # Apply the replacement for promptbox blocks
+    replace_promptbox = lambda match: replace_box_block(match, 'promptbox')
+    content = re.sub(promptbox_pattern, replace_promptbox, content, flags=re.DOTALL)
+    
+    # Check if any replacements were made
+    if content != original_content:
+        print(f"Replaced boxes with images in {file_path}")
     
     # Write the updated content back to the file
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
+    
+    print(f"Processed box replacements in {file_path}")
+
+def copy_equation_images_to_media(eq_images_source, output_media_dir):
+    """
+    Copy equation images from source directory to the media directory.
+    
+    Args:
+        eq_images_source: Source directory containing equation images
+        output_media_dir: Output media directory
+    """
+    eq_images_source = Path(eq_images_source)
+    output_media_dir = Path(output_media_dir)
+    
+    if not eq_images_source.exists():
+        print(f"Warning: Equation images source directory {eq_images_source} does not exist")
+        return
+    
+    # Create eq_images subdirectory in media
+    eq_images_dest = output_media_dir / "eq_images"
+    eq_images_dest.mkdir(parents=True, exist_ok=True)
+    
+    # Copy all PNG files from source to destination
+    png_files = list(eq_images_source.glob("*.png"))
+    
+    if not png_files:
+        print(f"Warning: No PNG files found in {eq_images_source}")
+        print(f"Looking for any image files instead...")
+        png_files = list(eq_images_source.glob("*.jpg")) + list(eq_images_source.glob("*.jpeg")) + list(eq_images_source.glob("*.gif"))
+    
+    copied_count = 0
+    for png_file in png_files:
+        dest_file = eq_images_dest / png_file.name
+        shutil.copy2(png_file, dest_file)
+        copied_count += 1
+        print(f"Copied equation image: {png_file.name}")
+    
+    print(f"Copied {copied_count} equation images to {eq_images_dest}")
+    
+    # Verify the expected equation images exist
+    expected_images = ['nexttoken.png', 'infonce.png', 'rl_objective.png', 'cot_prompting.png']
+    missing_images = []
+    
+    for img in expected_images:
+        if not (eq_images_dest / img).exists():
+            missing_images.append(img)
+    
+    if missing_images:
+        print(f"Warning: The following expected equation images are missing: {missing_images}")
+        print(f"Make sure these images exist in {eq_images_source}")
+    else:
+        print(f"All expected equation images were successfully copied.")
 
 def enforce_image_width_100_percent(file_path):
     """
@@ -941,6 +1110,7 @@ def enforce_image_width_100_percent(file_path):
         file_path: Path to the markdown file to update
     """
     if not file_path.exists():
+        print(f"Warning: File {file_path} does not exist")
         return
     
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -949,38 +1119,35 @@ def enforce_image_width_100_percent(file_path):
     # Convert any remaining markdown images to HTML with width="100%"
     def convert_remaining_markdown_images(match):
         alt_text = match.group(1)
-        image_path = match.group(2)
-        # Extract title if present
-        title_match = re.search(r'"([^"]*)"', match.group(0))
-        title_attr = f' title="{title_match.group(1)}"' if title_match else ""
-        return f'<img src="{image_path}" alt="{alt_text}" width="100%"{title_attr} />'
+        image_src = match.group(2)
+        return f'<img src="{image_src}" alt="{alt_text}" width="100%" />'
     
     # Convert all remaining markdown images to HTML
     content = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', convert_remaining_markdown_images, content)
     
     # Ensure all HTML img tags have width="100%" and fix any missing width attributes
     def ensure_width_attribute(match):
-        tag_start = match.group(1)
-        tag_end = match.group(2)
+        img_tag = match.group(1)
+        closing = match.group(2)
         
         # Check if width attribute already exists
-        if 'width=' in tag_start or 'width=' in tag_end:
-            # Replace existing width with 100%
-            full_tag = tag_start + tag_end
-            full_tag = re.sub(r'width="[^"]*"', 'width="100%"', full_tag)
-            full_tag = re.sub(r"width='[^']*'", 'width="100%"', full_tag)
-            return full_tag
+        if 'width=' in img_tag:
+            # Update existing width to 100%
+            img_tag = re.sub(r'width="[^"]*"', 'width="100%"', img_tag)
+            img_tag = re.sub(r"width='[^']*'", 'width="100%"', img_tag)
         else:
-            # Add width="100%" before the closing >
-            return f'{tag_start} width="100%"{tag_end}'
+            # Add width attribute
+            img_tag = img_tag + ' width="100%"'
+        
+        return img_tag + closing
     
     content = re.sub(r'(<img[^>]*)(>)', ensure_width_attribute, content)
     
     # Handle any figure environments that might contain images
     def process_figure_images(match):
         figure_content = match.group(1)
-        # Apply width enforcement to any img tags within the figure
-        figure_content = re.sub(r'(<img[^>]*?)(>)', lambda m: ensure_width_attribute(m), figure_content)
+        # Apply width="100%" to any img tags within figures
+        figure_content = re.sub(r'(<img[^>]*)(>)', ensure_width_attribute, figure_content)
         return f'<figure>{figure_content}</figure>'
     
     content = re.sub(r'<figure>(.*?)</figure>', process_figure_images, content, flags=re.DOTALL)
@@ -1145,6 +1312,48 @@ unnumbered: true
     # Convert PDF images to PNG for web display
     convert_pdf_images_to_png(media_output_dir)
     
+    # Copy equation images to media directory
+    # First try relative to input_dir.parent, then relative to workspace root
+    eq_images_source = input_dir.parent / 'docs' / 'eq_images'
+    eq_images_found = eq_images_source.exists()
+    
+    if not eq_images_found:
+        # Try from workspace root (go up until we find docs directory)
+        current_path = input_dir
+        while current_path.parent != current_path:  # Stop at filesystem root
+            potential_docs = current_path / 'docs' / 'eq_images'
+            if potential_docs.exists():
+                eq_images_source = potential_docs
+                eq_images_found = True
+                break
+            current_path = current_path.parent
+    
+    # Try looking for the directory directly in the project root
+    if not eq_images_found:
+        project_root = Path(__file__).parent.parent
+        potential_docs = project_root / 'docs' / 'eq_images'
+        if potential_docs.exists():
+            eq_images_source = potential_docs
+            eq_images_found = True
+    
+    # Try explicit path as a last resort
+    if not eq_images_found:
+        # Try an absolute path as a last resort
+        absolute_docs = Path('/Users/martino/Nueva_Carpeta/GPMs-book/docs/eq_images')
+        if absolute_docs.exists():
+            eq_images_source = absolute_docs
+            eq_images_found = True
+    
+    if eq_images_found:
+        print(f"Found equation images directory: {eq_images_source}")
+        copy_equation_images_to_media(eq_images_source, media_output_dir)
+    else:
+        print(f"WARNING: Could not find equation images directory. Please ensure it exists at 'docs/eq_images' relative to the project root.")
+        print(f"Searched locations: ")
+        print(f"  - {input_dir.parent / 'docs' / 'eq_images'}")
+        print(f"  - Various parent directories containing 'docs/eq_images'")
+        print(f"  - {Path(__file__).parent.parent / 'docs' / 'eq_images'}")
+    
     # Update image references in all markdown files
     for qmd_file in output_dir.glob('*.qmd'):
         update_image_references_in_markdown(qmd_file, media_dir)
@@ -1170,6 +1379,11 @@ unnumbered: true
         
         with open(qmd_file, 'w', encoding='utf-8') as f:
             f.write(fixed_content)
+    
+    # Replace tcolorbox equations and promptbox blocks with images
+    print("Replacing boxes with images...")
+    for qmd_file in output_dir.glob('*.qmd'):
+        replace_boxes_with_images(qmd_file, eq_images_source, media_dir)
     
     # Final image width enforcement: ensure all images have width="100%"
     print("Enforcing 100% width on all images...")

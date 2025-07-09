@@ -349,13 +349,7 @@ window.Quarto = {
 <section id="llms-as-feature-extractors" class="level4" data-number="8.1.1.1">
 <h4 data-number="8.1.1.1" class="anchored" data-anchor-id="llms-as-feature-extractors"><span class="header-section-number">8.1.1.1</span> <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> as Feature Extractors</h4>
 <p>Another emerging application of <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> is their use as “feature extractors”, where they generate textual or embedded representations of molecules or materials. For instance, in materials science, <span class="citation" data-cites="aneesh2025semantic">Aneesh et al. (<a href="09-references.html#ref-aneesh2025semantic" role="doc-biblioref">2025</a>)</span> employed <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> to generate text embeddings of perovskite solar cell compositions. These embeddings were subsequently used to train a <span data-acronym-label="gnn" data-acronym-form="singular+short">gnn</span> for predicting power conversion efficiency, demonstrating the potential of <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> to enhance feature representation in materials informatics. Similarly, in the molecular domain, <span class="citation" data-cites="srinivas2024crossmodal">Srinivas and Runkana (<a href="09-references.html#ref-srinivas2024crossmodal" role="doc-biblioref">2024b</a>)</span> used zero-shot <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span> prompting (see <a href="#box:%20cot_prompting" data-reference-type="ref+Label" data-reference="box: cot_prompting">[box: cot_prompting]</a> for prompt examples) to generate detailed textual descriptions of molecular functional groups, which are used to train a small <span data-acronym-label="lm" data-acronym-form="singular+short">lm</span>. This <span data-acronym-label="lm" data-acronym-form="singular+short">lm</span> is used to compute text-level embeddings of molecules. Simultaneously, they generate molecular graph-level embeddings from <span data-acronym-label="smiles" data-acronym-form="singular+short">smiles</span> string molecular graph inputs. They finally integrate the graph and text-level embeddings to produce a semantically enriched embedding.</p>
-<div class="promptbox">
-<p>[]{#box: cot_prompting label=“box: cot_prompting”} <strong><span data-acronym-label="cot" data-acronym-form="singular+short">cot</span> Prompting</strong>[<span class="citation" data-cites="srinivas2024crossmodal">Srinivas and Runkana (<a href="09-references.html#ref-srinivas2024crossmodal" role="doc-biblioref">2024b</a>)</span>]<br>
-Prompt 1: What is the molecular structure of this chemical <span data-acronym-label="smiles" data-acronym-form="singular+short">smiles</span> string? Could you describe its atoms, bonds, functional groups, and overall arrangement?<br>
-Prompt 2: What are the physical properties of this molecule, such as its boiling point and melting point?<br>
-...<br>
-Prompt 14: Are there any environmental impacts associated with the production, use, or disposal of this molecule?</p>
-</div>
+<p><img src="media/eq_images/cot_prompting.png" alt="Promptbox: box: cot_prompting" width="100%"></p>
 <p>In a different implementation of fine-tuning, <span class="citation" data-cites="balaji2023gptmolberta">Balaji et al. (<a href="09-references.html#ref-balaji2023gptmolberta" role="doc-biblioref">2023</a>)</span> used <code>ChatGPT</code> to generate text descriptions of molecules that were then used to train a <code>RoBERTa</code> (125M) model for property prediction, showing how <span data-acronym-label="lm" data-acronym-form="singular+short">lm</span>-generated representations can access latent spaces that <span data-acronym-label="smiles" data-acronym-form="singular+short">smiles</span> strings alone might not capture. Similarly, <span class="citation" data-cites="li2024unveiling">Z. Li et al. (<a href="09-references.html#ref-li2024unveiling" role="doc-biblioref">2024</a>)</span> introduced the <code>MoleX</code> framework, which fine-tunes <code>ChemBERTa-2</code>[<span class="citation" data-cites="ahmad2022chemberta">Ahmad et al. (<a href="09-references.html#ref-ahmad2022chemberta" role="doc-biblioref">2022</a>)</span>] on Group <span data-acronym-label="selfies" data-acronym-form="singular+short">selfies</span> [<span class="citation" data-cites="cheng2023group">Cheng et al. (<a href="09-references.html#ref-cheng2023group" role="doc-biblioref">2023</a>)</span>] (a functional group-based molecular representation) to then extract a single <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span>-derived embedding of molecules that captures the chemical semantics at the functional group level. This allowed them to determine which functional groups or fragments contribute to molecular properties, which in turn can be converted into reliable explanations of said properties.</p>
 </section>
 </section>
@@ -1182,6 +1176,19 @@ Zunger, Alex. 2019. <span>“<span class="nocase">Beware of plausible prediction
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="https://raw.githubusercontent.com/lamalab-org/lamalab.github.io/main/static/png-file.png" alt="Lab for AI in Materials Science logo" style="height:1.4rem;vertical-align:middle;margin-right:0.4rem;"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Copyright © 2025 Lab for AI in Materials Science</p>
+</div>
+  </div>
+</footer>
 
 
 

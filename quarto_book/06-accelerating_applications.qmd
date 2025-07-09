@@ -187,20 +187,7 @@ acronym-form="singular+short"} string molecular graph inputs. They
 finally integrate the graph and text-level embeddings to produce a
 semantically enriched embedding.
 
-::: promptbox
-[]{#box: cot_prompting label="box: cot_prompting"}
-**[cot]{acronym-label="cot" acronym-form="singular+short"}
-Prompting**\[@srinivas2024crossmodal\]\
-Prompt 1: What is the molecular structure of this chemical
-[smiles]{acronym-label="smiles" acronym-form="singular+short"} string?
-Could you describe its atoms, bonds, functional groups, and overall
-arrangement?\
-Prompt 2: What are the physical properties of this molecule, such as its
-boiling point and melting point?\
-\...\
-Prompt 14: Are there any environmental impacts associated with the
-production, use, or disposal of this molecule?
-:::
+<img src="media/eq_images/cot_prompting.png" alt="Promptbox: box: cot_prompting" / width="100%">
 
 In a different implementation of fine-tuning, @balaji2023gptmolberta
 used `ChatGPT` to generate text descriptions of molecules that were then

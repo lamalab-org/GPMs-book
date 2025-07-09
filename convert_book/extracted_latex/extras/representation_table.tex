@@ -1,0 +1,57 @@
+\begin{longtable}{%
+  >{\raggedright\arraybackslash}p{0.20\textwidth}
+  >{\raggedright\arraybackslash}p{0.15\textwidth}
+  >{\raggedright\arraybackslash}p{0.25\textwidth}
+  >{\raggedright\arraybackslash}p{0.32 \textwidth}
+}
+  \caption{\textbf{Comparison of common molecular representations}. For the encoded information contained by each representation, we followed the criteria used by \textcite{alampara2024mattext}. The examples shown are \textit{aspirin} for elemental composition, \gls{iupac} name, \gls{smiles}, \gls{selfies}, \glslink{inchi}{InChI}, graphs, 3D coordinates; and \textit{silicon} for \glslink{cif}{CIF}, condensed \glslink{cif}{CIF}, \glslink{slices}{SLICES}, \glslink{localenv}{Local-Env}, and natural-language description. Two non-canonical \gls{smiles} are shown to illustrate ambiguity. The examples for 3D coordinates, \glslink{cif}{CIF}, and natural-language description are truncated to fit in the table. For the multimodal representation, only one of the possible modalities is shown ($^{13}$C \glslink{nmr}{NMR} spectrum).}
+  \label{tab:molecular-representations} \\
+  \toprule
+  \textbf{Representation} & \textbf{Encoded information} & \textbf{Description} & \textbf{Example} \\
+  \midrule
+  \endfirsthead
+
+  \multicolumn{4}{c}%
+  {\tablename\ \thetable{} — continued from previous page} \\
+  \toprule
+  \textbf{Representation} & \textbf{Encoded info} & \textbf{Description} & \textbf{Example} \\
+  \midrule
+  \endhead
+
+  \midrule
+  \multicolumn{4}{r}{Continued on next page} \\
+  \endfoot
+
+
+  \bottomrule
+  \endlastfoot
+    Elemental composition & Stoichiometry & Always available, but non-unique. & C9H8O4 \\
+    \addlinespace
+    \gls{iupac} name & Stoichiometry, bonding, geometry & Universally understood, systematic nomenclature, unmanageable for large molecules, and lacks detailed 3D information. & 2-acetyloxybenzoic acid \\
+    \addlinespace
+    \gls{smiles} \autocite{weininger1988smiles} & Stoichiometry, bonding & Massive public corpora and tooling support, however, there are several valid strings per molecule, and it does not contain spatial information. & \footnotesize \makecell[tl]{%
+    \smi{CC(=O)OC1=CC=CC=C1C(=O)O}\\[10pt]      % blank line = 4 pt
+    \smi{O=C(O)c1ccccc1OC(C)=O}\\[10 pt]
+    \emph{etc.}
+    } \\
+    \addlinespace
+    \gls{selfies} \autocite{krenn2020self,cheng2023group} & Stoichiometry, bonding & 100\% syntactic and semantic validity by construction, including meaningful grouping. & \footnotesize \texttt{[C][C][=Branch1][C][=O][O]} \texttt{[C][=C][C][=C][C][=C]} \texttt{[Ring1][=Branch1][C]} \texttt{[=Branch1][C][=O][O]} \\
+    \addlinespace
+    \gls{inchi} & Stoichiometry, bonding & Canonical one-to-one identifier; encodes stereochemistry layers. & \footnotesize \texttt{InChI=1S/C9H8O4/c1-6(10)13} \texttt{-8-5-3-2-4-7(8)9(11)12/} \texttt{h2-5H,1H3,(H,11,12)} \\
+    \addlinespace
+    Graphs & Stoichiometry, bonding, geometry & Strong inductive bias that works with \glspl{gnn}. Symmetry-equivariant variants available. Long-range interactions are implicit. & \cellimage{figures/Aspirin.png} \\
+    \addlinespace
+    xyz representation & Stoichiometry, geometry & Exact spatial detail. It is high dimensional, and orientation alignment is needed. & \footnotesize 1.2333    0.5540    0.7792 O -0.6952   -2.7148   -0.7502 O 0.7958   -2.1843    0.8685 O 1.7813    0.8105   -1.4821 O -0.0857    0.6088    0.4403 C \ldots \\ % -0.7927   -0.5515    0.1244 C -0.7288    1.8464    0.4133 C -2.1426   -0.4741   -0.2184 C -2.0787    1.9238    0.0706 C -2.7855    0.7636   -0.2453 C -0.1409   -1.8536    0.1477 C 2.1094    0.6715   -0.3113 C 3.5305    0.5996    0.1635 C -0.1851    2.7545    0.6593 H -2.7247   -1.3605   -0.4564 H -2.5797    2.8872    0.0506 H -3.8374    0.8238   -0.5090 H 3.7290    1.4184    0.8593 H 4.2045    0.6969   -0.6924 H 3.7105   -0.3659    0.6426 H -0.2555   -3.5916   -0.7337 H \\
+    \addlinespace
+    Multimodal & Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining & Combines complementary signals; boosts robustness and coverage. It is hard to implement, the complexity scales with the amount of representations, some modalities are data-scarce, and the information encoded totally depends on the modalities included. & \cellimage{figures/60031761.jpeg} \\
+    \addlinespace
+    \gls{cif} \autocite{hall1991crystallographic} & Stoichiometry, bonding, geometry, periodicity & Standardized and widely supported, however, it carries heterogeneous keyword sets and parser overhead & \footnotesize \texttt{data\_Si \_symmetry\_space\_group\_name\_H-M   'P 1' \_cell\_length\_a   3.85 \ldots \_cell\_angle\_alpha   60.0 \ldots \_symmetry\_Int\_Tables\_number   1 \_chemical\_formula\_structural   Si \_chemical\_formula\_sum   Si2 \_cell\_volume   40.33 \_cell\_formula\_units\_Z   2 loop\_ \_symmetry\_equiv\_pos\_site\_id  \_symmetry\_equiv\_pos\_as\_xyz   1  'x, y, z' loop\_ \_atom\_type\_symbol \_atom\_type\_oxidation\_number  Si0+  0.0loop\_ \_atom\_site\_type\_symbol \_atom\_site\_label \_atom\_site\_symmetry\_multiplicity \_atom\_site\_fract\_x \ldots \_atom\_site\_occupancy  Si0+  Si0  1  0.75  0.75  0.75  1.0 Si0+  Si1  1  0.0  0.0  0.0  1.0}\\ 
+    \addlinespace
+    Condensed \gls{cif} \autocite{gruver2024finetuned, antunes2024crystal} & Stoichiometry, geometry, symmetry, periodicity & Good for crystal generation tasks. It omits occupancies and defects, custom tooling is needed, and only works for crystals & \footnotesize \texttt{3.8 3.8 3.8 59 59 59 Si0+ 0.75 0.75 0.75 Si0+ 0.00 0.00 0.00}\\
+    \addlinespace
+    \glslink{slices}{SLICES} \autocite{Xiao_2023} & Stoichiometry, bonding, periodicity & Invertible, symmetry-invariant and compact for general crystals. However, it carries ambiguity for disordered sites & \footnotesize \texttt{Si Si 0 1 + + + 0 1 + + o 0 1 + o + 0 1 o + +}   \\
+    \addlinespace
+    \glslink{localenv}{Local-Env}\autocite{alampara2024mattext} & Stoichiometry, bonding, symmetry, coarse graining & Treats each coordination polyhedron as a \enquote{molecule}, it is transferable and compact; but it ignores long-range order and its reconstruction requires post-processing & \footnotesize \texttt{R-3m Si (2c) [Si][Si]([Si])[Si]} \\
+    \addlinespace
+    Natural-language description \autocite{ganose2019robocrystallographer} & Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining & It is human-readable and more intuitive tokenizable by \glspl{llm}. However, trying to encode all the information can lead to verbose, ambiguous descriptions. & \enquote{Silicon crystallizes in the diamond-cubic structure, a lattice you can picture as two face-centred-cubic frameworks gently interpenetrating\ldots} \\
+\end{longtable}

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Implications of GPMs: Education, Safety, and Ethics – General Purpose Models for the Chemical Sciences</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./07-outlook_conclusions.html" rel="next">
+<link href="./05-applications.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b95ce3833fcbbb97f3687e6914a03b85.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-safety.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Implications of GPMs: Education, Safety, and Ethics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">General Purpose Models for the Chemical Sciences</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">General purpose models for the chemical sciences</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data_taxonomy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Shape and Structure of Chemical Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-architectures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Building Principles of GPMs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-evals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Evaluations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Applications</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-safety.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Implications of GPMs: Education, Safety, and Ethics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-outlook_conclusions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Outlook and Conclusions</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec:implications" id="toc-sec:implications" class="nav-link active" data-scroll-target="#sec\:implications"><span class="header-section-number">8</span> Implications of GPMs: Education, Safety, and Ethics</a>
+  <ul class="collapse">
+  <li><a href="#sec:education" id="toc-sec:education" class="nav-link" data-scroll-target="#sec\:education"><span class="header-section-number">8.1</span> Education</a>
+  <ul class="collapse">
+  <li><a href="#vision" id="toc-vision" class="nav-link" data-scroll-target="#vision"><span class="header-section-number">8.1.1</span> Vision</a></li>
+  <li><a href="#current-status" id="toc-current-status" class="nav-link" data-scroll-target="#current-status"><span class="header-section-number">8.1.2</span> Current Status</a></li>
+  <li><a href="#outlook-and-limitations" id="toc-outlook-and-limitations" class="nav-link" data-scroll-target="#outlook-and-limitations"><span class="header-section-number">8.1.3</span> Outlook and Limitations</a></li>
+  </ul></li>
+  <li><a href="#sec:safety" id="toc-sec:safety" class="nav-link" data-scroll-target="#sec\:safety"><span class="header-section-number">8.2</span> Safety</a>
+  <ul class="collapse">
+  <li><a href="#evaluating-risk-amplification-in-the-chemical-discovery-cycle" id="toc-evaluating-risk-amplification-in-the-chemical-discovery-cycle" class="nav-link" data-scroll-target="#evaluating-risk-amplification-in-the-chemical-discovery-cycle"><span class="header-section-number">8.2.1</span> Evaluating Risk Amplification in the Chemical Discovery Cycle</a></li>
+  <li><a href="#existing-approaches-to-safety" id="toc-existing-approaches-to-safety" class="nav-link" data-scroll-target="#existing-approaches-to-safety"><span class="header-section-number">8.2.2</span> Existing Approaches to Safety</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">8.2.3</span> Solutions</a></li>
+  </ul></li>
+  <li><a href="#sec:ethics" id="toc-sec:ethics" class="nav-link" data-scroll-target="#sec\:ethics"><span class="header-section-number">8.3</span> Ethics</a>
+  <ul class="collapse">
+  <li><a href="#environmental-impact-and-climate-ethics" id="toc-environmental-impact-and-climate-ethics" class="nav-link" data-scroll-target="#environmental-impact-and-climate-ethics"><span class="header-section-number">8.3.1</span> Environmental Impact and Climate Ethics</a></li>
+  <li><a href="#copyright-infringement-and-plagiarism-concerns" id="toc-copyright-infringement-and-plagiarism-concerns" class="nav-link" data-scroll-target="#copyright-infringement-and-plagiarism-concerns"><span class="header-section-number">8.3.2</span> Copyright Infringement and Plagiarism Concerns</a></li>
+  <li><a href="#bias-and-discrimination" id="toc-bias-and-discrimination" class="nav-link" data-scroll-target="#bias-and-discrimination"><span class="header-section-number">8.3.3</span> Bias and Discrimination</a></li>
+  <li><a href="#democratization-of-power" id="toc-democratization-of-power" class="nav-link" data-scroll-target="#democratization-of-power"><span class="header-section-number">8.3.4</span> Democratization of Power</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Implications of GPMs: Education, Safety, and Ethics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec:implications" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Implications of GPMs: Education, Safety, and Ethics</h1>
+<p>The advent of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in the chemical sciences marks a paradigm shift that extends beyond methodological advances to fundamentally alter the conceptual frameworks through which scientific knowledge is produced and validated. As these models permeate education and research, their transformative potential is closely linked to critical challenges in cultivating discerning learners, mitigating emergent risks in automated discovery, and navigating ethical dilemmas arising from biased systems. Here, these tripartite implications are examined, and it is argued that responsible integration of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> requires not only technical innovation but also rigorous pedagogical and regulatory frameworks.</p>
+<section id="sec:education" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec:education"><span class="header-section-number">8.1</span> Education</h2>
+<section id="vision" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="vision"><span class="header-section-number">8.1.1</span> Vision</h3>
+<p><span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> are opening up new directions to create or use educational materials (see <a href="#fig:education" data-reference-type="ref+Label" data-reference="fig:education">1</a>). Although many current applications are still in their conceptual stage, they begin to highlight the potential of these models to personalize learning, increase the fairness of evaluations, and improve accessibility. <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> can support both students and educators at various stages of the learning process and across different media forms, indicating a shift toward more adaptive and personalized educational frameworks. [<span class="citation" data-cites="Mollick2024">E. R. Mollick et al. (<a href="#ref-Mollick2024" role="doc-biblioref">2024</a>)</span>]</p>
+<p>For students, <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> could act as intelligent companions in a variety of tasks. As adaptive tutors, they could tailor explanations, exercises, and feedback to individual needs. Additionally, they could help students rehearse for exams and presentations and deepen their conceptual understanding. [<span class="citation" data-cites="mollick2024instructors">E. Mollick and Mollick (<a href="#ref-mollick2024instructors" role="doc-biblioref">2024</a>)</span>; <span class="citation" data-cites="Sharma2025role">Sharma et al. (<a href="#ref-Sharma2025role" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="wang2025effect">J. Wang and Fan (<a href="#ref-wang2025effect" role="doc-biblioref">2025</a>)</span>]</p>
+<figure id="fig:education" class="figure">
+<img src="media/figures/rescaled_figures/chemrev_figure23.png" width="100%" class="figure-img">
+<figcaption>
+<strong>Possible application examples for students and teachers and their specific limitations for <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in chemical education.</strong> <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> can be used by students as scientific assistants (e.g., for data analysis, coding or lab experiments) and tutors (e.g., for question answering, teaching or exercises). Teachers can use <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> for evaluation (e.g., for grading and detailed feedback) or to personalize materials (e.g., for lectures and other learning materials). Current limitations include an over-reliance and a lack of critical assessment of the outputs, a lack of ready-to-use products, hallucination, a lack of reliability of the models, and a technology knowledge deficit of the users.
+</figcaption>
+</figure>
+<p>In more practice-oriented settings, such as laboratories or coding environments, these models could function as scientific assistants. They may provide real-time feedback on experimental setups, assist with how to use lab equipment, or help identify potential safety concerns.[<span class="citation" data-cites="Du2024">Du et al. (<a href="#ref-Du2024" role="doc-biblioref">2024</a>)</span>] Coupled with <span data-acronym-label="ar" data-acronym-form="singular+short">ar</span>, <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> could also enable immersive simulations of lab procedures, allowing students to familiarize themselves with workflows and instruments before entering a physical lab. Moreover, by supporting students in technical areas such as coding, data analysis, or simulations, they could reduce the entry barrier or learning curve and thus foster interdisciplinary competence—particularly in contexts where instructor support is limited.</p>
+<p>At the same time, <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> could ease the workload of educators. They offer new possibilities for generating and adapting course materials—ranging from lecture slides and exercises to individualized exam questions—thus enabling a better alignment with diverse learning levels and prior knowledge. In assessment tasks, these models could support the grading of open-ended responses by providing consistent, criteria-based feedback and reducing subjective bias.[<span class="citation" data-cites="Kortemeyer2024">Kortemeyer, Nöhl, and Onishchuk (<a href="#ref-Kortemeyer2024" role="doc-biblioref">2024</a>)</span>; <span class="citation" data-cites="gao2024towards">Gao et al. (<a href="#ref-gao2024towards" role="doc-biblioref">2024</a>)</span>] This is especially valuable in large courses or when timely, detailed feedback would otherwise be difficult to provide.</p>
+</section>
+<section id="current-status" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="current-status"><span class="header-section-number">8.1.2</span> Current Status</h3>
+<p>Despite these envisioned potentials of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in chemistry education, current applications are often still fragmented and lack integration into cohesive educational systems. In many cases, models are used via general-purpose interfaces without subject-specific customization or alignment with curricular goals. Rather than being part of purpose-built tools or platforms, their use remains largely exploratory.</p>
+<section id="general-systems" class="level4" data-number="8.1.2.1">
+<h4 data-number="8.1.2.1" class="anchored" data-anchor-id="general-systems"><span class="header-section-number">8.1.2.1</span> General Systems</h4>
+<p>Early applications often rely on zero-shot prompting of general-purpose <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> or <span data-acronym-label="vlm" data-acronym-form="plural+short">vlms</span> to aid with student-oriented learning tasks. These include plotting data [<span class="citation" data-cites="Subasinghe2025">Subasinghe, Gersib, and Mankad (<a href="#ref-Subasinghe2025" role="doc-biblioref">2025</a>)</span>], writing code [<span class="citation" data-cites="Tsai2023">Tsai, Ong, and Chen (<a href="#ref-Tsai2023" role="doc-biblioref">2023</a>)</span>], or generating analogies to explain abstract chemical concepts [<span class="citation" data-cites="shao2025unlocking">Shao et al. (<a href="#ref-shao2025unlocking" role="doc-biblioref">2025</a>)</span>].</p>
+<p><span class="citation" data-cites="handa2025education">Handa et al. (<a href="#ref-handa2025education" role="doc-biblioref">2025</a>)</span> analyzed over 570,000 anonymized Claude.ai conversations from university-affiliated users, finding that students primarily used the model for preparing learning materials (<span class="math inline">\(39.3\%\)</span>) and solving academic problems (<span class="math inline">\(33.5\%\)</span>). However, their use was often exploratory and low-stakes, and the study emphasizes the need for guidance, as many users lacked the expertise to evaluate model outputs critically.</p>
+<p>Two recent studies have explored zero-shot prompting in more realistic, assessment-focused settings. <span class="citation" data-cites="baral2025drawedumath0">Baral et al. (<a href="#ref-baral2025drawedumath0" role="doc-biblioref">2025</a>)</span> introduced a benchmark of more than 2,000 student-drawn math images and found that state-of-the-art <span data-acronym-label="vlm" data-acronym-form="plural+short">vlms</span>, including and , struggled to assess student reasoning and correctness, particularly in open-ended or diagram-based answers. Similarly, <span class="citation" data-cites="Kortemeyer2024">Kortemeyer, Nöhl, and Onishchuk (<a href="#ref-Kortemeyer2024" role="doc-biblioref">2024</a>)</span> investigated the use of for grading handwritten thermodynamics exams at . While the model performed reasonably well on short derivations, it failed to track detailed rubrics or interpret hand-drawn diagrams reliably. In chemistry education, <span class="citation" data-cites="kharchenko2024advantages">Kharchenko and Babenko (<a href="#ref-kharchenko2024advantages" role="doc-biblioref">2024</a>)</span> compared , , and on domain-specific tasks and found that while the models performed adequately on simple recall questions, they failed in tasks that required chemical reasoning, structural understanding, or logical analysis.</p>
+<p>Together, these findings suggest that while zero-shot prompting enables rapid deployment of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in educational contexts, current models lack the reliability, consistency, and domain grounding required for chemistry education—not only from a pedagogical standpoint, but also from ethical and legal perspectives.</p>
+</section>
+<section id="specialized-systems" class="level4" data-number="8.1.2.2">
+<h4 data-number="8.1.2.2" class="anchored" data-anchor-id="specialized-systems"><span class="header-section-number">8.1.2.2</span> Specialized Systems</h4>
+<p>A growing number of applications embed <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in specialized educational systems that combine <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> with structured components such as <span data-acronym-label="rag" data-acronym-form="singular+short">rag</span>, tracking learning progress, or the ability to work with multiple sources of content such as textbooks, lecture slides, or handwritten notes.</p>
+<p>For example, <span class="citation" data-cites="perez2025large">Perez et al. (<a href="#ref-perez2025large" role="doc-biblioref">2025</a>)</span> presented a biology <span data-acronym-label="qa" data-acronym-form="singular+short">qa</span> system that used a <span data-acronym-label="rag" data-acronym-form="singular+short">rag</span> pipeline to deliver curriculum-aligned answers. The I-Digest team [<span class="citation" data-cites="Jablonka2023">Jablonka et al. (<a href="#ref-Jablonka2023" role="doc-biblioref">2023</a>)</span>] introduced a platform that generates lecture summaries and follow-up questions to support continuous learning. Some systems also integrate specialized components to improve personalization and continuity in the learning process. Although not designed for chemistry specifically, general-purpose platforms such as TutorLLM [<span class="citation" data-cites="li2025tutorllm0">Li et al. (<a href="#ref-li2025tutorllm0" role="doc-biblioref">2025</a>)</span>] (generating personalized content based on the learning progress) and LearnMate [<span class="citation" data-cites="wang2025learnmate0">X. J. Wang, Lee, and Mutlu (<a href="#ref-wang2025learnmate0" role="doc-biblioref">2025</a>)</span>] (creating learning plans and giving feedback) demonstrate how large models can be embedded in structured educational frameworks.</p>
+<p>Anthropic’s Claude for Education [<span class="citation" data-cites="AnthropicEducation">Anthropic (<a href="#ref-AnthropicEducation" role="doc-biblioref">2025a</a>)</span>] offers a purpose-built platform for higher education with a “Learning Mode” that uses the Socratic method to guide students rather than directly giving the answer to their queries. The intention here is to promote active learning and mitigate the risks of passive tool use. While such systems illustrate the potential of structured <span data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span>-based learning environments, fully integrated applications remain rare—particularly in domain-specific contexts such as chemistry. Furthermore, current models must still strengthen their robustness and domain-specific reasoning before they can be trusted in demanding fields, including chemistry.</p>
+</section>
+</section>
+<section id="outlook-and-limitations" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="outlook-and-limitations"><span class="header-section-number">8.1.3</span> Outlook and Limitations</h3>
+<p>While <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> offer promising opportunities for chemistry education, their use also raises critical ethical and pedagogical concerns.</p>
+<p>A first concern is the lack of transparency in how these models generate responses. Although <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> produce fluent and plausible explanations, they do so without genuine understanding—and often with no clear indication of uncertainty or possible errors. This can lead students to accept incorrect or misleading information as fact, particularly when the output appears confident or authoritative. Over time, such interactions may normalize uncritical acceptance and discourage students from questioning, verifying, or reflecting on what they are told. In scientific education, where reasoning, skepticism, and an evidence-based mindset are essential, this poses a serious threat to the development of informed and independent learners.[<span class="citation" data-cites="marcus2025will">Marcus (<a href="#ref-marcus2025will" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="kosmyna2025your">Kosmyna et al. (<a href="#ref-kosmyna2025your" role="doc-biblioref">2025</a>)</span>]</p>
+<p>A related but distinct issue is the risk of over-reliance and deskilling. When students delegate a large portion of the learning process to generative tools, they might be able to complete assignments without engaging in the mental work needed to develop subject-specific competence. In such cases, <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> can disrupt the connection between concrete tasks—such as solving a problem or writing an explanation—and the broader educational goals they are meant to support, such as developing chemical understanding or analytical thinking skills.[<span class="citation" data-cites="dung2025learning">Dung and Balg (<a href="#ref-dung2025learning" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="Sharma2025role">Sharma et al. (<a href="#ref-Sharma2025role" role="doc-biblioref">2025</a>)</span>]</p>
+<p>Today—and even more so in the future—students and learners will increasingly use <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>, both in education and in their future professions. Attempting to restrict their use is neither realistic nor educationally meaningful. Therefore, educators must guide their use thoughtfully and adapt both the learning process and assessment practices accordingly. Furthermore, the question of what to learn needs to be redefined. What we learn must increasingly center around the development of critical thinking, creativity, and logical reasoning—skills that remain essential and irreplaceable, even—or perhaps especially—in the age of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>. [<span class="citation" data-cites="klein2025rethink">Klein and Winthrop (<a href="#ref-klein2025rethink" role="doc-biblioref">2025</a>)</span>]</p>
+</section>
+</section>
+<section id="sec:safety" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec:safety"><span class="header-section-number">8.2</span> Safety</h2>
+<figure id="fig:safety-overview" class="figure">
+<img src="media/figures/safety_chemrev_fig.png" width="100%" class="figure-img">
+<figcaption>
+<strong>A conceptual schematic depicting <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> risk factors in chemical science</strong>. As one traverses through the game-like scientific process, there are various obstacles to encountering <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> exacerbated risks. The path to superaligned chemical <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span>-assistants is obfuscated by unexplored chemical space.
+</figcaption>
+</figure>
+<p>A growing coalition within the scientific community has sounded a call to action: <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> poses existential risks that deserve the same urgent attention as pandemics and nuclear war [<span class="citation" data-cites="cais2023statement"><span>“Statement on <span>AI</span> <span>Risk</span> <span></span> <span>CAIS</span>”</span> (<a href="#ref-cais2023statement" role="doc-biblioref">n.d.</a>)</span>]. This call, formalized in a statement signed by hundreds of prominent <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> researchers, reflects mounting recognition that advanced <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> systems could fundamentally alter, or threaten, human civilization. While the ongoing discourse has focused on abstract notions of <span data-acronym-label="agi" data-acronym-form="singular+short">agi</span>, the immediate risks may emerge through the integration of <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> into specific domains where the stakes are already high [<span class="citation" data-cites="morris2023levels">Morris et al. (<a href="#ref-morris2023levels" role="doc-biblioref">2023</a>)</span>].</p>
+<p>Chemistry represents one such domain. The rapid integration of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in chemistry is a dual-edged sword. Although these technologies can accelerate discovery, they also introduce unprecedented risks. From democratizing access to hazardous chemical knowledge to enabling autonomous synthesis of dangerous compounds, <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> systems could lower barriers for misuse, whether intentional or accidental. <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> alone may not create new risks [<span class="citation" data-cites="peppin2024reality">Peppin et al. (<a href="#ref-peppin2024reality" role="doc-biblioref">2024</a>)</span>], but they can amplify existing ones (see <a href="#fig:safety-overview" data-reference-type="ref+Label" data-reference="fig:safety-overview">2</a>).</p>
+<p>Even in this amplified context, the ability of these systems to pose meaningful safety risks in practice is constrained by real-world limitations, including access to specialized lab equipment, regulated or scarce reagents, and, most critically, the “tacit knowledge”[<span class="citation" data-cites="Polanyi_2009">Polanyi (<a href="#ref-Polanyi_2009" role="doc-biblioref">2009</a>)</span>] required to execute complex chemical processes. Tacit knowledge, the expertise gained through hands-on experience and intuition, cannot be fully acquired from textbooks or datasets alone, as it is normally shared verbally and encompasses small learnings, often considered insignificant. This gap between theoretical <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> outputs and practical execution underscores why risks, though serious, might remain manageable with proactive safeguards.</p>
+<p>Ultimately, mitigating these threats requires a nuanced balance of fostering innovation while embedding safety at the architectural, operational, and governance levels.</p>
+<section id="evaluating-risk-amplification-in-the-chemical-discovery-cycle" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="evaluating-risk-amplification-in-the-chemical-discovery-cycle"><span class="header-section-number">8.2.1</span> Evaluating Risk Amplification in the Chemical Discovery Cycle</h3>
+<section id="dual-use" class="level4" data-number="8.2.1.1">
+<h4 data-number="8.2.1.1" class="anchored" data-anchor-id="dual-use"><span class="header-section-number">8.2.1.1</span> Dual Use</h4>
+<p>A critical question is whether <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> provide maliciously acting novices with new avenues to obtain harmful knowledge beyond what is already easily accessible (e.g., via the internet)[<span class="citation" data-cites="sandbrink2023artificial">Sandbrink (<a href="#ref-sandbrink2023artificial" role="doc-biblioref">2023</a>)</span>]. Preliminary research has explored whether <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> can exacerbate biorisks, a concern that extends analogously to chemical safety under the “information access” threat model [<span class="citation" data-cites="peppin2024reality">Peppin et al. (<a href="#ref-peppin2024reality" role="doc-biblioref">2024</a>)</span>]. <span class="citation" data-cites="urbina2022dual">Urbina et al. (<a href="#ref-urbina2022dual" role="doc-biblioref">2022</a>)</span> explored how their de novo molecular generator, , could be used to design toxic chemical agents by adjusting the reward system of the model to prefer compounds with greater toxicity and bioactivity. While their model predicted VX (toxic nerve agent) and other chemical warfare agents, the actual synthesis of such compounds requires expertise, controlled precursors, and specialized equipment that is far beyond the capabilities of most non-state actors.</p>
+<p>Recent evaluations by and have systematically assessed how their models can facilitate the creation of biological threats. In an evaluation of their Deep Research System (a multi-agent architecture), classified the system to be medium-risk for chemical and biological threat-creation. [<span class="citation" data-cites="openai2024building">OpenAI (<a href="#ref-openai2024building" role="doc-biblioref">2024</a>)</span>] As discussed previously, a key barrier that prevents such models from exceeding the assessed risk threshold is the acquisition of “tacit knowledge”. However, this system demonstrated modest improvements in troubleshooting and the acquisition of tacit knowledge. Although it still fell short of expert-level performance, these findings suggest that models are making progress toward overcoming this critical hurdle. They also evaluated ’s impact on experts and students across five biological threat creation stages: ideation, acquisition, magnification, formulation, and release. [<span class="citation" data-cites="openai2024building">OpenAI (<a href="#ref-openai2024building" role="doc-biblioref">2024</a>)</span>] Their key finding was that biorisk information is widely accessible without <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> and that practical constraints such as wet lab access or domain expertise are more limiting than information scarcity.</p>
+<p>’s parallel assessment of focused specifically on biological risks through red-teaming with bio-defense experts, multi-step agentic evaluations, and explicit testing of bioinformatics tool integration [<span class="citation" data-cites="anthropic2025system">Anthropic (<a href="#ref-anthropic2025system" role="doc-biblioref">2025b</a>)</span>]. Their findings align with ’s assessment of , and conclude that current systems remain constrained by physical barriers. Both studies emphasize that supply chain control of chemicals, the flow of goods (e.g., chemical reagents) from suppliers to consumers, remains crucial as these systems continue to evolve and barriers to accessing knowledge are continuously lowered. For example, although <span class="citation" data-cites="he2023control">He et al. (<a href="#ref-he2023control" role="doc-biblioref">2023</a>)</span> showed that <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> can generate pathways for explosives like <span data-acronym-label="petn" data-acronym-form="singular+short">petn</span> or nerve agents like sarin, the supply chain of obtaining precursor chemicals for weapons like sarin is tightly regulated. In addition, access to lab infrastructure like fume hoods or inert environments is not trivial to obtain for non-experts.</p>
+<p>In the status quo it remains true that these risks are mitigated by material and logistical hurdles [<span class="citation" data-cites="sandbrink2023artificial">Sandbrink (<a href="#ref-sandbrink2023artificial" role="doc-biblioref">2023</a>)</span>]. Nonetheless, existing information access or presumed barriers to accessing materials are not an argument for <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> complacency. Models that lower the technical or cognitive barriers to weaponization even incrementally risk acting as force multipliers for malicious actors. Moreover, a red-teaming (discussed in <a href="04-evals.html#para:red_teaming" data-reference-type="ref+Label" data-reference="para:red_teaming">[para:red_teaming]</a>) effort proved that these practical constraints are circumventable and show that real world checks are prone to failure.</p>
+</section>
+<section id="hallucinations" class="level4" data-number="8.2.1.2">
+<h4 data-number="8.2.1.2" class="anchored" data-anchor-id="hallucinations"><span class="header-section-number">8.2.1.2</span> Hallucinations</h4>
+<p>Another critical risk of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> is their propensity for hallucination, leading to factually incorrect outputs.[<span class="citation" data-cites="pantha2024challenges">Pantha et al. (<a href="#ref-pantha2024challenges" role="doc-biblioref">2024</a>)</span>; <span class="citation" data-cites="ji2023survey">Ji et al. (<a href="#ref-ji2023survey" role="doc-biblioref">2023</a>)</span>] These errors risk propagating misinformation, such as inventing non-existent chemical reactions or falsifying safety protocols. Additionally, <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> suffer from temporal misalignment; their static training data renders outputs obsolete in fast-evolving fields like drug discovery [<span class="citation" data-cites="pantha2024challenges">Pantha et al. (<a href="#ref-pantha2024challenges" role="doc-biblioref">2024</a>)</span>]. Therefore, their accuracy in chemistry decays sharply for research published after the training cutoff, underscoring the need for real-time verification systems.</p>
+</section>
+<section id="indirect-cyberattack-risk" class="level4" data-number="8.2.1.3">
+<h4 data-number="8.2.1.3" class="anchored" data-anchor-id="indirect-cyberattack-risk"><span class="header-section-number">8.2.1.3</span> Indirect Cyberattack Risk</h4>
+<p>The convergence of individual steps of the chemical discovery cycle in autonomous laboratory systems or cloud-based laboratories represents a high-risk scenario [<span class="citation" data-cites="rouleau2025risks">Rouleau and Murugan (<a href="#ref-rouleau2025risks" role="doc-biblioref">2025</a>)</span>]. Beyond traditional cybersecurity threats, these systems face a critical timeline mismatch: <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> systems are projected to achieve superhuman hacking capabilities by 2027 while operating within inadequately secured infrastructure [<span class="citation" data-cites="dean2025security">Dean (<a href="#ref-dean2025security" role="doc-biblioref">2025</a>)</span>]. For autonomous laboratories, this means <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> systems capable of designing hazardous compounds could be compromised by external actors.</p>
+</section>
+</section>
+<section id="existing-approaches-to-safety" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="existing-approaches-to-safety"><span class="header-section-number">8.2.2</span> Existing Approaches to Safety</h3>
+<p>Adversarial testing and red teaming have become prominent methods for evaluating the safety of <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> systems, even in the chemical domain (see <a href="04-evals.html#sec:evals" data-reference-type="ref+Label" data-reference="sec:evals">[sec:evals]</a>). While such evaluations are valuable to identify weaknesses in <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>, they are inherently reactive. These approaches highlight failures only after a model is trained or deployed, rather than embedding safety into the model’s architecture. Moreover, adversarial testing is often unsystematic and relies on human-curated test cases that may not range across all potential risks, particularly in complex domains such as chemistry.</p>
+<p>To move beyond reactive measures, an emerging field of safety research explores machine “unlearning”, a technique that selectively removes hazardous knowledge from a model’s training data [<span class="citation" data-cites="barez2025open">Barez et al. (<a href="#ref-barez2025open" role="doc-biblioref">2025</a>)</span>]. However, this approach faces significant challenges in chemistry. First, defining “dangerous chemical knowledge” is non-trivial because chemical properties are context-dependent. Seemingly benign compounds like bleach can become hazardous when combined or misused. Second, unlearning risks can lead to a model’s utility degradation, and the resulting challenge of balancing the trade-off between safety and functionality remains unresolved. This balance is especially challenging for <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>, which must achieve broad applicability with strict safety constraints.</p>
+<p>A more implicit safety strategy is alignment, which aims to steer model behavior toward human values through techniques like <span data-acronym-label="rlhf" data-acronym-form="singular+short">rlhf</span> or Constitutional <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> [<span class="citation" data-cites="bai2022constitutional">Bai et al. (<a href="#ref-bai2022constitutional" role="doc-biblioref">2022</a>)</span>]. Although alignment can reduce harmful outputs, it may not generalize well to novel or domain-specific threats. For instance, a chemically aligned model might refuse to synthesize a known toxin, but could still be manipulated into suggesting precursor chemicals. Moreover, even after undergoing alignment training, they are still prone to produce risky and harmful content and will always be susceptible to jailbreaks [<span class="citation" data-cites="kuntz2025os-harm">Kuntz et al. (<a href="#ref-kuntz2025os-harm" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="yona2024stealing">Yona et al. (<a href="#ref-yona2024stealing" role="doc-biblioref">2024</a>)</span>; <span class="citation" data-cites="lynch2025agentic">Lynch et al. (<a href="#ref-lynch2025agentic" role="doc-biblioref">2025</a>)</span>].</p>
+<p>In an effort to train trustworthy models, many <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> researchers have turned to “interpretability”, an approach that aims to explain how the computations <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> are linked to the output. [<span class="citation" data-cites="cunningham2023sparse">Cunningham et al. (<a href="#ref-cunningham2023sparse" role="doc-biblioref">2023</a>)</span>] However, in a recent global evaluation of <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> safety, <span class="citation" data-cites="bengio2025international">Bengio et al. (<a href="#ref-bengio2025international" role="doc-biblioref">2025</a>)</span> argue that <span data-acronym-label="sota" data-acronym-form="singular+short">sota</span> interpretability tools have not proven their reliability in understanding models to modify them to alleviate safety risks.[<span class="citation" data-cites="makelov2023subspace">Makelov, Lange, and Nanda (<a href="#ref-makelov2023subspace" role="doc-biblioref">2023</a>)</span>]</p>
+<section id="challenges-in-developing-safeguards" class="level4" data-number="8.2.2.1">
+<h4 data-number="8.2.2.1" class="anchored" data-anchor-id="challenges-in-developing-safeguards"><span class="header-section-number">8.2.2.1</span> Challenges in Developing Safeguards</h4>
+<p>Even chemistry-specific <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> agents like [<span class="citation" data-cites="bran2024augmenting">Bran et al. (<a href="#ref-bran2024augmenting" role="doc-biblioref">2024</a>)</span>] or [<span class="citation" data-cites="boiko2023autonomous">Boiko et al. (<a href="#ref-boiko2023autonomous" role="doc-biblioref">2023</a>)</span>] exhibit vulnerabilities. For instance, ’s safeguards block known controlled substances, yet <span class="citation" data-cites="he2023control">He et al. (<a href="#ref-he2023control" role="doc-biblioref">2023</a>)</span> demonstrated a flaw in its safety protocols. The agent’s refusals are reactive rather than proactive, as they rely on post-query web search checks rather than embedded safeguards.</p>
+<p>The capabilities and ensuing risks posed by <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> need to be contextualized around user intent [<span class="citation" data-cites="tang2024prioritizing">Tang et al. (<a href="#ref-tang2024prioritizing" role="doc-biblioref">2024</a>)</span>]. Under a paradigm of malicious intent, the user intentionally creates a dangerous situation or application using the tool. However, an uninformed, benign user (e.g., a chemistry undergraduate student) could be unaware of the dangers posed by a given model output and unable to differentiate hallucinated responses.</p>
+</section>
+</section>
+<section id="solutions" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="solutions"><span class="header-section-number">8.2.3</span> Solutions</h3>
+<p>The gaps in current <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> safety measures reveal a pressing need for proactive frameworks that address technical and systemic risks. [<span class="citation" data-cites="bengio2025international">Bengio et al. (<a href="#ref-bengio2025international" role="doc-biblioref">2025</a>)</span>]</p>
+<section id="regulatory-framework-for-chemical-ai-models" class="level4" data-number="8.2.3.1">
+<h4 data-number="8.2.3.1" class="anchored" data-anchor-id="regulatory-framework-for-chemical-ai-models"><span class="header-section-number">8.2.3.1</span> Regulatory Framework for Chemical <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> Models</h4>
+<p>Drawing from emerging biosecurity governance models, as a first step, chemical <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> oversight should focus on a narrow class of “advanced chemical models” that meet specific risk thresholds. Similar to proposed biological model regulations, these could include models trained on not widely accessible, particularly sensitive chemical data [<span class="citation" data-cites="bloomfield2024ai">Bloomfield et al. (<a href="#ref-bloomfield2024ai" role="doc-biblioref">2024</a>)</span>]. This targeted approach is preferable to regulating all chemical <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> models because it avoids creating compliance burdens that would disproportionately affect low-risk research while capturing the systems that actually pose security concerns.</p>
+</section>
+<section id="existing-institutional-efforts" class="level4" data-number="8.2.3.2">
+<h4 data-number="8.2.3.2" class="anchored" data-anchor-id="existing-institutional-efforts"><span class="header-section-number">8.2.3.2</span> Existing Institutional Efforts</h4>
+<p>Recent governmental initiatives have begun to address <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> safety concerns. The US <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> Safety Institute [<span class="citation" data-cites="nist2024safety">NIST (<a href="#ref-nist2024safety" role="doc-biblioref">2024</a>)</span>] and the UK <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> Safety Institute have been tasked with designing safety evaluations for frontier models and researching catastrophic risks from <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> systems. In contrast, the <span data-acronym-label="eu" data-acronym-form="singular+short">eu</span> has taken a more pragmatic regulatory approach through the <span data-acronym-label="eu" data-acronym-form="singular+short">eu</span> <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> Act [<span class="citation" data-cites="EU2024regulation">EU (<a href="#ref-EU2024regulation" role="doc-biblioref">2024</a>)</span>], which classifies <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> systems by risk levels and imposes obligations ranging from transparency requirements to prohibited uses. These nascent efforts, while promising, face significant limitations. National institutes operate within frameworks that may prioritize domestic interests over global safety. While more comprehensive in scope, the <span data-acronym-label="eu" data-acronym-form="singular+short">eu</span> <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> Act focuses primarily on general <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> applications rather than domain-specific risks such as chemical synthesis, and its risk classification system may not adequately capture the unique dual-use nature of chemical <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> models.</p>
+</section>
+<section id="future-institutional-oversight-and-transparency" class="level4" data-number="8.2.3.3">
+<h4 data-number="8.2.3.3" class="anchored" data-anchor-id="future-institutional-oversight-and-transparency"><span class="header-section-number">8.2.3.3</span> Future Institutional Oversight and Transparency</h4>
+<p>A critical step forward is establishing neutral and independent regulatory bodies to oversee <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> development. Unlike self-regulation, which risks conflicts of interest, an <span data-acronym-label="iaio" data-acronym-form="singular+short">iaio</span> comprised of <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> researchers, policymakers, ethicists, and security experts could harmonize standards and prevent a “race to the bottom” in regulatory laxity [<span class="citation" data-cites="trager2023international">Trager et al. (<a href="#ref-trager2023international" role="doc-biblioref">2023</a>)</span>]. Such a body could mandate pre-approval for high-risk <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> research (like <span data-acronym-label="agi" data-acronym-form="singular+short">agi</span>-aligned projects), similar to institutional review boards that exist in the biomedical research space [<span class="citation" data-cites="pistono2016unethical">Pistono and Yampolskiy (<a href="#ref-pistono2016unethical" role="doc-biblioref">2016</a>)</span>]. Precedents for this exist in <span data-acronym-label="cern" data-acronym-form="singular+short">cern</span>, which tries to balance civilian duties with dual-use risks and nuclear non-proliferation treaties that tie market access to compliance.[<span class="citation" data-cites="cern_nuclear_safeguards_2024">CERN (<a href="#ref-cern_nuclear_safeguards_2024" role="doc-biblioref">2024</a>)</span>] Effective governance also requires binding enforcement mechanisms. One approach is conditional market access, where <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> products and precursors can only be traded internationally if certified by the <span data-acronym-label="iaio" data-acronym-form="singular+short">iaio</span>. Participating states would then enact domestic laws to align with these standards, ensuring corporate and national compliance. This model leverages economic incentives rather than voluntary guidelines to enforce safety. Transparency must also be enforced, particularly in red-teaming and safety testing. Currently, many companies conduct red-teaming privately, with no obligation to disclose the findings or corrective actions. To address this, <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> developers should be required to publicly report red-teaming results and undergo third-party safety audits for high-stakes applications.[<span class="citation" data-cites="carlini2025career"><span>“Career Update: Google <span>DeepMind</span> -&gt; Anthropic”</span> (<a href="#ref-carlini2025career" role="doc-biblioref">2025</a>)</span>]</p>
+<p>The risks posed by <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> in chemistry demand immediate action from governments and institutions. Yet these challenges also invite a deeper question: <em>Is the integration of <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> into scientific discovery fundamentally advancing our understanding or merely accelerating the production of epistemic noise?</em> As <span class="citation" data-cites="narayanan2025why">Narayanan and Kapoor (<a href="#ref-narayanan2025why" role="doc-biblioref">2025</a>)</span> cautioned, <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span>’s predictive abilities often obscure its inability to explain underlying mechanisms. In chemistry, this tension is acute: <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span>-driven tools may optimize reactions or design toxins with equal ease, but their black-box nature complicates accountability and obscures causal relationships. True progress may require safeguards against misuse and a reevaluation of whether <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span>’s role in science should be expansive or deliberately constrained.</p>
+</section>
+</section>
+</section>
+<section id="sec:ethics" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec:ethics"><span class="header-section-number">8.3</span> Ethics</h2>
+<p>The deployment of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in the chemical sciences raises several critical ethical concerns that require careful consideration. These issues range from perpetuating harmful biases to environmental impacts and intellectual property concerns [<span class="citation" data-cites="crawford2021atlas">Crawford (<a href="#ref-crawford2021atlas" role="doc-biblioref">2021</a>)</span>].</p>
+<section id="environmental-impact-and-climate-ethics" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="environmental-impact-and-climate-ethics"><span class="header-section-number">8.3.1</span> Environmental Impact and Climate Ethics</h3>
+<p>The computational requirements for training and deploying <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> contribute to environmental degradation through excessive energy consumption and carbon emissions. [<span class="citation" data-cites="spotte-smith2025considering">Spotte-Smith (<a href="#ref-spotte-smith2025considering" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="nature2023carbon">Board (<a href="#ref-nature2023carbon" role="doc-biblioref">2023</a>)</span>] These computational resources are often powered by fossil fuel-based energy sources, which directly contribute to anthropogenic climate change. [<span class="citation" data-cites="strubell2019energy">Strubell, Ganesh, and McCallum (<a href="#ref-strubell2019energy" role="doc-biblioref">2019</a>)</span>] The emphasis on <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> research has superseded some of the commitments made by big technological companies to carbon neutrality. For example, Google rescinded its commitment to carbon neutrality amid a surge in <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> usage (65<span class="math inline">\(\%\)</span> increase in carbon emissions between 2021-24) and funding.[<span class="citation" data-cites="bhuiyan2025google">Bhuiyan (<a href="#ref-bhuiyan2025google" role="doc-biblioref">2025</a>)</span>] Additionally, the water consumption for cooling data centers that support these models is another concern, particularly in regions facing water scarcity. [<span class="citation" data-cites="mytton2021data">Mytton (<a href="#ref-mytton2021data" role="doc-biblioref">2021</a>)</span>]</p>
+<p>The irony is particularly stark when considering that in the chemical sciences, these models are used to address climate-related challenges, such as the development of sustainable materials or carbon capture technologies. As a scientific community, we must grapple with the questions about the sustainability of current <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> development trajectories and consider more efficient and renewable approaches to model development and deployment. [<span class="citation" data-cites="kolbert2024obscene">Kolbert (<a href="#ref-kolbert2024obscene" role="doc-biblioref">2024</a>)</span>]</p>
+</section>
+<section id="copyright-infringement-and-plagiarism-concerns" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="copyright-infringement-and-plagiarism-concerns"><span class="header-section-number">8.3.2</span> Copyright Infringement and Plagiarism Concerns</h3>
+<p><span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> are typically trained on a vast corpora of copyrighted scientific literature, patents, and proprietary databases, often without explicit permission, a practice that has sparked legal disputes, such as <em>Getty Images v.&nbsp;Stability <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span></em>, where plaintiffs allege unauthorized scraping of protected content. [<span class="citation" data-cites="kirchhubel2024intellectual">Kirchhübel and Brown (<a href="#ref-kirchhubel2024intellectual" role="doc-biblioref">2024</a>)</span>] Developers at claimed in a statement to the <span data-acronym-label="uk" data-acronym-form="singular+short">uk</span> House of Lords that training <span data-acronym-label="sota" data-acronym-form="singular+short">sota</span> models is “impossible” without copyrighted material, highlighting a fundamental tension between <span data-acronym-label="ip" data-acronym-form="singular+short">ip</span> law and <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> advancement. [<span class="citation" data-cites="openai2023written">OpenAI (<a href="#ref-openai2023written" role="doc-biblioref">2023</a>)</span>] In the chemical sciences, this challenge persists through the training of models on experimental results from pay-walled journals. A potential resolution to this in the scientific sphere lies in the expansion of open-access research frameworks. Initiatives like the <span data-acronym-label="cas" data-acronym-form="singular+short">cas</span> Common Chemistry database provide legally clear training data while maintaining attribution. <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> have shown a high propensity to regurgitate elements from their training data. When generating text, models may reproduce near-verbatim fragments of training data without citation, effectively obscuring intellectual contributions.[<span class="citation" data-cites="bender2021dangers">Bender et al. (<a href="#ref-bender2021dangers" role="doc-biblioref">2021</a>)</span>] While some praise <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> for overcoming “blank-page syndrome” for early-career scientists [<span class="citation" data-cites="altmae2023artificial">Altmäe, Sola-Leyva, and Salumets (<a href="#ref-altmae2023artificial" role="doc-biblioref">2023</a>)</span>], others warn that uncritical reliance on their outputs risks eroding scientific rigor.[<span class="citation" data-cites="donker2023dangers">Donker (<a href="#ref-donker2023dangers" role="doc-biblioref">2023</a>)</span>]</p>
+</section>
+<section id="bias-and-discrimination" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="bias-and-discrimination"><span class="header-section-number">8.3.3</span> Bias and Discrimination</h3>
+<p><span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> inherit and amplify harmful prejudices and stereotypes present in their training data, which pose significant risks when applied translationally to medicinal chemistry and biochemistry. [<span class="citation" data-cites="spotte-smith2025considering">Spotte-Smith (<a href="#ref-spotte-smith2025considering" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="yang2024demographic">Yang et al. (<a href="#ref-yang2024demographic" role="doc-biblioref">2024</a>)</span>; <span class="citation" data-cites="omiye2023large">Omiye et al. (<a href="#ref-omiye2023large" role="doc-biblioref">2023</a>)</span>] These models can perpetuate inaccurate and harmful assumptions based on race and gender about drug efficacy, toxicity, and disease susceptibility, leading to misdiagnosis and mistreatment. [<span class="citation" data-cites="chen2023algorithmic">Chen et al. (<a href="#ref-chen2023algorithmic" role="doc-biblioref">2023</a>)</span>] Historical medical literature contains biased representations of how different populations respond to treatments, and <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> trained on such data can reinforce these misconceptions. [<span class="citation" data-cites="mittermaier2023bias">Mittermaier, Raza, and Kvedar (<a href="#ref-mittermaier2023bias" role="doc-biblioref">2023</a>)</span>] The problem extends to broader contexts in chemical research. Biased models can influence research priorities, funding decisions, and the development of chemical tools in ways that systematically disadvantage the most vulnerable populations [<span class="citation" data-cites="dotan2019value0laden">Dotan and Milli (<a href="#ref-dotan2019value0laden" role="doc-biblioref">2019</a>)</span>].</p>
+<section id="solutions-1" class="level4" data-number="8.3.3.1">
+<h4 data-number="8.3.3.1" class="anchored" data-anchor-id="solutions-1"><span class="header-section-number">8.3.3.1</span> Solutions</h4>
+<p>The problem of bias can be best addressed through top-down reform. The data necessary to train unbiased models can only exist if clinical studies of drug efficacy are conducted on diverse populations in the real world.[<span class="citation" data-cites="criado-perez2019invisible">Criado-Perez (<a href="#ref-criado-perez2019invisible" role="doc-biblioref">2019</a>)</span>] To complement improved data collection, standard evaluations for bias testing must be developed and mandated prior to deployment of <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>.</p>
+</section>
+</section>
+<section id="democratization-of-power" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="democratization-of-power"><span class="header-section-number">8.3.4</span> Democratization of Power</h3>
+<p>Although <span data-acronym-label="ai" data-acronym-form="singular+short">ai</span> tools have the potential to democratize access to advanced chemical research capabilities, they may also concentrate power in the hands of a few large companies that control the frontier models. This concentration raises concerns about equitable access to research tools, particularly for researchers in smaller institutions with limited resources.[<span class="citation" data-cites="satariano2025a1i1">Satariano and Mozur (<a href="#ref-satariano2025a1i1" role="doc-biblioref">2025</a>)</span>]</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-altmae2023artificial" class="csl-entry" role="listitem">
+Altmäe, Signe, Alberto Sola-Leyva, and Andres Salumets. 2023. <span>“<span class="nocase">Artificial intelligence in scientific writing: a friend or a foe?</span>”</span> <em>Reproductive BioMedicine Online</em> 47 (1): 3–9. <a href="https://doi.org/10.1016/j.rbmo.2023.04.009">https://doi.org/10.1016/j.rbmo.2023.04.009</a>.
+</div>
+<div id="ref-AnthropicEducation" class="csl-entry" role="listitem">
+Anthropic. 2025a. <span>“<span class="nocase">Claude for Education | Partnering with Universities on Responsible AI</span>.”</span> <a href="https://www.anthropic.com/education">https://www.anthropic.com/education</a>.
+</div>
+<div id="ref-anthropic2025system" class="csl-entry" role="listitem">
+———. 2025b. <span>“System <span>Card</span>: <span>Claude</span> <span>Opus</span> 4 &amp; <span>Claude</span> <span>Sonnet</span> 4.”</span> Anthropic. <a href="https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf">https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf</a>.
+</div>
+<div id="ref-bai2022constitutional" class="csl-entry" role="listitem">
+Bai, Yuntao, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, et al. 2022. <span>“Constitutional <span>AI</span>: <span>Harmlessness</span> from <span>AI</span> <span>Feedback</span>.”</span> <em>arXiv Preprint</em>, December. <a href="https://doi.org/10.48550/arXiv.2212.08073">https://doi.org/10.48550/arXiv.2212.08073</a>.
+</div>
+<div id="ref-baral2025drawedumath0" class="csl-entry" role="listitem">
+Baral, Sami, Li Lucy, Ryan Knight, Alice Ng, Luca Soldaini, Neil T. Heffernan, and Kyle Lo. 2025. <span>“<span class="nocase">DrawEduMath: Evaluating Vision Language Models with Expert-Annotated Students’ Hand-Drawn Math Images</span>.”</span> <em>arXiv Preprint arXiv: 2501.14877</em>. <a href="https://doi.org/10.48550/arXiv.2501.14877">https://doi.org/10.48550/arXiv.2501.14877</a>.
+</div>
+<div id="ref-barez2025open" class="csl-entry" role="listitem">
+Barez, Fazl, Tingchen Fu, Ameya Prabhu, Stephen Casper, Amartya Sanyal, Adel Bibi, Aidan O’Gara, et al. 2025. <span>“Open Problems in Machine Unlearning for AI Safety.”</span> <em>arXiv Preprint arXiv: 2501.04952</em>.
+</div>
+<div id="ref-bender2021dangers" class="csl-entry" role="listitem">
+Bender, Emily M, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. 2021. <span>“On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?”</span> <em>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency</em>, 610–23. <a href="https://doi.org/10.1145/3442188.3445922">https://doi.org/10.1145/3442188.3445922</a>.
+</div>
+<div id="ref-bengio2025international" class="csl-entry" role="listitem">
+Bengio, Yoshua, Sören Mindermann, Daniel Privitera, Tamay Besiroglu, Rishi Bommasani, Stephen Casper, Yejin Choi, et al. 2025. <span>“International AI Safety Report.”</span> <em>arXiv Preprint arXiv: 2501.17805</em>. <a href="https://doi.org/10.48550/arXiv.2501.17805">https://doi.org/10.48550/arXiv.2501.17805</a>.
+</div>
+<div id="ref-bhuiyan2025google" class="csl-entry" role="listitem">
+Bhuiyan, Johana. 2025. <span>“Google Undercounts Its Carbon Emissions, Report Finds.”</span> <a href="https://www.theguardian.com/technology/2025/jul/02/google-carbon-emissions-report">https://www.theguardian.com/technology/2025/jul/02/google-carbon-emissions-report</a>.
+</div>
+<div id="ref-bloomfield2024ai" class="csl-entry" role="listitem">
+Bloomfield, Doni, Jaspreet Pannu, Alex W. Zhu, Madelena Y. Ng, Ashley Lewis, Eran Bendavid, Steven M. Asch, Tina Hernandez-Boussard, Anita Cicero, and Tom Inglesby. 2024. <span>“<span>AI</span> and Biosecurity: <span>The</span> Need for Governance.”</span> <em>Science</em> 385 (6711): 831–33. <a href="https://doi.org/10.1126/science.adq1977">https://doi.org/10.1126/science.adq1977</a>.
+</div>
+<div id="ref-nature2023carbon" class="csl-entry" role="listitem">
+Board, Nature Computational Science Editorial. 2023. <span>“The Carbon Footprint of Computational Research.”</span> <em>Nature Computational Science</em> 3 (8): 659–59. <a href="https://doi.org/10.1038/s43588-023-00506-2">https://doi.org/10.1038/s43588-023-00506-2</a>.
+</div>
+<div id="ref-boiko2023autonomous" class="csl-entry" role="listitem">
+Boiko, Daniil A, Robert MacKnight, Ben Kline, and Gabe Gomes. 2023. <span>“<span class="nocase">Autonomous chemical research with large language models</span>.”</span> <em>Nature</em> 624 (7992): 570–78. <a href="https://doi.org/10.1038/s41586-023-06792-0">https://doi.org/10.1038/s41586-023-06792-0</a>.
+</div>
+<div id="ref-bran2024augmenting" class="csl-entry" role="listitem">
+Bran, Andres M., Sam Cox, Oliver Schilter, Carlo Baldassari, Andrew D. White, and Philippe Schwaller. 2024. <span>“Augmenting Large Language Models with Chemistry Tools.”</span> <em>Nature Machine Intelligence</em> 6 (5). <a href="https://doi.org/10.1038/s42256-024-00832-8">https://doi.org/10.1038/s42256-024-00832-8</a>.
+</div>
+<div id="ref-carlini2025career" class="csl-entry" role="listitem">
+<span>“Career Update: Google <span>DeepMind</span> -&gt; Anthropic.”</span> 2025. <a href="https://nicholas.carlini.com/writing/2025/career-update.html">https://nicholas.carlini.com/writing/2025/career-update.html</a>.
+</div>
+<div id="ref-cern_nuclear_safeguards_2024" class="csl-entry" role="listitem">
+CERN. 2024. <span>“<span>CERN</span> Publishes Its First Nuclear Safeguards Policy.”</span> Official News Release. <a href="https://home.cern/news/official-news/cern/cern-publishes-its-first-nuclear-safeguards-policy">https://home.cern/news/official-news/cern/cern-publishes-its-first-nuclear-safeguards-policy</a>.
+</div>
+<div id="ref-chen2023algorithmic" class="csl-entry" role="listitem">
+Chen, Richard J., Judy J. Wang, Drew F. K. Williamson, Tiffany Y. Chen, Jana Lipkova, Ming Y. Lu, Sharifa Sahai, and Faisal Mahmood. 2023. <span>“Algorithmic Fairness in Artificial Intelligence for Medicine and Healthcare.”</span> <em>Nature Biomedical Engineering</em>. <a href="https://doi.org/10.1038/s41551-023-01056-8">https://doi.org/10.1038/s41551-023-01056-8</a>.
+</div>
+<div id="ref-crawford2021atlas" class="csl-entry" role="listitem">
+Crawford, K. 2021. <em>The Atlas of <span>AI</span>: Power, Politics, and the Planetary Costs of Artificial Intelligence</em>. Yale University Press. <a href="https://books.google.de/books?id=KfodEAAAQBAJ">https://books.google.de/books?id=KfodEAAAQBAJ</a>.
+</div>
+<div id="ref-criado-perez2019invisible" class="csl-entry" role="listitem">
+Criado-Perez, Caroline. 2019. <em>Invisible Women: Exposing Data Bias in a World Designed for Men</em>. Chatto &amp; Windus.
+</div>
+<div id="ref-cunningham2023sparse" class="csl-entry" role="listitem">
+Cunningham, Hoagy, Aidan Ewart, Logan Riggs, Robert Huben, and Lee Sharkey. 2023. <span>“Sparse Autoencoders Find Highly Interpretable Features in Language Models.”</span> <em>arXiv Preprint arXiv: 2309.08600</em>. <a href="https://doi.org/10.48550/arXiv.2309.08600">https://doi.org/10.48550/arXiv.2309.08600</a>.
+</div>
+<div id="ref-dean2025security" class="csl-entry" role="listitem">
+Dean, Romeo. 2025. <span>“Security <span>Forecast</span> – <span>AI</span> 2027.”</span> <em>AI 2027</em>. <a href="https://ai-2027.com/research/security-forecast">https://ai-2027.com/research/security-forecast</a>.
+</div>
+<div id="ref-donker2023dangers" class="csl-entry" role="listitem">
+Donker, Tjibbe. 2023. <span>“The Dangers of Using Large Language Models for Peer Review.”</span> <em>The Lancet Infectious Diseases</em> 23 (7): 781. <a href="https://doi.org/10.1016/s1473-3099(23)00290-6">https://doi.org/10.1016/s1473-3099(23)00290-6</a>.
+</div>
+<div id="ref-dotan2019value0laden" class="csl-entry" role="listitem">
+Dotan, Ravit, and S. Milli. 2019. <span>“Value-Laden Disciplinary Shifts in Machine Learning.”</span> <em>FAT*</em>. <a href="https://doi.org/10.1145/3351095.3373157">https://doi.org/10.1145/3351095.3373157</a>.
+</div>
+<div id="ref-Du2024" class="csl-entry" role="listitem">
+Du, Yuanqi, Chenru Duan, Andres Bran, Anna Sotnikova, Yi Qu, Heather Kulik, Antoine Bosselut, Jinjia Xu, and Philippe Schwaller. 2024. <span>“<span class="nocase">Large Language Models are Catalyzing Chemistry Education</span>.”</span> <em>ChemRxiv Preprint</em>, June. <a href="https://doi.org/10.26434/chemrxiv-2024-h722v">https://doi.org/10.26434/chemrxiv-2024-h722v</a>.
+</div>
+<div id="ref-dung2025learning" class="csl-entry" role="listitem">
+Dung, Leonard, and Dominik Balg. 2025. <span>“<span class="nocase">Learning Alone: Language Models, Overreliance, and the Goals of Education</span>.”</span> <a href="https://philpapers.org/rec/DUNLAL-3">https://philpapers.org/rec/DUNLAL-3</a>.
+</div>
+<div id="ref-EU2024regulation" class="csl-entry" role="listitem">
+EU. 2024. <span>“Regulation (<span>EU</span>) 2024/1689 of the <span>European</span> <span>Parliament</span> and of the <span>Council</span> of 13 <span>June</span> 2024 Laying down Harmonised Rules on Artificial Intelligence and Amending <span>Regulations</span> (<span>EC</span>) <span>No</span> 300/2008, (<span>EU</span>) <span>No</span> 167/2013, (<span>EU</span>) <span>No</span> 168/2013, (<span>EU</span>) 2018/858, (<span>EU</span>) 2018/1139 and (<span>EU</span>) 2019/2144 and <span>Directives</span> 2014/90/<span>EU</span>, (<span>EU</span>) 2016/797 and (<span>EU</span>) 2020/1828 (<span>Artificial</span> <span>Intelligence</span> <span>Act</span>) (<span>Text</span> with <span>EEA</span> Relevance).”</span> <a href="http://data.europa.eu/eli/reg/2024/1689/oj/eng">http://data.europa.eu/eli/reg/2024/1689/oj/eng</a>.
+</div>
+<div id="ref-gao2024towards" class="csl-entry" role="listitem">
+Gao, Rujun, Xiaosu Guo, Xiaodi Li, Arun Balajiee Lekshmi Narayanan, Naveen Thomas, and Arun R. Srinivasa. 2024. <span>“<span class="nocase">Towards Scalable Automated Grading: Leveraging Large Language Models for Conceptual Question Evaluation in Engineering</span>.”</span> <em>arXiv Preprint arXiv: 2411.03659</em>. <a href="https://doi.org/10.48550/arXiv.2411.03659">https://doi.org/10.48550/arXiv.2411.03659</a>.
+</div>
+<div id="ref-handa2025education" class="csl-entry" role="listitem">
+Handa, Kunal, Drew Bent, Alex Tamkin, Miles McCain, Esin Durmus, Michael Stern, Mike Schiraldi, et al. 2025. <span>“<span>Anthropic Education Report: How University Students Use Claude</span>.”</span> <a href="https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude">https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude</a>.
+</div>
+<div id="ref-he2023control" class="csl-entry" role="listitem">
+He, Jiyan, Weitao Feng, Yaosen Min, Jingwei Yi, Kunsheng Tang, Shuai Li, Jie Zhang, et al. 2023. <span>“Control <span>Risk</span> for <span>Potential</span> <span>Misuse</span> of <span>Artificial</span> <span>Intelligence</span> in <span>Science</span>.”</span> <em>Arxiv Preprint arXiv:2312.06632</em>, December. <a href="https://doi.org/10.48550/arXiv.2312.06632">https://doi.org/10.48550/arXiv.2312.06632</a>.
+</div>
+<div id="ref-Jablonka2023" class="csl-entry" role="listitem">
+Jablonka, Kevin Maik, Qianxiang Ai, Alexander Al-Feghali, Shruti Badhwar, Joshua D. Bocarsly, Andres M. Bran, Stefan Bringuier, et al. 2023. <span>“<span class="nocase">14 examples of how LLMs can transform materials science and chemistry: a reflection on a large language model hackathon</span>.”</span> <em>Digital Discovery</em> 2 (5): 1233–50. <a href="https://doi.org/10.1039/d3dd00113j">https://doi.org/10.1039/d3dd00113j</a>.
+</div>
+<div id="ref-ji2023survey" class="csl-entry" role="listitem">
+Ji, Ziwei, Nayeon Lee, Rita Frieske, Tiezheng Yu, Dan Su, Yan Xu, Etsuko Ishii, Ye Jin Bang, Andrea Madotto, and Pascale Fung. 2023. <span>“Survey of <span>Hallucination</span> in <span>Natural</span> <span>Language</span> <span>Generation</span>.”</span> <em>ACM Comput. Surv.</em> 55 (12): 248:1–38. <a href="https://doi.org/10.1145/3571730">https://doi.org/10.1145/3571730</a>.
+</div>
+<div id="ref-kharchenko2024advantages" class="csl-entry" role="listitem">
+Kharchenko, Yuliia V, and Olena M Babenko. 2024. <span>“<span class="nocase">Advantages and limitations of large language models in chemistry education: A comparative analysis of ChatGPT, Gemini and Copilot</span>.”</span> <em>Proceedings of the Free Open-Access Proceedings for Computer Science Workshops, Lviv, Ukraine</em> 3781: 42–59. <a href="https://ceur-ws.org/Vol-3781/paper03.pdf">https://ceur-ws.org/Vol-3781/paper03.pdf</a>.
+</div>
+<div id="ref-kirchhubel2024intellectual" class="csl-entry" role="listitem">
+Kirchhübel, Christin, and Georgina Brown. 2024. <span>“Intellectual Property Rights at the Training, Development and Generation Stages of Large Language Models.”</span> Edited by Ingo Siegert and Khalid Choukri. <em>Proceedings of the Workshop on Legal and Ethical Issues in Human Language Technologies @ LREC-COLING</em>, May. <a href="https://aclanthology.org/2024.legal-1.3/">https://aclanthology.org/2024.legal-1.3/</a>.
+</div>
+<div id="ref-klein2025rethink" class="csl-entry" role="listitem">
+Klein, Ezra, and Rebecca Winthrop. 2025. <span>“We Have to Really Rethink the Purpose of Education.”</span> <a href="https://www.youtube.com/watch?v=HQQtaWgIQmE">https://www.youtube.com/watch?v=HQQtaWgIQmE</a>.
+</div>
+<div id="ref-kolbert2024obscene" class="csl-entry" role="listitem">
+Kolbert, Elizabeth. 2024. <span>“The Obscene Energy Demands of a.i.”</span> <a href="https://www.newyorker.com/news/daily-comment/the-obscene-energy-demands-of-ai">https://www.newyorker.com/news/daily-comment/the-obscene-energy-demands-of-ai</a>.
+</div>
+<div id="ref-Kortemeyer2024" class="csl-entry" role="listitem">
+Kortemeyer, Gerd, Julian Nöhl, and Daria Onishchuk. 2024. <span>“<span class="nocase">Grading assistance for a handwritten thermodynamics exam using artificial intelligence: An exploratory study</span>.”</span> <em>Physical Review Physics Education Research</em> 20 (2). <a href="https://doi.org/10.1103/physrevphyseducres.20.020144">https://doi.org/10.1103/physrevphyseducres.20.020144</a>.
+</div>
+<div id="ref-kosmyna2025your" class="csl-entry" role="listitem">
+Kosmyna, Nataliya, Eugene Hauptmann, Ye Tong Yuan, Jessica Situ, Xian-Hao Liao, Ashly Vivian Beresnitzky, Iris Braunstein, and Pattie Maes. 2025. <span>“Your Brain on ChatGPT: Accumulation of Cognitive Debt When Using an AI Assistant for Essay Writing Task.”</span> <em>arXiv Preprint</em>. <a href="https://doi.org/10.48550/arxiv.2506.08872">https://doi.org/10.48550/arxiv.2506.08872</a>.
+</div>
+<div id="ref-kuntz2025os-harm" class="csl-entry" role="listitem">
+Kuntz, Thomas, Agatha Duzan, Hao Zhao, Francesco Croce, Zico Kolter, Nicolas Flammarion, and Maksym Andriushchenko. 2025. <span>“OS-Harm: A Benchmark for Measuring Safety of Computer Use Agents.”</span> <em>arXiv Preprint arXiv: 2506.14866</em>. <a href="https://doi.org/10.48550/arXiv.2506.14866">https://doi.org/10.48550/arXiv.2506.14866</a>.
+</div>
+<div id="ref-li2025tutorllm0" class="csl-entry" role="listitem">
+Li, Zhaoxing, Vahid Yazdanpanah, Jindi Wang, Wen Gu, Lei Shi, Alexandra I. Cristea, Sarah Kiden, and Sebastian Stein. 2025. <span>“<span class="nocase">TutorLLM: Customizing Learning Recommendations with Knowledge Tracing and Retrieval-Augmented Generation</span>.”</span> <em>arXiv Preprint arXiv: 2502.15709</em>. <a href="https://doi.org/10.48550/arXiv.2502.15709">https://doi.org/10.48550/arXiv.2502.15709</a>.
+</div>
+<div id="ref-lynch2025agentic" class="csl-entry" role="listitem">
+Lynch, Aengus, Benjamin Wright, Caleb Larson, Kevin K. Troy, Stuart J. Ritchie, Sören Mindermann, Ethan Perez, and Evan Hubinger. 2025. <span>“Agentic Misalignment: How LLMs Could Be an Insider Threat.”</span> <em>Anthropic Research</em>.
+</div>
+<div id="ref-makelov2023subspace" class="csl-entry" role="listitem">
+Makelov, Aleksandar, Georg Lange, and Neel Nanda. 2023. <span>“Is This the Subspace You Are Looking for? An Interpretability Illusion for Subspace Activation Patching.”</span> <em>arXiv Preprint arXiv: 2311.17030</em>. <a href="https://doi.org/10.48550/arXiv.2311.17030">https://doi.org/10.48550/arXiv.2311.17030</a>.
+</div>
+<div id="ref-marcus2025will" class="csl-entry" role="listitem">
+Marcus, Greil. 2025. <span>“Will the Humanities Survive Artificial Intelligence?”</span> <em>The New Yorker</em>, April. <a href="https://www.newyorker.com/culture/the-weekend-essay/will-the-humanities-survive-artificial-intelligence">https://www.newyorker.com/culture/the-weekend-essay/will-the-humanities-survive-artificial-intelligence</a>.
+</div>
+<div id="ref-mittermaier2023bias" class="csl-entry" role="listitem">
+Mittermaier, Mirja, Marium M. Raza, and Joseph C. Kvedar. 2023. <span>“Bias in AI-Based Models for Medical Applications: Challenges and Mitigation Strategies.”</span> <em>Npj Digital Medicine</em>. <a href="https://doi.org/10.1038/s41746-023-00858-z">https://doi.org/10.1038/s41746-023-00858-z</a>.
+</div>
+<div id="ref-Mollick2024" class="csl-entry" role="listitem">
+Mollick, Ethan R., Lilach Mollick, Natalie Bach, LJ Ciccarelli, Ben Przystanski, and Daniel Ravipinto. 2024. <span>“<span class="nocase">AI Agents and Education: Simulated Practice at Scale</span>.”</span> <em>The Wharton School Research Paper</em>. <a href="https://doi.org/10.2139/ssrn.4871171">https://doi.org/10.2139/ssrn.4871171</a>.
+</div>
+<div id="ref-mollick2024instructors" class="csl-entry" role="listitem">
+Mollick, Ethan, and Lilach Mollick. 2024. <span>“<span class="nocase">Instructors as Innovators: A future-focused approach to new AI learning opportunities, with prompts</span>.”</span> <em>arXiv Preprint arXiv: 2407.05181</em>. <a href="https://doi.org/10.48550/arXiv.2407.05181">https://doi.org/10.48550/arXiv.2407.05181</a>.
+</div>
+<div id="ref-morris2023levels" class="csl-entry" role="listitem">
+Morris, Meredith Ringel, Jascha Sohl-dickstein, Noah Fiedel, Tris Warkentin, Allan Dafoe, Aleksandra Faust, Clement Farabet, and Shane Legg. 2023. <span>“Levels of AGI for Operationalizing Progress on the Path to AGI.”</span> <em>arXiv Preprint arXiv: 2311.02462</em>. <a href="https://doi.org/10.48550/arXiv.2311.02462">https://doi.org/10.48550/arXiv.2311.02462</a>.
+</div>
+<div id="ref-mytton2021data" class="csl-entry" role="listitem">
+Mytton, David. 2021. <span>“Data Centre Water Consumption.”</span> <em>Npj Clean Water</em>. <a href="https://doi.org/10.1038/s41545-021-00101-w">https://doi.org/10.1038/s41545-021-00101-w</a>.
+</div>
+<div id="ref-narayanan2025why" class="csl-entry" role="listitem">
+Narayanan, Arvind, and Sayash Kapoor. 2025. <span>“Why an Overreliance on <span>AI</span>-Driven Modelling Is Bad for Science.”</span> <em>Nature</em> 640 (8058): 312–14. <a href="https://doi.org/10.1038/d41586-025-01067-2">https://doi.org/10.1038/d41586-025-01067-2</a>.
+</div>
+<div id="ref-nist2024safety" class="csl-entry" role="listitem">
+NIST. 2024. <span>“Safety <span>Considerations</span> for <span>Chemical</span> and/or <span>Biological</span> <span>AI</span> <span>Models</span>.”</span> <em>Federal Register</em>. <a href="https://www.federalregister.gov/documents/2024/10/04/2024-22974/safety-considerations-for-chemical-andor-biological-ai-models">https://www.federalregister.gov/documents/2024/10/04/2024-22974/safety-considerations-for-chemical-andor-biological-ai-models</a>.
+</div>
+<div id="ref-omiye2023large" class="csl-entry" role="listitem">
+Omiye, Jesutofunmi A., Jenna C. Lester, Simon Spichak, Veronica Rotemberg, and Roxana Daneshjou. 2023. <span>“Large Language Models Propagate Race-Based Medicine.”</span> <em>Npj Digital Medicine</em> 6 (1): 1–4. <a href="https://doi.org/10.1038/s41746-023-00939-z">https://doi.org/10.1038/s41746-023-00939-z</a>.
+</div>
+<div id="ref-openai2023written" class="csl-entry" role="listitem">
+OpenAI. 2023. <span>“Written Evidence to [Committee Name].”</span> UK Parliament; Written Evidence. <a href="https://committees.parliament.uk/writtenevidence/126981/pdf/">https://committees.parliament.uk/writtenevidence/126981/pdf/</a>.
+</div>
+<div id="ref-openai2024building" class="csl-entry" role="listitem">
+———. 2024. <span>“Building an Early Warning System for <span>LLM</span>-Aided Biological Threat Creation.”</span> <a href="https://openai.com/index/building-an-early-warning-system-for-llm-aided-biological-threat-creation/">https://openai.com/index/building-an-early-warning-system-for-llm-aided-biological-threat-creation/</a>.
+</div>
+<div id="ref-pantha2024challenges" class="csl-entry" role="listitem">
+Pantha, Nishan, Muthukumaran Ramasubramanian, Iksha Gurung, Manil Maskey, and Rahul Ramachandran. 2024. <span>“Challenges in <span>Guardrailing</span> <span>Large</span> <span>Language</span> <span>Models</span> for <span>Science</span>.”</span> <em>Arxiv Preprint arXiv: 2411.08181</em>, December. <a href="https://doi.org/10.48550/arXiv.2411.08181">https://doi.org/10.48550/arXiv.2411.08181</a>.
+</div>
+<div id="ref-peppin2024reality" class="csl-entry" role="listitem">
+Peppin, Aidan, Anka Reuel, Stephen Casper, Elliot Jones, Andrew Strait, Usman Anwar, Anurag Agrawal, et al. 2024. <span>“<span class="nocase">The Reality of AI and Biorisk</span>.”</span> <em>arXiv Preprint arXiv: 2412.01946</em>. <a href="https://doi.org/10.48550/arXiv.2412.01946">https://doi.org/10.48550/arXiv.2412.01946</a>.
+</div>
+<div id="ref-perez2025large" class="csl-entry" role="listitem">
+Perez, Ryann M., Marie Shimogawa, Yanan Chang, Hoang Anh T. Phan, Jason G. Marmorstein, Evan S. K. Yanagawa, and E. James Petersson. 2025. <span>“<span class="nocase">Large Language Models for Education: ChemTAsk - An Open-Source Paradigm for Automated Q&amp;A in the Graduate Classroom</span>.”</span> <em>arXiv Preprint arXiv: 2502.00016</em>. <a href="https://doi.org/10.48550/arXiv.2502.00016">https://doi.org/10.48550/arXiv.2502.00016</a>.
+</div>
+<div id="ref-pistono2016unethical" class="csl-entry" role="listitem">
+Pistono, Federico, and Roman V. Yampolskiy. 2016. <span>“Unethical <span>Research</span>: <span>How</span> to <span>Create</span> a <span>Malevolent</span> <span>Artificial</span> <span>Intelligence</span>.”</span> <em>Arxiv Preprint arXiv:1605.02817</em>, September. <a href="https://doi.org/10.48550/arXiv.1605.02817">https://doi.org/10.48550/arXiv.1605.02817</a>.
+</div>
+<div id="ref-Polanyi_2009" class="csl-entry" role="listitem">
+Polanyi, Michael. 2009. <em>The Tacit Dimension</em>. Reproduction en fac-similé. Chicago: University of Chicago press.
+</div>
+<div id="ref-rouleau2025risks" class="csl-entry" role="listitem">
+Rouleau, Nicolas, and Nirosha J. Murugan. 2025. <span>“The <span>Risks</span> and <span>Rewards</span> of <span>Embodying</span> <span>Artificial</span> <span>Intelligence</span> with <span>Cloud</span>-<span>Based</span> <span>Laboratories</span>.”</span> <em>Advanced Intelligent Systems</em> 7 (1): 2400193. <a href="https://doi.org/10.1002/aisy.202400193">https://doi.org/10.1002/aisy.202400193</a>.
+</div>
+<div id="ref-sandbrink2023artificial" class="csl-entry" role="listitem">
+Sandbrink, Jonas B. 2023. <span>“Artificial Intelligence and Biological Misuse: <span>Differentiating</span> Risks of Language Models and Biological Design Tools.”</span> <em>Arxiv Preprint arXiv:2306.13952</em>, December. <a href="https://doi.org/10.48550/arXiv.2306.13952">https://doi.org/10.48550/arXiv.2306.13952</a>.
+</div>
+<div id="ref-satariano2025a1i1" class="csl-entry" role="listitem">
+Satariano, Adam, and Paul Mozur. 2025. <span>“The a.i. Race Is Splitting the World into Haves and Have-Nots.”</span> <a href="https://www.nytimes.com/interactive/2025/06/23/technology/ai-computing-global-divide.html">https://www.nytimes.com/interactive/2025/06/23/technology/ai-computing-global-divide.html</a>.
+</div>
+<div id="ref-shao2025unlocking" class="csl-entry" role="listitem">
+Shao, Zekai, Siyu Yuan, Lin Gao, Yixuan He, Deqing Yang, and Siming Chen. 2025. <span>“<span class="nocase">Unlocking Scientific Concepts: How Effective Are LLM-Generated Analogies for Student Understanding and Classroom Practice?</span>”</span> <em>arXiv Preprint arXiv: 2502.16895</em>. <a href="https://doi.org/10.48550/arXiv.2502.16895">https://doi.org/10.48550/arXiv.2502.16895</a>.
+</div>
+<div id="ref-Sharma2025role" class="csl-entry" role="listitem">
+Sharma, Sahil, Puneet Mittal, Mukesh Kumar, and Vivek Bhardwaj. 2025. <span>“<span class="nocase">The role of large language models in personalized learning: a systematic review of educational impact</span>.”</span> <em>Discover Sustainability</em> 6 (1). <a href="https://doi.org/10.1007/s43621-025-01094-z">https://doi.org/10.1007/s43621-025-01094-z</a>.
+</div>
+<div id="ref-spotte-smith2025considering" class="csl-entry" role="listitem">
+Spotte-Smith, Evan Walter Clark. 2025. <span>“Considering the <span>Ethics</span> of <span>Large</span> <span>Machine</span> <span>Learning</span> <span>Models</span> in the <span>Chemical</span> <span>Sciences</span>.”</span> <em>ChemRxiv Preprint</em>, March. <a href="https://doi.org/10.26434/chemrxiv-2025-ct5k8">https://doi.org/10.26434/chemrxiv-2025-ct5k8</a>.
+</div>
+<div id="ref-cais2023statement" class="csl-entry" role="listitem">
+<span>“Statement on <span>AI</span> <span>Risk</span> <span></span> <span>CAIS</span>.”</span> n.d. Accessed May 24, 2025. <a href="https://www.safe.ai/work/statement-on-ai-risk">https://www.safe.ai/work/statement-on-ai-risk</a>.
+</div>
+<div id="ref-strubell2019energy" class="csl-entry" role="listitem">
+Strubell, Emma, Ananya Ganesh, and Andrew McCallum. 2019. <span>“Energy and Policy Considerations for Deep Learning in NLP.”</span> <em>arXiv Preprint arXiv: 1906.02243</em>. <a href="https://doi.org/10.48550/arXiv.1906.02243">https://doi.org/10.48550/arXiv.1906.02243</a>.
+</div>
+<div id="ref-Subasinghe2025" class="csl-entry" role="listitem">
+Subasinghe, S. M. Supundrika, Simon G. Gersib, and Neal P. Mankad. 2025. <span>“<span class="nocase">Large Language Models (LLMs) as Graphing Tools for Advanced Chemistry Education and Research</span>.”</span> <em>Journal of Chemical Education</em>, March. <a href="https://doi.org/10.1021/acs.jchemed.4c01498">https://doi.org/10.1021/acs.jchemed.4c01498</a>.
+</div>
+<div id="ref-tang2024prioritizing" class="csl-entry" role="listitem">
+Tang, Xiangru, Qiao Jin, Kunlun Zhu, Tongxin Yuan, Yichi Zhang, Wangchunshu Zhou, Meng Qu, et al. 2024. <span>“Prioritizing <span>Safeguarding</span> <span>Over</span> <span>Autonomy</span>: <span>Risks</span> of <span>LLM</span> <span>Agents</span> for <span>Science</span>.”</span> <em>Arxiv Preprint arXiv: 2402.04247</em>, June. <a href="https://doi.org/10.48550/arXiv.2402.04247">https://doi.org/10.48550/arXiv.2402.04247</a>.
+</div>
+<div id="ref-trager2023international" class="csl-entry" role="listitem">
+Trager, Robert, Ben Harack, Anka Reuel, Allison Carnegie, Lennart Heim, Lewis Ho, Sarah Kreps, et al. 2023. <span>“International <span>Governance</span> of <span>Civilian</span> <span>AI</span>: <span>A</span> <span>Jurisdictional</span> <span>Certification</span> <span>Approach</span>.”</span> <em>Arxiv Preprint arXiv: 2308.15514</em>, September. <a href="https://doi.org/10.48550/arXiv.2308.15514">https://doi.org/10.48550/arXiv.2308.15514</a>.
+</div>
+<div id="ref-Tsai2023" class="csl-entry" role="listitem">
+Tsai, Meng-Lin, Chong Wei Ong, and Cheng-Liang Chen. 2023. <span>“<span class="nocase">Exploring the use of large language models (LLMs) in chemical engineering education: Building core course problem models with Chat-GPT</span>.”</span> <em>Education for Chemical Engineers</em> 44 (July): 71–95. <a href="https://doi.org/10.1016/j.ece.2023.05.001">https://doi.org/10.1016/j.ece.2023.05.001</a>.
+</div>
+<div id="ref-urbina2022dual" class="csl-entry" role="listitem">
+Urbina, Fabio, Filippa Lentzos, Cedric Invernizzi, and Sean Ekins. 2022. <span>“<span class="nocase">Dual use of artificial-intelligence-powered drug discovery</span>.”</span> <em>Nature Machine Intelligence</em> 4 (3): 189–91. <a href="https://doi.org/10.1038/s42256-022-00465-9">https://doi.org/10.1038/s42256-022-00465-9</a>.
+</div>
+<div id="ref-wang2025effect" class="csl-entry" role="listitem">
+Wang, Jin, and Wenxiang Fan. 2025. <span>“The Effect of ChatGPT on Students’ Learning Performance, Learning Perception, and Higher-Order Thinking: Insights from a Meta-Analysis.”</span> <em>Humanities and Social Sciences Communications</em> 12 (1). <a href="https://doi.org/10.1057/s41599-025-04787-y">https://doi.org/10.1057/s41599-025-04787-y</a>.
+</div>
+<div id="ref-wang2025learnmate0" class="csl-entry" role="listitem">
+Wang, Xinyu Jessica, Christine Lee, and Bilge Mutlu. 2025. <span>“<span class="nocase">LearnMate: Enhancing Online Education with LLM-Powered Personalized Learning Plans and Support</span>.”</span> <em>CHI Extended Abstracts</em>. <a href="https://doi.org/10.1145/3706599.3719857">https://doi.org/10.1145/3706599.3719857</a>.
+</div>
+<div id="ref-yang2024demographic" class="csl-entry" role="listitem">
+Yang, Yuzhe, Yujia Liu, Xin Liu, Avanti Gulhane, Domenico Mastrodicasa, Wei Wu, Edward J. Wang, Dushyant W. Sahani, and Shwetak Patel. 2024. <span>“Demographic <span>Bias</span> of <span>Expert</span>-<span>Level</span> <span>Vision</span>-<span>Language</span> <span>Foundation</span> <span>Models</span> in <span>Medical</span> <span>Imaging</span>.”</span> <em>arXiv Preprint arXiv:2402.14815</em>, February. <a href="https://doi.org/10.48550/arXiv.2402.14815">https://doi.org/10.48550/arXiv.2402.14815</a>.
+</div>
+<div id="ref-yona2024stealing" class="csl-entry" role="listitem">
+Yona, Itay, Ilia Shumailov, Jamie Hayes, and Nicholas Carlini. 2024. <span>“Stealing User Prompts from Mixture of Experts.”</span> <em>Arxiv Preprint</em>, no. <span>arXiv</span>:2410.22884 (October). <a href="https://doi.org/10.48550/arXiv.2410.22884">https://doi.org/10.48550/arXiv.2410.22884</a>.
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05-applications.html" class="pagination-link" aria-label="Applications">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Applications</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./07-outlook_conclusions.html" class="pagination-link" aria-label="Outlook and Conclusions">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Outlook and Conclusions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

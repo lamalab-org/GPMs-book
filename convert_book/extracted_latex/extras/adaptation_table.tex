@@ -1,0 +1,20 @@
+\begin{table}[!ht]
+    \centering
+    \caption{\textbf{Model Adaptation Approaches Overview:} This table provides a rough overview of the estimated time, data, and \gls{ml} knowledge required for each approach. Each method (listed in the first column) is paired with a triplet that includes: an approximate implementation time, the estimated dataset size, and the level of \gls{ml} expertise needed.  These estimates assume that you have at least a bachelor's level of understanding of chemistry and at least some computational background.}
+\begin{tabular}{llll}
+\toprule
+    \textbf{Model adaptation}  & \textbf{Time}    & \textbf{Data}   & \textbf{ML knowledge}  \\ 
+\midrule
+Pre-training       & Weeks   & 1M--1B+      & Very High  \\
+Zero-shot prompting & Minutes & None        & None          \\
+Few-shot Prompting   & Hours   & \textless 10 examples & None          \\
+Fine-tuning         & Days    & \textless 10k         & High          \\
+\toprule
+    \textbf{Coupling into systems} \\ 
+\midrule
+RAG                & Days    & 100k--1M+    & Low           \\
+Tool-Augmentation   & Days    & None / 10k+ & Low           \\
+\bottomrule
+\end{tabular}
+    \label{tab:model_adaptation}
+\end{table}

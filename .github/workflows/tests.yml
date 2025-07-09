@@ -1,0 +1,51 @@
+
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Get uv cache dir
+        id: uv-cache
+        run: echo "dir=$(uv cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache uv dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.uv-cache.outputs.dir }}
+          key: ${{ runner.os }}-uv-${{ hashFiles('pyproject.toml', 'requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      - name: Install dependencies
+        run: |
+          uv pip install --upgrade pip
+          uv pip install -e ".[all]"
+
+      - name: Run Tests
+        env:
+          CI: true
+        run: |
+          pytest tests -m "not requires_api_key"

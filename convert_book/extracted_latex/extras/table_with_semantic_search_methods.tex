@@ -1,0 +1,26 @@
+
+\begin{table}[!ht]
+    \centering
+    \caption{\textbf{Non-comprehensive overview of semantic search methods} The methods are arranged by complexity.}
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{>{\centering\arraybackslash}m{3.5cm}>{\centering\arraybackslash}m{3.5cm}>{\centering\arraybackslash}m{8cm}}
+        \toprule
+         \textbf{Method} &  \textbf{Type}  & \textbf{Innovations}\\
+         \midrule
+         Bag-of-Words & Fixed Representation & Word frequency retrieval \\
+         \midrule
+         BM25\autocite{doostmohammadi2023surface0based} & Fixed Representation & Document length normalization \newline Term frequency saturation \newline Refined inverse document frequency \\
+         \midrule
+         Latent Semantic Analysis (LSA) & Fixed Representation & Dimensionality reduction via Singular Value Decomposition (SVD) \newline Captures latent semantic structures \\
+         \midrule
+         Word2Vec\autocite{mikolov2013efficient} & Embedding & Predictive model using local context windows \newline Introduces CBOW and Skip-gram architectures \newline Learns embeddings by predicting word context \\
+         \midrule
+         GloVe\autocite{pennington2014glove} & Embedding & Global co-occurrence matrix factorization \newline Weighted least squares regression objective \newline Captures fine-grained semantic regularities via co-occurrence ratios \\
+         \midrule
+         Sentence-BERT (SBERT) & Trainable Encoder & Contextualized sentence embeddings \newline Fine-tuned Siamese BERT architecture for semantic similarity \\
+         \bottomrule
+    \end{tabular}%
+    }
+    \label{tab:semantic_search}
+\end{table}

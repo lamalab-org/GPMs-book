@@ -1,0 +1,2445 @@
+---
+title: "Applications"
+---
+
+# Applications
+
+## Automating the Scientific Workflow {#sec:ai-scientists}
+
+Recent advances in [gpms]{acronym-label="gpm"
+acronym-form="plural+short"}, particularly [llms]{acronym-label="llm"
+acronym-form="plural+short"}, have enabled initial demonstrations of
+fully autonomous [ai]{acronym-label="ai" acronym-form="singular+short"}
+scientists \[@schmidgall2025agent\]. We define these as
+[llm]{acronym-label="llm" acronym-form="singular+short"}-powered
+architectures capable of executing end-to-end research workflows based
+solely on the final objectives, e.g., "*Unexplained rise of
+antimicrobial resistance in Pseudomonas. Formulate hypotheses, design
+confirmatory in vitro assays, and suggest repurposing candidates for
+liver-fibrosis drugs*". Such systems navigate partially or entirely
+through all components of the scientific process outlined in
+[1](#fig:applications){reference-type="ref+Label"
+reference="fig:applications"}, and detailed in the subsequent sections.
+
+While significant applications emerge in [ml]{acronym-label="ml"
+acronym-form="singular+short"} and programming, scientific
+implementations remain less explored.
+
+### Coding and ML Applications of AI Scientists
+
+Notable frameworks, including \[@gottweis2025towards\], and
+\[@yamada2025ai\], aim to automate the entire [ml]{acronym-label="ml"
+acronym-form="singular+short"} research pipeline, typically employing
+multi-agent architectures (described in detail in
+[\[sec:multi-agent\]](#sec:multi-agent){reference-type="ref+Label"
+reference="sec:multi-agent"}) where specialized agents manage distinct
+phases of the scientific method \[@schmidgall2025agentrxiv\]. Critical
+to these systems is self-reflection
+\[@renze2024self0reflection\]---iterative evaluation and criticism of
+results within validation loops. However, comparative analyses reveal
+that [llm]{acronym-label="llm" acronym-form="singular+short"}-based
+evaluations frequently overscore outputs relative to human assessments
+\[@huang2023mlagentbench0; @chan2024mle; @starace2025paperbench0\].
+From an engineering perspective, alternative approaches focus
+specifically on iterative code optimization, enabling systems to refine
+their codebases \[@zhang2025darwin\] or generate improved agents
+autonomously \[@hu2024automated\]. In another work,
+\[@novikov2025alphaevolve\], which is an [llm]{acronym-label="llm"
+acronym-form="singular+short"} operating within a
+[ga]{acronym-label="ga" acronym-form="singular+short"} environment,
+found novel algorithms for matrix multiplication (which had seen no
+innovation in fifty years) and sorting.
+
+### Chemistry and Related Fields
+
+In chemistry, proposed systems show promising results. identified
+ripasudil as a treatment for [damd]{acronym-label="damd"
+acronym-form="singular+short"} \[@ghareeb2025robin0\]---despite pending
+clinical trials and the general debate for these systems about novelty
+of their findings\[@Listgarten2024perpetual\]. However, automation of
+experiment execution poses a major constraint for the chemistry-focused
+[ai]{acronym-label="ai" acronym-form="singular+short"}-scientists due to
+hardware requirements, making computational chemistry the most feasible
+subfield in which agents have successfully run simple quantum
+simulations \[@Zou2025ElAgente\]. Further, the
+[llms]{acronym-label="llm" acronym-form="plural+short"} powering these
+systems exhibit limited chemical knowledge \[@mirza2024large\]. Despite
+this, \[@narayanan2025training\]---the first chemistry-specialized
+reasoning [llm]{acronym-label="llm" acronym-form="singular+short"} (see
+[\[sec:rl\]](#sec:rl){reference-type="ref+Label" reference="sec:rl"} for
+a deeper discussion on reasoning models)---demonstrated strong
+capabilities in molecular design and accurate reaction prediction,
+positioning it as a promising foundation for chemistry-focused
+[ai]{acronym-label="ai" acronym-form="singular+short"} scientists.
+
+### Are these Systems Capable of Real Autonomous Research?
+
+Although agents like \[@intologyai2025zochi\] achieved peer-reviewed
+publication in top-tier venues ([acl]{acronym-label="acl"
+acronym-form="singular+short"} 2025), their capacity for truly
+autonomous end-to-end research remains debatable \[@son2025ai\]. Even
+when generating hypotheses that appear novel and impactful, their
+execution and reporting of these ideas, as demonstrated by
+@si2025ideation1execution, yield results deemed less attractive than
+those produced by humans. Additionally, this autonomy raises a critical
+question: *What should the role of [ai]{acronym-label="ai"
+acronym-form="singular+short"} in science be?* While these systems can
+generate hypotheses, conduct experiments, and produce publication-ready
+manuscripts, their integration demands careful consideration (refer to
+[\[sec:ethics\]](#sec:ethics){reference-type="ref+Label"
+reference="sec:ethics"} for further discussion about moral concerns
+around these systems). Beyond the vision of fully autonomous scientists,
+[gpms]{acronym-label="gpm" acronym-form="plural+short"}---primarily
+[llms]{acronym-label="llm" acronym-form="plural+short"}---are already
+utilized across most scientific workflow components, for which
+[llms]{acronym-label="llm" acronym-form="plural+short"} have proven
+useful for some. These elements are shown in
+[1](#fig:applications){reference-type="ref+Label"
+reference="fig:applications"}, and we discuss next.
+
+<figure id="fig:applications">
+<img src="media/figures/rescaled_figures/chemrev_figure11.png" width="50%" />
+<figcaption><strong>Overview of the scientific process</strong>. The
+outer elements represent the typical scientific research process: from
+gathering information and generating hypotheses based on the
+observations, to executing experiments and analyzing the results. The
+terms that are in the center represent data-driven “shortcuts” that
+“accelerate” the typical scientific method. All stages represented in
+the figure are discussed in detail in the following
+sections.</figcaption>
+</figure>
+
+## Existing GPMs for Chemical Science
+
+The development of [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} for chemical science represents a departure
+from traditional single-task approaches. Rather than fine-tuning
+pre-trained models for specific applications such as property prediction
+or molecular generation, these chemistry-aware language models are
+intentionally designed to perform multiple chemical tasks
+simultaneously. This multitask paradigm offers several advantages:
+shared representations across related chemical
+problems\[@dimitrios2023unifying\], improved data efficiency through
+transfer learning between tasks\[@lim2021predicting\], and the potential
+for emergent capabilities that arise from joint training across diverse
+chemical domains\[@livne2024nach0\].
+
+#### Multitask Learning Frameworks
+
+pioneered the multitask approach by fine-tuning through a two-stage
+process \[@xie2025darwin\]. Initially trained on 332k scientific
+question-answer pairs to establish foundational scientific reasoning,
+the model subsequently underwent multitask learning to perform property
+prediction-related regression and classification tasks concurrently.
+
+Building on similar principles, introduced a unified encoder-decoder
+transformer architecture for cross-domain chemical tasks
+\[@livne2024nach0\]. Pre-trained using [ssl]{acronym-label="ssl"
+acronym-form="singular+short"} on both natural language and chemical
+data, tackles diverse downstream applications including molecular
+structure generation, chemical property prediction, and reaction
+prediction. Notably, the authors found that combining chemistry-specific
+tasks outperformed models trained on distinct task groups, suggesting
+that chemical reasoning benefits from focused domain integration.
+
+In the materials domain, @qu2023leveraging developed a language-driven
+materials discovery framework that uses transformer-based embeddings
+(e.g., \[@wan2024tokens\]) to represent and generate novel crystal
+structures. Candidates are first recalled via similarity in embedding
+space, then ranked using a multitask multi-gate
+[moe]{acronym-label="moe" acronym-form="singular+short"} model that
+predicts the desired properties jointly. Their method successfully
+identifies novel high-performance materials (e.g., halide perovskites)
+and demonstrates that language representations encode latent knowledge
+for task-agnostic materials design.
+
+#### Domain-Specific Pre-Training Strategies
+
+A second category of [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} emphasizes deep domain knowledge through
+specialized pre-training. employed [peft]{acronym-label="peft"
+acronym-form="singular+short"} specifically on crystal structure data in
+[cif]{acronym-label="cif" acronym-form="singular+short"} format,
+enabling the generation of thermodynamically stable structures
+\[@mishra2024foundational\].
+
+scales this concept significantly, implementing domain pre-training on
+over 34 billion tokens from chemical textbooks and research articles
+\[@zhao2024chemdfm\]. Through comprehensive instruction tuning,
+familiarizes itself with chemical notation and patterns, distinguishing
+it from more materials-focused approaches like through its broader
+chemical knowledge base.
+
+further refined this approach by introducing template-based instruction
+tuning (ChemData) to optimize property-guided molecular generation
+\[@zhang2024chemllm\].
+
+#### Reasoning-Based Approaches
+
+A recent development in chemical [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} incorporates explicit reasoning
+capabilities. demonstrates this approach as a 24 billion parameter
+reasoning model trained on over 640k experimentally-grounded chemistry
+problems across diverse tasks, including retrosynthesis, solubility
+editing, and property prediction \[@narayanan2025training\]. Unlike
+previous models, uses [rl]{acronym-label="rl"
+acronym-form="singular+short"} (see
+[\[sec:rl\]](#sec:rl){reference-type="ref+Label" reference="sec:rl"}) to
+develop reasoning behaviors like verification and backtracking,
+demonstrating that structured problem-solving approaches can
+significantly improve performance on complex chemical tasks while
+maintaining grounding in experimental data.
+
+These diverse approaches illustrate the evolving landscape of chemical
+[gpms]{acronym-label="gpm" acronym-form="plural+short"}, each balancing
+broad applicability with domain-specific precision. Still, most
+applications of [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+focus on using these models for one specific application and we will
+review those in the following.
+
+## Knowledge Gathering {#sec:information_gathering}
+
+The rate of publishing keeps growing, and as a result, it is
+increasingly challenging to manually collect all relevant knowledge,
+potentially stymying scientific progress.\[@schilling2025text;
+@Chu_2021\] Even though knowledge collection might seem like a simple
+task, it often involves multiple different steps, visually described in
+[2](#fig:knowledge_gathering){reference-type="ref+Label"
+reference="fig:knowledge_gathering"}. We split the discussion in this
+section in two: structured data extraction and question answering.
+Example queries for both sections are shown at the bottom of
+[2](#fig:knowledge_gathering){reference-type="ref+Label"
+reference="fig:knowledge_gathering"}.
+
+<figure id="fig:knowledge_gathering">
+<img src="media/figures/rescaled_figures/chemrev_figure12.png" width="100%" />
+<figcaption><strong>A. a representation of a typical agent for
+scientific queries.</strong> The <span data-acronym-label="llm"
+data-acronym-form="singular+short">llm</span> is the central piece of
+the system, surrounded by typical tools that improve its
+question-answering capabilities, together forming an agentic system. The
+tools represented in this figure are semantic search, citation
+traversal, evidence gathering, and question answering. Semantic search
+finds relevant documents. Evidence gathering ranks and filters chunks of
+text using <span data-acronym-label="llm"
+data-acronym-form="plural+short">llms</span>. The citation traversal
+tool provides model access to citation graphs, enabling accurate
+referencing of each chunk and facilitating the discovery of additional
+sources. Finally, the question-answering tool (an <span
+data-acronym-label="llm" data-acronym-form="singular+short">llm</span>)
+collects all the information found by other tools and generates a final
+response to a user’s query. This part the figure is inspired by the
+agent.[@skarlinski2024language] <strong>B.</strong> two examples of
+applications discussed in this section.</figcaption>
+</figure>
+
+#### Semantic Search
+
+A step that is key to most, if not all, knowledge-gathering tasks is
+[rag]{acronym-label="rag" acronym-form="singular+short"}, discussed in
+more detail in [\[sec:rag\]](#sec:rag){reference-type="ref+Label"
+reference="sec:rag"}. Most commonly, this involves semantic search,
+intended to identify chunks of text with similar meaning. The difference
+between semantic search and conventional search lies in how each
+approach interprets queries. The latter operates through lexical
+matching---whether exact or fuzzy---focusing on the literal words and
+their variations. Semantic search, however, goes deeper by interpreting
+the underlying meaning and contextual relationships within the content.
+
+To enable semantic search, documents are stored in vector databases
+using embedding vectors (see
+[\[sec:embeddings\]](#sec:embeddings){reference-type="ref+Label"
+reference="sec:embeddings"}).\[@bojanowski2017enriching\] They represent
+the content of a document as a vector in a learned vector space and
+hence allow for similarity search by vector comparison (e.g., using
+cosine similarity for small databases or more sophisticated algorithms
+like [hnsw]{acronym-label="hnsw" acronym-form="singular+short"} for
+large databases\[@malkov2018efficient\]).
+
+In chemistry, semantic search has been used extensively to classify and
+identify chemical text.\[@Guo2021; @beltagy2019scibert0;
+@trewartha2022quantifying\]
+
+### Structured Data Extraction
+
+Semantic search can help us find relevant resources. However, for many
+applications it can be useful to collect data in a structured form,
+e.g., tables with fixed columns. Obtaining such a dataset based on
+extracting data from the literature using [llms]{acronym-label="llm"
+acronym-form="plural+short"} is currently one of the most practical
+avenues for the use of [llms]{acronym-label="llm"
+acronym-form="plural+short"} in the chemical sciences
+\[@schilling2025text\]. Currently, [llms]{acronym-label="llm"
+acronym-form="plural+short"} are used in various forms for this
+application.
+
+#### Data Extraction Using Prompting
+
+For most applications, zero-shot prompting should be the starting point.
+In this context, zero-shot prompting has been used to extract data about
+organic reactions\[@rios2025llm; @vangala2024suitability;
+@Patiny2023automatic\], synthesis procedures for metal-organic
+frameworks\[@zheng2023chatgpt\], polymers\[@schilling2024using;
+@gupta2024data\], solar cells\[@shabih2025automated\], or materials
+data\[@polak2024extracting; @hira2024reconstructing;
+@kumar2025mechbert; @wu2025large; @huang2022batterybert\].
+
+#### Fine-tuning Based Data Extraction
+
+If a commercial model needs to be run very often, it can be more
+cost-efficient to fine-tune a smaller, open-source model compared to
+prompting a large model. In addition, models might lack specialized
+knowledge and might not follow certain style guides, which can be
+introduced with fine-tuning. @ai2024extracting fine-tuned the model to
+extract procedural chemical reaction data from
+[uspto]{acronym-label="uspto" acronym-form="singular+short"}, and
+converted it to a [json]{acronym-label="json"
+acronym-form="singular+short"} format compatible with the schema of
+[ord]{acronym-label="ord"
+acronym-form="singular+short"}\[@Kearnes_2021\], achieving an overall
+accuracy of more than $90\%$. In a different work, @zhang2024fine
+fine-tuned to recognize and extract chemical entities from
+[uspto]{acronym-label="uspto" acronym-form="singular+short"}.
+Fine-tuning improved the performance of the base model on the same task
+by more than $15\%$. Similarly, @dagdelen2024structured proposed a
+human-in-the-loop data annotation process, where humans correct the
+outputs from an [llm]{acronym-label="llm" acronym-form="singular+short"}
+extraction instead of extracting data from scratch.
+
+#### Agents for Data Extraction
+
+Agents ([\[sec:agents\]](#sec:agents){reference-type="ref+Label"
+reference="sec:agents"}) have shown their potential in data extraction,
+though to a limited extent.\[@chen2024autonomous; @kang2024chatmof\]
+For example, @ansari2024agent introduced , an agent that autonomously
+extracts structured materials science data from scientific literature
+without requiring fine-tuning, demonstrating performance comparable to
+or better than fine-tuned methods. Their agent is an
+[llm]{acronym-label="llm" acronym-form="singular+short"} with access to
+tools such as chemical databases (e.g., the database) and research
+papers from various sources.
+
+While the authors claim this approach simplifies dataset creation for
+materials discovery, the evaluation is limited to a narrow set of
+materials science tasks (mostly focusing on [mofs]{acronym-label="mof"
+acronym-form="plural+short"}), indicating the need for the creation of
+agent evaluation tools.
+
+#### Limitations
+
+The ability to extract data from sources other than text is important
+since a large amount of data is only stored in plots, tables, and
+figures. Despite some initial simple proofs of concept
+\[@Zheng2024image\], the main bottleneck presently is the limited
+understanding of image data compared to text data in multimodal
+models.\[@alampara2024probing\] The promise of agents lies in their
+ability to interact with tools (that can also interpret multimodal
+data). Moreover, their ability to self-reflect could automatically
+improve wrong results.\[@du2023improving\]
+
+### Question Answering
+
+Besides extracting information from documents in a structured format,
+[llms]{acronym-label="llm" acronym-form="plural+short"} can also be used
+to answer questions---such as "Has X been tried before" by synthesizing
+knowledge from a corpus of documents (and potentially automatically
+retrieving additional documents).
+
+An example of a system that can do that is . This agentic system
+contains tools for search, evidence-gathering, and question answering as
+well as for traversing citation graphs, which are shown in
+[2](#fig:knowledge_gathering){reference-type="ref+Label"
+reference="fig:knowledge_gathering"}. The evidence-gathering tool
+collects the most relevant chunks of information via the semantic search
+and performs [llm]{acronym-label="llm"
+acronym-form="singular+short"}-based re-ranking of these chunks (i.e.
+the [llm]{acronym-label="llm" acronym-form="singular+short"} changes the
+order of the chunks depending on what is needed to answer the query).
+Subsequently, only the top-$n$ most relevant chunks are kept. To further
+ground the responses, citation traversal tools (e.g., Semantic
+Scholar\[@kinney2023semantic\]) are used. These leverage the citation
+graph as a means of discovering supplementary literature references.
+Ultimately, to address the user's query, a question-answering tool is
+employed. It initially augments the query with all the collected
+information before providing a definitive answer. The knowledge
+aggregated by these systems could be used to generate new hypotheses or
+challenge existing ones. Thus, in the next section, we focus on this
+aspect.
+
+## Hypothesis Generation {#sec:hypothesis-gen}
+
+Coming up with new hypotheses represents a cornerstone of the scientific
+process \[@rock2018hypothesis\]. Historically, hypotheses have emerged
+from systematic observation of natural phenomena, exemplified by Isaac
+Newton's formulation of the law of universal gravitation
+\[@newton1999principia\], which was inspired by the seemingly mundane
+observation of a falling apple \[@kosso2017whatgoesup\].
+
+In modern research, hypothesis generation increasingly relies on
+data-driven tools. For example, clinical research employs frameworks
+such as [viads]{acronym-label="viads" acronym-form="singular+short"} to
+derive testable hypotheses from well-curated datasets
+\[@Jing2022roles\]. Similarly, advances in [llms]{acronym-label="llm"
+acronym-form="plural+short"} are now being explored for their potential
+to automate and enhance idea generation across scientific domains
+\[@oneill2025sparks\]. However, such approaches face significant
+challenges due to the inherently open-ended nature of scientific
+discovery \[@stanley2017openendedness\]. Open-ended domains, as
+discussed in
+[\[sec:data-section\]](#sec:data-section){reference-type="ref+Label"
+reference="sec:data-section"}, risk intractability, as an unbounded
+combinatorial space of potential variables, interactions, and
+experimental parameters complicates systematic exploration
+\[@clune2019ai0gas0\]. Moreover, the quantitative evaluation of the
+novelty and impact of generated hypotheses remains non-trivial. As Karl
+Popper argued, scientific discovery defies rigid logical frameworks
+\[@popper1959logic\], and objective metrics for "greatness" of ideas are
+elusive \[@stanley2015greatness\]. These challenges underscore the
+complexity of automating or systematizing the creative core of
+scientific inquiry.
+
+### Initial Sparks
+
+Recent efforts in the [ml]{acronym-label="ml"
+acronym-form="singular+short"} community have sought to simulate the
+hypothesis formulation process \[@Gu2025forecasting;
+@arlt2024meta0designing\], primarily leveraging multi-agent systems
+\[@jansen2025codescientist0; @kumbhar2025hypothesis\]. In such
+frameworks, agents typically retrieve prior knowledge to contextualize
+previous related work---grounding hypothesis generation in existing
+literature \[@naumov2025dora; @ghareeb2025robin0;
+@gu2024interesting\]. A key challenge, however, lies in evaluating the
+generated hypotheses. While some studies leverage
+[llms]{acronym-label="llm" acronym-form="plural+short"} to evaluate
+novelty or interestingness \[@zhang2024omni0\], recent work has
+introduced critic agents---specialized components designed to monitor
+and iteratively correct outputs from other agents---into multi-agent
+frameworks (see
+[\[sec:multi-agent\]](#sec:multi-agent){reference-type="ref+Label"
+reference="sec:multi-agent"}). For instance, @Ghafarollahi2024
+demonstrated how integrating such critics enables systematic hypothesis
+refinement through continuous feedback mechanisms.
+
+However, the reliability of purely model-based evaluation remains
+contentious. @si2025llms argued that relying on a
+[gpm]{acronym-label="gpm" acronym-form="singular+short"} to evaluate
+hypotheses lacks robustness, advocating instead for human assessment.
+This approach was adopted in their work, where human evaluators
+validated hypotheses produced by their system, finding more novel
+[llm]{acronym-label="llm" acronym-form="singular+short"}-produced
+hypotheses compared to the ones proposed by humans. Notably,
+@yamada2025ai advanced the scope of such systems by automating the
+entire research [ml]{acronym-label="ml" acronym-form="singular+short"}
+process, from hypothesis generation to article writing. Their system's
+outputs were submitted to workshops at the [iclr]{acronym-label="iclr"
+acronym-form="singular+short"} 2025, with one contribution ultimately
+accepted. However, the advancements made by such works are currently
+incremental instead of unveiling new, paradigm-shifting research (see
+[3](#fig:hypothesis-generation){reference-type="ref+Label"
+reference="fig:hypothesis-generation"}).
+
+### Chemistry-Focused Hypotheses
+
+In scientific fields such as chemistry and materials science, hypothesis
+generation requires domain intuition, mastery of specialized
+terminology, and the ability to reason through foundational concepts
+\[@miret2024llms\]. To address potential knowledge gaps in
+[llms]{acronym-label="llm" acronym-form="plural+short"},
+@wang2023scimon0 proposed a few-shot learning approach (see
+[\[sec:prompting\]](#sec:prompting){reference-type="ref+Label"
+reference="sec:prompting"}) for hypothesis generation and compared it
+with model fine-tuning for the same task. Their method strategically
+incorporates in-context examples to supplement domain knowledge while
+discouraging over-reliance on existing literature. For fine-tuning, they
+designed a loss function that penalizes possible biases---e.g., given
+the context "hierarchical tables challenge numerical reasoning", the
+model would be penalized if it generated an overly generic prediction
+like "table analysis" instead of a task-specific one---when trained on
+such examples. Human evaluations of ablation studies revealed that ,
+augmented with a knowledge graph of prior research, outperformed
+fine-tuned models in generating hypotheses with greater technical
+specificity and iterative refinement of such hypotheses.
+
+Complementing this work, @yang2025moose introduced the framework to
+evaluate the novelty of [llm]{acronym-label="llm"
+acronym-form="singular+short"}-generated hypotheses. To avoid data
+contamination, their benchmark exclusively uses papers published after
+the knowledge cutoff date of the evaluated model, . Ground-truth
+hypotheses were derived from articles in high-impact journals (e.g.,
+Nature, Science) and validated by domain-specialized PhD researchers. By
+iteratively providing the model with context from prior studies,
+achieved coverage of over $80\%$ of the evaluation set's hypotheses
+while accessing only $4\%$ of the retrieval corpus, demonstrating
+efficient synthesis of ideas presumably not present in its training
+corpus.
+
+<figure id="fig:hypothesis-generation">
+<img src="media/figures/rescaled_figures/chemrev_figure13.png" width="100%" />
+<figcaption><strong>Overview of <span data-acronym-label="llm"
+data-acronym-form="singular+short">llm</span>-based hypothesis
+generation</strong>. Current methods are based on <span
+data-acronym-label="llm"
+data-acronym-form="singular+short">llm</span>-sampling methods in which
+an <span data-acronym-label="llm"
+data-acronym-form="singular+short">llm</span> proposes new hypotheses.
+The generated hypotheses are evaluated in terms of novelty and impact
+either by another <span data-acronym-label="llm"
+data-acronym-form="singular+short">llm</span> or by a human. Then,
+through experimentation, the hypotheses are transformed into results
+which showcase that current <span data-acronym-label="llm"
+data-acronym-form="plural+short">llms</span> cannot produce
+groundbreaking ideas, limited to their training corpus, resulting in the
+best cases, in incremental work. This is shown metaphorically with the
+puzzle. The “pieces of chemical knowledge” based on the hypothesis
+produced by <span data-acronym-label="llm"
+data-acronym-form="plural+short">llms</span> are already present in the
+“chemistry puzzle”, not unveiling new parts of it.</figcaption>
+</figure>
+
+### Are LLMs Actually Capable of Novel Hypothesis Generation?
+
+Automatic hypothesis generation is often regarded as the Holy Grail of
+automating the scientific process \[@coley2020autonomous\]. However,
+achieving this milestone remains challenging, as generating novel and
+impactful ideas requires questioning current scientific paradigms
+\[@Kuhn1962Structure\]---a skill typically refined through years of
+experience---which is currently impossible for most
+[ml]{acronym-label="ml" acronym-form="singular+short"} systems.
+
+Current progress in [ml]{acronym-label="ml"
+acronym-form="singular+short"} illustrates these limitations
+\[@kon2025exp0bench0; @gu2024interesting\]. Although some studies claim
+success in [ai]{acronym-label="ai"
+acronym-form="singular+short"}-generated ideas accepted at workshops in
+[ml]{acronym-label="ml" acronym-form="singular+short"} conferences via
+double-blind review \[@zhou2025tempest0\], these achievements are
+limited. First, accepted submissions often focus on coding tasks, one of
+the strongest domains for [llms]{acronym-label="llm"
+acronym-form="plural+short"}. Second, workshop acceptances are less
+competitive than main conferences, as they prioritize early-stage ideas
+over rigorously validated contributions. In chemistry, despite some
+works showing promise on these systems \[@yang2025moose0chem20\],
+[llms]{acronym-label="llm" acronym-form="plural+short"} struggle to
+propose functional hypotheses \[@si2025ideation1execution\]. Their
+apparent success often hinges on extensive sampling and iterative
+refinement, rather than genuine conceptual innovation.
+
+As @Kuhn1962Structure argued, generating groundbreaking ideas demands
+challenging prevailing paradigms---a capability missing in current
+[ml]{acronym-label="ml" acronym-form="singular+short"} models (they are
+trained to make the existing paradigm more likely in training rather
+than questioning their training data), as shown in
+[3](#fig:hypothesis-generation){reference-type="ref+Label"
+reference="fig:hypothesis-generation"}. Thus, while accidental
+discoveries can arise from non-programmed events (e.g., Fleming's
+identification of penicillin \[@Fleming1929antibacterial;
+@Fleming1945penicillin\]), transformative scientific advances typically
+originate from deliberate critique of existing knowledge
+\[@popper1959logic; @Lakatos1970falsification\]. In addition, very
+often breakthroughs can also not be achieved by optimizing for a simple
+metric---as we often do not fully understand the problem and, hence,
+cannot design a metric.\[@stanley2015greatness\] Despite some
+publications suggesting that [ai]{acronym-label="ai"
+acronym-form="singular+short"} scientists already exist, such claims are
+supported only by narrow evaluations that yield incremental progress
+\[@novikov2025alphaevolve\], not paradigm-shifting insights. For
+[ai]{acronym-label="ai" acronym-form="singular+short"} to evolve from
+research assistants into autonomous scientists, it must demonstrate
+efficacy in addressing societally consequential challenges, such as
+solving complex, open-ended problems at scale (e.g., "millennium" math
+problems \[@Carlson2006millennium\]).
+
+Finally, ethical considerations become critical as hypothesis generation
+grows more data-driven and automated. Adherence to legal and ethical
+standards must guide these efforts (see
+[\[sec:safety\]](#sec:safety){reference-type="ref+Label"
+reference="sec:safety"}) \[@danish_gov2024hypothesis\].
+
+With a hypothesis in hand, the next step is often to run an experiment
+to test it.
+
+## Experiment Planning {#sec:planning}
+
+Before a human or robot can execute any experiments, a plan must be
+created. Planning can be formalized as the process of decomposing a
+high-level task into a structured sequence of actionable steps aimed at
+achieving a specific goal. The term planning is often confused with
+scheduling and [rl]{acronym-label="rl" acronym-form="singular+short"},
+which are closely related but distinct concepts. Scheduling is a more
+specific process focused on the timing and sequence of tasks. It ensures
+that resources are efficiently allocated, experiments are conducted in
+an optimal order, and constraints (such as lab availability, time, and
+equipment) are respected.\[@kambhampati2023llmplanning\]
+[rl]{acronym-label="rl" acronym-form="singular+short"} is about adapting
+and improving plans over time based on ongoing results.\[@chen2022deep\]
+
+### Conventional Planning
+
+Early experimental planning in chemistry relied on human intuition and
+domain expertise. One example of this is retrosynthesis. Since the
+1960s, systems like [lhasa]{acronym-label="lhasa"
+acronym-form="singular+short"} \[@corey1972computer\] began automating
+retrosynthesis using hand-coded rules and heuristics\[@warr2014short\].
+Later tools, such as \[@grzybowski2018chematica\], expanded these
+efforts by integrating larger template libraries and optimization
+strategies. As reaction data grew in volume and complexity, manual rule
+encoding became unsustainable. Platforms like ASKCOS\[@tu2025askcos\]
+integrated [gnns]{acronym-label="gnn" acronym-form="plural+short"} and
+neural classifiers to predict reactivity and suggest conditions,
+enabling actionable synthetic routes.
+
+All applications, however, face the problem that planning is difficult
+because search spaces are combinatorially large and evaluating potential
+paths, in principle, requires a model that can perfectly predict the
+outcomes of different actions. Conventional approaches often rely on
+various forms of search algorithms such as [bfs]{acronym-label="bfs"
+acronym-form="singular+short"}, [dfs]{acronym-label="dfs"
+acronym-form="singular+short"}, [mcts]{acronym-label="mcts"
+acronym-form="singular+short"} \[@segler2017towards\]. Those, however,
+are often still not efficient enough to tackle long-horizon planning for
+complex problems.
+
+### LLMs to Decompose Problems into Plans
+
+[gpms]{acronym-label="gpm" acronym-form="plural+short"}, in particular
+[llms]{acronym-label="llm" acronym-form="plural+short"}, can potentially
+assist in planning with two modes of thinking. Deliberate
+(system-2-like) thinking can be used to score potential options or to
+decompose problems into plans. Intuitive (system-1-like) thinking can be
+used to efficiently prune search spaces. These two modes align with
+psychological frameworks known as system-1 and system-2 thinking.
+\[@kahneman2011thinking\] In the system-1 thinking,
+[llms]{acronym-label="llm" acronym-form="plural+short"} support rapid
+decision-making by leveraging heuristics and pattern recognition to
+quickly narrow down options. In contrast, system-2 thinking represents a
+slower, more analytical process, in which [llms]{acronym-label="llm"
+acronym-form="plural+short"} solve complex tasks---such as logical
+reasoning and planning---by explicitly generating step-by-step
+reasoning. \[@ji2025test\]
+
+Decomposing a goal into actionable milestones relies on this deliberate,
+system-2-style reasoning, enabling the model to evaluate alternatives
+and structure plans effectively. A variety of strategies have been
+proposed to improve the reasoning capabilities of
+[llms]{acronym-label="llm" acronym-form="plural+short"} during
+inference. Methods such as [cot]{acronym-label="cot"
+acronym-form="singular+short"} and least-to-most prompting guide models
+to decompose problems into interpretable steps, improving transparency
+and interpretability. However, their effectiveness in planning is
+limited by error accumulation and linear thinking
+patterns.\[@stechly2024chain\] To address these limitations, recent
+test-time strategies such as repeat sampling and tree search have been
+proposed to enhance planning capabilities in [llms]{acronym-label="llm"
+acronym-form="plural+short"}. Repeated sampling allows the model to
+generate multiple candidate reasoning paths, encouraging diversity in
+thought and increasing the chances of discovering effective subgoal
+decompositions. \[@wang2024planning\] Meanwhile, tree search methods
+like [tot]{acronym-label="tot" acronym-form="singular+short"} and
+[rap]{acronym-label="rap" acronym-form="singular+short"} treat reasoning
+as a structured search, also using algorithms like
+[mcts]{acronym-label="mcts" acronym-form="singular+short"} to explore
+and evaluate multiple solution paths, facilitating more global and
+strategic decision-making. \[@hao2023reasoning\]
+
+Beyond purely linguistic reasoning, [llms]{acronym-label="llm"
+acronym-form="plural+short"} have also been used to interpret
+natural-language queries and to translate them into structured planning
+steps, as demonstrated by systems like [llm]{acronym-label="llm"
+acronym-form="singular+short"}+P\[@liu2023llm\] and
+[llm]{acronym-label="llm"
+acronym-form="singular+short"}-DP\[@dagan2023dynamic\], which integrated
+[llms]{acronym-label="llm" acronym-form="plural+short"} with classical
+planners to convert planning problems into [pddl]{acronym-label="pddl"
+acronym-form="singular+short"}. [llms]{acronym-label="llm"
+acronym-form="plural+short"} have also been applied to generate
+structured procedures from limited observations. For example, in quantum
+physics, a model was trained to infer reusable experimental templates
+from measurement data, producing Python code that generalized across
+system sizes. \[@arlt2024meta0designing\] This demonstrates how
+[llms]{acronym-label="llm" acronym-form="plural+short"} can support
+scientific planning by synthesizing high-level protocols from low-level
+evidence, moving beyond symbolic reasoning to executable plan
+generation.
+
+### Pruning of Search Spaces
+
+Pruning refers to the process of eliminating unlikely or suboptimal
+options during the search to reduce the computational burden. Because
+the number of potential pathways can grow exponentially, exhaustive
+search may be computationally intensive. Classical planners employ
+heuristics, value functions, or logical filters to perform
+pruning\[@bonet2012action\]. [llms]{acronym-label="llm"
+acronym-form="plural+short"} can emulate pruning through learned
+heuristics, intuitive judgment, or context-driven evaluation,
+\[@gao2025synergizing\] reflecting system-1 thinking.
+[4](#fig:planning){reference-type="ref+Label" reference="fig:planning"}
+illustrates how [llms]{acronym-label="llm" acronym-form="plural+short"}
+can support experimental planning by selectively pruning options.
+Rule-based heuristics derived from domain knowledge can automatically
+discard routes involving unfavorable motifs, such as chemically strained
+rings or complex aromatic scaffolds. Meanwhile,
+[llms]{acronym-label="llm" acronym-form="plural+short"} can emulate an
+expert chemist's intuition by discarding synthetic routes that appear
+unnecessarily long, inefficient, or mechanistically implausible.
+
+To further enhance planning efficacy, [llms]{acronym-label="llm"
+acronym-form="plural+short"} can be augmented with external tools that
+estimate the feasibility or performance of candidate plans, enabling
+targeted pruning of the search space before costly execution. In , the
+[llm]{acronym-label="llm" acronym-form="singular+short"} collaborated
+with specialized chemical tools with knowledge about molecular and
+reaction properites. While does not explicitly generate and prune a
+large pool of candidate plans, these tools serve as real-time evaluators
+that help the model avoid unfeasible or inefficient directions during
+synthesis or reaction planning.
+
+In addition to external tools, [llms]{acronym-label="llm"
+acronym-form="plural+short"} can also engage in self-correction, a
+reflective strategy that identifies and prunes flawed reasoning steps
+within their own outputs. This introspective pruning supports more
+robust and coherent planning by discarding faulty intermediate steps
+before they affect final decisions. As such, self-correction offers a
+lightweight yet effective mechanism for narrowing the solution space in
+complex reasoning tasks. At the highest level of oversight,
+human-in-the-loop frameworks introduce expert feedback to guide pruning
+decisions. The system\[@darvish2025organa\] integrated chemist feedback
+into the planning process, helping define goals, resolve ambiguities,
+and eliminate invalid directions.
+
+<figure id="fig:planning">
+<img src="media/figures/rescaled_figures/chemrev_figure14.png" width="100%" />
+<figcaption><strong><span data-acronym-label="gpm"
+data-acronym-form="singular+short">gpm</span>-guided retrosynthesis
+route planning and pruning</strong>. <span data-acronym-label="gpm"
+data-acronym-form="plural+short">gpms</span> can systematically evaluate
+and prune retrosynthetic routes using multiple reasoning capabilities to
+discriminate between viable and problematic approaches. The partially
+overlapping arrows at the start of each route indicate multiple steps.
+<strong>Route A</strong>: This route was pruned by heuristic reasoning
+due to the unfavorable aromatic core construction. <strong>Route
+B</strong>: This route was selected as it successfully passes all <span
+data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span>
+planning checks, demonstrating optimal synthetic feasibility.
+<strong>Route C</strong>: This pathway was pruned by external tools due
+to the poor region-selectivity of the oxidation step. <strong>Route
+D</strong>: This route was pruned based on learned intuition, as it
+represents an inefficient multistep pathway; the route could just start
+with phenol instead of synthesizing it. </figcaption>
+</figure>
+
+### Evaluation
+
+While pruning accelerates planning, its effectiveness depends on
+reliable evaluation---the ability to judge whether a candidate plan is
+valid or promising. However, evaluating planning quality is particularly
+challenging in scientific fields such as chemistry and biology. Many
+alternative plans may achieve the same goal, so evaluation is inherently
+ambiguous in the absence of a comprehensive world model. In open-ended
+domains, evaluation is often conducted manually. For example,
+\[@bran2024augmenting\] relied on expert review to assess the
+correctness and plausibility of generated outputs. More dynamic
+evaluations can be performed in simulated or real embodied environments
+\[@song2023llm; @choi2024lota\], offering interactive feedback on
+feasibility. In parallel, automatic evaluation methods are emerging. For
+example, \[@o2023bioplanner\] used pseudocode-based evaluation,
+comparing [llm]{acronym-label="llm"
+acronym-form="singular+short"}-generated protocols to expert-written
+pseudocode representations to assess plausibility and correctness
+without requiring manual review or physical execution.
+
+## Experiment Execution
+
+Once an experimental plan is available, whether from a human scientist's
+idea or a sophisticated AI model, the next step is to execute it.
+Regardless of its source, the plan must be translated into concrete,
+low-level actions for execution. One of the main challenges of lab
+automation is to convert the high-level and abstract experimental plan
+into real-world operations carried out by the experimental hardware
+(liquid-handing systems, robotic arms, instruments, etc.).
+
+It is worth noting that, despite their methodological differences,
+executing experiments *in silico* (running simulations or code) and *in
+vitro* are not fundamentally different---both follow an essentially
+identical workflow: Plan $\rightarrow$ Instructions $\rightarrow$
+Execution $\rightarrow$ Analysis. In a computer simulation, a researcher
+writes a program (plan), which is then compiled or interpreted into
+machine code (instructions) for the [cpu]{acronym-label="cpu"
+acronym-form="singular+short"}, executed to produce data, and finally
+the outputs are analyzed. In an automated laboratory, the scientist
+specifies a protocol (plan), which must be translated into instrument
+commands (instructions), executed on a robotic platform, followed by the
+analysis of sensor data or assay results. Both scenarios require careful
+translation of abstract steps into concrete actions, as well as further
+decision-making based on the acquired results.
+
+The execution of *in silico* experiments can be reduced to two essential
+steps: preparing input files and running the computational code;
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} can be used in
+both steps.\[@Liu2025ASA; @Mendible-Barreto2025DynaMate;
+@Zou2025ElAgente; @Campbell2025MDCrow\] @Jacobs2025orca found that
+using a combination of fine-tuning, [cot]{acronym-label="cot"
+acronym-form="singular+short"} and [rag]{acronym-label="rag"
+acronym-form="singular+short"} (see
+[\[sec:model_adaptation\]](#sec:model_adaptation){reference-type="ref+Label"
+reference="sec:model_adaptation"}) can improve the performance of
+[llms]{acronym-label="llm" acronym-form="plural+short"} in generating
+executable input files for the quantum chemistry software
+*ORCA*\[@ORCA5\], while @Gadde2025chatbot created , an
+[llm]{acronym-label="llm" acronym-form="singular+short"}-based platform
+that assists users in preparing input files for
+[qmmm]{acronym-label="qmmm" acronym-form="singular+short"} simulations
+of explicitly solvated molecules and running them on a remote computer.
+Examples of [gpm]{acronym-label="gpm"
+acronym-form="singular+short"}-based autonomous agents (see
+[\[sec:agents\]](#sec:agents){reference-type="ref+Label"
+reference="sec:agents"}) capable of performing the entire computational
+workflow (i.e., preparing inputs, executing the code, and analyzing the
+results) are \[@Campbell2025MDCrow\] (for molecular dynamics) and
+\[@Zou2025ElAgente\] (for quantum chemistry).
+
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} can also assist
+in automating *in vitro* experiments. We can draw parallels from
+programming language paradigms---compiled vs. interpreted (see
+[5](#fig:exec){reference-type="ref+Label" reference="fig:exec"}A)---to
+better understand how [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} can be useful in different approaches of
+experiment automation. In compiled languages (like or ), the entire code
+is converted ahead of time by another program called the "compiler" into
+binary machine code, which is directly executable by the hardware. In
+interpreted languages (like or ), a program called the "interpreter"
+reads the instructions line-by-line during runtime, translating and
+executing them on the fly. Compiled languages offer high performance and
+early error detection, making them ideal for performance-critical
+systems, but they require a separate compilation step and are less
+flexible during development. Interpreted languages are easier to use,
+debug, and modify on the fly, which makes them great for rapid
+development and scripting, but they generally run slower and catch
+errors only at runtime. Similarly, we can broadly categorize different
+approaches to experiment automation into two different groups: "compiled
+automation" and "interpreted automation" (see
+[5](#fig:exec){reference-type="ref+Label" reference="fig:exec"}B). In
+the compiled approach, the entire protocol is translated---either by a
+human or a [gpm]{acronym-label="gpm" acronym-form="singular+short"}---to
+low-level instructions before execution, while in interpreted
+automation, the [gpm]{acronym-label="gpm" acronym-form="singular+short"}
+plays a central role, acting as the "interpreter" and executing the
+protocol step by step. As we show below, it can be instructive to use
+this perspective when discussing approaches to automate experiment
+execution with [gpms]{acronym-label="gpm" acronym-form="plural+short"}.
+
+<figure id="fig:exec">
+<img src="media/figures/rescaled_figures/chemrev_figure15+16.png" width="\textwidth" />
+<figcaption><strong>Programming languages vs. lab automation. A)
+programming paradigms</strong>: In compiled languages, the entire source
+code is translated ahead of time to machine code by the compiler. This
+stand-alone code is then given to the <span data-acronym-label="os"
+data-acronym-form="singular+short">os</span>, which is responsible for
+scheduling and distributing tasks to the hardware. In interpreted
+languages, the interpreter reads and translates each line of the source
+code to machine code and hands it to the <span data-acronym-label="os"
+data-acronym-form="singular+short">os</span> for execution. <strong>B)
+automation paradigms</strong>: In the compiled approach, a <span
+data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span>
+formalizes the protocol, a compiler, such as the
+chempiler[@steiner2019organic], translates the formalized protocol to
+hardware-specific low-level steps, which the controller then executes—a
+central hub tasked with scheduling and distributing commands to chemical
+hardware. In the interpreted approach, a <span data-acronym-label="gpm"
+data-acronym-form="singular+short">gpm</span>, acting as the
+interpreter, first breaks down the protocol into specific steps, then
+sends them (via an <span data-acronym-label="api"
+data-acronym-form="singular+short">api</span>) for execution one by one.
+The strength of interpreted systems is dynamic feedback: after the
+execution of each step, the <span data-acronym-label="gpm"
+data-acronym-form="singular+short">gpm</span> receives a signal (e.g.,
+data, errors), which can influence its behavior for the next
+steps.</figcaption>
+</figure>
+
+### Compiled Automation
+
+In the case of "compiled automation", the experiment protocol needs to
+be formalized in a high-level or [dsl]{acronym-label="dsl"
+acronym-form="singular+short"} that describes exactly what operations to
+perform in what order. A chemical compiler (or "chempiler"
+\[@steiner2019organic\]) then converts this high-level protocol into
+low-level code for the specific lab hardware, which is then executed by
+robotic instruments, orchestrated by a controller (refer to the caption
+of [5](#fig:exec){reference-type="ref+Label" reference="fig:exec"}B).
+
+#### Protocol Languages
+
+While -based scripts are frequently used as the *de facto* protocol
+language due to 's accessibility and flexibility,\[@pylabrobot;
+@vriza2023polybot; @wang2025polybot\] specialized languages
+([dsls]{acronym-label="dsl" acronym-form="plural+short"}) have also been
+developed to provide more structured and semantically rich
+representations of experimental procedures.\[@wang2022ulsa;
+@ananthanarayanan2010biocoder; @autoprotocol2023; @Park2023CMDL\] One
+of the prominent examples of such languages is
+[chidl]{acronym-label="chidl"
+acronym-form="singular+short"}\[@xdl2023spec\], developed as part of the
+Chemputer architecture \[@steiner2019organic; @mehr2020universal;
+@hammer2021chemputation\]. [chidl]{acronym-label="chidl"
+acronym-form="singular+short"} uses a [json]{acronym-label="json"
+acronym-form="singular+short"}-like format, and the experimental
+protocol is described by defining , , etc, and using abstract chemical
+commands such as , , , etc. In the next step, the software takes this
+[chidl]{acronym-label="chidl" acronym-form="singular+short"} script and
+a description of the physical connectivity and composition of the
+automated platform as a graph and translates it into
+[chasm]{acronym-label="chasm" acronym-form="singular+short"} which is
+specific to the platform (akin to machine code). In practice,
+[chidl]{acronym-label="chidl" acronym-form="singular+short"} has been
+used to automate multi-step organic syntheses with yields comparable to
+manual experiments.\[@mehr2020universal\]
+
+Developing experimental protocols in a formal language is a non-trivial
+task, often requiring specialized coding expertise. Within the compiled
+approach, the role of the [gpm]{acronym-label="gpm"
+acronym-form="singular+short"} is to translate natural-language
+protocols into their formalized, machine-readable
+counterparts.\[@Lamas2024DSLXpert; @jiang2024protocode;
+@conrad2025lowering; @inagaki2023robotic\] @Vaucher2020AutoExtraction
+used an encoder-decoder transformer model to convert English
+experimental procedures to structured sequences of pre-defined synthesis
+actions (e.g., , , ). They pre-trained the model on $2$M sentence-action
+pairs extracted by a rule-based [nlp]{acronym-label="nlp"
+acronym-form="singular+short"} algorithm and then fine-tuned it on
+manually annotated samples to improve accuracy. The model achieved exact
+sentence-pair matching in $61\%$ of the test samples and had more than
+$75\%$ overlap in $82\%$ of them. Although this approach accelerates
+automated protocol extraction from chemical literature, the output
+format is not directly suitable for execution.
+
+@Pagel2024LLMChemputer introduced a multi-agent workflow (based on )
+that can address this issue and convert unstructured chemistry papers
+into executable code. The first agent extracts all synthesis-relevant
+text, including supporting information; a procedure agent then sanitizes
+the data and tries to fill the gaps from chemical databases (using
+[rag]{acronym-label="rag" acronym-form="singular+short"}); another agent
+translates procedures into [chidl]{acronym-label="chidl"
+acronym-form="singular+short"} and simulates them on virtual hardware;
+finally, a critique agent cross-checks the translation and fixes errors.
+
+The example above shows one of the strengths of the compiled approach:
+it allows for pre-validation. The protocol can be simulated or checked
+for any errors before running on the actual hardware, ensuring safety.
+Another example of [llm]{acronym-label="llm"
+acronym-form="singular+short"}-based validators for chemistry protocols
+is .\[@Yoshikawa2023CLAIRify\] Leveraging an iterative prompting
+strategy, it uses to first translate the natural-language protocol into
+[chidl]{acronym-label="chidl" acronym-form="singular+short"} script,
+then automatically verifies its syntax and structure, identifies any
+errors, appends those errors to the prompt, and prompts the
+[llm]{acronym-label="llm" acronym-form="singular+short"}
+again---iterating this process until a valid
+[chidl]{acronym-label="chidl" acronym-form="singular+short"} script is
+produced.
+
+Similar to how compiled software can be recompiled for different
+platforms, compiled automation is hardware-agnostic: by using
+appropriate compilation, a well-defined protocol can---at least in
+principle---be run on different robotic systems as long as they have the
+required capabilities.\[@rauschen2024universal;
+@strieth-kalthoff2024delocalized; @wilbraham2021chemPU\] In practice,
+however, inconsistencies in hardware interfaces and software standards
+across the lab automation community make cross-platform execution
+challenging.
+
+The main limitations of compiled approaches are the flip side of their
+strengths: low flexibility and adaptability. Any logic or
+decision-making must either be explicitly encoded within the
+protocol---necessitating meticulous scripting---or delegated to an
+external control layer.\[@mehr2023digitizing; @leonov2024integrated\]
+If something unexpected occurs (a pump clogging, a reaction taking
+longer than expected), the pre-compiled protocol cannot easily adjust in
+real-time, and human intervention or a complete recompile might be
+needed.
+
+### Interpreted Automation
+
+Interpreted programming languages support higher levels of abstraction,
+enabling the use of more general and flexible command structures.
+Similarly, since [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+can translate high-level goals into concrete steps\[@ahn2022can;
+@huang2022language\], they can act as an "interpreter" between the
+experimental intent and lab hardware. For instance, given an instruction
+"titrate the solution until it turns purple", a
+[gpm]{acronym-label="gpm" acronym-form="singular+short"} agent (see
+[\[sec:agents\]](#sec:agents){reference-type="ref+Label"
+reference="sec:agents"}) can break it down into smaller steps and
+convert each step to executable code, allowing it to perform incremental
+additions of titrant and read a color sensor, looping until the
+condition is met. This conversion of concrete steps to code happens at
+runtime; it is not pre-compiled. We refer to such systems as
+"interpreted automation" systems. In contrast to the deterministic,
+preplanned nature of compiled systems, interpreted architectures
+introduce real-time decision-making. As each action completes, the
+system collects sensor data (instrument readings, spectra, error
+messages, etc.) which the agent analyzes and decides on the next action.
+This allows for dynamic branching and conditional logic during the
+experiment execution.
+
+*Coscientist* \[@boiko2023autonomous\] is an [llm]{acronym-label="llm"
+acronym-form="singular+short"}-based chemistry assistant built around
+that can autonomously design and execute experiments. It can take
+high-level goals and call tools to write the code in real-time in order
+to control an Opentrons OT-2 liquid-handling robot. The architecture
+included tool calls: a web-search module, a documentation module (to
+read instrument manuals), a execution module (to run generated code in a
+sandbox), and an experiment execution module that sends code to actual
+lab equipment. If an error occurred, the system would get feedback and
+would debug its own code. successfully planned and executed multistep
+syntheses with minimal human intervention. For example, it efficiently
+optimized a palladium cross-coupling reaction with minimal human input,
+outperforming a standard Bayesian optimizer baseline in finding
+high-yield conditions.
+
+Another example is \[@bran2024augmenting\], a -based agent augmented
+with $18$ expert-designed tools for tasks like compound lookup, spectral
+analysis, and retrosynthesis. can perform tasks across synthesis
+planning, drug discovery, and materials design by invoking external
+software for things like retrosynthesis, property prediction, database
+queries, etc. It planned and executed the syntheses of an insect
+repellent, [deet]{acronym-label="deet" acronym-form="singular+short"},
+and three different organocatalysts and even guided the discovery of a
+new chromophore dye.
+
+The interpreted paradigm is highly generalizable; in principle, the same
+[llm]{acronym-label="llm" acronym-form="singular+short"} agent
+controlling a chemistry experiment could be re-purposed to a biology or
+materials experiment with minimal reprogramming because it operates at
+the level of intent and semantic understanding. However, fully
+autonomous labs featuring interpreted automation are still experimental
+themselves---ensuring their reliability and accuracy remains an open
+challenge.
+
+Despite being labeled as "autonomous," both systems mentioned above
+often need prompting nudges and human correction. In addition, these
+models can replicate known procedures and use databases, but they lack
+an understanding of mechanisms or underlying principles. Another issue
+is full reproducibility and long-term experiment tracking. Since the
+[gpm]{acronym-label="gpm" acronym-form="singular+short"}'s response
+might not be deterministic, small changes in prompts can yield different
+results and closed-source models like can change over time.
+Hallucinations remain a risk, especially in planning complex or
+sensitive reactions. In addition, allowing an agent to control hardware
+brings safety considerations; the flexibility of
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} means that they
+can devise unanticipated actions. Designing safety nets for these
+systems is an active area of research. (see
+[\[sec:safety\]](#sec:safety){reference-type="ref+Label"
+reference="sec:safety"})
+
+### Hybrid Approaches
+
+Between the two extremes of fully compiled vs. fully interpreted
+automation lies a hybrid approach that seeks to combine the best of both
+paradigms: the safety and reliability of compiled protocols and the
+[ai]{acronym-label="ai" acronym-form="singular+short"}-driven
+flexibility of interpreted systems.
+
+The key difference from purely interpreted systems is that during each
+experiment run, the plan is fixed, ensuring safety and reproducibility,
+but between runs, the plan can dynamically change based on the
+[gpm]{acronym-label="gpm" acronym-form="singular+short"}'s
+interpretation of results. Once the initial plan (ideally devised by the
+same [gpm]{acronym-label="gpm" acronym-form="singular+short"} in a
+previous step) is provided to a hybrid system, instead of reducing it to
+smaller steps and directly sending the instructions to a laboratory one
+at a time, the protocol is first formalized---i.e., it is translated to
+a formal machine-readable format such as [chidl]{acronym-label="chidl"
+acronym-form="singular+short"}. Once validated, the formalized protocol
+is compiled and executed. After the completion of execution, the
+[gpm]{acronym-label="gpm" acronym-form="singular+short"} receives the
+results and decides what experiment to perform next. This cycle repeats,
+creating an autonomous optimization or discovery loop.
+
+This hybrid strategy is attractive because it provides a safety net
+against mistakes made by the [gpm]{acronym-label="gpm"
+acronym-form="singular+short"} interpreter; any generated procedure must
+pass through a formalization and verification stage before real
+execution, and therefore, erroneous or hallucinated steps can be caught.
+For example, if the interpreter hallucinated adding 1000 mL of a solvent
+but the hardware has only 100 mL capacity, it can be flagged as an
+error.
+
+\[@darvish2025organa\] is an [llm]{acronym-label="llm"
+acronym-form="singular+short"}-based robotic assistant following this
+hybrid paradigm. It allows human chemists to describe their experimental
+goal in natural language. The system can converse with the user to
+clarify ambiguous requests (the agent would ask "do you mean X or Y?" if
+the instructions are unclear). Once the goal is understood, it uses
+\[@Yoshikawa2023CLAIRify\] to convert and validate the natural-language
+description of a chemistry experiment into a
+[chidl]{acronym-label="chidl" acronym-form="singular+short"} script,
+which can be executed on a compatible platform. In one case, carried out
+a multistep electrochemistry procedure---polishing electrodes, running
+an experiment, and analyzing the data---involving 19 substeps that it
+coordinated in parallel. If an unexpected observation occurred (e.g., a
+solution does not change color when expected), the system can notice via
+image analysis and modify the plan or alert the user. In user studies,
+significantly reduced the manual labor and frustration for chemists, who
+could offload tedious tasks and trust the agent to handle low-level
+decisions.
+
+### Comparison and Outlook
+
+While compiled paradigms continue to provide the backbone for reliable
+automation, interpreted paradigms will drive exploratory research, where
+adaptability is key. Hybrid systems are likely to be the bridge that
+brings [ai]{acronym-label="ai" acronym-form="singular+short"} into
+mainstream lab operations, ensuring that flexibility comes with
+accountability. A brief comparison of the three mentioned approaches is
+given in [1](#tab:execution_comparison){reference-type="ref+Label"
+reference="tab:execution_comparison"}.
+
+::: {#tab:execution_comparison}
+  **Feature**                         **Compiled**                            **Interpreted**                             **Hybrid**
+  ---------------------- -------------------------------------- ------------------------------------------- --------------------------------------
+  Flexibility             [Low]{style="color: NegativeColor"}      [High]{style="color: PositiveColor"}                     Medium
+  Adaptivity              [None]{style="color: NegativeColor"}   [Real-time]{style="color: PositiveColor"}                Iterative
+  Reproducibility         [High]{style="color: PositiveColor"}                    Medium                     [High]{style="color: PositiveColor"}
+  Safety                  [High]{style="color: PositiveColor"}      [Low]{style="color: NegativeColor"}                     Medium
+  Setup Overhead                         Medium                    [High]{style="color: NegativeColor"}      [High]{style="color: NegativeColor"}
+  Industrial Readiness    [Low]{style="color: NegativeColor"}       [Low]{style="color: NegativeColor"}      [Low]{style="color: NegativeColor"}
+
+  : **Comparison of the Compiled, Interpreted, and Hybrid Automation
+  Paradigms**. Each approach has its strengths and weaknesses. Compiled
+  systems favor reliability, interpreted systems allow for more
+  flexibility, while hybrid systems try to strike a balance.
+:::
+
+[]{#tab:execution_comparison label="tab:execution_comparison"}
+
+While we are essentially witnessing the rise of self-driving
+laboratories, autonomous experimentation systems present a range of
+challenges.\[@Tom2024SDL; @Seifrid2022SDL\] First, translating
+high-level natural-language goals into precise laboratory actions
+remains difficult, as [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} can misinterpret ambiguous instructions,
+leading to invalid or unsafe procedures. This problem is compounded by
+the lack of universally adopted standards for protocol formalization;
+while languages like [chidl]{acronym-label="chidl"
+acronym-form="singular+short"} show promise, inconsistencies in
+abstraction, device compatibility, and community uptake limit
+interoperability. Real-time execution adds further complexity, as
+systems must detect and respond to failures or unexpected behaviors;
+however, general-purpose validation mechanisms and recovery strategies
+remain underdeveloped. Hardware integration is another bottleneck;
+current commercial robotic platforms are prohibitively expensive and lab
+environments often rely on a patchwork of instruments with proprietary
+interfaces, and building robust, unified control layers demands
+considerable engineering overhead. Another challenge is multi-modality
+in chemistry; chemists use a wide variety of data (e.g., spectra, TLC
+plates, SEM images). Without integrating these forms of output, models
+will be limited in their decision-making. Finally, ensuring
+reproducibility and regulatory compliance requires that every step be
+logged, validated, and traceable at the level required for clinical or
+industrial adoption (see
+[\[sec:safety\]](#sec:safety){reference-type="ref+Label"
+reference="sec:safety"}. These challenges must be addressed in tandem to
+move from experimental demonstrations toward reliable, scalable, and
+trustworthy autonomous laboratories.
+
+## Data Analysis
+
+The analysis of spectroscopic and experimental data in chemistry remains
+a predominantly manual process. Even seemingly straightforward steps,
+such as plotting or summarizing results, demand repeated manual
+intervention.
+
+One key challenge that makes automation particularly difficult is the
+extreme heterogeneity of chemical data sources. Laboratories often rely
+on a wide variety of instruments, some of which are decades old, rarely
+standardized, or unique in configuration.\[@jablonka2022making\] These
+devices output data in incompatible, non-standardized, or poorly
+documented formats, each requiring specialized processing pipelines.
+Despite efforts like \[@McDonald1988standard\], standardization attempts
+remain scarce and have generally failed to gain widespread use. This
+diversity makes rule-based or hard-coded solutions largely infeasible,
+as they cannot generalize across the long tail of edge cases and
+exceptions found in real-world workflows.
+
+However, this exact complexity makes data analysis in chemistry a
+promising candidate for [gpms]{acronym-label="gpm"
+acronym-form="plural+short"}. They are designed to operate flexibly
+across diverse tasks and formats, relying on implicit knowledge captured
+from broad training data. In other domains, @narayan2022can showed that
+models like can already perform classical data processing tasks such as
+cleaning, transformation, and error detection through prompting alone.
+@kayali2023chorus introduced that shows that [llms]{acronym-label="llm"
+acronym-form="plural+short"} can analyze heterogeneous tabular data
+without task-specific training. demonstrates that by converting tables
+into a standardized text format and using zero-shot prompting (i.e.,
+prompts with no examples), [llms]{acronym-label="llm"
+acronym-form="plural+short"} can flexibly analyze tables even when they
+differ in structure, column names, or data types.
+
+<figure id="fig:anaylsis">
+<img src="media/figures/rescaled_figures/chemrev_figure17.png" width="100%" />
+<figcaption><strong>Static conventional data analysis workflow
+vs. dynamic <span data-acronym-label="gpm"
+data-acronym-form="singular+short">gpm</span> generated
+workflow</strong>. The chemical analysis can be done with a variety of
+possible instruments and techniques, resulting in a large number of
+possible output data formats. The <span data-acronym-label="gpm"
+data-acronym-form="singular+short">gpm</span> can use these diverse, raw
+data and process it into easy-to-understand plots, analysis and reports.
+A hard-coded workflow, in contrast, is specifically made to analyze one
+specific data format and spectra and produces a fixed output format,
+e.g., the <span data-acronym-label="smiles"
+data-acronym-form="singular+short">smiles</span> of the analyzed
+molecule.</figcaption>
+</figure>
+
+### Prompting
+
+Initial evaluations demonstrated that [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} can support basic data analysis workflows.
+\[@Fu2025large\] For example, in chemistry, this enabled the
+classification of [xps]{acronym-label="xps"
+acronym-form="singular+short"} signals \[@decurt2024large\] based on
+peak positions, intensities, or characteristic spectral patterns).
+
+Spectroscopic data are not always available in structured textual form.
+In many practical cases, it appears as raw plots or images, making
+direct interpretation by [vlms]{acronym-label="vlm"
+acronym-form="plural+short"} a more natural starting point for automated
+analysis. A broad assessment of [vlm]{acronym-label="vlm"
+acronym-form="singular+short"}-based spectral analysis was introduced
+with the benchmark \[@alampara2024probing\], which systematically
+evaluates how [vlms]{acronym-label="vlm" acronym-form="plural+short"}
+interpret experimental data in chemistry and materials
+science---including various types of spectra such as
+[ir]{acronym-label="ir" acronym-form="singular+short"},
+[nmr]{acronym-label="nmr" acronym-form="singular+short"}, and
+[xrd]{acronym-label="xrd" acronym-form="singular+short"}q---directly
+from images. They showed that while [vlms]{acronym-label="vlm"
+acronym-form="plural+short"} can correctly extract isolated features
+from plots, the performance substantially drops in tasks requiring
+deeper spatial reasoning. To overcome these limitations,
+@kawchak2024high explored two-step pipelines that decouple visual
+perception from chemical reasoning. First, the model interprets each
+spectrum individually (e.g., converting [ir]{acronym-label="ir"
+acronym-form="singular+short"}, [nmr]{acronym-label="nmr"
+acronym-form="singular+short"}, or [ms]{acronym-label="ms"
+acronym-form="singular+short"} images into textual peak descriptions),
+and second, a [llm]{acronym-label="llm" acronym-form="singular+short"}
+analyzes these outputs to propose a molecular structure based on the
+molecular formula.
+
+### Agentic Systems
+
+Beyond zero-shot prompting of [gpms]{acronym-label="gpm"
+acronym-form="plural+short"}, one can develop agentic systems that
+combine multiple analysis steps end-to-end. In this regard,
+@ghareeb2025robin0 developed ---a multi-agent system for assisting
+biological research with hypothesis generation (see
+[3](#fig:hypothesis-generation){reference-type="ref+Label"
+reference="fig:hypothesis-generation"}) and experimental analysis. The
+data analysis agent performs autonomous analysis of raw or preprocessed
+experimental data, such as [rna]{acronym-label="rna"
+acronym-form="singular+short"} sequencing and flow cytometry. Given a
+user prompt (e.g., "[rna]{acronym-label="rna"
+acronym-form="singular+short"} sequencing differential expression
+analysis"), executes code in a Jupyter notebook to process the data,
+apply relevant statistical methods, and generate interpretable outputs.
+For flow cytometry, this includes gating strategies and significance
+testing, while for [rna]{acronym-label="rna"
+acronym-form="singular+short"} sequencing, it encompasses differential
+expression and gene ontology enrichment analysis. Currently, only these
+two data types are supported, and expert-designed prompts are still
+required to ensure reliable results.
+
+Recent work extends agentic systems beyond single-step data evaluation
+toward executing and optimizing entire workflows. @mandal2024autonomous
+introduced (Artificially Intelligent Lab Assistant) utilizing
+[llm]{acronym-label="llm" acronym-form="singular+short"}-agents to plan,
+code, execute, and revise complete [afm]{acronym-label="afm"
+acronym-form="singular+short"} analysis pipelines. The system handles
+tasks such as image processing, defect detection, clustering, and
+extraction of physical parameters. Compared to systems like , shifts the
+focus from generating summaries to performing and improving full
+experimental analyses with minimal user input while maintaining
+transparency and reproducibility through code and reports.
+
+### Current Limitations
+
+While [gpms]{acronym-label="gpm" acronym-form="plural+short"} offer
+promising capabilities for automating scientific data analysis, several
+limitations remain. Recent evaluations such as \[@tian2024scicode\] have
+shown that even state-of-the-art models like and frequently produce
+syntactically correct but semantically incorrect code when tasked with
+common data analysis steps, such as reading files, applying filters, or
+generating plots. Typical issues include incorrect column usage, or
+inconsistent output formatting.
+
+These technical shortcomings are reinforced by the model's sensitivity
+to prompt formulation. As demonstrated by @Yan2020auto and
+@alampara2024probing, minor changes in wording or structure can lead to
+significantly different outputs, highlighting a lack of robustness in
+prompt-based control.
+
+Together, these findings suggest that while foundation models can
+generalize across diverse data formats and analysis types, their current
+performance is not yet sufficient for fully autonomous use in scientific
+analysis settings. Robust prompting strategies, post-generation
+validation, and human oversight remain essential components in practice.
+
+## Reporting
+
+To share insights obtained from data analysis, one often converts them
+into scientific reports. Also, in this step, [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} can take a central role, which we discuss
+in the following.
+
+Reporting refers to converting scientific results into shareable
+reports, scientific publications, blogs, and other forms of content.
+This section describes two main applications of
+[llms]{acronym-label="llm" acronym-form="plural+short"} in scientific
+reporting: converting data into explanations and the first steps towards
+using these models as fully-fledged writing assistants.
+
+### From Data to Explanation
+
+The lack of explainability of [ml]{acronym-label="ml"
+acronym-form="singular+short"} predictions generates skepticism among
+experimental chemists\[@wellawatte2025human\], hindering the wider
+adoption of such models.\[@wellawatte2022model\] One promising approach
+to address this challenge is to convey explanations of model predictions
+in natural language. An approach proposed by @wellawatte2025human is to
+couple [llms]{acronym-label="llm" acronym-form="plural+short"} with
+feature importance analysis tools, such as [shap]{acronym-label="shap"
+acronym-form="singular+short"} or [lime]{acronym-label="lime"
+acronym-form="singular+short"}. In this framework,
+[llms]{acronym-label="llm" acronym-form="plural+short"} can additionally
+interact with tools such as [rag]{acronym-label="rag"
+acronym-form="singular+short"} over to provide evidence-based
+explanations.
+
+### Writing Assistance
+
+When considering [ml]{acronym-label="ml"
+acronym-form="singular+short"}-based assistance in scientific writing,
+we can distinguish two primary modes: systems that aid authors during
+the active writing process and tools that optimize or refine scientific
+articles after initial drafting.
+
+The former refers to the use of writing copilots that can suggest syntax
+improvement, identify text redundancies,\[@khalifa2024using\] caption
+figures and tables\[@hsu2021scicap; @selivanov2023medical\], or provide
+caption-figure match evaluation\[@hsu2023gpt04\], but also more specific
+applications like writing alt-text (descriptive text that explains the
+meaning and purpose of an image in digital
+content)\[@singh2024figura11y\].
+
+Under the latter mode, [gpm]{acronym-label="gpm"
+acronym-form="singular+short"} can be used to assist non-native English
+speakers with scientific writing \[@giglio2023use\]. It could even allow
+authors to write in their native language and use
+[gpm]{acronym-label="gpm" acronym-form="singular+short"} for
+communicating scientific results in English.
+
+Another application of [llm]{acronym-label="llm"
+acronym-form="singular+short"} is to assist with completing checklists
+before submitting a publication. For example, @goldberg2024usefulness
+benchmark the use of [llms]{acronym-label="llm"
+acronym-form="plural+short"} in completing the author checklist for the
+[neurips]{acronym-label="neurips" acronym-form="singular+short"} 2025.
+They concluded that $70\%$ of the authors found the
+[llm]{acronym-label="llm" acronym-form="singular+short"}-assistant
+useful, with the same fraction indicating they would revise their own
+checklist based on the model feedback.
+
+### Vision
+
+Few have ventured into fully automating the writing
+process.\[@yamada2025ai\] While at its inception, reporting using
+[gpm]{acronym-label="gpm" acronym-form="singular+short"} has tremendous
+potential. In [7](#fig:writing_with_ml){reference-type="ref+Label"
+reference="fig:writing_with_ml"} we showcase how the future of reporting
+could look like if we were to integrate [gpm]{acronym-label="gpm"
+acronym-form="singular+short"} at each step of the process.
+
+<figure id="fig:writing_with_ml">
+<img src="media/figures/rescaled_figures/chemrev_figure18.png" width="100%" />
+<figcaption><strong>Vision for <span data-acronym-label="gpm"
+data-acronym-form="singular+short">gpm</span> in reporting, a
+visualization of the scientific writing process</strong>. <span
+data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>
+can be used at every stage of the process. For creating the pre-print,
+we can utilize the multimodal capabilities of these models to write
+detailed captions for figures. For the peer-review process, we can
+harness the ability of <span data-acronym-label="gpm"
+data-acronym-form="plural+short">gpms</span> to summarize and prioritize
+information (e.g., design a time-efficient plan to address the peer
+review). When converting a document from a peer-reviewed pre-print, we
+often need to implement the publisher’s requirements. In this case, we
+can make use of agentic systems that would assist with minor text fixes
+or document restructuring.</figcaption>
+</figure>
+
+An idea entertained by @li2023teach in the context of education is
+personalized writing. However, it is still widely unexplored in its
+goal: to make science accessible to everyone. A personalized model that
+learns user preferences and domain expertise can be used to deliver the
+message of a scientific article in simpler terms. As a result, we might
+observe a rise in cross-domain scientific collaborations and a rising
+interest in science.
+
+# Accelerating Applications
+
+The application of accelerated approaches in the scientific discovery
+cycle (see [1](#fig:applications){reference-type="ref+Label"
+reference="fig:applications"}) hinges on their ability to streamline and
+enhance each stage of the process. However, a fundamental challenge in
+effectively implementing these approaches lies in the choice of
+machine-readable representation.
+
+This challenge is particularly evident in the representation of
+molecules and materials, which must balance computational efficiency
+with the preservation of structural, compositional, and functional
+properties. Take, for example, the high-temperature superconductor .
+While atomic positions and coordinates are theoretically sufficient to
+solve the Schrödinger equation and describe this material, such a
+representation may not provide the adaptability necessary for diverse
+tasks. What defines a good representation depends on the problem.
+\[@huang2016understanding\]. A representation designed to predict
+critical temperature must efficiently encode the relationship between
+oxygen stoichiometry and superconducting properties, emphasizing
+features like oxygen vacancy patterns and charge transfer mechanisms.
+Conversely, a representation for structural stability might prioritize
+different geometric or bonding characteristics.
+
+This tension has led to three primary strategies for representing
+molecules and materials (read
+[\[sec:common_representations\]](#sec:common_representations){reference-type="ref+Label"
+reference="sec:common_representations"} to learn in detail about the
+different representations that currently exist). First, domain-specific
+text-based formats---such as [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} \[@weininger1988smiles\],
+[selfies]{acronym-label="selfies" acronym-form="singular+short"}
+\[@krenn2020self\], and [cif]{acronym-label="cif"
+acronym-form="singular+short"} \[@hall1991crystallographic\]---offer
+compact, machine-readable encodings of structural information. While
+these necessarily omit certain physical details, their computational
+tractability has enabled breakthroughs, as demonstrated by
+@jablonka2024leveraging in their [llm]{acronym-label="llm"
+acronym-form="singular+short"}-based generation of valid molecular and
+material structures.
+
+Yet, the question remains: Which representation is optimal for a given
+task? Future advances in accelerated discovery will likely hinge on
+adaptive representations that dynamically balance these competing
+demands.
+
+## Property Prediction {#sec:prediction}
+
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} have emerged as
+a powerful tool for predicting molecular and material properties,
+offering an alternative to traditional quantum mechanical calculations
+or specialized [ml]{acronym-label="ml" acronym-form="singular+short"}
+models. Current [gpm]{acronym-label="gpm"
+acronym-form="singular+short"}-driven property prediction tasks span
+both classification and regression. Unlike conventional approaches that
+rely on task-specific architectures and extensively labeled data,
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} have
+demonstrated strong generalization capabilities across diverse domains,
+efficiently adapting to various prediction tasks. Their success extends
+to multiple datasets, from standardized benchmarks such as
+\[@wu2018moleculenet\], to curated datasets targeting specific
+applications such as antibacterial activity
+\[@chithrananda2020chemberta\] or photovoltaic
+efficiency\[@aneesh2025semantic\].
+
+Three key methodologies have been explored to adapt
+[llms]{acronym-label="llm" acronym-form="plural+short"} for property
+prediction: prompting techniques (see
+[\[sec:prompting\]](#sec:prompting){reference-type="ref+Label"
+reference="sec:prompting"}), fine-tuning (see
+[\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
+reference="sec:fine-tuning"}) on domain-specific data, and
+[rag]{acronym-label="rag" acronym-form="singular+short"} (see
+[\[sec:rag\]](#sec:rag){reference-type="ref+Label" reference="sec:rag"})
+approaches that combine [llms]{acronym-label="llm"
+acronym-form="plural+short"} with external knowledge bases.
+
+::: minipage
+**Key:** P = prompting; FT = fine-tuned model; RAG = retrieval-augmented
+generation; C = Classification; R = Regression
+:::
+
+### Prompting
+
+Prompt engineering involves designing targeted instructions to guide
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} in performing
+specialized tasks without altering their underlying parameters by
+leveraging their embedded knowledge. In molecular and materials science,
+this strategy goes beyond simply asking a model to predict properties.
+It also includes carefully structured prompts to elicit detailed
+molecular and material descriptions directly from the model's
+pre-trained knowledge.
+
+@liu2025integrating conducted a comprehensive evaluation of different
+prompting techniques to predict the properties of organic small
+molecules and crystal materials. Some of these techniques included
+domain-knowledge (prior knowledge was embedded in the prompt), expert
+(role-play instructions), and few-shot [cot]{acronym-label="cot"
+acronym-form="singular+short"} (the text*"Let's think step by step"* is
+added) prompting. Of these, domain knowledge achieved maximum
+performance. However, their evaluation was limited to a relatively small
+set of molecules and tasks, and the effectiveness of their
+domain-knowledge approach may not generalize to other molecular property
+domains.
+
+Building on these foundational prompting strategies, few-shot prompting
+approaches leverage [icl]{acronym-label="icl"
+acronym-form="singular+short"} to enhance performance through selected
+examples @liu2024moleculargpt used [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} string representations of molecules with
+few-shot [icl]{acronym-label="icl" acronym-form="singular+short"},
+retrieving structurally similar molecules as demonstrations to enhance
+property prediction. This approach highlights how
+[icl]{acronym-label="icl" acronym-form="singular+short"} can transfer
+knowledge from similar molecule examples without requiring model
+fine-tuning for each task. However, the effectiveness of
+[icl]{acronym-label="icl" acronym-form="singular+short"} depends on the
+quality of retrieved examples.
+
+@fifty2023incontext moved beyond direct text prompting of molecules and
+introduced [camp]{acronym-label="camp" acronym-form="singular+short"}:
+an [icl]{acronym-label="icl" acronym-form="singular+short"} algorithm
+that uses a two-stage encoding approach without relying on pre-trained
+[llms]{acronym-label="llm" acronym-form="plural+short"}. First, a
+specialized [mpnn]{acronym-label="mpnn" acronym-form="singular+short"}
+encodes molecule graphs into molecular embeddings rather than processing
+them as raw text. These embeddings are then fed into a transformer
+encoder, which learns contextualized representations across the support
+set (a small collection of labeled molecule-property pairs) and the
+unlabeled query molecules. They demonstrated [camp]{acronym-label="camp"
+acronym-form="singular+short"}'s ability to outperform existing few-shot
+learning baselines by providing relevant molecular examples within the
+prompt context. However, this approach is constrained by the
+context-length limitations of the underlying [lms]{acronym-label="lm"
+acronym-form="plural+short"} and the challenge of selecting optimal
+demonstration examples.
+
+More sophisticated approaches have leveraged prompting as part of
+multi-modal frameworks. The pipeline by @zheng2025large employs
+specialized prompts to guide [lms]{acronym-label="lm"
+acronym-form="plural+short"} through their pre-trained knowledge on
+scientific literature, generating known rules (e.g., molecules weighing
+under 500 Da are more likely to pass the blood-brain barrier) that
+transform molecules into feature vectors (e.g. could translate to a
+vector $[2,46.07,1,1]$ where each number represents a feature of the
+molecule, in this example \[# , MW, \# -bond donors, \# -bond
+acceptors\]) for use with a random forest model, which they consider
+"interpretable". This approach outperformed specialized
+[sota]{acronym-label="sota" acronym-form="singular+short"} models across
+$58$ benchmark tasks, while providing interpretable reasoning about
+prediction logic (see
+[\[tab:property_prediction_models\]](#tab:property_prediction_models){reference-type="ref+Label"
+reference="tab:property_prediction_models"} for properties predicted by
+this model). However, its reliance on rule extraction may limit its
+ability to capture complex, non-linear relationships that specialized
+deep learning models can identify.
+
+#### [llms]{acronym-label="llm" acronym-form="plural+short"} as Feature Extractors
+
+Another emerging application of [llms]{acronym-label="llm"
+acronym-form="plural+short"} is their use as "feature extractors", where
+they generate textual or embedded representations of molecules or
+materials. For instance, in materials science, @aneesh2025semantic
+employed [llms]{acronym-label="llm" acronym-form="plural+short"} to
+generate text embeddings of perovskite solar cell compositions. These
+embeddings were subsequently used to train a [gnn]{acronym-label="gnn"
+acronym-form="singular+short"} for predicting power conversion
+efficiency, demonstrating the potential of [llms]{acronym-label="llm"
+acronym-form="plural+short"} to enhance feature representation in
+materials informatics. Similarly, in the molecular domain,
+@srinivas2024crossmodal used zero-shot [llm]{acronym-label="llm"
+acronym-form="singular+short"} prompting (see
+[\[box: cot_prompting\]](#box: cot_prompting){reference-type="ref+Label"
+reference="box: cot_prompting"} for prompt examples) to generate
+detailed textual descriptions of molecular functional groups, which are
+used to train a small [lm]{acronym-label="lm"
+acronym-form="singular+short"}. This [lm]{acronym-label="lm"
+acronym-form="singular+short"} is used to compute text-level embeddings
+of molecules. Simultaneously, they generate molecular graph-level
+embeddings from [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} string molecular graph inputs. They
+finally integrate the graph and text-level embeddings to produce a
+semantically enriched embedding.
+
+::: promptbox
+[]{#box: cot_prompting label="box: cot_prompting"}
+**[cot]{acronym-label="cot" acronym-form="singular+short"}
+Prompting**\[@srinivas2024crossmodal\]\
+Prompt 1: What is the molecular structure of this chemical
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} string?
+Could you describe its atoms, bonds, functional groups, and overall
+arrangement?\
+Prompt 2: What are the physical properties of this molecule, such as its
+boiling point and melting point?\
+\...\
+Prompt 14: Are there any environmental impacts associated with the
+production, use, or disposal of this molecule?
+:::
+
+In a different implementation of fine-tuning, @balaji2023gptmolberta
+used to generate text descriptions of molecules that were then used to
+train a (125M) model for property prediction, showing how
+[lm]{acronym-label="lm" acronym-form="singular+short"}-generated
+representations can access latent spaces that
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} strings
+alone might not capture. Similarly, @li2024unveiling introduced the
+framework, which fine-tunes \[@ahmad2022chemberta\] on Group
+[selfies]{acronym-label="selfies" acronym-form="singular+short"}
+\[@cheng2023group\] (a functional group-based molecular representation)
+to then extract a single [llm]{acronym-label="llm"
+acronym-form="singular+short"}-derived embedding of molecules that
+captures the chemical semantics at the functional group level. This
+allowed them to determine which functional groups or fragments
+contribute to molecular properties, which in turn can be converted into
+reliable explanations of said properties.
+
+### Fine-Tuning {#sec:prediction_FT}
+
+<figure id="fig:gptchem">
+<img src="media/figures/property_gptchem.png" width="100%" />
+<figcaption><strong>Fine-tuned for predicting solid-solution formation
+in high-entropy alloys</strong> Performance comparison of different
+<span data-acronym-label="ml"
+data-acronym-form="singular+short">ml</span> approaches as a function of
+the number of training points. Results are shown for (blue), transformer
+(orange), fine-tuned (red), with error bars showing standard error of
+the mean. The non-Google test set shows the fine-tuned model tested on
+compounds without an exact Google search match (dark red). The dashed
+line shows performance using random forest. achieves comparable accuracy
+to traditional approaches with significantly fewer training examples.
+Data adapted from @jablonka2024leveraging</figcaption>
+</figure>
+
+#### [lift]{acronym-label="lift" acronym-form="singular+short"}
+
+@dinh2022lift showed that reformulating regression and classification
+as [qa]{acronym-label="qa" acronym-form="singular+short"} tasks enables
+the use of unmodified model architecture while improving performance
+(see [\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
+reference="sec:fine-tuning"} for a deeper discussion of
+[lift]{acronym-label="lift" acronym-form="singular+short"}). In
+recognizing the scarcity of experimental data and acknowledging the
+persistence of this limitation, @jablonka2024leveraging designed a
+[lift]{acronym-label="lift" acronym-form="singular+short"}-based
+framework using fine-tuned on task-specific small datasets (see
+[\[tab:property_prediction_models\]](#tab:property_prediction_models){reference-type="ref+Label"
+reference="tab:property_prediction_models"}). They seminally
+demonstrated that fine-tuned can match or surpass specialized
+[ml]{acronym-label="ml" acronym-form="singular+short"} models in various
+chemistry tasks. A key finding was fine-tuned 's ability to generalize
+beyond training data. When tested on compounds absent from Google Search
+(and likely its training data), it performed well, proving that it was
+not simply recalling memorized information (see
+[8](#fig:gptchem){reference-type="ref+Label" reference="fig:gptchem"}).
+
+In a follow-up to @jablonka2024leveraging's work,
+@vanherck2025assessment systematically evaluated this approach across
+22 diverse real-world chemistry case studies using three open-source
+models. They demonstrate that fine-tuned [llms]{acronym-label="llm"
+acronym-form="plural+short"} can effectively predict various material
+properties. For example, they achieved $96\%$ accuracy in predicting the
+adhesive free-energy of polymers, outperforming traditional
+[ml]{acronym-label="ml" acronym-form="singular+short"} methods like
+random forest ($90\%$ accuracy). When predicting properties of monomers
+using [smiles]{acronym-label="smiles" acronym-form="singular+short"}
+notation, the fine-tuned models reached average accuracies of $84\%$
+across four different properties. Particularly notable was the ability
+of [llms]{acronym-label="llm" acronym-form="plural+short"} to work with
+non-standard inputs, like in a protein phase separation study they did,
+where raw protein sequences could be directly input without
+pre-processing and achieve $95\%$ prediction accuracy. At the same time,
+when training datasets were very small (15 data points), the predictive
+accuracy of all fine-tuned models was lower than the random baseline
+(e.g. MOF synthesis). These case studies preliminarily demonstrate that
+these models can achieve predictive performance with some small
+datasets, work with various chemical representations
+([smiles]{acronym-label="smiles" acronym-form="singular+short"},
+[mof]{acronym-label="mof" acronym-form="singular+short"}id, and
+[iupac]{acronym-label="iupac" acronym-form="singular+short"} names), and
+can outperform traditional [ml]{acronym-label="ml"
+acronym-form="singular+short"} approaches for some material property
+prediction tasks.
+
+In the materials domain, fine-tunes \[@raffel2020exploring\] to predict
+crystalline material properties from text descriptions generated by
+\[@ganose2019robocrystallographer\]. By discarding 's decoder and adding
+task-specific prediction heads, the approach reduces computational
+overhead while leveraging the model's ability to process structured
+crystal descriptions. The method demonstrates that natural language
+representations can effectively capture key material features, offering
+an alternative to traditional graph-based models like
+[gnns]{acronym-label="gnn" acronym-form="plural+short"}.
+
+Fine-tuning has been used to adapt [ssms]{acronym-label="ssm"
+acronym-form="plural+short"} like Mamba (see
+[\[sec:example_architectures\]](#sec:example_architectures){reference-type="ref+Label"
+reference="sec:example_architectures"}). By pre-training on 91 million
+molecules, the Mamba-based model outperformed transformer methods
+(\[@krzyzanowski2025exploring\]) in reaction yield prediction (e.g.,
+Buchwald-Hartwig cross-coupling) and achieved competitive results in
+molecular property prediction benchmarks.\[@soares2025mamba-based\]
+
+#### Foundational [gnns]{acronym-label="gnn" acronym-form="plural+short"} and [mlips]{acronym-label="mlip" acronym-form="plural+short"}
+
+The fine-tuning approach has been applied to "foundational
+[gnns]{acronym-label="gnn" acronym-form="plural+short"}"
+\[@sypetkowski2024scalability; @shoghi2023molecules\] and
+[mlips]{acronym-label="mlip" acronym-form="plural+short"}, approaches
+distinct from [gpms]{acronym-label="gpm" acronym-form="plural+short"}.
+For example, \[@shoghi2023molecules; @sypetkowski2024scalability\] show
+[sota]{acronym-label="sota" acronym-form="singular+short"} performance
+on property prediction tasks. "Foundational"
+[mlips]{acronym-label="mlip" acronym-form="plural+short"} pre-trained on
+large datasets encompassing many chemical elements can be fine-tuned for
+specific downstream tasks \[@batatia2022mace\], such as calculating
+sublimation enthalpies of molecular crystal polymorphs
+\[@kaur2025data\].
+
+#### Limitations
+
+One central challenge is finding balance in datasets. In practical
+applications, researchers often have many more examples of
+poor-performing materials than optimal ones, resulting in unbalanced
+datasets that can diminish model performance. @vanherck2025assessment
+point out that in the catalyzed cleavage reaction study, only $3.8\%$ of
+catalysts were labeled as "good", forcing researchers to reduce their
+training set significantly to maintain balance. They also note that
+[llms]{acronym-label="llm" acronym-form="plural+short"} struggle with
+highly complex or noisy datasets, as seen in their study of catalytic
+isomerization, where even after hyperparameter optimization, the models
+failed to achieve meaningful predictive power due to the high noise in
+the experimental data and limited sample size. Finally, they note that
+although [llms]{acronym-label="llm" acronym-form="plural+short"} can
+work with different chemical representations, the choice of
+representation significantly impacts performance. For example, when
+predicting polymerization rates, models using
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} notation
+significantly outperformed those using [iupac]{acronym-label="iupac"
+acronym-form="singular+short"} names, indicating that representation
+selection remains an important consideration.
+
+Fine-tuning effectively adapts [llms]{acronym-label="llm"
+acronym-form="plural+short"} to specialized chemistry tasks, but its
+dependence on static datasets hinders adaptability to new or evolving
+knowledge. [rag]{acronym-label="rag" acronym-form="singular+short"},
+whose fundamentals are described in detail in
+[\[sec:rag\]](#sec:rag){reference-type="ref+Label" reference="sec:rag"},
+overcomes these limitations by dynamically integrating external data
+sources, enabling more flexible and up-to-date reasoning.
+
+### Agents
+
+Caldas Ramos et al. introduce , a framework that processes
+natural-language queries about material properties using an
+[llm]{acronym-label="llm" acronym-form="singular+short"} to decide which
+of the available tools such as the Materials Project
+[api]{acronym-label="api" acronym-form="singular+short"}, the
+Reaction-Network package, or Google Search to use to generate a
+response. \[@Jablonka2023\] employs a [react]{acronym-label="react"
+acronym-form="singular+short"} prompt (see
+[\[sec:arch_agents\]](#sec:arch_agents){reference-type="ref+Label"
+reference="sec:arch_agents"} to read more about
+[react]{acronym-label="react" acronym-form="singular+short"}), to
+convert prompts such as *"Is $Fe_2O_3$ magnetic?"* or *"What is the band
+gap of Mg(Fe3O3)2?"* into queries for Materials Project
+[api]{acronym-label="api" acronym-form="singular+short"}. The system
+processes multi-step prompts through logical reasoning, for example,
+when asked *"If Mn2FeO3 is not metallic, what is its band gap?"*, the
+[llm]{acronym-label="llm" acronym-form="singular+short"} system creates
+a two-step workflow to first verify metallicity before retrieving the
+band gap.
+
+Building on this foundation of agent-based materials querying,
+@chiang2024llamp advanced the approach with , a framework that employs
+"hierarchical" [react]{acronym-label="react"
+acronym-form="singular+short"} agents to interact with computational and
+experimental data. This "hierarchical" framework employs a
+supervisor-assistant agent architecture where a complex problem is
+broken down and tasks are delegated to domain-specific agents. addresses
+the challenge of hallucinations more effectively than standard
+[llm]{acronym-label="llm" acronym-form="singular+short"} approaches by
+grounding responses in retrieved materials databases, retrieving
+materials data (e.g., crystal structures, elastic tensors) while
+counteracting systematic [llm]{acronym-label="llm"
+acronym-form="singular+short"} biases in property predictions. These
+biases include the tendency for [llms]{acronym-label="llm"
+acronym-form="plural+short"} to overestimate certain properties like
+bulk moduli and to exhibit errors in bandgap predictions based on
+compositional patterns learned during training rather than physical
+principles.
+
+### Core Limitations {#sec:property_core_limits}
+
+<figure id="fig:property_limitations">
+<img src="media/figures/property_mattext.png" width="100%" />
+<figcaption><strong>Normalized error distributions for materials
+property prediction models across different architectures</strong>. Each
+point represents the normalized error of a model on a specific property
+prediction task. Normalization was achieved with min/max values of each
+dataset to produce a range of errors between 0 and 1. The first column
+(blue) shows <span data-acronym-label="gnn"
+data-acronym-form="singular+short">gnn</span> based models, the second
+column (red) displays <span data-acronym-label="llm"
+data-acronym-form="singular+short">llm</span> approaches, and the third
+column (orange) represents other baseline methods and <span
+data-acronym-label="sota" data-acronym-form="singular+short">sota</span>
+models including . [@Wang_2021] Lower values indicate better predictive
+performance. Data adapted from @alampara2024mattext</figcaption>
+</figure>
+
+@alampara2024mattext introduced , a framework for evaluating
+[lms]{acronym-label="lm" acronym-form="plural+short"} ability to predict
+properties of materials using text-based representations. Their findings
+indicate that current [llms]{acronym-label="llm"
+acronym-form="plural+short"} (including pre-trained and fine-tuned ) are
+effective for tasks relying purely on compositional information (e.g.,
+element types and local bonding patterns), but struggle to leverage
+geometric or positional information encoded in text, as reflected in
+[9](#fig:property_limitations){reference-type="ref+Label"
+reference="fig:property_limitations"}. This observation suggests that
+transformer-based architectures may be fundamentally limited to
+applications where spatial understanding is not required. Their
+experiments with data scaling and text representations reveal that
+increasing pre-training data or adding geometric details fails to
+improve downstream property prediction, challenging the conventional
+assumption that larger models and datasets universally enhance
+performance. \[@frey2023neural\] Notably, @frey2023neural demonstrated
+power-law scaling in chemical [llms]{acronym-label="llm"
+acronym-form="plural+short"}, but 's results imply that such scaling may
+not overcome architectural biases against geometric reasoning in
+materials tasks.\[@gruver2024promises\]
+
+## Molecular and Material Generation {#sec:mol_generation}
+
+<figure id="fig:generation">
+<img src="media/figures/rescaled_figures/chemrev_figure21.png" width="100%" />
+<figcaption><strong>Pipeline for molecular and materials
+generation</strong> The workflow begins with input structures
+represented in various formats, which are used to train <span
+data-acronym-label="ml" data-acronym-form="singular+short">ml</span>
+models to generate novel molecular and material structures. The
+generated structures should undergo a feedback loop through validation
+processes before being applied in the real world. Blue boxes indicate
+well-established areas of the pipeline with mature methodologies, while
+the red box represents critical bottlenecks.</figcaption>
+</figure>
+
+Early work in molecular and materials generation relied heavily on
+unconditional generation, where models produce novel structures without
+explicit guidance, relying solely on patterns learned from training
+data. For example, latent space sampling in autoencoders, where random
+vectors are decoded into new structures.\[@yoshikai2024novel\] These
+methods excel at exploring chemical space broadly but lack fine-grained
+control. This limitation underscores the need for conditional
+generation, using explicit prompts or constraints (e.g., property
+targets, structural fragments), to steer [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} toward meaningful molecule or material
+designs. Beyond the generation step, as
+[10](#fig:generation){reference-type="ref+Label"
+reference="fig:generation"} shows, critical bottlenecks persist in
+synthesizability and physical consistency at the validation stage.
+
+### Generation {#sec:generation}
+
+#### Prompting
+
+While zero-shot and few-shot prompting strategies demonstrate promising
+flexibility for molecule generation, benchmark studies \[@guo2023large\]
+reveal significant limitations that restrict their practical utility.
+@guo2023large exposed fundamental gaps in [llms]{acronym-label="llm"
+acronym-form="plural+short"}' molecular design capabilities through a
+systematic evaluation. was reported to produce chemically valid
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} $89\%$ of
+the time but achieving less than $20\%$ accuracy in matching the target
+specifications. This result is far below specialized models like
+\[@edwards2022translation\]. They conclude that this performance gap
+stems from [llms]{acronym-label="llm" acronym-form="plural+short"}'
+inadequate understanding of [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} syntax and structure-property
+relationships. Subsequent work by @bhattacharya2024large explored
+whether systematic prompt engineering could overcome these limitations,
+demonstrating that these prompts could guide to generate chemically
+valid molecules ($97\%$ syntactic validity) with controlled
+modifications, including fine-grained structural changes (median
+Tanimoto similarity $0.67$--$0.69$) and predictable electronic property
+shifts (0.14 eV--0.27 eV [homo]{acronym-label="homo"
+acronym-form="singular+short"} energy changes). Hybrid approaches like
+extend this method with knowledge-augmented prompting, where
+[llms]{acronym-label="llm" acronym-form="plural+short"} generate both
+molecule predictions and explanations that are used to fine-tune smaller
+[lms]{acronym-label="lm" acronym-form="plural+short"}, with all
+resulting embeddings ultimately combined via hierarchical attention
+mechanisms to produce the final [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} representation\[@srinivas2024crossing\].
+It showed improved accuracy over pure prompting strategies but
+sacrificed the generalizability that makes [llms]{acronym-label="llm"
+acronym-form="plural+short"} attractive, as the model requires
+re-training for each new molecular domain.
+
+#### Fine-Tuning {#fine-tuning}
+
+To overcome the limitations of prompting, fine-tuning has been adopted
+in molecular and materials generation, much like its use in property
+prediction with [lift]{acronym-label="lift"
+acronym-form="singular+short"}-based frameworks (see
+[\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
+reference="sec:fine-tuning"} for a deeper explanation of
+[lift]{acronym-label="lift" acronym-form="singular+short"} and
+[2.1.2](#sec:prediction_FT){reference-type="ref+Label"
+reference="sec:prediction_FT"} for a discussion of
+[lift]{acronym-label="lift" acronym-form="singular+short"} applied to
+property prediction tasks). @yu2024llasmol demonstrated that systematic
+fine-tuning in various chemical tasks including molecule generation from
+captions can improve performance while remaining parameter-efficient,
+using only $0.58\%$ of trainable parameters via
+[lora]{acronym-label="lora" acronym-form="singular+short"}.
+
+The molecule-caption translation task (), which involves generating
+textual descriptions from molecular representations and vice versa
+(Cap2Mol), has become a standard benchmark for evaluating
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} for molecule
+generation. \[@edwards2022translation\] Under the "Mol2Cap"/"Cap2Mol"
+task paradigm, [icma]{acronym-label="icma"
+acronym-form="singular+short"} avoids domain-specific pre-training by
+combining retrieval-augmented in-context learning with fine-tuning on
+[icl]{acronym-label="icl" acronym-form="singular+short"}
+examples.\[@li2025large\] On the ChEBI-20\[@edwards2021text2mol\] and
+PubChem324k\[@liu2023molca\] datasets, [icma]{acronym-label="icma"
+acronym-form="singular+short"} nearly doubles baseline performance, with
+[icma]{acronym-label="icma" acronym-form="singular+short"} powered by
+achieving a 0.581 [bleu]{acronym-label="bleu"
+acronym-form="singular+short"} score in and $46.0\%$ exact match in
+.\[@li2025large\] However, its reliance on retrieved examples raises
+concerns about generalization to novel scaffolds. Similarly, enhances
+fine-grained alignment through a teacher-student framework, where a
+larger [llm]{acronym-label="llm" acronym-form="singular+short"} (e.g., )
+extracts substructure-aware captions to guide a smaller model (),
+improving accuracy while reducing hallucinations.\[@li2024molreflect\]
+Meanwhile, extends the task to property-conditioned generation, using
+instructions ([smiles]{acronym-label="smiles"
+acronym-form="singular+short"}-text-property tuples) to optimize for
+captioning and prediction jointly.\[@lin2025property\]
+
+Fine-tuned [lms]{acronym-label="lm" acronym-form="plural+short"} have
+shown promise in molecule and materials generation. However, their
+reliance on decoding and [smiles]{acronym-label="smiles"
+acronym-form="singular+short"}/[selfies]{acronym-label="selfies"
+acronym-form="singular+short"} representations introduces fundamental
+limitations: degeneracy (multiple valid [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} for the same molecule) and difficulty
+capturing complex structural relationships implicit in textual
+descriptions.
+
+#### Diffusion and Flow Matching
+
+Diffusion and flow-based models operate directly on latent
+representations, enabling more flexible generation of diverse and novel
+structures.\[@zhu20243m-diffusion\] Moreover, emerging hybrid
+architectures combine the strengths of [llms]{acronym-label="llm"
+acronym-form="plural+short"} with diffusion and flow matching models to
+overcome the limitations of each paradigm individually
+\[@sriram2024flowllm\].
+
+Beyond text-based representations, introduced a multimodal
+[llm]{acronym-label="llm" acronym-form="singular+short"} approach
+capable of text and graph generation by integrating a base
+[llm]{acronym-label="llm" acronym-form="singular+short"} with graph
+diffusion transformers and graph neural networks for multi-conditional
+molecular generation and retrosynthetic planning. Specifically they used
+different trigger (`<design>` and `<retro>`) and query (`<query>`)
+tokens for switching between them and improved success in synthesis
+success rates from $5\%$ to $35\%$ . \[@liu2024multimodal\]
+
+A unique challenge with crystalline materials is generating a material
+that possesses both discrete (atom type) and continuous (atomic position
+and lattice geometry) variables. @sriram2024flowllm developed to
+address this challenge. They recognized that the respective strengths of
+[llms]{acronym-label="llm" acronym-form="plural+short"}, modeling
+discrete values and conditional prompting, and denoising models,
+modeling continuous values and equivariances, could be combined to
+create a hybrid architecture. A fine-tuned [llm]{acronym-label="llm"
+acronym-form="singular+short"} is used to learn an effective base
+distribution of metastable crystals via text-based representations,
+which is then iteratively refined through [rfm]{acronym-label="rfm"
+acronym-form="singular+short"} to optimize atomic coordinates and
+lattice parameters.\[@sriram2024flowllm\]
+
+#### Reinforcement Learning and Preference Optimization
+
+Translating [gpm]{acronym-label="gpm" acronym-form="singular+short"}
+generated outputs to the real world requires designing molecules and
+materials with specific target properties. [rl]{acronym-label="rl"
+acronym-form="singular+short"} and preference optimization
+techniques\[@lee2024fine-tuning\] have emerged as powerful solutions for
+this challenge. For instance, @jang2025can combined
+[sft]{acronym-label="sft" acronym-form="singular+short"} and
+[rl]{acronym-label="rl" acronym-form="singular+short"} using
+[ppo]{acronym-label="ppo" acronym-form="singular+short"} to generate
+diverse molecular sequences auto-regressively. This approach excels in
+exploring a broad chemical space, but incurs high computational costs
+due to its reliance on iterative, sequence-based generation. In
+contrast, @cavanagh2024smileyllama employed [dpo]{acronym-label="dpo"
+acronym-form="singular+short"} with [sft]{acronym-label="sft"
+acronym-form="singular+short"} to fine-tune [llms]{acronym-label="llm"
+acronym-form="plural+short"} for molecular design, leveraging
+[smiles]{acronym-label="smiles" acronym-form="singular+short"}
+representations to optimize drug-like properties (e.g., hydrogen bond
+donors/acceptors and LogP). While [dpo]{acronym-label="dpo"
+acronym-form="singular+short"} reduces computational overhead in
+comparison to [ppo]{acronym-label="ppo" acronym-form="singular+short"},
+it trades off molecular diversity, a key strength of the work by
+@jang2025can, due to the inherent constraints of preference-based
+fine-tuning.
+
+Beyond these methods, [era]{acronym-label="era"
+acronym-form="singular+short"} introduces a different optimization
+paradigm. \[@chennakesavalu2025aligning\] Unlike
+[ppo]{acronym-label="ppo" acronym-form="singular+short"} or
+[dpo]{acronym-label="dpo" acronym-form="singular+short"},
+[era]{acronym-label="era" acronym-form="singular+short"} uses
+gradient-based objectives to guide word-by-word generation with explicit
+reward functions, converging to a physics-inspired probability
+distribution that allows fine control over the generation process. In
+single-property optimization tasks, [era]{acronym-label="era"
+acronym-form="singular+short"} successfully aligned molecular
+transformers to generate compounds with targeted chemical properties
+(QED, LogP, ring count, molar refractivity) while maintaining $59-84\%$
+chemical validity without regularization. For multi-objective
+optimization, it achieved precise control over property trade-offs using
+weighted energy functions.
+
+@calanzone2025mol-moe also address the challenge of multi-objective
+molecular generation with , a [moe]{acronym-label="moe"
+acronym-form="singular+short"} framework (see
+[\[sec:arch-moes\]](#sec:arch-moes){reference-type="ref+Label"
+reference="sec:arch-moes"} to learn more about [moe]{acronym-label="moe"
+acronym-form="singular+short"} architectures). dynamically combines
+property-specific expert models at test time using preference-guided
+routers toward drug-relevant molecular properties enabling flexible
+steering across multiple objectives without re-training. Compared to
+alternatives like \[@zhou2024one-preference-fits-all\],
+[sft]{acronym-label="sft" acronym-form="singular+short"} with
+rewards-in-context, and simple model merging such as Rewarded
+Soups\[@rame2023rewarded\]), achieves superior performance in both
+property optimization and steerability---particularly in
+out-of-distribution scenarios where other methods struggle.
+
+uses [rl]{acronym-label="rl" acronym-form="singular+short"} fine-tuning
+to optimize \[@cao2024space\], a transformer-based crystal generator,
+with rewards from discriminative models (e.g., property
+predictors)\[@cao2025crystalformer-rl\]. [rl]{acronym-label="rl"
+acronym-form="singular+short"} improves stability (lower energy above
+convex hull) and enables property-guided generation (e.g., high
+dielectric constant + band gap). Here, [rl]{acronym-label="rl"
+acronym-form="singular+short"} fine-tuning is shown to outperform
+supervised fine-tuning, enhancing both novel material discovery and
+retrieval of high-performing candidates from the pre-training dataset.
+
+#### Agents
+
+Agent-based frameworks leveraging [llms]{acronym-label="llm"
+acronym-form="plural+short"}, deeply explained in
+[\[sec:agents\]](#sec:agents){reference-type="ref+Label"
+reference="sec:agents"}, have emerged as approaches for autonomous
+molecular and materials generation, demonstrating capabilities that
+extend beyond simple prompting or fine-tuning by incorporating iterative
+feedback loops, tool integration, and human-[ai]{acronym-label="ai"
+acronym-form="singular+short"} collaboration. The framework implements
+this approach for the inverse design of materials, where agents input
+initial [smiles]{acronym-label="smiles" acronym-form="singular+short"}
+strings with optimization task descriptions and generate validated
+candidate molecules by retrieving domain knowledge from the
+literature.\[@ansari2024dziner\] It also uses domain-expert surrogate
+models to evaluate the required property in the new molecule/material.
+These surrogate models are highly customizable to the desired property
+and give the user the option to train their own [ml]{acronym-label="ml"
+acronym-form="singular+short"} model or using an existing
+[sota]{acronym-label="sota" acronym-form="singular+short"} model.
+@ansari2024dziner demonstrated 's capabilities in generating
+surfactants for critical micelle concentration reduction, WDR5
+inhibitors, and optimizing [mof]{acronym-label="mof"
+acronym-form="singular+short"} organic linkers for adsorption. The
+framework adopts a [rag]{acronym-label="rag"
+acronym-form="singular+short"}-enhanced multi-agent approach where
+specialized teams including "Planning", "Knowledge Graph", and
+"Molecular Understanding" collaborate to dynamically retrieve and
+integrate external biochemical knowledge for drug discovery tasks
+without requiring domain-specific fine-tuning.\[@lee2025rag-enhanced\]
+
+### Validation
+
+#### General validation
+
+The most fundamental validation approaches use cheminformatics tools
+like to verify molecular validity. provides robust tools for validating
+molecules through its ability to parse and sanitize molecules from
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} strings.
+If a step in the [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} to structure conversion process fails,
+then the molecule is considered invalid. More sophisticated validation
+involves quantum mechanical calculations to compute molecular properties
+such as formation energies\[@kingsbury2022flexible\]. These
+computationally expensive operations provide deeper insights into
+whether generated structures are viable. Models are also evaluated for
+their ability to generate unique molecules by calculating the proportion
+of unique molecules in generated sets, often using molecular
+fingerprints or structural descriptors.
+
+The gold standard for validation is experimental synthesis, but
+significant gaps exist between computational generation and laboratory
+realization. Preliminarily, metrics like Tanimoto similarity and Fréchet
+ChemNet distance \[@preuer2018frechet\] quantify structural resemblance,
+which can indicate synthetic feasibility when training data consists of
+known compounds. Retrosynthesis prediction algorithms attempt to bridge
+this gap by evaluating synthetic accessibility and proposing potential
+synthesis routes (see
+[2.3](#sec:retrosynthesis){reference-type="ref+Label"
+reference="sec:retrosynthesis"}). However, these methods still face
+limitations in accurately predicting real-world synthesizability
+\[@zunger2019beware\].
+
+#### Conditional Generation Validation
+
+Beyond establishing the general validity of generated molecules,
+evaluation methods can assess both their novelty relative to training
+data and their ability to meet specific design goals. For inverse design
+tasks, such as optimizing binding affinity or solubility, the *de novo*
+molecule generation benchmark GuacaMol differentiates between
+*distribution-learning* (e.g., generating diverse, valid molecules) and
+*goal-directed* optimization (e.g., rediscovering known drugs or meeting
+multi-objective constraints) \[@brown2019guacamol\]. In the materials
+paradigm, frameworks such as evaluate analogous challenges such as
+stability, electronic properties, and synthesizability, but adapt
+metrics to periodic systems, such as energy above hull or band gap
+prediction accuracy\[@riebesell2025framework\]. Recently, they
+introduced the "discovery acceleration factor", which quantifies how
+effective a model is at finding stable structures relative to a random
+baseline.
+
+## Retrosynthesis {#sec:retrosynthesis}
+
+The practical utility of [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} for generating molecules and materials
+remains limited by a persistent gap in their synthetic feasibility.
+Early work by @schwaller2021mapping laid important groundwork by
+demonstrating how attention-based neural networks can learn meaningful
+representations of chemical reactions, enabling accurate classification
+and prediction of reaction outcomes. Their model, trained on millions of
+reactions from patent and literature data, showed that learned reaction
+embeddings were capable of capturing nuanced chemical relationships.
+
+Recent efforts have built on this foundation by integrating
+synthesizability directly into molecular and materials generation
+pipelines that leverage both domain-specific tools and
+[gpms]{acronym-label="gpm" acronym-form="plural+short"}. For example,
+@sun2025synllama adapted and to predict retrosynthetic pathways and
+identify commercially available building blocks for experimentally
+validated SARS-CoV-2 Mpro inhibitors. Similarly, @liu2024multimodal
+introduced a multimodal framework that combines reaction databases with
+chemical intuition encoded in [llms]{acronym-label="llm"
+acronym-form="plural+short"}, improving the prioritization of
+high-yield, low-cost synthetic routes.
+
+More recent work has explored how fully fine-tuned
+[llms]{acronym-label="llm" acronym-form="plural+short"} can serve as
+comprehensive chemistry assistants for experimental guidance.
+@zhang2025large developed , a fine-tuned model trained on 1.28 million
+chemical reaction question-answer pairs. Through an active learning
+framework that incorporates experimental feedback (see
+[\[sec:rl\]](#sec:rl){reference-type="ref+Label" reference="sec:rl"} to
+learn more about [rl]{acronym-label="rl"
+acronym-form="singular+short"}), human- collaboration successfully
+optimized an unreported Suzuki-Miyaura cross-coupling reaction within
+only 15 experimental runs.
+
+Predictive retrosynthesis has also extended to the inorganic domain.
+@kim2024large demonstrated that fine-tuned and can predict both the
+synthesizability of inorganic compounds from their chemical formulas and
+select appropriate precursors for synthesis, achieving performance
+comparable to specialized [ml]{acronym-label="ml"
+acronym-form="singular+short"} models with minimal development time and
+cost. In a follow-up work, they extended this approach to
+structure-based predictions of inorganic crystal polymorphs, where
+[llms]{acronym-label="llm" acronym-form="plural+short"} provided
+human-readable explanations for their synthesizability
+assessments\[@kim2025explainable\]. Notably, their structure-aware
+models correctly identified twelve hypothetical compounds as
+non-synthesizable despite their thermodynamic stability, perfectly
+matching experimental outcomes where synthesis attempts failed.
+
+Beyond retrosynthetic prediction, [llms]{acronym-label="llm"
+acronym-form="plural+short"} have also been deployed as reasoning
+engines for autonomous design. @bran2024augmenting developed , an
+[llm]{acronym-label="llm" acronym-form="singular+short"}-based system
+that autonomously plans and executes the synthesis of novel compounds by
+integrating specialized tools like a retrosynthesis planner (see
+[1.5](#sec:planning){reference-type="ref+Label"
+reference="sec:planning"} to read more about this capability of and its
+limitations) and reaction predictors. This approach mirrors the
+iterative experimental design cycle employed by human chemists, but is
+equipped with the scalability of automation. Notably, systems like rely
+on high-quality reaction data to ground their reasoning in empirically
+viable chemistry, which, depending on the design space, could be a
+limitation.
+
+## LLMs as Optimizers {#sec:llm-optimizers}
+
+<figure id="fig:optimization">
+<img src="media/figures/rescaled_figures/chemrev_figure22.png" width="100%" />
+<figcaption><strong>Overview of the iterative optimization loop that
+mirrors the structure of the optimization section</strong>. The blue
+boxes contain the different roles that the <span
+data-acronym-label="llm" data-acronym-form="plural+short">llms</span>
+play in the loop, and which are described in the main text. References
+in which the use of <span data-acronym-label="llm"
+data-acronym-form="plural+short">llms</span> for that step are detailed
+inside the small boxes inside each of the components of the loop. The
+example shown is about obtaining molecules with high
+<code>logP</code>.</figcaption>
+</figure>
+
+Discovering novel compounds and reactions in chemistry and materials
+science has long relied on iterative trial-and-error processes rooted in
+existing domain knowledge \[@Taylor2023brief\]. While, as explained in
+[2.3](#sec:retrosynthesis){reference-type="ref+Label"
+reference="sec:retrosynthesis"}, those methods are used to accelerate
+this process, optimization methods help improve conditions, binding
+affinity, etc. These approaches are slow and labor-intensive.
+Traditional data-driven methods aimed to address these limitations by
+combining predictive [ml]{acronym-label="ml"
+acronym-form="singular+short"} models with optimization frameworks such
+as [bo]{acronym-label="bo" acronym-form="singular+short"} or
+[eas]{acronym-label="ea" acronym-form="plural+short"}. These frameworks
+balance exploration of uncharted regions in chemical space with
+exploitation of known high-performing regions \[@Li2024sequential;
+@Hse2021gryffin; @Shields2021bayesian; @Griffiths2020constrained;
+@RajabiKochi2025adaptive\].
+
+Recent advances in [llms]{acronym-label="llm"
+acronym-form="plural+short"} have unlocked potential for addressing
+optimization challenges in chemistry and related domains
+\[@fernando2023promptbreeder0; @yang2023large; @chen2024instruct\]. A
+key strength of [llms]{acronym-label="llm" acronym-form="plural+short"}
+lies in their capacity to frame optimization tasks through natural
+language, which enhances knowledge incorporation, improves candidate
+comparisons, and increases interpretability. This aligns well with
+chemical problem-solving, where complex phenomena, such as reaction
+pathways or material behaviors, are often poorly captured by standard
+nomenclature; however, they can still be intuitively explained through
+natural language. Moreover, [gpms]{acronym-label="gpm"
+acronym-form="plural+short"}' general capabilities provide flexibility
+beyond classical methods, which have to be trained from scratch if the
+optimization problem or any of its variables changes. By encoding
+domain-specific knowledge---including reaction rules, thermodynamic
+principles, and structure-property relationships---into structured
+prompts, [llms]{acronym-label="llm" acronym-form="plural+short"} can
+synergize expertise with their ability to navigate complex chemical
+optimization problems.
+
+Current [llm]{acronym-label="llm" acronym-form="singular+short"}
+applications in chemistry optimization vary in scope and methodology.
+Many studies integrate [llms]{acronym-label="llm"
+acronym-form="plural+short"} into [bo]{acronym-label="bo"
+acronym-form="singular+short"} frameworks, where models guide
+experimental design by predicting promising candidates
+\[@rankovic2023bochemian\]. Others employ [gas]{acronym-label="ga"
+acronym-form="plural+short"} or hybrid strategies that combine
+[llm]{acronym-label="llm" acronym-form="singular+short"}-generated
+hypotheses with computational screening \[@cisse2025language0based\].
+
+### LLMs as Surrogate Models
+
+A prominent [llm]{acronym-label="llm"
+acronym-form="singular+short"}-driven strategy positions these models as
+surrogate models within optimization loops. Typically implemented as
+[gpr]{acronym-label="gpr" acronym-form="singular+short"}, surrogate
+models learn from prior data to approximate costly feature-outcome
+landscapes, which are often computationally and time-consuming to
+evaluate, thereby guiding the acquisition. [llms]{acronym-label="llm"
+acronym-form="plural+short"} offer major advantages in this role
+primarily through strong low-data performance. Their
+[icl]{acronym-label="icl" acronym-form="singular+short"} capability
+enables task demonstration with minimal prompt examples while leveraging
+chemical knowledge from pre-training to generate accurate predictions.
+This allows [gpms]{acronym-label="gpm" acronym-form="plural+short"} to
+compensate for sparse experimental data effectively.
+
+@ramos2023bayesian demonstrated the viability of this paradigm through
+a simple yet effective framework that combines [icl]{acronym-label="icl"
+acronym-form="singular+short"} using only one example in the prompt with
+a [bo]{acronym-label="bo" acronym-form="singular+short"} workflow. Their
+[bo]{acronym-label="bo"
+acronym-form="singular+short"}-[icl]{acronym-label="icl"
+acronym-form="singular+short"} approach uses few-shot examples formatted
+as question-answer pairs, where the [llm]{acronym-label="llm"
+acronym-form="singular+short"} generates candidate solutions conditioned
+on prior successful iterations. These candidates are ranked using an
+acquisition function, with top-$k$ selections integrated into subsequent
+prompts to refine predictions iteratively. Remarkably, this method
+achieved high performance in optimizing catalytic reaction conditions,
+even matching the top-1 accuracies observed in experimental benchmarks.
+This emphasizes the potential of [llms]{acronym-label="llm"
+acronym-form="plural+short"} as accessible, [icl]{acronym-label="icl"
+acronym-form="singular+short"} optimizers when coupled with
+well-designed prompts.
+
+To address limitations in base [llms]{acronym-label="llm"
+acronym-form="plural+short"}' inherent chemical knowledge---particularly
+their grasp of specialized representations like
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} or
+structure-property mappings---@yu2025collaborative introduced a hybrid
+architecture augmenting pre-trained [llms]{acronym-label="llm"
+acronym-form="plural+short"} with task-specific embedding and prediction
+layers. These layers, fine-tuned on domain data, align latent
+representations of input-output pairs (denoted as `<x>` and `<y>` in
+prompts), enabling the model to map chemical structures and properties
+into a unified, interpretable space. Crucially, the added layers enhance
+chemical reasoning without sacrificing the flexibility of
+[icl]{acronym-label="icl" acronym-form="singular+short"}, allowing the
+system to adapt to trends across iterations, similarly to what was done
+by @ramos2023bayesian. In their evaluations of molecular optimization
+benchmarks, such as the [pmo]{acronym-label="pmo"
+acronym-form="singular+short"} \[@gao2022sample\], they revealed
+improvements over conventional methods, including
+[bo]{acronym-label="bo"
+acronym-form="singular+short"}-[gp]{acronym-label="gp"
+acronym-form="singular+short"}, [rl]{acronym-label="rl"
+acronym-form="singular+short"} methods, and [ga]{acronym-label="ga"
+acronym-form="singular+short"}.
+
+@yu2025collaborative further highlighted the framework's extensibility
+to diverse black-box optimization challenges beyond chemistry. This
+represents one of the most important advantages of using
+[llms]{acronym-label="llm" acronym-form="plural+short"} as orchestrators
+of the optimization process. The flexibility of natural language in this
+process enables the procedure to be applied to any optimization process.
+In contrast, classical methods are constrained to the specific task for
+which they are designed due to the need to train the surrogate model.
+
+### LLMs as Next Candidate Generators
+
+Recent studies demonstrate the potential of [llms]{acronym-label="llm"
+acronym-form="plural+short"} to enhance [eas]{acronym-label="ea"
+acronym-form="plural+short"} \[@lu2024generative\] and
+[bo]{acronym-label="bo" acronym-form="singular+short"}
+\[@amin2025towards\] frameworks by leveraging their embedded chemical
+knowledge and ability to integrate prior information, thereby reducing
+computational effort while improving output quality. Within
+[eas]{acronym-label="ea" acronym-form="plural+short"},
+[llms]{acronym-label="llm" acronym-form="plural+short"} refine molecular
+candidates through mutations (modifying molecular substructures) or
+crossovers (combining parent molecules). In [bo]{acronym-label="bo"
+acronym-form="singular+short"} frameworks, they serve as acquisition
+functions, utilizing surrogate model predictions---both mean and
+uncertainty---to select optimal molecules or reaction conditions for
+evaluation.
+
+For molecule optimization, @yu2025collaborative introduced , a
+dual-[llm]{acronym-label="llm" acronym-form="singular+short"} system
+where one model proposes candidates and the other supplies domain
+knowledge (see
+[2.4.3](#sec:opt-llm-know-source){reference-type="ref+Label"
+reference="sec:opt-llm-know-source"}). By fine-tuning the "worker"
+[llm]{acronym-label="llm" acronym-form="singular+short"} to recognize
+molecular scaffolds and target properties, and expanding the training
+pool to include a million-size pre-training dataset, they achieved hit
+rates exceeding $90\%$. Similarly, @wang2024efficient developed ,
+integrating an [llm]{acronym-label="llm" acronym-form="singular+short"}
+into an [ea]{acronym-label="ea" acronym-form="singular+short"} to
+replace random mutations with [llm]{acronym-label="llm"
+acronym-form="singular+short"}-guided modifications. Here, generated
+optimized offspring from parent molecules, significantly accelerating
+convergence to high fitness scores. Notably, while domain-specialized
+models (, ) underperformed, the general-purpose excelled---a finding
+that underscores the context-dependent utility of
+[llms]{acronym-label="llm" acronym-form="plural+short"}
+
+In a related approach, @lu2024generative showed that well-designed
+prompts---incorporating task-specific constraints, objectives, and
+few-shot examples---enable general [llms]{acronym-label="llm"
+acronym-form="plural+short"} (, ) to generate high-quality candidates
+without fine-tuning, outperforming both random selection and vanilla
+[gas]{acronym-label="ga" acronym-form="plural+short"} in functional
+[tmc]{acronym-label="tmc" acronym-form="singular+short"} design.
+
+### LLMs as Prior Knowledge Sources {#sec:opt-llm-know-source}
+
+A key advantage of integrating [llms]{acronym-label="llm"
+acronym-form="plural+short"} into optimization frameworks is their
+ability to encode and deploy prior knowledge within the optimization
+loop. As illustrated in
+[11](#fig:optimization){reference-type="ref+Label"
+reference="fig:optimization"}, this knowledge can be directed into
+either the surrogate model or candidate generation module, significantly
+reducing the number of optimization steps required through high-quality
+guidance.
+
+For example, @yu2025collaborative deployed a "research" agent that
+leverages search and to verify and rank molecules generated by "worker"
+agents against target features and properties. Their results demonstrate
+substantial improvements when this filtering mechanism is applied.
+
+Similarly, @cisse2025language0based introduced , which contextualizes
+conventional black-box [bo]{acronym-label="bo"
+acronym-form="singular+short"} using an [llm]{acronym-label="llm"
+acronym-form="singular+short"}. maintains standard
+[bo]{acronym-label="bo" acronym-form="singular+short"} as the core
+driver but strategically activates the [llm]{acronym-label="llm"
+acronym-form="singular+short"} when progress stalls. This leverages the
+model's [icl]{acronym-label="icl" acronym-form="singular+short"}
+capabilities to hypothesize promising search regions and propose new
+samples, regulated by a lightweight heuristic policy that manages costs
+and incorporates domain knowledge (or user input). Evaluations on
+synthetic benchmarks such as the catalyst optimization task for hydrogen
+generation show that accelerates exploration, improves convergence, and
+outperforms existing [llm]{acronym-label="llm"
+acronym-form="singular+short"}-[bo]{acronym-label="bo"
+acronym-form="singular+short"} hybrids.
+
+### How to Face Optimization Problems?
+
+Published works explore different ways of using
+[llms]{acronym-label="llm" acronym-form="plural+short"} for optimization
+problems in chemistry, from simple approaches, such as just prompting
+the model with some initial random set of experimental candidates and
+iterating \[@ramos2023bayesian\], to fine-tuning models in
+[bo]{acronym-label="bo" acronym-form="singular+short"} fashion
+\[@rankovic2025gollum0\]. The most efficient initial point is by relying
+entirely on a [icl]{acronym-label="icl" acronym-form="singular+short"}
+approach, which allows one to obtain a first signal rapidly. Such
+initial results will enable to determine whether a more complex,
+computationally intensive approach is necessary or whether prompt
+engineering is reliable enough for the application. Fine-tuning can be
+used as a way to enhance the chemical knowledge of the
+[llms]{acronym-label="llm" acronym-form="plural+short"} and can lead to
+improvements in optimization tasks where the model requires such
+knowledge to choose or generate better candidates. Fine-tuning might not
+be a game-changer for other approaches that rely more on sampling
+methods \[@wang2025llm0augmented\].
+
+While some initial works showed that [llms]{acronym-label="llm"
+acronym-form="plural+short"} trained specifically on chemistry perform
+better for optimization tasks \[@kristiadi2024sober\], other works
+showed that a [gpm]{acronym-label="gpm" acronym-form="singular+short"}
+such as combined with an [ea]{acronym-label="ea"
+acronym-form="singular+short"} outperformed all other models
+\[@wang2024efficient\]. Is it better to incorporate a general model or a
+chemistry [lm]{acronym-label="lm" acronym-form="singular+short"} into
+the optimization frameworks? We hypothesize that for models of the same
+size (in number of parameters) and similar training size---attending to
+[pflops]{acronym-label="pflop" acronym-form="plural+short"}---a chemical
+[lm]{acronym-label="lm" acronym-form="singular+short"} (a specialized
+model) will consistently outperform general models. If the models differ
+significantly in size, the larger model will typically perform better.

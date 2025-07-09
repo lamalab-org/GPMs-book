@@ -1,0 +1,109 @@
+% require KOMA script >= 3.17
+\changefontsizes{10pt}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}
+\RequirePackage{roboto}
+\RequirePackage[english,ngerman]{babel}
+\RequirePackage{iflang}
+\RequirePackage[left=25mm,right=30mm,top=45mm,bottom=20mm]{geometry}
+\RequirePackage{graphicx}
+\renewcommand{\rmdefault}{\sfdefault}
+\setlength{\footskip}{0pt}
+\@setplength{sigbeforevskip}{0pt}
+\@setplength{toaddrhpos}{25mm}
+\@setplength{firstheadvpos}{14mm}
+\@setplength{firstheadhpos}{94mm}
+\@setplength{lochpos}{-138mm}
+\@setplength{locvpos}{31mm}
+\@setplength{locwidth}{72mm}
+\@setplength{locheight}{72mm}
+\@setplength{foldmarkthickness}{1pt}
+\@setplength{tfoldmarklength}{\useplength{foldmarkthickness}}
+\@setplength{pfoldmarklength}{\useplength{foldmarkthickness}}
+\@setplength{bfoldmarklength}{\useplength{foldmarkthickness}}
+\KOMAoptions{parskip}
+\KOMAoptions{fromemail}
+\KOMAoptions{refline=nodate}
+\KOMAoptions{backaddress=plain}
+\KOMAoptions{addrfield=topaligned}
+\linespread{1.1}
+\addtokomafont{subject}{\fontsize{11pt}{12pt}\selectfont}
+\addtokomafont{backaddress}{\robotocondensed}
+\renewcommand{\raggedsignature}{\raggedright}
+\newkomavar{fromfaculty}
+\newkomavar{fromfacultyshort}
+\newkomavar{fromposition}
+\setkomavar{place}{Jena}
+\setkomavar{placeseparator}{\IfLanguageName{ngerman}{, den }{,~}}
+\setkomavar{backaddressseparator}{~\textperiodcentered~}
+\newkomavar{backaddressfaculty}
+\setkomavar{backaddressfaculty}{%
+    \ifkomavarempty{fromfacultyshort}{%
+      {\def\\{~\@ogobble}\usekomavar{fromfaculty}}%
+    }{%
+      \usekomavar{fromfacultyshort}%
+    }%
+}
+\setkomavar{backaddress}{%
+  Universit\"at Jena\\
+  \usekomavar{backaddressfaculty}\\
+  07737 Jena
+  \vskip6pt}
+\setkomavar{firsthead}{%
+  \includegraphics[width=70mm]{unijena_bildwortmarke_black}%
+}
+\newkomavar{bulletintitle}
+\let\orig@addrfield\@addrfield
+\renewcommand{\@addrfield}{%
+  \ifkomavarempty{bulletintitle}{%
+    \orig@addrfield
+  }{%
+    \vb@t@z{%
+      \@savevbox{\useplength{toaddrheight}}{\hsize\useplength{toaddrwidth}%
+        {\LARGE\textbf{\usekomavar{bulletintitle}}}}%
+      {bulletin title}{toaddrheight}{\setkomavar}%
+    }%
+  }%
+}
+\setkomavar{nexthead}{\parbox{\linewidth}{\raggedleft
+  \vskip-36mm
+  \includegraphics[width=58mm]{unijena_bildwortmarke_black}%
+  \hskip-20mm\null
+}}
+\setkomavar{nextfoot}{}
+\@newplength{facultywidth}
+\@setplength{facultywidth}{\useplength{locwidth}}
+\@addtoplength{facultywidth}{-10pt}  % XXX where do these 10pt come from?
+\newcommand{\facultybox}{\vbox{\hsize\useplength{facultywidth}\raggedright
+    \textbf{\usekomavar{fromfaculty}}}}
+\setkomavar{location}{%
+  \robotocondensed
+  \setbox\z@\facultybox%
+  \setlength{\@tempdimb}{\ht0}\addtolength{\@tempdimb}{\dp0}%
+  \ifdim \@tempdimb>2\baselineskip
+    \PackageWarning{unijena.lco}{%
+      Faculty name is too long, must fit in two lines below the logo.}%
+  \fi
+  \facultybox
+  \vskip1.5pt
+  \fontsize{8.5pt}{10.2pt}\selectfont
+  \usekomavar{fromname}\\
+  \textit{\usekomavar{fromposition}}\\[0.5\baselineskip]
+  \usekomavar{fromaddress}\\[0.8\baselineskip]
+  \begin{tabular}{@{}p{18mm}@{}l@{}}
+  %  \usekomavar*{fromphone} & \usekomavar{fromphone}\\
+ %   \usekomavar*{fromfax} & \usekomavar{fromfax}\\
+    \usekomavar*{fromemail} & \usekomavar{fromemail} \\
+    URL: &  \usekomavar{fromurl} 
+  \end{tabular}\par
+  \vskip\baselineskip
+  \ifkomavarempty{place}{}{\usekomavar{place}\usekomavar{placeseparator}}%
+  \usekomavar{date}%
+}
+\AtBeginDocument{
+  \renewcaptionname{ngerman}\faxname{Telefax}
+}
+\pagestyle{myheadings}
+\raggedright
+\let\@orig@closing\closing
+\renewcommand{\closing}[1]{\vskip2\baselineskip\@orig@closing{#1}}

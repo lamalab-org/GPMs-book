@@ -1,0 +1,27 @@
+\section{Introduction}
+
+
+Much emphasis and hope is placed on \gls{ml} to accelerate the rate of scientific progress.\autocite{jablonka2020big,Butler_2018,yano2022case,Yao_2022,De_Luna_2017,wang2023scientific} 
+Recent progress in the field has demonstrated, for example, the ability of \gls{ml} models to make predictions for multiscale systems,\autocite{charalambous2024holistic,yang2020machine, Deringer_2021} to perform experiments by interacting with laboratory equipment \autocite{boiko2023autonomous,coley2019robotic}, to autonomously collect data from the scientific literature,\autocite{schilling2025text,zhang2024fine,dagdelen2024structured} and to make predictions with high accuracy.\autocite{jablonka2024leveraging,jablonka2023machine,jung2024automatic, Rupp_2012,Keith_2021,Wu_2024} 
+
+However, the diversity and scale of chemical data create a unique challenge for applying \gls{ml} to the chemical sciences. This diversity manifests across temporal, spatial, and representational dimensions. Temporally, chemical processes span femtosecond-scale spectroscopic events to year-long stability studies of pharmaceuticals or batteries, demanding data sampled at resolutions tailored to each time regime. 
+Spatially, systems range from the atomic to the industrial scale, requiring models that bridge molecular behavior to macroscopic properties. 
+Representationally, even a single observation (e.g., a \ce{^{13}C}-NMR spectrum) can be encoded in chemically equivalent formats: a string \autocite{alberts2024unraveling}, vector \autocite{mirza2024elucidating}, or image\autocite{alberts2024unraveling}. 
+However, these representations are not computationally equivalent and have been empirically shown to produce diverse model outputs.\autocite{atz2024prospective,alampara2024probing,wu2024t,skinnider2024invalid}
+
+Additionally, \gls{ml} for chemistry is challenged by what we term \enquote{hidden variables}. 
+These can be thought of as the parameters in an experiment that remain largely unaccounted for (e.g., their importance is unknown or they are difficult to control for), but could have a significant impact on experimental outcomes. 
+One example are seasonal variations in ambient laboratory conditions that are typically not controlled for and, if at all, only communicated in private accounts.\autocite{Nega_2021}
+In addition to that, chemistry is believed to rely on a large amount of \emph{tacit knowledge}, i.e., knowledge that cannot be readily verbalized.\autocite{Taber_2014, Polanyi_2009}  
+Tacit chemical knowledge includes the subtle nuances of experimental procedures, troubleshooting techniques, and the ability to anticipate potential problems based on past experiences.
+
+These factors---the diversity, scale, and tacity---clearly indicate that the full complexity of chemistry cannot be captured using standard approaches with bespoke representations based on structured data.\autocite{jablonka2022making}
+Fully addressing the challenges imposed by chemistry requires the development of \gls{ml} systems that can handle diverse, \enquote{fuzzy}, data instances and have transferable capabilities to leverage low amounts of data. \\
+
+\noindent \emph{Foundation Models} are such models that can easily adapt to new settings and deal with diverse, fuzzy inputs. 
+The first comprehensive description of such models was provided by \textcite{bommasani2021opportunities}, who also coined the term \enquote{foundation models}. 
+In the chemical literature, this term has different connotations.
+We make the distinction between \glspl{gpm} such as \glspl{llm} \autocite{zhang2024chemllm,, guo2025deepseek, openai2023gpt04, anthropic2025system, livne2024nach0, brown2020language} and domain-specific models with \gls{sota} performance in a subset of tasks, such as machine-learning interatomic potentials.\autocite{ahmad2022chemberta,floge2024oneprot,batatia2023foundation,Chen_2022,unke2021machine} 
+
+As we will show in the following, \glspl{gpm}---models designed to generalize across a wide range of tasks and domains with minimal task-specific modifications, typically pre-trained on vast and diverse datasets (see \Cref{sec:taxonomy})---are better equipped than domain-specific models to leverage diverse, fuzzy inputs.  
+Thus, this review article focuses on their potential to shape the future of research in the chemical sciences.\autocite{white2023future}

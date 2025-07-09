@@ -1,0 +1,29 @@
+project:
+  type: book
+  title: General Purpose Models for the Chemical Sciences
+book:
+  title: General Purpose Models for the Chemical Sciences
+  author: "Nawaf Alampara, Anagha Aneesh, Marti\xF1o R\xEDos-Garc\xEDa, Adrian Mirza,\
+    \ Mara Schilling-Wilhelmi, Meiling Sun, Gordan Prastalo, Ali Asghar Aghajani,\
+    \ Kevin Maik Jablonka"
+  date: today
+  chapters:
+  - index.qmd
+  - 01-introduction.qmd
+  - 02-data_taxonomy.qmd
+  - 03-architectures.qmd
+  - 04-evals.qmd
+  - 05-applications.qmd
+  - 06-safety.qmd
+  - 07-outlook_conclusions.qmd
+bibliography: references.bib
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    highlight-style: github
+execute:
+  freeze: auto

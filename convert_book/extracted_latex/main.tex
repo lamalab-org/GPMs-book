@@ -1,0 +1,109 @@
+\documentclass[11pt, oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\input{preamble.tex}
+\usepackage{credits}
+\usepackage{orcidlink}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{arydshln}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\usepackage[version=4]{mhchem}
+\usepackage{float}
+
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{xltabular}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\setlength\tabcolsep{4pt}
+\usepackage{makecell}
+\usepackage{longtable}
+
+\newcommand{\smi}[1]{\texttt{#1}}
+
+\newcommand{\cellimage}[1]{%
+  \raisebox{-0.9\height}{%
+    \includegraphics[width=0.30\textwidth,
+                     keepaspectratio]{#1}}}
+
+
+\title{\textsf{General purpose models for the chemical sciences}}
+
+\input{authors.tex}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    \noindent Data-driven techniques have a large potential to transform and accelerate the chemical sciences. 
+    However, chemical sciences also pose the unique challenge of very diverse, small, fuzzy datasets that are difficult to leverage in conventional machine learning approaches completely. 
+    A new class of models, general-purpose models (GPMs) such as large language models, have shown the ability to solve tasks they have not been directly trained on, and to flexibly operate with low amounts of data in different formats.
+    In this review, we discuss fundamental building principles of GPMs and review recent applications of those models in the chemical sciences across the entire scientific process.
+    While many of these applications are still in the prototype phase, we expect that the increasing interest in GPMs will make many of them mature in the coming years. 
+\end{abstract}
+
+\tableofcontents
+
+\clearpage 
+\input{sections/introduction}
+\input{sections/data_taxonomy}  
+\input{sections/architectures}
+\input{sections/evals}
+\input{sections/applications}
+\input{sections/safety}
+\input{sections/outlook_conclusions}
+
+\section*{Acknowledgments}
+
+This work was supported by the Carl-Zeiss Foundation. 
+
+\noindent A.A.\ acknowledges financial support for this research by the Fulbright U.S. Student Program, which is sponsored by the U.S. Department of State and the German-American Fulbright Commission. Its contents are solely the responsibility of the author and do not necessarily represent the official views of the Fulbright Program, the Government of the United States, or the German-American Fulbright Commission. 
+ 
+\noindent M. S.-W.\ was supported by Intel and Merck via the AWASES research center. 
+
+\noindent A.M.'s work was funded by the SOL-AI project, funded as part of the Helmholtz Foundation Model Initiative of the Helmholtz Association. 
+
+\noindent G.P.'s work was supported by the HPC Gateway measure of the Helmholtz Association.
+
+
+\noindent K.M.J.\ is part of the NFDI consortium FAIRmat funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) – project 460197019.
+
+\noindent We thank Mimi Lavin and Maximilian Greiner for their feedback on a draft of this article.
+
+\section*{Author contributions}
+N. A.\ was the lead contributor for the \enquote{Building principles of GPMs} section. Including its writing and figures (excluding the \enquote{adapting and using GPMs} subsection). N. A.\ also reviewed the \enquote{Introduction,} \enquote{Shape and structure of chemical data,} \enquote{Evals,} \enquote{Implication of GPMs,} and \enquote{Property prediction and material generation in accelerating applications} sections. \\
+
+\noindent A. A.\ was the primary contributor to the writing of the property prediction, molecule and materials generation, safety, and ethics sections, conceptualized the outline for safety and ethics sections, designed and created all figures/schematics/plots in sections with primary contribution, was one of the contributors to the AI scientist overview, edited introduction, evaluations, architectures, knowledge gathering, experiment execution, and education sections. \\ 
+
+\noindent M.R.-G. was the primary contributor to the \gls{ai} scientist overview, the hypothesis generation, and the \gls{llm} as optimizers sections, and helped in reviewing the entire manuscript. \\
+
+\noindent A.M.\ was the main contributor to the introduction and data sections, and the main contributor to the knowledge gathering and reporting sections within the applications section, with minor contributions to the architecture and the safety sections. Has drafted the initial outline of the article. Reviewed the architecture sections, the safety section, the hypothesis generation, the data analysis sections and contributed to the review of the LLM-as-optimizers section.\\
+
+\noindent M.S.-W.\ was the main contributor to the evaluation, education and data analysis section. M.S.-W. also reviewed the shape of chemical data, hypothesis generation, experiment execution, reporting and safety section. Unified all figures. Kept track of upcoming deadlines. \\ 
+
+\noindent M.\ S.\ was the primary contributor to the writing of experimental planning section and related figure. And also helped in reviewing \enquote{Knowledge gathering,} \enquote{Property prediction,} and \enquote{LLMs as optimizers} sections. \\
+
+
+\noindent G.P.\ was the main contributor to \enquote{Adapting and Using General Purpose Models} section, including its writing and table. G.P.\ additionally reviewed the \enquote{The Shape and Structure of Chemical Data,} \enquote{Data Analysis,} \enquote{Reporting} and \enquote{Molecular and Material Generation} sections. \\
+
+\noindent A.A.A.\ was the main contributor to the \enquote{Experiment Execution} section, including its figure, and a minor contributor to the post-training subsection. A.A.A.\ reviewed the \enquote{Introduction,} \enquote{Experiment Planning,} \enquote{Molecule/Materials Generation} and \enquote{Education} sections, edited \enquote{The Shape and Structure of Chemical Data} and part of \enquote{Building principles of GPMs} sections, created the glossary, and ensured that most references can be easily accessed via a DOI or URL. \\
+
+\noindent K.M.J.\ initiated and led the project. K.M.J.\ edited all sections. 
+
+\section*{Conflicts of Interest}
+K.M.J.\ has been a paid contractor for OpenAI as part of the Red-Teaming Network.
+
+\clearpage
+\printbibliography
+
+\clearpage
+\glsaddall
+\printnoidxglossary[type=\acronymtype, sort=letter]
+\printnoidxglossary[type=main, title=Glossary]
+\end{document}
+ 

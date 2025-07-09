@@ -16,6 +16,48 @@ import argparse
 import yaml
 import zipfile
 
+def split_applications_file(applications_path, output_dir):
+    """
+    Split the applications.tex file into two parts:
+    1. applications_part1.tex - content before "Accelerating Applications"
+    2. applications_part2.tex - content from "Accelerating Applications" onwards
+    """
+    with open(applications_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Find the split point
+    split_pattern = r'\\section\{Accelerating Applications\}'
+    match = re.search(split_pattern, content)
+    
+    if not match:
+        print("Warning: Could not find 'Accelerating Applications' section. Using original file.")
+        # If we can't find the split point, just copy the original file
+        shutil.copy(applications_path, output_dir / 'applications_part1.tex')
+        # Create empty part2 file
+        with open(output_dir / 'applications_part2.tex', 'w', encoding='utf-8') as f:
+            f.write('\\section{Accelerating Applications}\n% No content found\n')
+        return
+    
+    # Split the content
+    split_pos = match.start()
+    
+    # Part 1: Everything before "Accelerating Applications"
+    part1_content = content[:split_pos].rstrip()
+    
+    # Part 2: Everything from "Accelerating Applications" onwards
+    part2_content = content[split_pos:]
+    
+    # Write the split files
+    with open(output_dir / 'applications_part1.tex', 'w', encoding='utf-8') as f:
+        f.write(part1_content)
+    
+    with open(output_dir / 'applications_part2.tex', 'w', encoding='utf-8') as f:
+        f.write(part2_content)
+    
+    print(f"Split applications.tex into two parts:")
+    print(f"  - Part 1: {len(part1_content)} characters")
+    print(f"  - Part 2: {len(part2_content)} characters")
+
 def clean_bibliography_content(content):
     """
     Clean bibliography content by fixing problematic Unicode characters.
@@ -60,6 +102,62 @@ def clean_bibliography_content(content):
     
     return content
 
+def fix_heading_levels(content):
+    """
+    Fix skipped heading levels in markdown content.
+    
+    This function ensures that heading levels are sequential (no skipped levels).
+    For example, if we have h1 -> h4, it converts h4 to h3.
+    It also handles cases where headings go back to a higher level.
+    """
+    lines = content.split('\n')
+    result_lines = []
+    
+    # Track the current heading level context (the last heading level we've seen)
+    current_level = 0
+    
+    for line in lines:
+        # Check if this line is a heading
+        if line.strip().startswith('#') and not line.strip().startswith('```'):
+            # Count the number of '#' characters
+            hash_count = 0
+            for char in line:
+                if char == '#':
+                    hash_count += 1
+                else:
+                    break
+            
+            # Skip if this looks like a comment (more than 6 #'s usually indicates a comment)
+            if hash_count > 6:
+                result_lines.append(line)
+                continue
+            
+            # Determine the appropriate level based on context
+            if hash_count == 1:
+                # H1 headings reset the context
+                current_level = 1
+                adjusted_line = line
+            else:
+                # For other headings, ensure they don't skip levels
+                if hash_count <= current_level + 1:
+                    # This heading is at an appropriate level or going back up
+                    adjusted_line = line
+                    current_level = hash_count
+                else:
+                    # This heading is too deep, adjust it to the max allowed level
+                    max_allowed_level = current_level + 1
+                    adjusted_hash_count = max_allowed_level
+                    # Replace the heading hashes
+                    content_part = line[hash_count:].rstrip()
+                    adjusted_line = '#' * adjusted_hash_count + content_part
+                    current_level = adjusted_hash_count
+            
+            result_lines.append(adjusted_line)
+        else:
+            result_lines.append(line)
+    
+    return '\n'.join(result_lines)
+
 def clean_latex_content(content):
     """
     Clean LaTeX content by removing/modifying problematic commands for pandoc conversion.
@@ -99,6 +197,10 @@ def clean_latex_content(content):
     
     # Convert \section* to \section (pandoc handles this better)
     content = re.sub(r'\\section\*', r'\\section', content)
+    
+    # Convert custom \modelname command to \texttt before pandoc processes it
+    # \modelname{text} -> \texttt{text}
+    content = re.sub(r'\\modelname\{([^}]+)\}', r'\\texttt{\1}', content)
     
     # Clean up citation issues before conversion
     # Fix citation issues - remove double commas and trailing/leading commas
@@ -224,7 +326,7 @@ def resolve_input_commands(content, base_dir):
     
     return content
 
-def convert_section_to_markdown(section_path, output_path, extract_media_dir):
+def convert_section_to_markdown(section_path, output_path, extract_media_dir, base_dir=None):
     """Convert a single section LaTeX file to markdown."""
     print(f"Converting {section_path} to {output_path}")
     
@@ -232,8 +334,12 @@ def convert_section_to_markdown(section_path, output_path, extract_media_dir):
     with open(section_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
+    # Determine the correct base directory for resolving \input{} commands
+    if base_dir is None:
+        base_dir = section_path.parent.parent
+    
     # Resolve any \input{} commands in the content
-    content = resolve_input_commands(content, section_path.parent.parent)
+    content = resolve_input_commands(content, base_dir)
     
     # Extract title for frontmatter
     title = extract_title_from_section(content)
@@ -308,6 +414,9 @@ title: "{title}"
         # Clean up any remaining citation formatting issues
         final_content = clean_citation_formatting_in_markdown(final_content)
         
+        # Fix heading levels to ensure no levels are skipped
+        final_content = fix_heading_levels(final_content)
+        
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(final_content)
         
@@ -348,6 +457,7 @@ def create_index_page(main_tex_path, output_path, extract_media_dir):
     # Create index content
     index_content = f"""---
 title: "{title}"
+unnumbered: true
 ---
 
 # {title}
@@ -368,27 +478,27 @@ A.M.'s work was funded by the SOL-AI project, funded as part of the Helmholtz Fo
 
 G.P.'s work was supported by the HPC Gateway measure of the Helmholtz Association.
 
-K.M.J.\ is part of the NFDI consortium FAIRmat funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) – project 460197019.
+K.M.J.\ is part of the NFDI consortium FAIRmat funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - project 460197019.
 
 We thank Mimi Lavin and Maximilian Greiner for their feedback on a draft of this article.
 
 ## Author contributions
 
-N. A. was the lead contributor for the [Building Principles of GPMs](03-architectures.qmd) section. Including its writing and figures (excluding the [Model Level Adaptation](03-architectures.qmd#sec:model_adaptation) subsection). N. A. also reviewed the [Introduction](01-introduction.qmd), [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Evaluations](04-evals.qmd), [Implications of GPMs: Education, Safety, and Ethics](06-safety.qmd), and [Property Prediction](05-applications.qmd#sec:prediction) and [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) sections.
+N. A. was the lead contributor for the [Building Principles of GPMs](03-architectures.qmd) section. Including its writing and figures (excluding the [Model Level Adaptation](03-architectures.qmd#sec:model_adaptation) subsection). N. A. also reviewed the [Introduction](01-introduction.qmd), [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Evaluations](04-evals.qmd), [Implications of GPMs: Education, Safety, and Ethics](07-safety.qmd), and [Property Prediction](05-applications.qmd#sec:prediction) and [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) sections.
 
-A. A. was the primary contributor to the writing of the [Property Prediction](05-applications.qmd#sec:prediction), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation), [Safety](06-safety.qmd#sec:safety), and [Ethics](06-safety.qmd#sec:ethics) sections, conceptualized the outline for safety and ethics sections, designed and created all figures/schematics/plots in sections with primary contribution, was one of the contributors to the [AI Scientists](05-applications.qmd#sec:ai-scientists) overview, edited [Introduction](01-introduction.qmd), [Evaluations](04-evals.qmd), [Building Principles of GPMs](03-architectures.qmd), [Knowledge Gathering](05-applications.qmd#sec:information_gathering), [Experiment Execution](05-applications.qmd#sec:experiment_execution), and [Education](06-safety.qmd#sec:education) sections.
+A. A. was the primary contributor to the writing of the [Property Prediction](05-applications.qmd#sec:prediction), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation), [Safety](07-safety.qmd#sec:safety), and [Ethics](07-safety.qmd#sec:ethics) sections, conceptualized the outline for safety and ethics sections, designed and created all figures/schematics/plots in sections with primary contribution, was one of the contributors to the [AI Scientists](05-applications.qmd#sec:ai-scientists) overview, edited [Introduction](01-introduction.qmd), [Evaluations](04-evals.qmd), [Building Principles of GPMs](03-architectures.qmd), [Knowledge Gathering](05-applications.qmd#sec:information_gathering), [Experiment Execution](05-applications.qmd#sec:experiment_execution), and [Education](07-safety.qmd#sec:education) sections.
 
 M.R.-G. was the primary contributor to the [AI Scientists](05-applications.qmd#sec:ai-scientists) overview, the [Hypothesis Generation](05-applications.qmd#sec:hypothesis), and the [LLMs as Optimizers](05-applications.qmd#sec:optimizers) sections, and helped in reviewing the entire manuscript.
 
-A.M. was the main contributor to the [Introduction](01-introduction.qmd) and [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) sections, and the main contributor to the [Knowledge Gathering](05-applications.qmd#sec:information_gathering) and [Reporting](05-applications.qmd#sec:reporting) sections within the applications section, with minor contributions to the [Building Principles of GPMs](03-architectures.qmd) and the [Safety](06-safety.qmd#sec:safety) sections. Has drafted the initial outline of the article. Reviewed the [Building Principles of GPMs](03-architectures.qmd) sections, the [Safety](06-safety.qmd#sec:safety) section, the [Hypothesis Generation](05-applications.qmd#sec:hypothesis), the [Data Analysis](05-applications.qmd#sec:data_analysis) sections and contributed to the review of the [LLMs as Optimizers](05-applications.qmd#sec:optimizers) section.
+A.M. was the main contributor to the [Introduction](01-introduction.qmd) and [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) sections, and the main contributor to the [Knowledge Gathering](05-applications.qmd#sec:information_gathering) and [Reporting](05-applications.qmd#sec:reporting) sections within the applications section, with minor contributions to the [Building Principles of GPMs](03-architectures.qmd) and the [Safety](07-safety.qmd#sec:safety) sections. Has drafted the initial outline of the article. Reviewed the [Building Principles of GPMs](03-architectures.qmd) sections, the [Safety](07-safety.qmd#sec:safety) section, the [Hypothesis Generation](05-applications.qmd#sec:hypothesis), the [Data Analysis](05-applications.qmd#sec:data_analysis) sections and contributed to the review of the [LLMs as Optimizers](05-applications.qmd#sec:optimizers) section.
 
-M.S.-W. was the main contributor to the [Evaluations](04-evals.qmd), [Education](06-safety.qmd#sec:education) and [Data Analysis](05-applications.qmd#sec:data_analysis) section. M.S.-W. also reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Hypothesis Generation](05-applications.qmd#sec:hypothesis), [Experiment Execution](05-applications.qmd#sec:experiment_execution), [Reporting](05-applications.qmd#sec:reporting) and [Safety](06-safety.qmd#sec:safety) section. Unified all figures. Kept track of upcoming deadlines.
+M.S.-W. was the main contributor to the [Evaluations](04-evals.qmd), [Education](07-safety.qmd#sec:education) and [Data Analysis](05-applications.qmd#sec:data_analysis) section. M.S.-W. also reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Hypothesis Generation](05-applications.qmd#sec:hypothesis), [Experiment Execution](05-applications.qmd#sec:experiment_execution), [Reporting](05-applications.qmd#sec:reporting) and [Safety](07-safety.qmd#sec:safety) section. Unified all figures. Kept track of upcoming deadlines.
 
 M. S. was the primary contributor to the writing of [Experiment Planning](05-applications.qmd#sec:planning) section and related figure. And also helped in reviewing [Knowledge Gathering](05-applications.qmd#sec:information_gathering), [Property Prediction](05-applications.qmd#sec:prediction), and [LLMs as Optimizers](05-applications.qmd#sec:optimizers) sections.
 
 G.P. was the main contributor to [Model Level Adaptation](03-architectures.qmd#sec:model_adaptation) section, including its writing and table. G.P. additionally reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Data Analysis](05-applications.qmd#sec:data_analysis), [Reporting](05-applications.qmd#sec:reporting) and [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) sections.
 
-A.A.A. was the main contributor to the [Experiment Execution](05-applications.qmd#sec:experiment_execution) section, including its figure, and a minor contributor to the post-training subsection. A.A.A. reviewed the [Introduction](01-introduction.qmd), [Experiment Planning](05-applications.qmd#sec:planning), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) and [Education](06-safety.qmd#sec:education) sections, edited [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) and [Building Principles of GPMs](03-architectures.qmd) sections, created the glossary, and ensured that most references are accessible via a DOI.
+A.A.A. was the main contributor to the [Experiment Execution](05-applications.qmd#sec:experiment_execution) section, including its figure, and a minor contributor to the post-training subsection. A.A.A. reviewed the [Introduction](01-introduction.qmd), [Experiment Planning](05-applications.qmd#sec:planning), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) and [Education](07-safety.qmd#sec:education) sections, edited [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) and [Building Principles of GPMs](03-architectures.qmd) sections, created the glossary, and ensured that most references are accessible via a DOI.
 
 K.M.J. initiated and led the project. K.M.J. edited all sections. 
 
@@ -402,19 +512,75 @@ K.M.J.\ has been a paid contractor for OpenAI as part of the Red-Teaming Network
 This book covers the following topics:
 
 1. [Introduction](01-introduction.qmd)
-2. [Data Taxonomy](02-data_taxonomy.qmd)
-3. [Architectures](03-architectures.qmd)
+2. [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd)
+3. [Building Principles of GPMs](03-architectures.qmd)
 4. [Evaluations](04-evals.qmd)
 5. [Applications](05-applications.qmd)
-6. [Safety](06-safety.qmd)
-7. [Conclusions and Outlook](07-outlook_conclusions.qmd)
+6. [Accelerating Applications](06-accelerating_applications.qmd)
+7. [Implications of GPMs: Education, Safety, and Ethics](07-safety.qmd)
+8. [Outlook and Conclusions](08-outlook_conclusions.qmd)
+9. [References](09-references.qmd)
 """
     
     # Clean up any remaining citation formatting issues in the index content
     index_content = clean_citation_formatting_in_markdown(index_content)
     
+    # Fix heading levels to ensure no levels are skipped
+    index_content = fix_heading_levels(index_content)
+    
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
+
+def create_helpers_directory(output_dir):
+    """Create helpers directory with toc.html file for custom navigation."""
+    helpers_dir = output_dir / 'helpers'
+    helpers_dir.mkdir(exist_ok=True)
+    
+    toc_html_content = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LamaLab - Lab for AI in Materials Science</title>
+  <style>
+    /* Simple styling to keep it clean and readable */
+    nav ul { list-style-type: none; padding-left: 0; }
+    nav li { margin: 0.5rem 0; }
+    nav a { text-decoration: none; }
+    nav img { max-width: 200px; height: auto; display: block; margin: 0 auto 1rem; }
+  </style>
+</head>
+<body>
+  <nav id="$idprefix$TOC" role="doc-toc">
+    <img src="https://raw.githubusercontent.com/lamalab-org/lamalab.github.io/main/static/png-file.png" alt="LamaLab logo">
+    <h2>LamaLab - Lab for AI in Materials Science</h2>
+    <ul>
+      <li>
+        <a href="https://lamalab.org/"><strong>🌐 Visit our website</strong></a>
+      </li>
+      <li>
+        <a href="https://x.com/jablonkagroup"><strong>🐦 Follow us on X (Twitter)</strong></a>
+      </li>
+      <li>
+        <a href=""><strong>📄 Read our publications</strong></a>
+      </li>
+      <li>
+        <a href="mailto:mail@kjablonka.com"><strong>✉️ Contact us</strong></a>
+      </li>
+    </ul>
+    <hr>
+    $if(toc-title)$
+    <h2 id="$idprefix$toc-title">$toc-title$</h2>
+    $endif$
+    $table-of-contents$
+  </nav>
+</body>
+</html>'''
+    
+    toc_html_path = helpers_dir / 'toc.html'
+    with open(toc_html_path, 'w', encoding='utf-8') as f:
+        f.write(toc_html_content)
+    
+    print(f"Created helpers directory and toc.html at {toc_html_path}")
 
 def create_quarto_config(output_dir):
     """Create the _quarto.yml configuration file."""
@@ -434,8 +600,10 @@ def create_quarto_config(output_dir):
                 '03-architectures.qmd',
                 '04-evals.qmd',
                 '05-applications.qmd',
-                '06-safety.qmd',
-                '07-outlook_conclusions.qmd'
+                '06-accelerating_applications.qmd',
+                '07-safety.qmd',
+                '08-outlook_conclusions.qmd',
+                '09-references.qmd'
             ],
         },
         'bibliography': 'references.bib',
@@ -444,9 +612,13 @@ def create_quarto_config(output_dir):
                 'theme': 'cosmo',
                 'css': 'styles.css',
                 'toc': True,
-                'toc-depth': 3,
+                'toc-depth': 5,
                 'number-sections': True,
-                'highlight-style': 'github'
+                'highlight-style': 'github',
+                'code-link': True,
+                'template-partials': ['helpers/toc.html'],
+                'toc-title': 'On this page',
+                'code-overflow': 'wrap'
             }
         },
         'execute': {
@@ -559,6 +731,7 @@ def convert_pdf_images_to_png(media_dir):
 def update_image_references_in_markdown(file_path, media_dir="media"):
     """
     Update image references in markdown files to use PNG instead of PDF and correct media paths.
+    Ensures all images have width="100%".
     
     Args:
         file_path: Path to the markdown file to update
@@ -570,12 +743,60 @@ def update_image_references_in_markdown(file_path, media_dir="media"):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # Replace PDF image references with PNG
+    # Replace PDF image references with PNG and add width attributes
     # Handle both ![alt](path.pdf) and ![alt](path.pdf "title") formats
-    content = re.sub(r'!\[([^\]]*)\]\(([^)]+)\.pdf(\s+"[^"]*")?\)', r'![\1](\2.png\3)', content)
+    # Convert to HTML img tags with width="100%"
+    def replace_markdown_image_pdf(match):
+        alt_text = match.group(1)
+        image_path = match.group(2)
+        title = match.group(3) if match.group(3) else ""
+        if title.strip():
+            title_clean = title.strip(' "')
+            title_attr = f' title="{title_clean}"'
+        else:
+            title_attr = ""
+        return f'<img src="{image_path}.png" alt="{alt_text}" width="100%"{title_attr} />'
     
-    # Handle HTML img tags with PDF sources
-    content = re.sub(r'<img([^>]*)\ssrc="([^"]+)\.pdf"', r'<img\1 src="\2.png"', content)
+    content = re.sub(r'!\[([^\]]*)\]\(([^)]+)\.pdf(\s+"[^"]*")?\)', replace_markdown_image_pdf, content)
+    
+    # Handle regular PNG/JPG markdown images and convert to HTML with width="100%"
+    def replace_markdown_image_regular(match):
+        alt_text = match.group(1)
+        image_path = match.group(2)
+        title = match.group(3) if match.group(3) else ""
+        if title.strip():
+            title_clean = title.strip(' "')
+            title_attr = f' title="{title_clean}"'
+        else:
+            title_attr = ""
+        return f'<img src="{image_path}" alt="{alt_text}" width="100%"{title_attr} />'
+    
+    content = re.sub(r'!\[([^\]]*)\]\(([^)]+\.(?:png|jpg|jpeg|gif|svg))(\s+"[^"]*")?\)', replace_markdown_image_regular, content)
+    
+    # Handle HTML img tags with PDF sources and ensure width="100%"
+    def replace_html_img_pdf(match):
+        other_attrs = match.group(1)
+        image_path = match.group(2)
+        # Remove existing width attributes from other_attrs
+        other_attrs = re.sub(r'\s*width="[^"]*"', '', other_attrs)
+        return f'<img{other_attrs} src="{image_path}.png" width="100%"'
+    
+    content = re.sub(r'<img([^>]*)\ssrc="([^"]+)\.pdf"', replace_html_img_pdf, content)
+    
+    # Handle existing HTML img tags and ensure they have width="100%"
+    def ensure_img_width(match):
+        pre_src = match.group(1)
+        src = match.group(2)
+        post_src = match.group(3)
+        
+        # Remove existing width attributes
+        pre_src = re.sub(r'\s*width="[^"]*"', '', pre_src)
+        post_src = re.sub(r'\s*width="[^"]*"', '', post_src)
+        
+        # Add width="100%" before the closing tag
+        return f'<img{pre_src} src="{src}"{post_src} width="100%"'
+    
+    content = re.sub(r'<img([^>]*)\ssrc="([^"]+)"([^>]*)', ensure_img_width, content)
     
     # Handle pandoc-generated data-original-image-src attributes with PDF
     content = re.sub(r'data-original-image-src="([^"]+)\.pdf"', r'data-original-image-src="\1.png"', content)
@@ -588,17 +809,17 @@ def update_image_references_in_markdown(file_path, media_dir="media"):
     content = re.sub(r'src="figures/', f'src="{media_dir}/figures/', content)
     content = re.sub(r'!\[([^\]]*)\]\(figures/', rf'![\1]({media_dir}/figures/', content)
     
-    # Convert pandoc placeholder spans to proper img tags
+    # Convert pandoc placeholder spans to proper img tags with width="100%"
     # This pattern matches: <span class="image placeholder" data-original-image-src="path.png" ...></span>
     def convert_placeholder_to_img(match):
         full_match = match.group(0)
         src_match = re.search(r'data-original-image-src="([^"]+)"', full_match)
-        width_match = re.search(r'width="([^"]+)"', full_match)
+        alt_match = re.search(r'alt="([^"]*)"', full_match)
         
         if src_match:
             src = src_match.group(1)
-            width = width_match.group(1) if width_match else "100%"
-            return f'<img src="{src}" width="{width}" />'
+            alt = alt_match.group(1) if alt_match else ""
+            return f'<img src="{src}" alt="{alt}" width="100%" />'
         return full_match
     
     content = re.sub(r'<span class="image placeholder"[^>]*data-original-image-src="[^"]*"[^>]*></span>', 
@@ -630,6 +851,142 @@ def clean_citation_formatting_in_markdown(content):
     content = re.sub(r'\\@(\w+)', r'@\1', content)
     
     return content
+
+def replace_tcolorbox_equations_with_images(file_path, eq_images_dir="../docs/eq_images", media_dir="media"):
+    """
+    Replace tcolorbox equations with images.
+    
+    Args:
+        file_path: Path to the markdown file to update
+        eq_images_dir: Directory containing equation images
+        media_dir: The media directory name in output
+    """
+    if not file_path.exists():
+        return
+    
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Define equation mappings based on labels
+    equation_mappings = {
+        'eq:nexttoken': 'nexttoken.png',
+        'eq:infonce': 'infonce.png', 
+        'eq:rl_objective': 'rl_objective.png'
+    }
+    
+    # Pattern to match tcolorbox sections with equations
+    lines = content.split('\n')
+    new_lines = []
+    i = 0
+    
+    while i < len(lines):
+        line = lines[i]
+        
+        # Check if this line starts a tcolorbox block
+        if line.strip() == '::::: tcolorbox':
+            # Find the end of this tcolorbox block
+            tcolorbox_start = i
+            tcolorbox_end = None
+            
+            # Look for the closing :::::
+            for j in range(i + 1, len(lines)):
+                if lines[j].strip() == ':::::':
+                    tcolorbox_end = j
+                    break
+            
+            if tcolorbox_end:
+                # Extract the content of the tcolorbox block
+                tcolorbox_content = '\n'.join(lines[tcolorbox_start:tcolorbox_end + 1])
+                
+                # Check if this tcolorbox contains any of our target equations
+                equation_found = None
+                for eq_label_check, image_file_check in equation_mappings.items():
+                    if f'#{eq_label_check}' in tcolorbox_content and f'label="{eq_label_check}"' in tcolorbox_content:
+                        equation_found = (eq_label_check, image_file_check)
+                        break
+                
+                if equation_found:
+                    eq_label_found, image_file_found = equation_found
+                    
+                    # Replace the entire tcolorbox block with an HTML image with width="100%"
+                    image_html = f'<img src="{media_dir}/eq_images/{image_file_found}" alt="{eq_label_found}" width="100%" id="{eq_label_found}" />'
+                    new_lines.append(image_html)
+                    
+                    print(f"Replaced tcolorbox with equation {eq_label_found} with image {image_file_found}")
+                    
+                    # Skip to after the tcolorbox block
+                    i = tcolorbox_end + 1
+                    continue
+            
+            # If we didn't find a matching tcolorbox or couldn't process it, keep the original line
+            new_lines.append(line)
+        else:
+            new_lines.append(line)
+        
+        i += 1
+    
+    # Update content with the new lines
+    content = '\n'.join(new_lines)
+    
+    # Write the updated content back to the file
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+def enforce_image_width_100_percent(file_path):
+    """
+    Comprehensive function to ensure all images in a markdown file have width="100%".
+    This function handles various image formats and ensures consistent width settings.
+    
+    Args:
+        file_path: Path to the markdown file to update
+    """
+    if not file_path.exists():
+        return
+    
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Convert any remaining markdown images to HTML with width="100%"
+    def convert_remaining_markdown_images(match):
+        alt_text = match.group(1)
+        image_path = match.group(2)
+        # Extract title if present
+        title_match = re.search(r'"([^"]*)"', match.group(0))
+        title_attr = f' title="{title_match.group(1)}"' if title_match else ""
+        return f'<img src="{image_path}" alt="{alt_text}" width="100%"{title_attr} />'
+    
+    # Convert all remaining markdown images to HTML
+    content = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', convert_remaining_markdown_images, content)
+    
+    # Ensure all HTML img tags have width="100%" and fix any missing width attributes
+    def ensure_width_attribute(match):
+        tag_start = match.group(1)
+        tag_end = match.group(2)
+        
+        # Check if width attribute already exists
+        if 'width=' in tag_start or 'width=' in tag_end:
+            # Replace existing width with 100%
+            full_tag = tag_start + tag_end
+            full_tag = re.sub(r'width="[^"]*"', 'width="100%"', full_tag)
+            full_tag = re.sub(r"width='[^']*'", 'width="100%"', full_tag)
+            return full_tag
+        else:
+            # Add width="100%" before the closing >
+            return f'{tag_start} width="100%"{tag_end}'
+    
+    content = re.sub(r'(<img[^>]*)(>)', ensure_width_attribute, content)
+    
+    # Handle any figure environments that might contain images
+    def process_figure_images(match):
+        figure_content = match.group(1)
+        # Apply width enforcement to any img tags within the figure
+        figure_content = re.sub(r'(<img[^>]*?)(>)', lambda m: ensure_width_attribute(m), figure_content)
+        return f'<figure>{figure_content}</figure>'
+    
+    content = re.sub(r'<figure>(.*?)</figure>', process_figure_images, content, flags=re.DOTALL)
+    
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(content)
 
 def main():
     parser = argparse.ArgumentParser(description='Convert LaTeX document to Quarto book')
@@ -693,15 +1050,32 @@ def main():
     else:
         print("Warning: No references.bib file found")
     
+    # Split the applications.tex file into two parts
+    sections_dir = input_dir / 'sections'
+    if sections_dir.exists():
+        applications_file = sections_dir / 'applications.tex'
+        if applications_file.exists():
+            # Create temporary directory for split files
+            temp_dir = output_dir / 'temp_sections'
+            temp_dir.mkdir(exist_ok=True)
+            
+            # Split the applications file
+            split_applications_file(applications_file, temp_dir)
+            
+            print("Successfully split applications.tex into two parts")
+        else:
+            print("Warning: applications.tex not found")
+    
     # Section mapping (order matters for the book)
     sections = [
         ('introduction.tex', '01-introduction.qmd'),
         ('data_taxonomy.tex', '02-data_taxonomy.qmd'),
         ('architectures.tex', '03-architectures.qmd'),
         ('evals.tex', '04-evals.qmd'),
-        ('applications.tex', '05-applications.qmd'),
-        ('safety.tex', '06-safety.qmd'),
-        ('outlook_conclusions.tex', '07-outlook_conclusions.qmd')
+        ('applications_part1.tex', '05-applications.qmd'),
+        ('applications_part2.tex', '06-accelerating_applications.qmd'),
+        ('safety.tex', '07-safety.qmd'),
+        ('outlook_conclusions.tex', '08-outlook_conclusions.qmd')
     ]
     
     # Create media directory in output
@@ -709,13 +1083,23 @@ def main():
     
     # Convert each section
     sections_dir = input_dir / 'sections'
+    temp_sections_dir = output_dir / 'temp_sections'
+    
     if sections_dir.exists():
         for section_file, output_file in sections:
-            section_path = sections_dir / section_file
+            # Check if this is a split file (look in temp directory first)
+            if section_file.startswith('applications_part') and temp_sections_dir.exists():
+                section_path = temp_sections_dir / section_file
+                # For split files, use the original input_dir as base_dir for resolving \input{} commands
+                base_dir = input_dir
+            else:
+                section_path = sections_dir / section_file
+                base_dir = None  # Will use default (section_path.parent.parent)
+            
             output_path = output_dir / output_file
             
             if section_path.exists():
-                convert_section_to_markdown(section_path, output_path, media_output_dir)
+                convert_section_to_markdown(section_path, output_path, media_output_dir, base_dir)
             else:
                 print(f"Warning: Section file {section_path} not found")
     
@@ -724,6 +1108,22 @@ def main():
     index_path = output_dir / 'index.qmd'
     if main_tex_path.exists():
         create_index_page(main_tex_path, index_path, media_output_dir)
+    
+    # Create references page
+    references_path = output_dir / '09-references.qmd'
+    references_content = '''---
+title: "References"
+unnumbered: true
+---
+
+# References {.unnumbered}
+
+::: {#refs}
+:::'''
+    
+    with open(references_path, 'w', encoding='utf-8') as f:
+        f.write(references_content)
+    print(f"Created references page at {references_path}")
     
     # Copy media directory if it exists
     media_source = input_dir / 'media'
@@ -760,8 +1160,27 @@ def main():
         with open(qmd_file, 'w', encoding='utf-8') as f:
             f.write(cleaned_content)
     
+    # Final heading level fix: ensure all markdown files have proper heading levels
+    print("Performing final heading level fix...")
+    for qmd_file in output_dir.glob('*.qmd'):
+        with open(qmd_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        fixed_content = fix_heading_levels(content)
+        
+        with open(qmd_file, 'w', encoding='utf-8') as f:
+            f.write(fixed_content)
+    
+    # Final image width enforcement: ensure all images have width="100%"
+    print("Enforcing 100% width on all images...")
+    for qmd_file in output_dir.glob('*.qmd'):
+        enforce_image_width_100_percent(qmd_file)
+    
     # Create Quarto configuration
     create_quarto_config(output_dir)
+    
+    # Create helpers directory with toc.html
+    create_helpers_directory(output_dir)
     
     # Create a basic CSS file
     css_content = """
@@ -820,6 +1239,7 @@ pre {
     print(f"2. On macOS: brew install poppler or brew install imagemagick")
     print(f"3. On Ubuntu/Debian: sudo apt-get install poppler-utils or sudo apt-get install imagemagick")
     print(f"4. PDF images have been automatically converted to PNG format for web display")
+    print(f"5. All images have been set to width='100%' for consistent display")
 
 if __name__ == '__main__':
     main()

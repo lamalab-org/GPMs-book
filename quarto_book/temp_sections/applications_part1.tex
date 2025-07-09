@@ -1,0 +1,401 @@
+\section{Applications}
+
+\input{sections/ai_scientists}
+
+\subsection{Existing GPMs for Chemical Science}
+
+The development of \glspl{gpm} for chemical science represents a departure from traditional single-task approaches. Rather than fine-tuning pre-trained models for specific applications such as property prediction or molecular generation, these chemistry-aware language models are intentionally designed to perform multiple chemical tasks simultaneously. This multitask paradigm offers several advantages: shared representations across related chemical problems\autocite{dimitrios2023unifying}, improved data efficiency through transfer learning between tasks\autocite{lim2021predicting}, and the potential for emergent capabilities that arise from joint training across diverse chemical domains\autocite{livne2024nach0}.
+
+\paragraph{Multitask Learning Frameworks} \modelname{DARWIN 1.5} pioneered the multitask approach by fine-tuning \modelname{Llama-7B} through a two-stage process \autocite{xie2025darwin}. Initially trained on 332k scientific question-answer pairs to establish foundational scientific reasoning, the model subsequently underwent multitask learning to perform property prediction-related regression and classification tasks concurrently.
+
+Building on similar principles, \modelname{nach0} introduced a unified encoder-decoder transformer architecture for cross-domain chemical tasks \autocite{livne2024nach0}. Pre-trained using \gls{ssl} on both natural language and chemical data, \modelname{nach0} tackles diverse downstream applications including molecular structure generation, chemical property prediction, and reaction prediction. Notably, the authors found that combining chemistry-specific tasks outperformed models trained on distinct task groups, suggesting that chemical reasoning benefits from focused domain integration.
+
+In the materials domain, \textcite{qu2023leveraging} developed a language-driven materials discovery framework that uses transformer-based embeddings (e.g., \modelname{MatBERT}\autocite{wan2024tokens}) to represent and generate novel crystal structures. Candidates are first recalled via similarity in embedding space, then ranked using a multitask multi-gate \gls{moe} model that predicts the desired properties jointly. 
+Their method successfully identifies novel high-performance materials (e.g., halide perovskites) and demonstrates that language representations encode latent knowledge for task-agnostic materials design.
+
+\paragraph{Domain-Specific Pre-Training Strategies} A second category of \glspl{gpm} emphasizes deep domain knowledge through specialized pre-training. \modelname{LLaMat} employed \gls{peft} specifically on crystal structure data in \gls{cif} format, enabling the generation of thermodynamically stable structures \autocite{mishra2024foundational}.
+
+\modelname{ChemDFM} scales this concept significantly, implementing domain pre-training on over 34 billion tokens from chemical textbooks and research articles \autocite{zhao2024chemdfm}. Through comprehensive instruction tuning, \modelname{ChemDFM} familiarizes itself with chemical notation and patterns, distinguishing it from more materials-focused approaches like \modelname{LLaMat} through its broader chemical knowledge base.
+
+\modelname{ChemLLM} further refined this approach by introducing template-based instruction tuning (ChemData) to optimize property-guided molecular generation \autocite{zhang2024chemllm}.
+
+\paragraph{Reasoning-Based Approaches} A recent development in chemical \glspl{gpm} incorporates explicit reasoning capabilities. \modelname{ether0} demonstrates this approach as a 24 billion parameter reasoning model trained on over 640k experimentally-grounded chemistry problems across diverse tasks, including retrosynthesis, solubility editing, and property prediction \autocite{narayanan2025training}. 
+Unlike previous models, \modelname{ether0} uses \gls{rl} (see \Cref{sec:rl}) to develop reasoning behaviors like verification and backtracking, demonstrating that structured problem-solving approaches can significantly improve performance on complex chemical tasks while maintaining grounding in experimental data.
+
+These diverse approaches illustrate the evolving landscape of chemical \glspl{gpm}, each balancing broad applicability with domain-specific precision.
+Still, most applications of \glspl{gpm} focus on using these models for one specific application and we will review those in the following.
+
+\subsection{Knowledge Gathering}\label{sec:information_gathering}
+The rate of publishing keeps growing, and as a result, it is increasingly challenging to manually collect all relevant knowledge, potentially stymying scientific progress.\autocite{schilling2025text, Chu_2021}
+Even though knowledge collection might seem like a simple task, it often involves multiple different steps, visually described in \Cref{fig:knowledge_gathering}. We split the discussion in this section in two: structured data extraction and question answering.  Example queries for both sections are shown at the bottom of \Cref{fig:knowledge_gathering}.
+
+\begin{figure}[!ht]
+    \centering
+\includegraphics[width=1\textwidth]{figures/rescaled_figures/chemrev_figure12.pdf}
+    \caption{\textbf{A. a representation of a typical agent for scientific queries.} The \gls{llm} is the central piece of the system, surrounded by typical tools that improve its question-answering capabilities, together forming an agentic system. The tools represented in this figure are semantic search, citation traversal, evidence gathering, and question answering. Semantic search finds relevant documents. Evidence gathering ranks and filters chunks of text using \glspl{llm}. The citation traversal tool provides model access to citation graphs, enabling accurate referencing of each chunk and facilitating the discovery of additional sources. Finally, the question-answering tool (an \gls{llm}) collects all the information found by other tools and generates a final response to a user's query. This part the figure is inspired by the \modelname{PaperQA2} agent.\autocite{skarlinski2024language} \textbf{B.} two examples of applications discussed in this section.}
+\label{fig:knowledge_gathering}
+\end{figure}
+
+
+\paragraph{Semantic Search} A step that is key to most, if not all, knowledge-gathering tasks is \gls{rag}, discussed in more detail in \Cref{sec:rag}. 
+Most commonly, this involves semantic search, intended to identify chunks of text with similar meaning. 
+The difference between semantic search and conventional search lies in how each approach interprets queries. The latter operates through lexical matching---whether exact or fuzzy---focusing on the literal words and their variations. Semantic search, however, goes deeper by interpreting the underlying meaning and contextual relationships within the content. 
+
+To enable semantic search, documents are stored in vector databases using embedding vectors (see \Cref{sec:embeddings}).\autocite{bojanowski2017enriching} 
+They represent the content of a document as a vector in a learned vector space and hence allow for similarity search by vector comparison (e.g., using cosine similarity for small databases or more sophisticated algorithms like \gls{hnsw} for large databases\autocite{malkov2018efficient}). 
+
+In chemistry, semantic search has been used extensively to classify and identify chemical text.\autocite{Guo2021,beltagy2019scibert0,trewartha2022quantifying}
+
+\subsubsection{Structured Data Extraction}
+
+Semantic search can help us find relevant resources. 
+However, for many applications it can be useful to collect data in a structured form, e.g., tables with fixed columns.
+Obtaining such a dataset based on extracting data from the literature using \glspl{llm} is currently one of the most practical avenues for the use of \glspl{llm} in the chemical sciences \autocite{schilling2025text}.
+Currently, \glspl{llm} are used in various forms for this application. 
+
+\paragraph{Data Extraction Using Prompting} 
+
+For most applications, zero-shot prompting should be the starting point. In this context, zero-shot prompting has been used to extract data about organic reactions\autocite{rios2025llm,vangala2024suitability, Patiny2023automatic}, synthesis procedures for metal-organic frameworks\autocite{zheng2023chatgpt}, polymers\autocite{schilling2024using,gupta2024data}, solar cells\autocite{shabih2025automated}, or materials data\autocite{polak2024extracting,hira2024reconstructing,kumar2025mechbert,wu2025large,huang2022batterybert}. 
+ 
+\paragraph{Fine-tuning Based Data Extraction} 
+
+If a commercial model needs to be run very often, it can be more cost-efficient to fine-tune a smaller, open-source model compared to prompting a large model. 
+In addition, models might lack specialized knowledge and might not follow certain style guides, which can be introduced with fine-tuning. 
+\textcite{ai2024extracting} fine-tuned the \modelname{LLaMa-2-7B} model to extract procedural chemical reaction data from \gls{uspto}, and converted it to a \gls{json} format compatible with the schema of \gls{ord}\autocite{Kearnes_2021}, achieving an overall accuracy of more than $90\%$. 
+In a different work, \textcite{zhang2024fine} fine-tuned \modelname{GPT-3.5-Turbo} to recognize and extract chemical entities from \gls{uspto}. Fine-tuning improved the performance of the base model on the same task by more than $15\%$. Similarly, \textcite{dagdelen2024structured} proposed a human-in-the-loop data annotation process, where humans correct the outputs from an \gls{llm} extraction instead of extracting data from scratch.
+
+\paragraph{Agents for Data Extraction} 
+
+Agents (\Cref{sec:agents}) have shown their potential in data extraction, though to a limited extent.\autocite{chen2024autonomous,kang2024chatmof}
+For example, \textcite{ansari2024agent} introduced \modelname{Eunomia}, an agent that autonomously extracts structured materials science data from scientific literature without requiring fine-tuning, demonstrating performance comparable to or better than fine-tuned methods. Their agent is an \gls{llm} with access to tools such as chemical databases (e.g., the \modelname{Materials Project} database) and research papers from various sources.
+
+While the authors claim this approach simplifies dataset creation for materials discovery, the evaluation is limited to a narrow set of materials science tasks (mostly focusing on \glspl{mof}), indicating the need for the creation of agent evaluation tools.
+
+
+\paragraph{Limitations} 
+The ability to extract data from sources other than text is important since a large amount of data is only stored in plots, tables, and figures. 
+Despite some initial simple proofs of concept \autocite{Zheng2024image}, the main bottleneck presently is the limited understanding of image data compared to text data in multimodal models.\autocite{alampara2024probing} The promise of agents lies in their ability to interact with tools (that can also interpret multimodal data). Moreover, their ability to self-reflect could automatically improve wrong results.\autocite{du2023improving}
+
+\subsubsection{Question Answering}
+Besides extracting information from documents in a structured format, \glspl{llm} can also be used to answer questions---such as \enquote{Has X been tried before} by synthesizing knowledge from a corpus of documents (and potentially automatically retrieving additional documents). 
+
+An example of a system that can do that is \modelname{PaperQA}. This agentic system contains tools for search, evidence-gathering, and question answering as well as for traversing citation graphs, which are shown in \Cref{fig:knowledge_gathering}. The evidence-gathering tool collects the most relevant chunks of information via the semantic search and performs \gls{llm}-based re-ranking of these chunks (i.e. the \gls{llm} changes the order of the chunks depending on what is needed to answer the query).
+Subsequently, only the top-$n$ most relevant chunks are kept. To further ground the responses, citation traversal tools (e.g., Semantic Scholar\autocite{kinney2023semantic}) are used. 
+These leverage the citation graph as a means of discovering supplementary literature references. Ultimately, to address the user's query, a question-answering tool is employed. It initially augments the query with all the collected information before providing a definitive answer.
+The knowledge aggregated by these systems could be used to generate new hypotheses or challenge existing ones. 
+Thus, in the next section, we focus on this aspect.
+
+
+\input{sections/hypothesis}
+
+
+\subsection{Experiment Planning}
+\label{sec:planning}
+Before a human or robot can execute any experiments, a plan must be created. 
+Planning can be formalized as the process of decomposing a high-level task into a structured sequence of actionable steps aimed at achieving a specific goal. 
+The term planning is often confused with scheduling and \gls{rl}, which are closely related but distinct concepts. Scheduling is a more specific process focused on the timing and sequence of tasks. 
+It ensures that resources are efficiently allocated, experiments are conducted in an optimal order, and constraints (such as lab availability, time, and equipment) are respected.\autocite{kambhampati2023llmplanning} 
+\gls{rl} is about adapting and improving plans over time based on ongoing results.\autocite{chen2022deep}
+
+\subsubsection{Conventional Planning} 
+Early experimental planning in chemistry relied on human intuition and domain expertise. 
+One example of this is retrosynthesis. 
+Since the 1960s, systems like \gls{lhasa} \autocite{corey1972computer} began automating retrosynthesis using hand-coded rules and heuristics\autocite{warr2014short}. 
+Later tools, such as \modelname{Chematica}\autocite{grzybowski2018chematica}, expanded these efforts by integrating larger template libraries and optimization strategies. 
+As reaction data grew in volume and complexity, manual rule encoding became unsustainable. 
+Platforms like ASKCOS\autocite{tu2025askcos} integrated \glspl{gnn} and neural classifiers to predict reactivity and suggest conditions, enabling actionable synthetic routes. 
+
+All applications, however, face the problem that planning is difficult because search spaces are combinatorially large and evaluating potential paths, in principle, requires a model that can perfectly predict the outcomes of different actions. Conventional approaches often rely on various forms of search algorithms such as \gls{bfs}, \gls{dfs}, \gls{mcts} \autocite{segler2017towards}. 
+Those, however, are often still not efficient enough to tackle long-horizon planning for complex problems. 
+
+\subsubsection{LLMs to Decompose Problems into Plans}
+\glspl{gpm}, in particular \glspl{llm}, can potentially assist in planning with two modes of thinking. 
+Deliberate (system-2-like) thinking can be used to score potential options or to decompose problems into plans. 
+Intuitive (system-1-like) thinking can be used to efficiently prune search spaces. 
+These two modes align with psychological frameworks known as system-1 and system-2 thinking. \autocite{kahneman2011thinking}
+In the system-1 thinking, \glspl{llm} support rapid decision-making by leveraging heuristics and pattern recognition to quickly narrow down options. 
+In contrast, system-2 thinking represents a slower, more analytical process, in which \glspl{llm} solve complex tasks---such as logical reasoning and planning---by explicitly generating step-by-step reasoning. \autocite{ji2025test}
+
+Decomposing a goal into actionable milestones relies on this deliberate, system-2-style reasoning, enabling the model to evaluate alternatives and structure plans effectively. 
+A variety of strategies have been proposed to improve the reasoning capabilities of \glspl{llm} during inference. 
+Methods such as \gls{cot} and least-to-most prompting guide models to decompose problems into interpretable steps, improving transparency and interpretability. 
+However, their effectiveness in planning is limited by error accumulation and linear thinking patterns.\autocite{stechly2024chain}
+To address these limitations, recent test-time strategies such as repeat sampling and tree search have been proposed to enhance planning capabilities in \glspl{llm}. 
+Repeated sampling allows the model to generate multiple candidate reasoning paths, encouraging diversity in thought and increasing the chances of discovering effective subgoal decompositions. \autocite{wang2024planning}
+Meanwhile, tree search methods like \gls{tot} and \gls{rap} treat reasoning as a structured search, also using algorithms like \gls{mcts} to explore and evaluate multiple solution paths, facilitating more global and strategic decision-making. \autocite{hao2023reasoning}
+
+Beyond purely linguistic reasoning, \glspl{llm} have also been used to interpret natural-language queries and to translate them into structured planning steps, as demonstrated by systems like \gls{llm}+P\autocite{liu2023llm} and \gls{llm}-DP\autocite{dagan2023dynamic}, which integrated \glspl{llm} with classical planners to convert planning problems into \gls{pddl}.
+\glspl{llm} have also been applied to generate structured procedures from limited observations. For example, in quantum physics, a model was trained to infer reusable experimental templates from measurement data, producing Python code that generalized across system sizes. \autocite{arlt2024meta0designing} This demonstrates how \glspl{llm} can support scientific planning by synthesizing high-level protocols from low-level evidence, moving beyond symbolic reasoning to executable plan generation.
+
+\subsubsection{Pruning of Search Spaces}
+
+Pruning refers to the process of eliminating unlikely or suboptimal options during the search to reduce the computational burden.
+Because the number of potential pathways can grow exponentially, exhaustive search may be computationally intensive. 
+Classical planners employ heuristics, value functions, or logical filters to perform pruning\autocite{bonet2012action}. 
+\glspl{llm} can emulate pruning through learned heuristics, intuitive judgment, or context-driven evaluation, \autocite{gao2025synergizing} reflecting system-1 thinking.
+\Cref{fig:planning} illustrates how \glspl{llm} can support experimental planning by selectively pruning options.
+Rule-based heuristics derived from domain knowledge can automatically discard routes involving unfavorable motifs, such as chemically strained rings or complex aromatic scaffolds. 
+Meanwhile, \glspl{llm} can emulate an expert chemist's intuition by discarding synthetic routes that appear unnecessarily long, inefficient, or mechanistically implausible. 
+
+To further enhance planning efficacy, \glspl{llm} can be augmented with external tools that estimate the feasibility or performance of candidate plans, enabling targeted pruning of the search space before costly execution. 
+In \modelname{ChemCrow}, the \gls{llm} collaborated with specialized chemical tools with knowledge about molecular and reaction properites. While \modelname{ChemCrow} does not explicitly generate and prune a large pool of candidate plans, these tools serve as real-time evaluators that help the model avoid unfeasible or inefficient directions during synthesis or reaction planning.
+
+In addition to external tools, \glspl{llm} can also engage in self-correction, a reflective strategy that identifies and prunes flawed reasoning steps within their own outputs. 
+This introspective pruning supports more robust and coherent planning by discarding faulty intermediate steps before they affect final decisions. 
+As such, self-correction offers a lightweight yet effective mechanism for narrowing the solution space in complex reasoning tasks. 
+At the highest level of oversight, human-in-the-loop frameworks introduce expert feedback to guide pruning decisions. 
+The \modelname{ORGANA} system\autocite{darvish2025organa} integrated chemist feedback into the planning process, helping define goals, resolve ambiguities, and eliminate invalid directions.
+\begin{figure}[!htbp]
+    \centering
+        \includegraphics[width=1\textwidth]{figures/rescaled_figures/chemrev_figure14.pdf}
+    \caption{\textbf{\gls{gpm}-guided retrosynthesis route planning and pruning}. \glspl{gpm} can systematically evaluate and prune retrosynthetic routes using multiple reasoning capabilities to discriminate between viable and problematic approaches. The partially overlapping arrows at the start of each route indicate multiple steps. \textbf{Route A}: This route was pruned by heuristic reasoning due to the unfavorable aromatic core construction.
+    \textbf{Route B}: This route was selected as it successfully passes all \gls{gpm} planning checks, demonstrating optimal synthetic feasibility.
+    \textbf{Route C}: This pathway was pruned by external tools due to the poor region-selectivity of the oxidation step.
+    \textbf{Route D}: This route was pruned based on learned intuition, as it represents an inefficient multistep pathway; the route could just start with phenol instead of synthesizing it.
+}
+    \label{fig:planning}
+\end{figure}
+
+\subsubsection{Evaluation}
+While pruning accelerates planning, its effectiveness depends on reliable evaluation---the ability to judge whether a candidate plan is valid or promising. 
+However, evaluating planning quality is particularly challenging in scientific fields such as chemistry and biology. 
+Many alternative plans may achieve the same goal, so evaluation is inherently ambiguous in the absence of a comprehensive world model.
+In open-ended domains, evaluation is often conducted manually. 
+For example, \modelname{ChemCrow} \autocite{bran2024augmenting} relied on expert review to assess the correctness and plausibility of generated outputs. 
+More dynamic evaluations can be performed in simulated or real embodied environments \autocite{song2023llm, choi2024lota}, offering interactive feedback on feasibility. 
+In parallel, automatic evaluation methods are emerging. 
+For example, \modelname{BioPlanner}\autocite{o2023bioplanner}
+used pseudocode-based evaluation, comparing \gls{llm}-generated protocols to expert-written pseudocode representations to assess plausibility and correctness without requiring manual review or physical execution.
+
+
+\subsection{Experiment Execution}
+Once an experimental plan is available, whether from a human scientist's idea or a sophisticated AI model, the next step is to execute it. 
+Regardless of its source, the plan must be translated into concrete, low-level actions for execution. One of the main challenges of lab automation is to convert the high-level and abstract experimental plan into real-world operations carried out by the experimental hardware (liquid-handing systems, robotic arms, instruments, etc.). 
+
+It is worth noting that, despite their methodological differences, executing experiments \textit{in silico} (running simulations or code) and \textit{in vitro} are not fundamentally different---both follow an essentially identical workflow: Plan $\rightarrow$ Instructions $\rightarrow$ Execution $\rightarrow$ Analysis. 
+In a computer simulation, a researcher writes a program (plan), which is then compiled or interpreted into machine code (instructions) for the \gls{cpu}, executed to produce data, and finally the outputs are analyzed. 
+In an automated laboratory, the scientist specifies a protocol (plan), which must be translated into instrument commands (instructions), executed on a robotic platform, followed by the analysis of sensor data or assay results. Both scenarios require careful translation of abstract steps into concrete actions, as well as further decision-making based on the acquired results.
+
+The execution of \textit{in silico} experiments can be reduced to two essential steps: preparing input files and running the computational code; \glspl{gpm} can be used in both steps.\autocite{Liu2025ASA, Mendible‑Barreto2025DynaMate, Zou2025ElAgente, Campbell2025MDCrow} \textcite{Jacobs2025orca} found that using a combination of fine-tuning, \gls{cot} and \gls{rag} (see \Cref{sec:model_adaptation}) can improve the performance of \glspl{llm} in generating executable input files for the quantum chemistry software \emph{ORCA}\autocite{ORCA5}, while \textcite{Gadde2025chatbot} created \modelname{AutosolvateWeb}, an \gls{llm}-based platform that assists users in preparing input files for \gls{qmmm} simulations of explicitly solvated molecules and running them on a remote computer. 
+Examples of \gls{gpm}-based autonomous agents (see 
+\Cref{sec:agents}) capable of performing the entire computational workflow (i.e., preparing inputs, executing the code, and analyzing the results) are \modelname{MDCrow} \autocite{Campbell2025MDCrow} (for molecular dynamics) and \modelname{El Agente Q} \autocite{Zou2025ElAgente} (for quantum chemistry).
+
+\Glspl{gpm} can also assist in automating \textit{in vitro} experiments. 
+We can draw parallels from programming language paradigms---compiled vs.\ interpreted (see \Cref{fig:exec}A)---to better understand how \glspl{gpm} can be useful in different approaches of experiment automation. 
+In compiled languages (like \modelname{C++} or \modelname{Fortran}), the entire code is converted ahead of time by another program called the \enquote{compiler} into binary machine code, which is directly executable by the hardware. 
+In interpreted languages (like \modelname{Python} or \modelname{JavaScript}), a program called the \enquote{interpreter} reads the instructions line-by-line during runtime, translating and executing them on the fly. 
+Compiled languages offer high performance and early error detection, making them ideal for performance-critical systems, but they require a separate compilation step and are less flexible during development. 
+Interpreted languages are easier to use, debug, and modify on the fly, which makes them great for rapid development and scripting, but they generally run slower and catch errors only at runtime. 
+Similarly, we can broadly categorize different approaches to experiment automation into two different groups: \enquote{compiled automation} and \enquote{interpreted automation} (see \Cref{fig:exec}B). In the compiled approach, the entire protocol is translated---either by a human or a \gls{gpm}---to low-level instructions before execution, while in interpreted automation, the \gls{gpm} plays a central role, acting as the \enquote{interpreter} and executing the protocol step by step. 
+As we show below, it can be instructive to use this perspective when discussing approaches to automate experiment execution with \glspl{gpm}.
+
+
+\begin{figure}[p]
+    \centering
+\includegraphics[width=\textwidth]{figures/rescaled_figures/chemrev_figure15+16.pdf}
+    \caption{\textbf{Programming languages vs.\ lab automation. A) programming paradigms}: In compiled languages, the entire source code is translated ahead of time to machine code by the compiler. This stand-alone code is then given to the \gls{os}, which is responsible for scheduling and distributing tasks to the hardware. In interpreted languages, the interpreter reads and translates each line of the source code to machine code and hands it to the \gls{os} for execution. \textbf{B) automation paradigms}: In the compiled approach, a \gls{gpm} formalizes the protocol, a compiler, such as the chempiler\autocite{steiner2019organic}, translates the formalized protocol to hardware-specific low-level steps, which the controller then executes---a central hub tasked with scheduling and distributing commands to chemical hardware. In the interpreted approach, a \gls{gpm}, acting as the interpreter, first breaks down the protocol into specific steps, then sends them (via an \gls{api}) for execution one by one. The strength of interpreted systems is dynamic feedback: after the execution of each step, the \gls{gpm} receives a signal (e.g., data, errors), which can influence its behavior for the next steps.}
+    \label{fig:exec}
+\end{figure}
+
+\subsubsection{Compiled Automation}
+In the case of \enquote{compiled automation}, the experiment protocol needs to be formalized in a high-level or \gls{dsl} that describes exactly what operations to perform in what order. 
+A chemical compiler (or \enquote{chempiler} \autocite{steiner2019organic}) then converts this high-level protocol into low-level code for the specific lab hardware, which is then executed by robotic instruments, orchestrated by a controller (refer to the caption of \Cref{fig:exec}B). 
+
+\paragraph{Protocol Languages} While \modelname{Python}-based scripts are frequently used as the \textit{de facto} protocol language due to \modelname{Python}'s accessibility and flexibility,\autocite{pylabrobot,vriza2023polybot, wang2025polybot} specialized languages (\glspl{dsl}) have also been developed to provide more structured and semantically rich representations of experimental procedures.\autocite{wang2022ulsa, ananthanarayanan2010biocoder, autoprotocol2023, Park2023CMDL} 
+One of the prominent examples of such languages is \gls{chidl}\autocite{xdl2023spec}, developed as part of the Chemputer architecture \autocite{steiner2019organic, mehr2020universal, hammer2021chemputation}. 
+\gls{chidl} uses a \gls{json}-like format, and the experimental protocol is described by defining \modelname{Reagents}, \modelname{Vessels}, etc, and using abstract chemical commands such as \modelname{Add}, \modelname{Stir}, \modelname{Filter}, etc. 
+In the next step, the \modelname{Chempiler} software takes this \gls{chidl} script and a description of the physical connectivity and composition of the automated platform as a graph and translates it into \gls{chasm} which is specific to the platform (akin to machine code). 
+In practice, \gls{chidl}  has been used to automate multi-step organic syntheses with yields comparable to manual experiments.\autocite{mehr2020universal} 
+%The \gls{chidl} code can be published or shared, enabling remote execution \autocite{rauschen2024universal, strieth-kalthoff2024delocalized}. 
+
+Developing experimental protocols in a formal language is a non-trivial task, often requiring specialized coding expertise. 
+Within the compiled approach, the role of the \gls{gpm} is to translate natural-language protocols into their formalized, machine-readable counterparts.\autocite{Lamas2024DSLXpert, jiang2024protocode, conrad2025lowering, inagaki2023robotic} \textcite{Vaucher2020AutoExtraction} used an encoder-decoder transformer model to convert English experimental procedures to structured sequences of pre-defined synthesis actions (e.g., \modelname{MakeSolution}, \modelname{SetTemperature}, \modelname{Extract}). They pre-trained the model on $2$M sentence-action pairs extracted by a rule-based \gls{nlp} algorithm and then fine-tuned it on manually annotated samples to improve accuracy. 
+The model achieved exact sentence-pair matching in $61\%$ of the test samples and had more than $75\%$ overlap in $82\%$ of them. 
+Although this approach accelerates automated protocol extraction from chemical literature, the output format is not directly suitable for execution. 
+
+\textcite{Pagel2024LLMChemputer} introduced a multi-agent workflow (based on \modelname{GPT-4}) that can address this issue and convert unstructured chemistry papers into executable code. 
+The first agent extracts all synthesis-relevant text, including supporting information; a procedure agent then sanitizes the data and tries to fill the gaps from chemical databases (using \gls{rag}); another agent translates procedures into \gls{chidl} and simulates them on virtual hardware; finally, a critique agent cross-checks the translation and fixes errors.
+
+The example above shows one of the strengths of the compiled approach: it allows for pre-validation. 
+The protocol can be simulated or checked for any errors before running on the actual hardware, ensuring safety. 
+Another example of \gls{llm}-based validators for chemistry protocols is \modelname{CLAIRify}.\autocite{Yoshikawa2023CLAIRify} 
+Leveraging an iterative prompting strategy, it uses \modelname{GPT‑3.5} to first translate the natural-language protocol into \gls{chidl} script, then automatically verifies its syntax and structure, identifies any errors, appends those errors to the prompt, and prompts the \gls{llm} again---iterating this process until a valid \gls{chidl} script is produced. 
+
+Similar to how compiled software can be recompiled for different platforms, compiled automation is hardware-agnostic: by using appropriate compilation, a well-defined protocol can---at least in principle---be run on different robotic systems as long as they have the required capabilities.\autocite{rauschen2024universal, strieth-kalthoff2024delocalized,wilbraham2021chemPU} 
+In practice, however, inconsistencies in hardware interfaces and software standards across the lab automation community make cross-platform execution challenging.
+
+The main limitations of compiled approaches are the flip side of their strengths: low flexibility and adaptability. 
+Any logic or decision-making must either be explicitly encoded within the protocol---necessitating meticulous scripting---or delegated to an external control layer.\autocite{mehr2023digitizing,leonov2024integrated} 
+If something unexpected occurs (a pump clogging, a reaction taking longer than expected), the pre-compiled protocol cannot easily adjust in real-time, and human intervention or a complete recompile might be needed.
+
+\subsubsection{Interpreted Automation}
+Interpreted programming languages support higher levels of abstraction, enabling the use of more general and flexible command structures. 
+Similarly, since \glspl{gpm} can translate high-level goals into concrete steps\autocite{ahn2022can, huang2022language}, they can act as an \enquote{interpreter} between the experimental intent and lab hardware. 
+For instance, given an instruction \enquote{titrate the solution until it turns purple}, a \gls{gpm} agent (see \Cref{sec:agents}) can break it down into smaller steps and convert each step to executable code, allowing it to perform incremental additions of titrant and read a color sensor, looping until the condition is met. 
+This conversion of concrete steps to code happens at runtime; it is not pre-compiled. 
+We refer to such systems as \enquote{interpreted automation} systems. 
+In contrast to the deterministic, preplanned nature of compiled systems, interpreted architectures introduce real-time decision-making.
+As each action completes, the system collects sensor data (instrument readings, spectra, error messages, etc.) which the agent analyzes and decides on the next action. This allows for dynamic branching and conditional logic during the experiment execution. 
+
+\emph{Coscientist} \autocite{boiko2023autonomous} is an \gls{llm}-based chemistry assistant built around \modelname{GPT-4} that can autonomously design and execute experiments. 
+It can take high-level goals and call tools to write the code in real-time in order to control an Opentrons OT-2 liquid-handling robot. The architecture included tool calls: a web-search module, a documentation module (to read instrument manuals), a \modelname{Python} execution module (to run generated code in a sandbox), and an experiment execution module that sends code to actual lab equipment.
+If an error occurred, the system would get feedback and \modelname{GPT-4} would debug its own code. \modelname{Coscientist} successfully planned and executed multistep syntheses with minimal human intervention. 
+For example, it efficiently optimized a palladium cross-coupling reaction with minimal human input, outperforming a standard Bayesian optimizer baseline in finding high-yield conditions.
+
+Another example is \modelname{ChemCrow} \autocite{bran2024augmenting}, a \modelname{GPT-4}-based agent augmented with $18$ expert-designed tools for tasks like compound lookup, spectral analysis, and retrosynthesis. \modelname{ChemCrow} can perform tasks across synthesis planning, drug discovery, and materials design by invoking external software for things like retrosynthesis, property prediction, database queries, etc. 
+It planned and executed the syntheses of an insect repellent, \gls{deet}, and three different organocatalysts and even guided the discovery of a new chromophore dye. 
+
+The interpreted paradigm is highly generalizable; in principle, the same \gls{llm} agent controlling a chemistry experiment could be re-purposed to a biology or materials experiment with minimal reprogramming because it operates at the level of intent and semantic understanding. 
+However, fully autonomous labs featuring interpreted automation are still experimental themselves---ensuring their reliability and accuracy remains an open challenge. 
+
+Despite being labeled as \enquote{autonomous,} both systems mentioned above often need prompting nudges and human correction. 
+In addition, these models can replicate known procedures and use databases, but they lack an understanding of mechanisms or underlying principles. Another issue is full reproducibility and long-term experiment tracking. Since the \gls{gpm}'s response might not be deterministic, small changes in prompts can yield different results and closed-source models like \modelname{GPT-4} can change over time. 
+Hallucinations remain a risk, especially in planning complex or sensitive reactions. 
+In addition, allowing an agent to control hardware brings safety considerations; the flexibility of \glspl{gpm} means that they can devise unanticipated actions. Designing safety nets for these systems is an active area of research. (see \Cref{sec:safety})
+
+\subsubsection{Hybrid Approaches}
+Between the two extremes of fully compiled vs.\ fully interpreted automation lies a hybrid approach that seeks to combine the best of both paradigms: the safety and reliability of compiled protocols and the \gls{ai}-driven flexibility of interpreted systems. 
+
+The key difference from purely interpreted systems is that during each experiment run, the plan is fixed, ensuring safety and reproducibility, but between runs, the plan can dynamically change based on the \gls{gpm}’s interpretation of results. 
+Once the initial plan (ideally devised by the same \gls{gpm} in a previous step) is provided to a hybrid system, instead of reducing it to smaller steps and directly sending the instructions to a laboratory one at a time, the protocol is first formalized---i.e., it is translated to a formal machine-readable format such as \gls{chidl}. Once validated, the formalized protocol is compiled and executed. After the completion of execution, the \gls{gpm} receives the results and decides what experiment to perform next. This cycle repeats, creating an autonomous optimization or discovery loop. 
+
+This hybrid strategy is attractive because it provides a safety net against mistakes made by the \gls{gpm} interpreter; any generated procedure must pass through a formalization and verification stage before real execution, and therefore, erroneous or hallucinated steps can be caught. For example, if the interpreter hallucinated adding \SI{1000}{\milli\liter} of a solvent but the hardware has only \SI{100}{\milli\liter} capacity, it can be flagged as an error. 
+
+
+
+\modelname{ORGANA} \autocite{darvish2025organa} is an \gls{llm}-based robotic assistant following this hybrid paradigm. 
+It allows human chemists to describe their experimental goal in natural language. The system can converse with the user to clarify ambiguous requests (the agent would ask \enquote{do you mean X or Y?} if the instructions are unclear). Once the goal is understood, it uses \modelname{CLAIRify} \autocite{Yoshikawa2023CLAIRify} to convert and validate the natural-language description of a chemistry experiment into a \gls{chidl} script, which can be executed on a compatible platform. 
+In one case, \modelname{ORGANA} carried out a multistep electrochemistry procedure---polishing electrodes, running an experiment, and analyzing the data---involving 19 substeps that it coordinated in parallel. 
+If an unexpected observation occurred (e.g., a solution does not change color when expected), the system can notice via image analysis and modify the plan or alert the user. 
+In user studies, \modelname{ORGANA} significantly reduced the manual labor and frustration for chemists, who could offload tedious tasks and trust the agent to handle low-level decisions.
+
+\subsubsection{Comparison and Outlook}
+While compiled paradigms continue to provide the backbone for reliable automation, interpreted paradigms will drive exploratory research, where adaptability is key. 
+Hybrid systems are likely to be the bridge that brings \gls{ai} into mainstream lab operations, ensuring that flexibility comes with accountability. A brief comparison of the three mentioned approaches is given in \Cref{tab:execution_comparison}.
+
+\begin{table}[ht]
+\centering
+\caption{\textbf{Comparison of the Compiled, Interpreted, and Hybrid Automation Paradigms}. Each approach has its strengths and weaknesses. Compiled systems favor reliability, interpreted systems allow for more flexibility, while hybrid systems try to strike a balance. }
+\begin{tabular}{lccc}
+\toprule
+\textbf{Feature} & \textbf{Compiled} & \textbf{Interpreted} & \textbf{Hybrid} \\
+\midrule
+Flexibility & \textcolor{NegativeColor}{Low} & \textcolor{PositiveColor}{High} & Medium \\
+Adaptivity & \textcolor{NegativeColor}{None} & \textcolor{PositiveColor}{Real-time} & Iterative \\
+Reproducibility & \textcolor{PositiveColor}{High} & Medium & \textcolor{PositiveColor}{High} \\
+Safety & \textcolor{PositiveColor}{High} & \textcolor{NegativeColor}{Low} & Medium \\
+Setup Overhead & Medium & \textcolor{NegativeColor}{High} & \textcolor{NegativeColor}{High} \\
+Industrial Readiness & \textcolor{NegativeColor}{Low} & \textcolor{NegativeColor}{Low} & \textcolor{NegativeColor}{Low} \\
+\bottomrule
+\end{tabular}
+\label{tab:execution_comparison}
+\end{table}
+
+While we are essentially witnessing the rise of self-driving laboratories, autonomous experimentation systems present a range of challenges.\autocite{Tom2024SDL,Seifrid2022SDL} 
+First, translating high-level natural-language goals into precise laboratory actions remains difficult, as \glspl{gpm} can misinterpret ambiguous instructions, leading to invalid or unsafe procedures. 
+This problem is compounded by the lack of universally adopted standards for protocol formalization; while languages like \gls{chidl} show promise, inconsistencies in abstraction, device compatibility, and community uptake limit interoperability. 
+Real-time execution adds further complexity, as systems must detect and respond to failures or unexpected behaviors; however, general-purpose validation mechanisms and recovery strategies remain underdeveloped. 
+Hardware integration is another bottleneck; current commercial robotic platforms are prohibitively expensive and lab environments often rely on a patchwork of instruments with proprietary interfaces, and building robust, unified control layers demands considerable engineering overhead. 
+Another challenge is multi-modality in chemistry; chemists use a wide variety of data (e.g., spectra, TLC plates, SEM images). 
+Without integrating these forms of output, models will be limited in their decision-making. 
+Finally, ensuring reproducibility and regulatory compliance requires that every step be logged, validated, and traceable at the level required for clinical or industrial adoption (see \Cref{sec:safety}. These challenges must be addressed in tandem to move from experimental demonstrations toward reliable, scalable, and trustworthy autonomous laboratories.
+
+
+\subsection{Data Analysis}
+The analysis of spectroscopic and experimental data in chemistry remains a predominantly manual process. 
+Even seemingly straightforward steps, such as plotting or summarizing results, demand repeated manual intervention.
+
+One key challenge that makes automation particularly difficult is the extreme heterogeneity of chemical data sources. 
+Laboratories often rely on a wide variety of instruments, some of which are decades old, rarely standardized, or unique in configuration.\autocite{jablonka2022making} 
+These devices output data in incompatible, non-standardized, or poorly documented formats, each requiring specialized processing pipelines. 
+Despite efforts like \modelname{JCAMP-DX} \autocite{McDonald1988standard}, standardization attempts remain scarce and have generally failed to gain widespread use. 
+This diversity makes rule-based or hard-coded solutions largely infeasible, as they cannot generalize across the long tail of edge cases and exceptions found in real-world workflows.
+
+However, this exact complexity makes data analysis in chemistry a promising candidate for \glspl{gpm}. 
+They are designed to operate flexibly across diverse tasks and formats, relying on implicit knowledge captured from broad training data. 
+In other domains, \textcite{narayan2022can} showed that models like \modelname{GPT-3 DaVinci} can already perform classical data processing tasks such as cleaning, transformation, and error detection through prompting alone. \textcite{kayali2023chorus} introduced \modelname{Chorus} that shows that \glspl{llm} can analyze heterogeneous tabular data without task-specific training. 
+\modelname{Chorus} demonstrates that by converting tables into a standardized text format and using zero-shot prompting (i.e., prompts with no examples), \glspl{llm} can flexibly analyze tables even when they differ in structure, column names, or data types.
+
+\begin{figure}[!ht]
+    \centering
+\includegraphics[width=1\textwidth]{figures/rescaled_figures/chemrev_figure17.pdf}
+    \caption{\textbf{Static conventional data analysis workflow vs.\ dynamic \gls{gpm} generated workflow}. The chemical analysis can be done with a variety of possible instruments and techniques, resulting in a large number of possible output data formats. The \gls{gpm} can use these diverse, raw data and process it into easy-to-understand plots, analysis and reports. A hard-coded workflow, in contrast, is specifically made to analyze one specific data format and spectra and produces a fixed output format, e.g., the \gls{smiles} of the analyzed molecule.}
+    \label{fig:anaylsis}
+\end{figure}
+
+
+ \subsubsection{Prompting} Initial evaluations demonstrated that \glspl{gpm} can support basic data analysis workflows. \autocite{Fu2025large} 
+ For example, in chemistry, this enabled the classification of \gls{xps} signals \autocite{decurt2024large} based on peak positions, intensities, or characteristic spectral patterns).  
+ 
+Spectroscopic data are not always available in structured textual form. 
+In many practical cases, it appears as raw plots or images, making direct interpretation by \glspl{vlm} a more natural starting point for automated analysis. 
+A broad assessment of \gls{vlm}-based spectral analysis was introduced with the \modelname{MaCBench} benchmark \autocite{alampara2024probing}, which systematically evaluates how \glspl{vlm} interpret experimental data in chemistry and materials science---including various types of spectra such as \gls{ir}, \gls{nmr}, and \gls{xrd}q---directly from images. They showed that while \glspl{vlm} can correctly extract isolated features from plots, the performance substantially drops in tasks requiring deeper spatial reasoning.
+To overcome these limitations, \textcite{kawchak2024high} explored two-step pipelines that decouple visual perception from chemical reasoning. First, the model interprets each spectrum individually (e.g., converting  \gls{ir}, \gls{nmr}, or \gls{ms} images into textual peak descriptions), and second, a \gls{llm} analyzes these outputs to propose a molecular structure based on the molecular formula. 
+
+\subsubsection{Agentic Systems}
+Beyond zero-shot prompting of \glspl{gpm}, one can develop agentic systems that combine multiple analysis steps end-to-end. 
+In this regard, \textcite{ghareeb2025robin0} developed \modelname{Robin}---a multi-agent system for assisting biological research with hypothesis generation (see \Cref{fig:hypothesis-generation}) and experimental analysis. 
+The data analysis agent \modelname{Finch} performs autonomous analysis of raw or preprocessed experimental data, such as \gls{rna} sequencing and flow cytometry. 
+Given a user prompt (e.g., \enquote{\gls{rna} sequencing differential expression analysis}), \modelname{Finch} executes code in a Jupyter notebook to process the data, apply relevant statistical methods, and generate interpretable outputs. For flow cytometry, this includes gating strategies and significance testing, while for \gls{rna} sequencing, it encompasses differential expression and gene ontology enrichment analysis. 
+Currently, only these two data types are supported, and expert-designed prompts are still required to ensure reliable results. 
+
+Recent work extends agentic systems beyond single-step data evaluation toward executing and optimizing entire workflows. \textcite{mandal2024autonomous} introduced \modelname{AILA} (Artificially Intelligent
+Lab Assistant) utilizing \gls{llm}-agents to plan, code, execute, and revise complete \gls{afm} analysis pipelines. 
+The system handles tasks such as image processing, defect detection, clustering, and extraction of physical parameters. 
+Compared to systems like \modelname{Finch}, \modelname{AILA} shifts the focus from generating summaries to performing and improving full experimental analyses with minimal user input while maintaining transparency and reproducibility through code and reports.
+
+\subsubsection{Current Limitations}
+While \glspl{gpm} offer promising capabilities for automating scientific data analysis, several limitations remain. 
+Recent evaluations such as \modelname{FMs4Code} \autocite{tian2024scicode} have shown that even state-of-the-art models like \modelname{GPT-4-Turbo} and \modelname{Claude 2} frequently produce syntactically correct but semantically incorrect code when tasked with common data analysis steps, such as reading files, applying filters, or generating plots. 
+Typical issues include incorrect column usage, or inconsistent output formatting.
+
+These technical shortcomings are reinforced by the model's sensitivity to prompt formulation. As demonstrated by \textcite{Yan2020auto} and \textcite{alampara2024probing}, minor changes in wording or structure can lead to significantly different outputs, highlighting a lack of robustness in prompt-based control. 
+
+Together, these findings suggest that while foundation models can generalize across diverse data formats and analysis types, their current performance is not yet sufficient for fully autonomous use in scientific analysis settings. 
+Robust prompting strategies, post-generation validation, and human oversight remain essential components in practice.
+
+
+
+\subsection{Reporting}
+To share insights obtained from data analysis, one often converts them into scientific reports. 
+Also, in this step, \glspl{gpm} can take a central role, which we discuss in the following.
+
+Reporting refers to converting scientific results into shareable reports, scientific publications, blogs, and other forms of content. 
+This section describes two main applications of \glspl{llm} in scientific reporting: converting data into explanations and the first steps towards using these models as fully-fledged writing assistants.
+
+\subsubsection{From Data to Explanation}
+
+The lack of explainability of \gls{ml} predictions generates skepticism among experimental chemists\autocite{wellawatte2025human}, hindering the wider adoption of such models.\autocite{wellawatte2022model}
+One promising approach to address this challenge is to convey explanations of model predictions in natural language. 
+An approach proposed by \textcite{wellawatte2025human} is to couple \glspl{llm} with feature importance analysis tools, such as \gls{shap} or \gls{lime}. 
+In this framework, \glspl{llm} can additionally interact with tools such as \gls{rag} over \modelname{arxiv} to provide evidence-based explanations.
+
+\subsubsection{Writing Assistance} When considering \gls{ml}-based assistance in scientific writing, we can distinguish two primary modes: systems that aid authors during the active writing process and tools that optimize or refine scientific articles after initial drafting.
+
+The former refers to the use of writing copilots that can suggest syntax improvement, identify text redundancies,\autocite{khalifa2024using} caption figures and tables\autocite{hsu2021scicap,selivanov2023medical}, or provide caption-figure match evaluation\autocite{hsu2023gpt04}, but also more specific applications like writing alt-text (descriptive text that explains the meaning and purpose of an image in digital content)\autocite{singh2024figura11y}. 
+
+Under the latter mode, \gls{gpm} can be used to assist non-native English speakers with scientific writing \autocite{giglio2023use}.
+It could even allow authors to write in their native language and use \gls{gpm} for communicating scientific results in English.
+
+Another application of \gls{llm} is to assist with completing checklists before submitting a publication. For example, \textcite{goldberg2024usefulness} benchmark the use of \glspl{llm} in completing the author checklist for the \gls{neurips} 2025. They concluded that $70\%$ of the authors found the \gls{llm}-assistant useful, with the same fraction indicating they would revise their own checklist based on the model feedback.
+
+
+
+
+\subsubsection{Vision} 
+
+Few have ventured into fully automating the writing process.\autocite{yamada2025ai} 
+While at its inception, reporting using \gls{gpm} has tremendous potential. 
+In \Cref{fig:writing_with_ml} we showcase how the future of reporting could look like if we were to integrate \gls{gpm} at each step of the process.
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[width=1\textwidth]{figures/rescaled_figures/chemrev_figure18.pdf}
+    \caption{\textbf{Vision for \gls{gpm} in reporting, a visualization of the scientific writing process}. \glspl{gpm} can be used at every stage of the process. For creating the pre-print, we can utilize the multimodal capabilities of these models to write detailed captions for figures. For the peer-review process, we can harness the ability of \glspl{gpm} to summarize and prioritize information (e.g., design a time-efficient plan to address the peer review). When converting a document from a peer-reviewed pre-print, we often need to implement the publisher's requirements. In this case, we can make use of agentic systems that would assist with minor text fixes or document restructuring.}
+    \label{fig:writing_with_ml}
+\end{figure}
+
+An idea entertained by \textcite{li2023teach} in the context of education is personalized writing. 
+However, it is still widely unexplored in its goal: to make science accessible to everyone. 
+A personalized model that learns user preferences and domain expertise can be used to deliver the message of a scientific article in simpler terms. 
+As a result, we might observe a rise in cross-domain scientific collaborations and a rising interest in science.

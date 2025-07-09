@@ -5,7 +5,7 @@ title: "Outlook and Conclusions"
 # Outlook and Conclusions
 
 <figure id="fig:conclusions">
-<img src="media/figures/conclusion_figure_v2.png" width="100%" />
+<img src="media/figures/conclusion_figure_v2.png" alt="" / width="100%">
 <figcaption><strong>Evolution of <span data-acronym-label="gpm"
 data-acronym-form="singular+short">gpm</span>-powered systems.</strong>
 First <span data-acronym-label="gpm"

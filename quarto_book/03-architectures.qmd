@@ -220,7 +220,7 @@ application. @ganose2019robocrystallographer aimed to create
 human-readable descriptions by proposing a tool to generate
 natural-language descriptions of crystal structures automatically. For
 specific material classes, such as [mofs]{acronym-label="mof"
-acronym-form="plural+short"}, specialized representations like
+acronym-form="plural+short"}, specialized representations like `MOFid`
 \[@Bucior_2019\] have been developed.
 
 Instead of a string, we can represent chemical substances as graphs.
@@ -313,12 +313,12 @@ Through training, models can learn to map discrete inputs into
 continuous spaces where similar items have meaningful relationships (for
 example, similar items cluster in this continuous space). In the
 simplest approach, they can be created by training models (so-called
-models) that take one-hot encoded inputs and predict the probability of
-words in the context.\[@mikolov2013efficient; @mikolov2013distributed;
-@Tshitoyan_2019\] Embeddings are powerful because they learn
-relationships between entities, allowing for the efficient compression
-of data and the uncovering of hidden patterns that would otherwise be
-invisible in the raw data.
+`Word2Vec` models) that take one-hot encoded inputs and predict the
+probability of words in the context.\[@mikolov2013efficient;
+@mikolov2013distributed; @Tshitoyan_2019\] Embeddings are powerful
+because they learn relationships between entities, allowing for the
+efficient compression of data and the uncovering of hidden patterns that
+would otherwise be invisible in the raw data.
 
 The advent of [gpms]{acronym-label="gpm" acronym-form="plural+short"}
 has further underscored the usefulness of high-quality embeddings. These
@@ -349,7 +349,7 @@ rules) and which are "unlikely" or "impossible" (random assortments of
 atoms).
 
 <figure id="fig:training_workflow">
-<img src="media/figures/rescaled_figures/chemrev_figure4.png" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure4.png" alt="" / width="100%">
 <figcaption><strong>General training workflow through the lens of
 molecular science</strong>. The figure illustrates the progression from
 pre-training through fine-tuning to post-training stages. <strong>(1)
@@ -489,7 +489,7 @@ reference="fig:types_ssl"} illustrates the two main families: generative
 and contrastive, along with example pretext tasks for each.
 
 <figure id="fig:types_ssl">
-<img src="media/figures/rescaled_figures/chemrev_figure5.png" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure5.png" alt="" / width="100%">
 <figcaption><strong>Main families in <span data-acronym-label="ssl"
 data-acronym-form="plural+short">ssls</span></strong>. The figure
 illustrates the two primary approaches to <span data-acronym-label="ssl"
@@ -680,7 +680,7 @@ compute the contrastive loss on an instance basis or a cluster basis.
 Instance Discrimination is arguably the most dominant paradigm in recent
 contrastive learning. Each instance (sample) in the dataset is treated
 as its own distinct class. This is typically achieved using contrastive
-loss functions like see
+loss functions like `InfoNCE` see
 [\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
 reference="eq:infonce"}. \[@oord2018representation\] As detailed in
 [\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
@@ -736,21 +736,21 @@ $$\label{eq:infonce}
 #### Clustering-based Contrastive Learning {#sec:clustering_cl}
 
 Clustering approaches leverage the idea that similarity often translates
-to closeness in the feature space. Methods like \[@caron2018deep\]
-iteratively train a model. First, they group the generated features
-(internal representation) of a dataset into distinct sets using a common
-grouping algorithm, such as $k$-means clustering. Imagine you have a
-pile of diverse objects; $k$-means would help you sort them into a
-predefined number of piles based on their similarities, like color or
-shape. These assigned groups then act as "pseudo-labels"---temporary,
-automatically generated labels---to train the network. The supervised
-training step implicitly contrasts samples from different clusters. The
-clustering and training steps alternate. Take a dataset of molecular
-fingerprints as an example. A model can be trained to predict the
-clustering pattern of this fingerprint data, distinguishing between
-conformer types or perturbed structures. Thus, the model learns
-representations that group chemically or structurally similar
-fingerprints.
+to closeness in the feature space. Methods like `DeepCluster`
+\[@caron2018deep\] iteratively train a model. First, they group the
+generated features (internal representation) of a dataset into distinct
+sets using a common grouping algorithm, such as $k$-means clustering.
+Imagine you have a pile of diverse objects; $k$-means would help you
+sort them into a predefined number of piles based on their similarities,
+like color or shape. These assigned groups then act as
+"pseudo-labels"---temporary, automatically generated labels---to train
+the network. The supervised training step implicitly contrasts samples
+from different clusters. The clustering and training steps alternate.
+Take a dataset of molecular fingerprints as an example. A model can be
+trained to predict the clustering pattern of this fingerprint data,
+distinguishing between conformer types or perturbed structures. Thus,
+the model learns representations that group chemically or structurally
+similar fingerprints.
 
 ## The Holy Grail of Building Good Internal Representation
 
@@ -771,7 +771,7 @@ enable richer features by providing additional layers of information to
 learn from, such as generating different low-energy conformers or using
 non-canonical string representations.
 
-#### Parallels between Generative and Contrastive Objectives
+### Parallels between Generative and Contrastive Objectives
 
 While it might seem that generative and contrastive
 [ssls]{acronym-label="ssl" acronym-form="plural+short"} methods optimize
@@ -780,8 +780,8 @@ generative masked language model learns the conditional probability (see
 [\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
 reference="eq:infonce"}) , aiming to assign a high probability to the
 correct masked token by effectively discriminating it from other
-vocabulary tokens. The loss in contrastive learning can be viewed as a
-log-loss for a $(K+1)$-way classification task (see
+vocabulary tokens. The `InfoNCE` loss in contrastive learning can be
+viewed as a log-loss for a $(K+1)$-way classification task (see
 [\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
 reference="eq:infonce"}). Here, the model learns to identify the
 positive pair $f(x_i^+)$ as matching $f(x_i)$ from a set including
@@ -808,11 +808,11 @@ However, these representations also implicitly encode structural
 patterns (commonly observed coordination environments) and their
 correlations with each other and with abstract properties. A distinct
 and powerful pre-training paradigm moves away from real-world data
-entirely, instead training models like on millions of synthetically
-generated datasets to become general-purpose learning algorithms. This
-allows them to perform in-context learning on new, small datasets in a
-single forward pass, often outperforming traditional methods.
-\[@hollmann2025accurate\]\
+entirely, instead training models like `TabPFN` on millions of
+synthetically generated datasets to become general-purpose learning
+algorithms. This allows them to perform in-context learning on new,
+small datasets in a single forward pass, often outperforming traditional
+methods. \[@hollmann2025accurate\]\
 The core principle remains: *learning on large datasets to build
 generalizable internal representations before task-specific
 fine-tuning.*
@@ -940,7 +940,7 @@ $$\label{eq:rl_objective}
   enabling the generation of high-quality outputs.
 :::::
 
-#### The Challenge of Reward Design
+### The Challenge of Reward Design
 
 A critical factor for the success of this framework is the design of the
 reward function. The training process is most stable and effective when
@@ -1052,7 +1052,7 @@ reference="fig:architectures"} are examples of foundational backbones
 that we discuss in the following sections.
 
 <figure id="fig:architectures">
-<img src="media/figures/rescaled_figures/chemrev_figure6.png" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure6.png" alt="" / width="100%">
 <figcaption><strong>Blueprint for <span data-acronym-label="gpm"
 data-acronym-form="plural+short">gpms</span> architectures</strong>.
 This diagram illustrates four distinct neural network architectures
@@ -1079,7 +1079,7 @@ molecular features, ranging from sequential to global, and graph-based
 relationships.</figcaption>
 </figure>
 
-#### [lstm]{acronym-label="lstm" acronym-form="singular+short"}
+### [lstm]{acronym-label="lstm" acronym-form="singular+short"}
 
 [lstm]{acronym-label="lstm" acronym-form="singular+short"} networks
 \[@hochreiter1997long\] are well-suited for processing sequential data,
@@ -1121,10 +1121,10 @@ control what information flows) to precisely revise its memory. Second,
 instead of a single memory bottleneck, it uses a parallel "matrix
 memory". This provides multiple "slots" to store different pieces of
 information at the same time. This structure allows it to process
-information in parallel, making it much more efficient. adapts this
-architecture for biological and chemical sequences, demonstrating
-proficiency in generative tasks and in-context learning for DNA,
-proteins, and small molecules.\[@SchmidingerSSSH25\]
+information in parallel, making it much more efficient. `Bio-xLSTM`
+adapts this architecture for biological and chemical sequences,
+demonstrating proficiency in generative tasks and in-context learning
+for DNA, proteins, and small molecules.\[@SchmidingerSSSH25\]
 
 #### Transformer
 
@@ -1318,22 +1318,23 @@ a researcher can ask a question in natural language, provide a molecule
 (in the form of a structure file or image) as context, and receive a
 helpful answer that leverages both structural and textual knowledge.
 
-\[@edwards2022translation\] adapted the transformer for chemical
-language by training on scientific text and
+`MolT5` \[@edwards2022translation\] adapted the `T5` transformer for
+chemical language by training on scientific text and
 [smiles]{acronym-label="smiles" acronym-form="singular+short"} strings,
 using a masking objective to reconstruct masked segments. This approach
 treats [smiles]{acronym-label="smiles" acronym-form="singular+short"} as
-a "language", enabling to generate both valid molecules and fluent text.
-Similarly, \[@taylor2022galactica\], an [llm]{acronym-label="llm"
-acronym-form="singular+short"}, also incorporated
-[smiles]{acronym-label="smiles" acronym-form="singular+short"} into its
-training. Later, the \[@liu2023molxpt0\] model used "paired" examples
+a "language", enabling `MolT5` to generate both valid molecules and
+fluent text. Similarly, `Galactica` \[@taylor2022galactica\], an
+[llm]{acronym-label="llm" acronym-form="singular+short"}, also
+incorporated [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} into its training. Later, the
+`MolXPT`\[@liu2023molxpt0\] model used "paired" examples
 ([smiles]{acronym-label="smiles" acronym-form="singular+short"} and
 textual description) by replacing chemical names in scientific texts
 with their corresponding [smiles]{acronym-label="smiles"
 acronym-form="singular+short"} strings and description. This
-pre-training approach enables to learn the context of molecules within
-text and achieve zero-shot text-to-molecule generation (see
+pre-training approach enables `MolXPT` to learn the context of molecules
+within text and achieve zero-shot text-to-molecule generation (see
 [\[sec:mol_generation\]](#sec:mol_generation){reference-type="ref+Label"
 reference="sec:mol_generation"} for more details on this application).
 
@@ -1341,18 +1342,19 @@ Contrastive learning emerged as an alternative, aligning separate text
 and molecule encoders in a shared embedding space. The principle of
 learning here is the same as that explained in
 [\[{sec:contrastive_learning}\]](#{sec:contrastive_learning}){reference-type="ref+Label"
-reference="{sec:contrastive_learning}"}. \[@Liu2023multi0modal\] aligns
-separate text and molecule encoders in a shared space using paired data.
-This dual-encoder approach enables tasks such as retrieving molecules
-from text queries and shows strong zero-shot generalization for chemical
-concepts. Another notable study is \[@sanchez2023cloome\], which used
-contrastive learning to embed bioimaging data (microscopy images of cell
-assays) and chemical structures of small molecules into a shared space.
-Multimodal learning also enables the determination of molecular
-structure from spectroscopic data. Models trained on large datasets of
-simulated spectra \[@alberts2024unraveling\], which combine multiple
-spectral inputs, could accurately translate spectra into molecular
-structures. \[@chacko2024spectro; @mirza2024elucidating\]
+reference="{sec:contrastive_learning}"}. `MoleculeSTM`
+\[@Liu2023multi0modal\] aligns separate text and molecule encoders in a
+shared space using paired data. This dual-encoder approach enables tasks
+such as retrieving molecules from text queries and shows strong
+zero-shot generalization for chemical concepts. Another notable study is
+`CLOOME` \[@sanchez2023cloome\], which used contrastive learning to
+embed bioimaging data (microscopy images of cell assays) and chemical
+structures of small molecules into a shared space. Multimodal learning
+also enables the determination of molecular structure from spectroscopic
+data. Models trained on large datasets of simulated spectra
+\[@alberts2024unraveling\], which combine multiple spectral inputs,
+could accurately translate spectra into molecular structures.
+\[@chacko2024spectro; @mirza2024elucidating\]
 
 Beyond just prediction, some multimodal models aim for cross-modal
 generation, creating one type of data from another (e.g., generating an
@@ -1379,8 +1381,8 @@ representations to understand the connections between them.
 
 A more recent approach is the integration of molecular encoders with
 pre-trained [llms]{acronym-label="llm" acronym-form="plural+short"}.
-Models like \[@cao2023instructmol0\] and \[@li2024seeing\] use an
-"adapter" (see discussion about in
+Models like `InstructMol` \[@cao2023instructmol0\] and `ChemVLM`
+\[@li2024seeing\] use an "adapter" (see discussion about `LoRa` in
 [1.11](#sec:model_adaptation){reference-type="ref+Label"
 reference="sec:model_adaptation"}) to project molecular information into
 the [llm]{acronym-label="llm" acronym-form="singular+short"}'s existing
@@ -1441,8 +1443,8 @@ needed for a given task, rather than activating the entire neural
 network for every task. Modern transformer models using
 [moe]{acronym-label="moe" acronym-form="singular+short"} layers can
 scale to billions of parameters while maintaining manageable
-computational costs, as demonstrated by models like , which uses eight
-experts with sparsity.
+computational costs, as demonstrated by models like `Mixtral-8x7B`,
+which uses eight experts with sparsity.
 
 @shazeer2017outrageously demonstrated that using a sparsely-gated
 [moe]{acronym-label="moe" acronym-form="singular+short"} layer can
@@ -1455,30 +1457,31 @@ given input.
 
 An [llm]{acronym-label="llm" acronym-form="singular+short"} for science
 with [moe]{acronym-label="moe" acronym-form="singular+short"}
-architecture ( \[@sun2024scidfm\]) shows that the results of expert
-selection vary with data from different disciplines, i.e., activating
-distinct experts for chemistry vs. other disciplines. They consist of
-multiple "expert" subnetworks, each potentially specializing in
-different facets of chemical knowledge or types of chemical tasks. A
+architecture (`SciDFM` \[@sun2024scidfm\]) shows that the results of
+expert selection vary with data from different disciplines, i.e.,
+activating distinct experts for chemistry vs. other disciplines. They
+consist of multiple "expert" subnetworks, each potentially specializing
+in different facets of chemical knowledge or types of chemical tasks. A
 routing mechanism directs inputs to the most relevant expert(s). This
 allows the foundation model to be more adaptable and perform across the
 broad chemical landscape. The [moe]{acronym-label="moe"
 acronym-form="singular+short"} concept has also been adapted for
-physical simulations. The family employs a [moe]{acronym-label="moe"
-acronym-form="singular+short"} architecture with linear experts to build
-accurate yet computationally efficient interatomic potentials
-\[@wood2025uma0\]. This approach builds route based on global system
-properties (e.g., elemental composition, charge, spin) rather than
-per-token.
+physical simulations. The `UMA` family employs a
+[moe]{acronym-label="moe" acronym-form="singular+short"} architecture
+with linear experts to build accurate yet computationally efficient
+interatomic potentials \[@wood2025uma0\]. This approach builds route
+based on global system properties (e.g., elemental composition, charge,
+spin) rather than per-token.
 
 Extending this concept, a recent multi-view [moe]{acronym-label="moe"
-acronym-form="singular+short"} model ( \[@shirasuna2024multi\]) treats
-entire, distinct chemical models as individual "experts". Rather than
-routing tokens within one large model, a gating network learns to create
-a combined molecular representation by dynamically weighting the
-embeddings from each expert model. This method showed strong performance
-on , a widely used benchmark suite for molecular property prediction,
-outperforming competitors on 9 of 11 tasks.
+acronym-form="singular+short"} model (`Mol-MVMoE`
+\[@shirasuna2024multi\]) treats entire, distinct chemical models as
+individual "experts". Rather than routing tokens within one large model,
+a gating network learns to create a combined molecular representation by
+dynamically weighting the embeddings from each expert model. This method
+showed strong performance on `MoleculeNet`, a widely used benchmark
+suite for molecular property prediction, outperforming competitors on 9
+of 11 tasks.
 
 Training [moe]{acronym-label="moe" acronym-form="singular+short"} models
 can be a complex process. The gating mechanism must be carefully learned
@@ -1510,9 +1513,9 @@ experimental data---it simplifies the numbers, uses less memory, and
 allows calculations to run much faster.
 
 @dettmers2022gpt3 introduced an 8-bit inference approach (`LLM.int8`)
-enabling models as large as (175B parameters) to run with no loss in
-predictive performance (less than $50\%$ GPU-memory usage). A key
-insight in this paper is that while most numbers in a model can be
+enabling models as large as `GPT-3` (175B parameters) to run with no
+loss in predictive performance (less than $50\%$ GPU-memory usage). A
+key insight in this paper is that while most numbers in a model can be
 safely rounded, a few "outlier" values with large magnitudes are
 critical for performance.
 
@@ -1652,7 +1655,7 @@ interact with external sources of information and tools.
 
 []{#tab:model_adaptation label="tab:model_adaptation"}
 
-#### Prompting {#sec:prompting}
+### Prompting {#sec:prompting}
 
 [llms]{acronym-label="llm" acronym-form="plural+short"} have
 demonstrated the ability to perform a wide range of tasks based solely
@@ -1784,7 +1787,7 @@ these components represent a set of capabilities that the agent's core
 draw upon to achieve complex objectives.
 
 <figure id="fig:agent-loop">
-<img src="media/figures/rescaled_figures/chemrev_figure7.png" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure7.png" alt="" / width="100%">
 <figcaption><strong>The execution-cognition-perception capabilities of
 an <span data-acronym-label="llm"
 data-acronym-form="singular+short">llm</span>-agent:</strong> This
@@ -1834,9 +1837,9 @@ integration with robots \[@darvish2025organa; @chan2024mle;
 a stoichiometry calculator or as complex as a Python script that runs a
 [dft]{acronym-label="dft" acronym-form="singular+short"} simulation
 using specialized software, a search [api]{acronym-label="api"
-acronym-form="singular+short"} for querying chemical databases like , or
-a controller for a robotic synthesis platform \[@boiko2023autonomous;
-@darvish2025organa; @bran2024augmenting\].
+acronym-form="singular+short"} for querying chemical databases like
+`PubChem`, or a controller for a robotic synthesis platform
+\[@boiko2023autonomous; @darvish2025organa; @bran2024augmenting\].
 
 #### Memory & [rag]{acronym-label="rag" acronym-form="singular+short"}  {#sec:rag}
 

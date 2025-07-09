@@ -14,16 +14,23 @@ book:
   - 03-architectures.qmd
   - 04-evals.qmd
   - 05-applications.qmd
-  - 06-safety.qmd
-  - 07-outlook_conclusions.qmd
+  - 06-accelerating_applications.qmd
+  - 07-safety.qmd
+  - 08-outlook_conclusions.qmd
+  - 09-references.qmd
 bibliography: references.bib
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
-    toc-depth: 3
+    toc-depth: 5
     number-sections: true
     highlight-style: github
+    code-link: true
+    template-partials:
+    - helpers/toc.html
+    toc-title: On this page
+    code-overflow: wrap
 execute:
   freeze: auto

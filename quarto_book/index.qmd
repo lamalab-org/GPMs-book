@@ -1,5 +1,6 @@
 ---
 title: "General purpose models for the chemical sciences"
+unnumbered: true
 ---
 
 # General purpose models for the chemical sciences
@@ -24,27 +25,27 @@ A.M.'s work was funded by the SOL-AI project, funded as part of the Helmholtz Fo
 
 G.P.'s work was supported by the HPC Gateway measure of the Helmholtz Association.
 
-K.M.J.\ is part of the NFDI consortium FAIRmat funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) – project 460197019.
+K.M.J.\ is part of the NFDI consortium FAIRmat funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - project 460197019.
 
 We thank Mimi Lavin and Maximilian Greiner for their feedback on a draft of this article.
 
 ## Author contributions
 
-N. A. was the lead contributor for the [Building Principles of GPMs](03-architectures.qmd) section. Including its writing and figures (excluding the [Model Level Adaptation](03-architectures.qmd#sec:model_adaptation) subsection). N. A. also reviewed the [Introduction](01-introduction.qmd), [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Evaluations](04-evals.qmd), [Implications of GPMs: Education, Safety, and Ethics](06-safety.qmd), and [Property Prediction](05-applications.qmd#sec:prediction) and [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) sections.
+N. A. was the lead contributor for the [Building Principles of GPMs](03-architectures.qmd) section. Including its writing and figures (excluding the [Model Level Adaptation](03-architectures.qmd#sec:model_adaptation) subsection). N. A. also reviewed the [Introduction](01-introduction.qmd), [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Evaluations](04-evals.qmd), [Implications of GPMs: Education, Safety, and Ethics](07-safety.qmd), and [Property Prediction](05-applications.qmd#sec:prediction) and [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) sections.
 
-A. A. was the primary contributor to the writing of the [Property Prediction](05-applications.qmd#sec:prediction), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation), [Safety](06-safety.qmd#sec:safety), and [Ethics](06-safety.qmd#sec:ethics) sections, conceptualized the outline for safety and ethics sections, designed and created all figures/schematics/plots in sections with primary contribution, was one of the contributors to the [AI Scientists](05-applications.qmd#sec:ai-scientists) overview, edited [Introduction](01-introduction.qmd), [Evaluations](04-evals.qmd), [Building Principles of GPMs](03-architectures.qmd), [Knowledge Gathering](05-applications.qmd#sec:information_gathering), [Experiment Execution](05-applications.qmd#sec:experiment_execution), and [Education](06-safety.qmd#sec:education) sections.
+A. A. was the primary contributor to the writing of the [Property Prediction](05-applications.qmd#sec:prediction), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation), [Safety](07-safety.qmd#sec:safety), and [Ethics](07-safety.qmd#sec:ethics) sections, conceptualized the outline for safety and ethics sections, designed and created all figures/schematics/plots in sections with primary contribution, was one of the contributors to the [AI Scientists](05-applications.qmd#sec:ai-scientists) overview, edited [Introduction](01-introduction.qmd), [Evaluations](04-evals.qmd), [Building Principles of GPMs](03-architectures.qmd), [Knowledge Gathering](05-applications.qmd#sec:information_gathering), [Experiment Execution](05-applications.qmd#sec:experiment_execution), and [Education](07-safety.qmd#sec:education) sections.
 
 M.R.-G. was the primary contributor to the [AI Scientists](05-applications.qmd#sec:ai-scientists) overview, the [Hypothesis Generation](05-applications.qmd#sec:hypothesis), and the [LLMs as Optimizers](05-applications.qmd#sec:optimizers) sections, and helped in reviewing the entire manuscript.
 
-A.M. was the main contributor to the [Introduction](01-introduction.qmd) and [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) sections, and the main contributor to the [Knowledge Gathering](05-applications.qmd#sec:information_gathering) and [Reporting](05-applications.qmd#sec:reporting) sections within the applications section, with minor contributions to the [Building Principles of GPMs](03-architectures.qmd) and the [Safety](06-safety.qmd#sec:safety) sections. Has drafted the initial outline of the article. Reviewed the [Building Principles of GPMs](03-architectures.qmd) sections, the [Safety](06-safety.qmd#sec:safety) section, the [Hypothesis Generation](05-applications.qmd#sec:hypothesis), the [Data Analysis](05-applications.qmd#sec:data_analysis) sections and contributed to the review of the [LLMs as Optimizers](05-applications.qmd#sec:optimizers) section.
+A.M. was the main contributor to the [Introduction](01-introduction.qmd) and [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) sections, and the main contributor to the [Knowledge Gathering](05-applications.qmd#sec:information_gathering) and [Reporting](05-applications.qmd#sec:reporting) sections within the applications section, with minor contributions to the [Building Principles of GPMs](03-architectures.qmd) and the [Safety](07-safety.qmd#sec:safety) sections. Has drafted the initial outline of the article. Reviewed the [Building Principles of GPMs](03-architectures.qmd) sections, the [Safety](07-safety.qmd#sec:safety) section, the [Hypothesis Generation](05-applications.qmd#sec:hypothesis), the [Data Analysis](05-applications.qmd#sec:data_analysis) sections and contributed to the review of the [LLMs as Optimizers](05-applications.qmd#sec:optimizers) section.
 
-M.S.-W. was the main contributor to the [Evaluations](04-evals.qmd), [Education](06-safety.qmd#sec:education) and [Data Analysis](05-applications.qmd#sec:data_analysis) section. M.S.-W. also reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Hypothesis Generation](05-applications.qmd#sec:hypothesis), [Experiment Execution](05-applications.qmd#sec:experiment_execution), [Reporting](05-applications.qmd#sec:reporting) and [Safety](06-safety.qmd#sec:safety) section. Unified all figures. Kept track of upcoming deadlines.
+M.S.-W. was the main contributor to the [Evaluations](04-evals.qmd), [Education](07-safety.qmd#sec:education) and [Data Analysis](05-applications.qmd#sec:data_analysis) section. M.S.-W. also reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Hypothesis Generation](05-applications.qmd#sec:hypothesis), [Experiment Execution](05-applications.qmd#sec:experiment_execution), [Reporting](05-applications.qmd#sec:reporting) and [Safety](07-safety.qmd#sec:safety) section. Unified all figures. Kept track of upcoming deadlines.
 
 M. S. was the primary contributor to the writing of [Experiment Planning](05-applications.qmd#sec:planning) section and related figure. And also helped in reviewing [Knowledge Gathering](05-applications.qmd#sec:information_gathering), [Property Prediction](05-applications.qmd#sec:prediction), and [LLMs as Optimizers](05-applications.qmd#sec:optimizers) sections.
 
 G.P. was the main contributor to [Model Level Adaptation](03-architectures.qmd#sec:model_adaptation) section, including its writing and table. G.P. additionally reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Data Analysis](05-applications.qmd#sec:data_analysis), [Reporting](05-applications.qmd#sec:reporting) and [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) sections.
 
-A.A.A. was the main contributor to the [Experiment Execution](05-applications.qmd#sec:experiment_execution) section, including its figure, and a minor contributor to the post-training subsection. A.A.A. reviewed the [Introduction](01-introduction.qmd), [Experiment Planning](05-applications.qmd#sec:planning), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) and [Education](06-safety.qmd#sec:education) sections, edited [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) and [Building Principles of GPMs](03-architectures.qmd) sections, created the glossary, and ensured that most references are accessible via a DOI.
+A.A.A. was the main contributor to the [Experiment Execution](05-applications.qmd#sec:experiment_execution) section, including its figure, and a minor contributor to the post-training subsection. A.A.A. reviewed the [Introduction](01-introduction.qmd), [Experiment Planning](05-applications.qmd#sec:planning), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) and [Education](07-safety.qmd#sec:education) sections, edited [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) and [Building Principles of GPMs](03-architectures.qmd) sections, created the glossary, and ensured that most references are accessible via a DOI.
 
 K.M.J. initiated and led the project. K.M.J. edited all sections. 
 
@@ -58,9 +59,11 @@ K.M.J.\ has been a paid contractor for OpenAI as part of the Red-Teaming Network
 This book covers the following topics:
 
 1. [Introduction](01-introduction.qmd)
-2. [Data Taxonomy](02-data_taxonomy.qmd)
-3. [Architectures](03-architectures.qmd)
+2. [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd)
+3. [Building Principles of GPMs](03-architectures.qmd)
 4. [Evaluations](04-evals.qmd)
 5. [Applications](05-applications.qmd)
-6. [Safety](06-safety.qmd)
-7. [Conclusions and Outlook](07-outlook_conclusions.qmd)
+6. [Accelerating Applications](06-accelerating_applications.qmd)
+7. [Implications of GPMs: Education, Safety, and Ethics](07-safety.qmd)
+8. [Outlook and Conclusions](08-outlook_conclusions.qmd)
+9. [References](09-references.qmd)

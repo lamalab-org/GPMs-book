@@ -1,0 +1,1074 @@
+---
+title: "Accelerating Applications"
+---
+
+# Accelerating Applications
+
+The application of accelerated approaches in the scientific discovery
+cycle (see
+[\[fig:applications\]](#fig:applications){reference-type="ref+Label"
+reference="fig:applications"}) hinges on their ability to streamline and
+enhance each stage of the process. However, a fundamental challenge in
+effectively implementing these approaches lies in the choice of
+machine-readable representation.
+
+This challenge is particularly evident in the representation of
+molecules and materials, which must balance computational efficiency
+with the preservation of structural, compositional, and functional
+properties. Take, for example, the high-temperature superconductor .
+While atomic positions and coordinates are theoretically sufficient to
+solve the Schrödinger equation and describe this material, such a
+representation may not provide the adaptability necessary for diverse
+tasks. What defines a good representation depends on the problem.
+\[@huang2016understanding\]. A representation designed to predict
+critical temperature must efficiently encode the relationship between
+oxygen stoichiometry and superconducting properties, emphasizing
+features like oxygen vacancy patterns and charge transfer mechanisms.
+Conversely, a representation for structural stability might prioritize
+different geometric or bonding characteristics.
+
+This tension has led to three primary strategies for representing
+molecules and materials (read
+[\[sec:common_representations\]](#sec:common_representations){reference-type="ref+Label"
+reference="sec:common_representations"} to learn in detail about the
+different representations that currently exist). First, domain-specific
+text-based formats---such as [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} \[@weininger1988smiles\],
+[selfies]{acronym-label="selfies" acronym-form="singular+short"}
+\[@krenn2020self\], and [cif]{acronym-label="cif"
+acronym-form="singular+short"} \[@hall1991crystallographic\]---offer
+compact, machine-readable encodings of structural information. While
+these necessarily omit certain physical details, their computational
+tractability has enabled breakthroughs, as demonstrated by
+@jablonka2024leveraging in their [llm]{acronym-label="llm"
+acronym-form="singular+short"}-based generation of valid molecular and
+material structures.
+
+Yet, the question remains: Which representation is optimal for a given
+task? Future advances in accelerated discovery will likely hinge on
+adaptive representations that dynamically balance these competing
+demands.
+
+## Property Prediction {#sec:prediction}
+
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} have emerged as
+a powerful tool for predicting molecular and material properties,
+offering an alternative to traditional quantum mechanical calculations
+or specialized [ml]{acronym-label="ml" acronym-form="singular+short"}
+models. Current [gpm]{acronym-label="gpm"
+acronym-form="singular+short"}-driven property prediction tasks span
+both classification and regression. Unlike conventional approaches that
+rely on task-specific architectures and extensively labeled data,
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} have
+demonstrated strong generalization capabilities across diverse domains,
+efficiently adapting to various prediction tasks. Their success extends
+to multiple datasets, from standardized benchmarks such as `MoleculeNet`
+\[@wu2018moleculenet\], to curated datasets targeting specific
+applications such as antibacterial activity
+\[@chithrananda2020chemberta\] or photovoltaic
+efficiency\[@aneesh2025semantic\].
+
+Three key methodologies have been explored to adapt
+[llms]{acronym-label="llm" acronym-form="plural+short"} for property
+prediction: prompting techniques (see
+[\[sec:prompting\]](#sec:prompting){reference-type="ref+Label"
+reference="sec:prompting"}), fine-tuning (see
+[\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
+reference="sec:fine-tuning"}) on domain-specific data, and
+[rag]{acronym-label="rag" acronym-form="singular+short"} (see
+[\[sec:rag\]](#sec:rag){reference-type="ref+Label" reference="sec:rag"})
+approaches that combine [llms]{acronym-label="llm"
+acronym-form="plural+short"} with external knowledge bases.
+
+::: minipage
+**Key:** P = prompting; FT = fine-tuned model; RAG = retrieval-augmented
+generation; C = Classification; R = Regression
+:::
+
+### Prompting
+
+Prompt engineering involves designing targeted instructions to guide
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} in performing
+specialized tasks without altering their underlying parameters by
+leveraging their embedded knowledge. In molecular and materials science,
+this strategy goes beyond simply asking a model to predict properties.
+It also includes carefully structured prompts to elicit detailed
+molecular and material descriptions directly from the model's
+pre-trained knowledge.
+
+@liu2025integrating conducted a comprehensive evaluation of different
+prompting techniques to predict the properties of organic small
+molecules and crystal materials. Some of these techniques included
+domain-knowledge (prior knowledge was embedded in the prompt), expert
+(role-play instructions), and few-shot [cot]{acronym-label="cot"
+acronym-form="singular+short"} (the text*"Let's think step by step"* is
+added) prompting. Of these, domain knowledge achieved maximum
+performance. However, their evaluation was limited to a relatively small
+set of molecules and tasks, and the effectiveness of their
+domain-knowledge approach may not generalize to other molecular property
+domains.
+
+Building on these foundational prompting strategies, few-shot prompting
+approaches leverage [icl]{acronym-label="icl"
+acronym-form="singular+short"} to enhance performance through selected
+examples @liu2024moleculargpt used [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} string representations of molecules with
+few-shot [icl]{acronym-label="icl" acronym-form="singular+short"},
+retrieving structurally similar molecules as demonstrations to enhance
+property prediction. This approach highlights how
+[icl]{acronym-label="icl" acronym-form="singular+short"} can transfer
+knowledge from similar molecule examples without requiring model
+fine-tuning for each task. However, the effectiveness of
+[icl]{acronym-label="icl" acronym-form="singular+short"} depends on the
+quality of retrieved examples.
+
+@fifty2023incontext moved beyond direct text prompting of molecules and
+introduced [camp]{acronym-label="camp" acronym-form="singular+short"}:
+an [icl]{acronym-label="icl" acronym-form="singular+short"} algorithm
+that uses a two-stage encoding approach without relying on pre-trained
+[llms]{acronym-label="llm" acronym-form="plural+short"}. First, a
+specialized [mpnn]{acronym-label="mpnn" acronym-form="singular+short"}
+encodes molecule graphs into molecular embeddings rather than processing
+them as raw text. These embeddings are then fed into a transformer
+encoder, which learns contextualized representations across the support
+set (a small collection of labeled molecule-property pairs) and the
+unlabeled query molecules. They demonstrated [camp]{acronym-label="camp"
+acronym-form="singular+short"}'s ability to outperform existing few-shot
+learning baselines by providing relevant molecular examples within the
+prompt context. However, this approach is constrained by the
+context-length limitations of the underlying [lms]{acronym-label="lm"
+acronym-form="plural+short"} and the challenge of selecting optimal
+demonstration examples.
+
+More sophisticated approaches have leveraged prompting as part of
+multi-modal frameworks. The `LLM4SD` pipeline by @zheng2025large
+employs specialized prompts to guide [lms]{acronym-label="lm"
+acronym-form="plural+short"} through their pre-trained knowledge on
+scientific literature, generating known rules (e.g., molecules weighing
+under 500 Da are more likely to pass the blood-brain barrier) that
+transform molecules into feature vectors (e.g. could translate to a
+vector $[2,46.07,1,1]$ where each number represents a feature of the
+molecule, in this example \[# , MW, \# -bond donors, \# -bond
+acceptors\]) for use with a random forest model, which they consider
+"interpretable". This approach outperformed specialized
+[sota]{acronym-label="sota" acronym-form="singular+short"} models across
+$58$ benchmark tasks, while providing interpretable reasoning about
+prediction logic (see
+[\[tab:property_prediction_models\]](#tab:property_prediction_models){reference-type="ref+Label"
+reference="tab:property_prediction_models"} for properties predicted by
+this model). However, its reliance on rule extraction may limit its
+ability to capture complex, non-linear relationships that specialized
+deep learning models can identify.
+
+#### [llms]{acronym-label="llm" acronym-form="plural+short"} as Feature Extractors
+
+Another emerging application of [llms]{acronym-label="llm"
+acronym-form="plural+short"} is their use as "feature extractors", where
+they generate textual or embedded representations of molecules or
+materials. For instance, in materials science, @aneesh2025semantic
+employed [llms]{acronym-label="llm" acronym-form="plural+short"} to
+generate text embeddings of perovskite solar cell compositions. These
+embeddings were subsequently used to train a [gnn]{acronym-label="gnn"
+acronym-form="singular+short"} for predicting power conversion
+efficiency, demonstrating the potential of [llms]{acronym-label="llm"
+acronym-form="plural+short"} to enhance feature representation in
+materials informatics. Similarly, in the molecular domain,
+@srinivas2024crossmodal used zero-shot [llm]{acronym-label="llm"
+acronym-form="singular+short"} prompting (see
+[\[box: cot_prompting\]](#box: cot_prompting){reference-type="ref+Label"
+reference="box: cot_prompting"} for prompt examples) to generate
+detailed textual descriptions of molecular functional groups, which are
+used to train a small [lm]{acronym-label="lm"
+acronym-form="singular+short"}. This [lm]{acronym-label="lm"
+acronym-form="singular+short"} is used to compute text-level embeddings
+of molecules. Simultaneously, they generate molecular graph-level
+embeddings from [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} string molecular graph inputs. They
+finally integrate the graph and text-level embeddings to produce a
+semantically enriched embedding.
+
+::: promptbox
+[]{#box: cot_prompting label="box: cot_prompting"}
+**[cot]{acronym-label="cot" acronym-form="singular+short"}
+Prompting**\[@srinivas2024crossmodal\]\
+Prompt 1: What is the molecular structure of this chemical
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} string?
+Could you describe its atoms, bonds, functional groups, and overall
+arrangement?\
+Prompt 2: What are the physical properties of this molecule, such as its
+boiling point and melting point?\
+\...\
+Prompt 14: Are there any environmental impacts associated with the
+production, use, or disposal of this molecule?
+:::
+
+In a different implementation of fine-tuning, @balaji2023gptmolberta
+used `ChatGPT` to generate text descriptions of molecules that were then
+used to train a `RoBERTa` (125M) model for property prediction, showing
+how [lm]{acronym-label="lm" acronym-form="singular+short"}-generated
+representations can access latent spaces that
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} strings
+alone might not capture. Similarly, @li2024unveiling introduced the
+`MoleX` framework, which fine-tunes `ChemBERTa-2`\[@ahmad2022chemberta\]
+on Group [selfies]{acronym-label="selfies"
+acronym-form="singular+short"} \[@cheng2023group\] (a functional
+group-based molecular representation) to then extract a single
+[llm]{acronym-label="llm" acronym-form="singular+short"}-derived
+embedding of molecules that captures the chemical semantics at the
+functional group level. This allowed them to determine which functional
+groups or fragments contribute to molecular properties, which in turn
+can be converted into reliable explanations of said properties.
+
+### Fine-Tuning {#sec:prediction_FT}
+
+<figure id="fig:gptchem">
+<img src="media/figures/property_gptchem.png" alt="" / width="100%">
+<figcaption><strong>Fine-tuned <code>GPT-3</code> for predicting
+solid-solution formation in high-entropy alloys</strong> Performance
+comparison of different <span data-acronym-label="ml"
+data-acronym-form="singular+short">ml</span> approaches as a function of
+the number of training points. Results are shown for
+<code>Automatminer</code> (blue), <code>CrabNet</code> transformer
+(orange), fine-tuned <code>GPT-3</code> (red), with error bars showing
+standard error of the mean. The non-Google test set shows the fine-tuned
+<code>GPT-3</code> model tested on compounds without an exact Google
+search match (dark red). The dashed line shows performance using random
+forest. <code>GPT-3</code> achieves comparable accuracy to traditional
+approaches with significantly fewer training examples. Data adapted from
+@jablonka2024leveraging</figcaption>
+</figure>
+
+#### [lift]{acronym-label="lift" acronym-form="singular+short"}
+
+@dinh2022lift showed that reformulating regression and classification
+as [qa]{acronym-label="qa" acronym-form="singular+short"} tasks enables
+the use of unmodified model architecture while improving performance
+(see [\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
+reference="sec:fine-tuning"} for a deeper discussion of
+[lift]{acronym-label="lift" acronym-form="singular+short"}). In
+recognizing the scarcity of experimental data and acknowledging the
+persistence of this limitation, @jablonka2024leveraging designed a
+[lift]{acronym-label="lift" acronym-form="singular+short"}-based
+framework using `GPT-3` fine-tuned on task-specific small datasets (see
+[\[tab:property_prediction_models\]](#tab:property_prediction_models){reference-type="ref+Label"
+reference="tab:property_prediction_models"}). They seminally
+demonstrated that fine-tuned `GPT-3` can match or surpass specialized
+[ml]{acronym-label="ml" acronym-form="singular+short"} models in various
+chemistry tasks. A key finding was fine-tuned `GPT-3`'s ability to
+generalize beyond training data. When tested on compounds absent from
+Google Search (and likely its training data), it performed well, proving
+that it was not simply recalling memorized information (see
+[1](#fig:gptchem){reference-type="ref+Label" reference="fig:gptchem"}).
+
+In a follow-up to @jablonka2024leveraging's work,
+@vanherck2025assessment systematically evaluated this approach across
+22 diverse real-world chemistry case studies using three open-source
+models. They demonstrate that fine-tuned [llms]{acronym-label="llm"
+acronym-form="plural+short"} can effectively predict various material
+properties. For example, they achieved $96\%$ accuracy in predicting the
+adhesive free-energy of polymers, outperforming traditional
+[ml]{acronym-label="ml" acronym-form="singular+short"} methods like
+random forest ($90\%$ accuracy). When predicting properties of monomers
+using [smiles]{acronym-label="smiles" acronym-form="singular+short"}
+notation, the fine-tuned models reached average accuracies of $84\%$
+across four different properties. Particularly notable was the ability
+of [llms]{acronym-label="llm" acronym-form="plural+short"} to work with
+non-standard inputs, like in a protein phase separation study they did,
+where raw protein sequences could be directly input without
+pre-processing and achieve $95\%$ prediction accuracy. At the same time,
+when training datasets were very small (15 data points), the predictive
+accuracy of all fine-tuned models was lower than the random baseline
+(e.g. MOF synthesis). These case studies preliminarily demonstrate that
+these models can achieve predictive performance with some small
+datasets, work with various chemical representations
+([smiles]{acronym-label="smiles" acronym-form="singular+short"},
+[mof]{acronym-label="mof" acronym-form="singular+short"}id, and
+[iupac]{acronym-label="iupac" acronym-form="singular+short"} names), and
+can outperform traditional [ml]{acronym-label="ml"
+acronym-form="singular+short"} approaches for some material property
+prediction tasks.
+
+In the materials domain, `LLMprop` fine-tunes
+`T5`\[@raffel2020exploring\] to predict crystalline material properties
+from text descriptions generated by
+`Robocrystallographer`\[@ganose2019robocrystallographer\]. By discarding
+`T5`'s decoder and adding task-specific prediction heads, the approach
+reduces computational overhead while leveraging the model's ability to
+process structured crystal descriptions. The method demonstrates that
+natural language representations can effectively capture key material
+features, offering an alternative to traditional graph-based models like
+[gnns]{acronym-label="gnn" acronym-form="plural+short"}.
+
+Fine-tuning has been used to adapt [ssms]{acronym-label="ssm"
+acronym-form="plural+short"} like Mamba (see
+[\[sec:example_architectures\]](#sec:example_architectures){reference-type="ref+Label"
+reference="sec:example_architectures"}). By pre-training on 91 million
+molecules, the Mamba-based model
+$\text{O}_{SMI}-{\text{SSM}-}336\textit{M}$ outperformed transformer
+methods (`Yield-BERT`\[@krzyzanowski2025exploring\]) in reaction yield
+prediction (e.g., Buchwald-Hartwig cross-coupling) and achieved
+competitive results in molecular property prediction
+benchmarks.\[@soares2025mamba-based\]
+
+#### Foundational [gnns]{acronym-label="gnn" acronym-form="plural+short"} and [mlips]{acronym-label="mlip" acronym-form="plural+short"}
+
+The fine-tuning approach has been applied to "foundational
+[gnns]{acronym-label="gnn" acronym-form="plural+short"}"
+\[@sypetkowski2024scalability; @shoghi2023molecules\] and
+[mlips]{acronym-label="mlip" acronym-form="plural+short"}, approaches
+distinct from [gpms]{acronym-label="gpm" acronym-form="plural+short"}.
+For example, \[@shoghi2023molecules; @sypetkowski2024scalability\] show
+[sota]{acronym-label="sota" acronym-form="singular+short"} performance
+on property prediction tasks. "Foundational"
+[mlips]{acronym-label="mlip" acronym-form="plural+short"} pre-trained on
+large datasets encompassing many chemical elements can be fine-tuned for
+specific downstream tasks \[@batatia2022mace\], such as calculating
+sublimation enthalpies of molecular crystal polymorphs
+\[@kaur2025data\].
+
+#### Limitations
+
+One central challenge is finding balance in datasets. In practical
+applications, researchers often have many more examples of
+poor-performing materials than optimal ones, resulting in unbalanced
+datasets that can diminish model performance. @vanherck2025assessment
+point out that in the catalyzed cleavage reaction study, only $3.8\%$ of
+catalysts were labeled as "good", forcing researchers to reduce their
+training set significantly to maintain balance. They also note that
+[llms]{acronym-label="llm" acronym-form="plural+short"} struggle with
+highly complex or noisy datasets, as seen in their study of catalytic
+isomerization, where even after hyperparameter optimization, the models
+failed to achieve meaningful predictive power due to the high noise in
+the experimental data and limited sample size. Finally, they note that
+although [llms]{acronym-label="llm" acronym-form="plural+short"} can
+work with different chemical representations, the choice of
+representation significantly impacts performance. For example, when
+predicting polymerization rates, models using
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} notation
+significantly outperformed those using [iupac]{acronym-label="iupac"
+acronym-form="singular+short"} names, indicating that representation
+selection remains an important consideration.
+
+Fine-tuning effectively adapts [llms]{acronym-label="llm"
+acronym-form="plural+short"} to specialized chemistry tasks, but its
+dependence on static datasets hinders adaptability to new or evolving
+knowledge. [rag]{acronym-label="rag" acronym-form="singular+short"},
+whose fundamentals are described in detail in
+[\[sec:rag\]](#sec:rag){reference-type="ref+Label" reference="sec:rag"},
+overcomes these limitations by dynamically integrating external data
+sources, enabling more flexible and up-to-date reasoning.
+
+### Agents
+
+Caldas Ramos et al. introduce `MAPI-LLM`, a framework that processes
+natural-language queries about material properties using an
+[llm]{acronym-label="llm" acronym-form="singular+short"} to decide which
+of the available tools such as the Materials Project
+[api]{acronym-label="api" acronym-form="singular+short"}, the
+Reaction-Network package, or Google Search to use to generate a
+response. \[@Jablonka2023\] `MAPI-LLM` employs a
+[react]{acronym-label="react" acronym-form="singular+short"} prompt (see
+[\[sec:arch_agents\]](#sec:arch_agents){reference-type="ref+Label"
+reference="sec:arch_agents"} to read more about
+[react]{acronym-label="react" acronym-form="singular+short"}), to
+convert prompts such as *"Is $Fe_2O_3$ magnetic?"* or *"What is the band
+gap of Mg(Fe3O3)2?"* into queries for Materials Project
+[api]{acronym-label="api" acronym-form="singular+short"}. The system
+processes multi-step prompts through logical reasoning, for example,
+when asked *"If Mn2FeO3 is not metallic, what is its band gap?"*, the
+[llm]{acronym-label="llm" acronym-form="singular+short"} system creates
+a two-step workflow to first verify metallicity before retrieving the
+band gap.
+
+Building on this foundation of agent-based materials querying,
+@chiang2024llamp advanced the approach with `LLaMP`, a framework that
+employs "hierarchical" [react]{acronym-label="react"
+acronym-form="singular+short"} agents to interact with computational and
+experimental data. This "hierarchical" framework employs a
+supervisor-assistant agent architecture where a complex problem is
+broken down and tasks are delegated to domain-specific agents. `LLaMP`
+addresses the challenge of hallucinations more effectively than standard
+[llm]{acronym-label="llm" acronym-form="singular+short"} approaches by
+grounding responses in retrieved materials databases, retrieving
+materials data (e.g., crystal structures, elastic tensors) while
+counteracting systematic [llm]{acronym-label="llm"
+acronym-form="singular+short"} biases in property predictions. These
+biases include the tendency for [llms]{acronym-label="llm"
+acronym-form="plural+short"} to overestimate certain properties like
+bulk moduli and to exhibit errors in bandgap predictions based on
+compositional patterns learned during training rather than physical
+principles.
+
+### Core Limitations {#sec:property_core_limits}
+
+<figure id="fig:property_limitations">
+<img src="media/figures/property_mattext.png" alt="" / width="100%">
+<figcaption><strong>Normalized error distributions for materials
+property prediction models across different architectures</strong>. Each
+point represents the normalized error of a model on a specific property
+prediction task. Normalization was achieved with min/max values of each
+dataset to produce a range of errors between 0 and 1. The first column
+(blue) shows <span data-acronym-label="gnn"
+data-acronym-form="singular+short">gnn</span> based models, the second
+column (red) displays <span data-acronym-label="llm"
+data-acronym-form="singular+short">llm</span> approaches, and the third
+column (orange) represents other baseline methods and <span
+data-acronym-label="sota" data-acronym-form="singular+short">sota</span>
+models including <code>CrabNet</code>. [@Wang_2021] Lower values
+indicate better predictive performance. Data adapted from
+@alampara2024mattext</figcaption>
+</figure>
+
+@alampara2024mattext introduced `MatText`, a framework for evaluating
+[lms]{acronym-label="lm" acronym-form="plural+short"} ability to predict
+properties of materials using text-based representations. Their findings
+indicate that current [llms]{acronym-label="llm"
+acronym-form="plural+short"} (including pre-trained `BERT` and
+fine-tuned `LLaMA-3-8B`) are effective for tasks relying purely on
+compositional information (e.g., element types and local bonding
+patterns), but struggle to leverage geometric or positional information
+encoded in text, as reflected in
+[2](#fig:property_limitations){reference-type="ref+Label"
+reference="fig:property_limitations"}. This observation suggests that
+transformer-based architectures may be fundamentally limited to
+applications where spatial understanding is not required. Their
+experiments with data scaling and text representations reveal that
+increasing pre-training data or adding geometric details fails to
+improve downstream property prediction, challenging the conventional
+assumption that larger models and datasets universally enhance
+performance. \[@frey2023neural\] Notably, @frey2023neural demonstrated
+power-law scaling in chemical [llms]{acronym-label="llm"
+acronym-form="plural+short"}, but `MatText`'s results imply that such
+scaling may not overcome architectural biases against geometric
+reasoning in materials tasks.\[@gruver2024promises\]
+
+## Molecular and Material Generation {#sec:mol_generation}
+
+<figure id="fig:generation">
+<img src="media/figures/rescaled_figures/chemrev_figure21.png" alt="" / width="100%">
+<figcaption><strong>Pipeline for molecular and materials
+generation</strong> The workflow begins with input structures
+represented in various formats, which are used to train <span
+data-acronym-label="ml" data-acronym-form="singular+short">ml</span>
+models to generate novel molecular and material structures. The
+generated structures should undergo a feedback loop through validation
+processes before being applied in the real world. Blue boxes indicate
+well-established areas of the pipeline with mature methodologies, while
+the red box represents critical bottlenecks.</figcaption>
+</figure>
+
+Early work in molecular and materials generation relied heavily on
+unconditional generation, where models produce novel structures without
+explicit guidance, relying solely on patterns learned from training
+data. For example, latent space sampling in autoencoders, where random
+vectors are decoded into new structures.\[@yoshikai2024novel\] These
+methods excel at exploring chemical space broadly but lack fine-grained
+control. This limitation underscores the need for conditional
+generation, using explicit prompts or constraints (e.g., property
+targets, structural fragments), to steer [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} toward meaningful molecule or material
+designs. Beyond the generation step, as
+[3](#fig:generation){reference-type="ref+Label"
+reference="fig:generation"} shows, critical bottlenecks persist in
+synthesizability and physical consistency at the validation stage.
+
+### Generation {#sec:generation}
+
+#### Prompting
+
+While zero-shot and few-shot prompting strategies demonstrate promising
+flexibility for molecule generation, benchmark studies \[@guo2023large\]
+reveal significant limitations that restrict their practical utility.
+@guo2023large exposed fundamental gaps in [llms]{acronym-label="llm"
+acronym-form="plural+short"}' molecular design capabilities through a
+systematic evaluation. `GPT-4` was reported to produce chemically valid
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} $89\%$ of
+the time but achieving less than $20\%$ accuracy in matching the target
+specifications. This result is far below specialized models like
+`MolT5`\[@edwards2022translation\]. They conclude that this performance
+gap stems from [llms]{acronym-label="llm" acronym-form="plural+short"}'
+inadequate understanding of [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} syntax and structure-property
+relationships. Subsequent work by @bhattacharya2024large explored
+whether systematic prompt engineering could overcome these limitations,
+demonstrating that these prompts could guide `Claude 3 Opus` to generate
+chemically valid molecules ($97\%$ syntactic validity) with controlled
+modifications, including fine-grained structural changes (median
+Tanimoto similarity $0.67$--$0.69$) and predictable electronic property
+shifts (0.14 eV--0.27 eV [homo]{acronym-label="homo"
+acronym-form="singular+short"} energy changes). Hybrid approaches like
+`FrontierX` extend this method with knowledge-augmented prompting, where
+[llms]{acronym-label="llm" acronym-form="plural+short"} generate both
+molecule predictions and explanations that are used to fine-tune smaller
+[lms]{acronym-label="lm" acronym-form="plural+short"}, with all
+resulting embeddings ultimately combined via hierarchical attention
+mechanisms to produce the final [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} representation\[@srinivas2024crossing\].
+It showed improved accuracy over pure prompting strategies but
+sacrificed the generalizability that makes [llms]{acronym-label="llm"
+acronym-form="plural+short"} attractive, as the model requires
+re-training for each new molecular domain.
+
+#### Fine-Tuning {#fine-tuning}
+
+To overcome the limitations of prompting, fine-tuning has been adopted
+in molecular and materials generation, much like its use in property
+prediction with [lift]{acronym-label="lift"
+acronym-form="singular+short"}-based frameworks (see
+[\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
+reference="sec:fine-tuning"} for a deeper explanation of
+[lift]{acronym-label="lift" acronym-form="singular+short"} and
+[1.1.2](#sec:prediction_FT){reference-type="ref+Label"
+reference="sec:prediction_FT"} for a discussion of
+[lift]{acronym-label="lift" acronym-form="singular+short"} applied to
+property prediction tasks). @yu2024llasmol demonstrated that systematic
+fine-tuning in various chemical tasks including molecule generation from
+captions can improve performance while remaining parameter-efficient,
+using only $0.58\%$ of trainable parameters via
+[lora]{acronym-label="lora" acronym-form="singular+short"}.
+
+The molecule-caption translation task (`Mol2Cap`), which involves
+generating textual descriptions from molecular representations and vice
+versa (Cap2Mol), has become a standard benchmark for evaluating
+[gpms]{acronym-label="gpm" acronym-form="plural+short"} for molecule
+generation. \[@edwards2022translation\] Under the "Mol2Cap"/"Cap2Mol"
+task paradigm, [icma]{acronym-label="icma"
+acronym-form="singular+short"} avoids domain-specific pre-training by
+combining retrieval-augmented in-context learning with fine-tuning on
+[icl]{acronym-label="icl" acronym-form="singular+short"}
+examples.\[@li2025large\] On the ChEBI-20\[@edwards2021text2mol\] and
+PubChem324k\[@liu2023molca\] datasets, [icma]{acronym-label="icma"
+acronym-form="singular+short"} nearly doubles baseline performance, with
+[icma]{acronym-label="icma" acronym-form="singular+short"} powered
+by`Mistral-7B` achieving a 0.581 [bleu]{acronym-label="bleu"
+acronym-form="singular+short"} score in `Mol2Cap` and $46.0\%$ exact
+match in `Cap2Mol`.\[@li2025large\] However, its reliance on retrieved
+examples raises concerns about generalization to novel scaffolds.
+Similarly, `MolReFlect` enhances fine-grained alignment through a
+teacher-student framework, where a larger [llm]{acronym-label="llm"
+acronym-form="singular+short"} (e.g., `GPT-4`) extracts
+substructure-aware captions to guide a smaller model (`Mistral-7B`),
+improving `Cap2Mol` accuracy while reducing
+hallucinations.\[@li2024molreflect\] Meanwhile, `PEIT-LLM` extends the
+task to property-conditioned generation, using instructions
+([smiles]{acronym-label="smiles"
+acronym-form="singular+short"}-text-property tuples) to optimize for
+captioning and prediction jointly.\[@lin2025property\]
+
+Fine-tuned [lms]{acronym-label="lm" acronym-form="plural+short"} have
+shown promise in molecule and materials generation. However, their
+reliance on decoding and [smiles]{acronym-label="smiles"
+acronym-form="singular+short"}/[selfies]{acronym-label="selfies"
+acronym-form="singular+short"} representations introduces fundamental
+limitations: degeneracy (multiple valid [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} for the same molecule) and difficulty
+capturing complex structural relationships implicit in textual
+descriptions.
+
+#### Diffusion and Flow Matching
+
+Diffusion and flow-based models operate directly on latent
+representations, enabling more flexible generation of diverse and novel
+structures.\[@zhu20243m-diffusion\] Moreover, emerging hybrid
+architectures combine the strengths of [llms]{acronym-label="llm"
+acronym-form="plural+short"} with diffusion and flow matching models to
+overcome the limitations of each paradigm individually
+\[@sriram2024flowllm\].
+
+Beyond text-based representations, `llamole` introduced a multimodal
+[llm]{acronym-label="llm" acronym-form="singular+short"} approach
+capable of text and graph generation by integrating a base
+[llm]{acronym-label="llm" acronym-form="singular+short"} with graph
+diffusion transformers and graph neural networks for multi-conditional
+molecular generation and retrosynthetic planning. Specifically they used
+different trigger (`<design>` and `<retro>`) and query (`<query>`)
+tokens for switching between them and improved success in synthesis
+success rates from $5\%$ to $35\%$ . \[@liu2024multimodal\]
+
+A unique challenge with crystalline materials is generating a material
+that possesses both discrete (atom type) and continuous (atomic position
+and lattice geometry) variables. @sriram2024flowllm developed `FlowLLM`
+to address this challenge. They recognized that the respective strengths
+of [llms]{acronym-label="llm" acronym-form="plural+short"}, modeling
+discrete values and conditional prompting, and denoising models,
+modeling continuous values and equivariances, could be combined to
+create a hybrid architecture. A fine-tuned [llm]{acronym-label="llm"
+acronym-form="singular+short"} is used to learn an effective base
+distribution of metastable crystals via text-based representations,
+which is then iteratively refined through [rfm]{acronym-label="rfm"
+acronym-form="singular+short"} to optimize atomic coordinates and
+lattice parameters.\[@sriram2024flowllm\]
+
+#### Reinforcement Learning and Preference Optimization
+
+Translating [gpm]{acronym-label="gpm" acronym-form="singular+short"}
+generated outputs to the real world requires designing molecules and
+materials with specific target properties. [rl]{acronym-label="rl"
+acronym-form="singular+short"} and preference optimization
+techniques\[@lee2024fine-tuning\] have emerged as powerful solutions for
+this challenge. For instance, @jang2025can combined
+[sft]{acronym-label="sft" acronym-form="singular+short"} and
+[rl]{acronym-label="rl" acronym-form="singular+short"} using
+[ppo]{acronym-label="ppo" acronym-form="singular+short"} to generate
+diverse molecular sequences auto-regressively. This approach excels in
+exploring a broad chemical space, but incurs high computational costs
+due to its reliance on iterative, sequence-based generation. In
+contrast, @cavanagh2024smileyllama employed [dpo]{acronym-label="dpo"
+acronym-form="singular+short"} with [sft]{acronym-label="sft"
+acronym-form="singular+short"} to fine-tune [llms]{acronym-label="llm"
+acronym-form="plural+short"} for molecular design, leveraging
+[smiles]{acronym-label="smiles" acronym-form="singular+short"}
+representations to optimize drug-like properties (e.g., hydrogen bond
+donors/acceptors and LogP). While [dpo]{acronym-label="dpo"
+acronym-form="singular+short"} reduces computational overhead in
+comparison to [ppo]{acronym-label="ppo" acronym-form="singular+short"},
+it trades off molecular diversity, a key strength of the work by
+@jang2025can, due to the inherent constraints of preference-based
+fine-tuning.
+
+Beyond these methods, [era]{acronym-label="era"
+acronym-form="singular+short"} introduces a different optimization
+paradigm. \[@chennakesavalu2025aligning\] Unlike
+[ppo]{acronym-label="ppo" acronym-form="singular+short"} or
+[dpo]{acronym-label="dpo" acronym-form="singular+short"},
+[era]{acronym-label="era" acronym-form="singular+short"} uses
+gradient-based objectives to guide word-by-word generation with explicit
+reward functions, converging to a physics-inspired probability
+distribution that allows fine control over the generation process. In
+single-property optimization tasks, [era]{acronym-label="era"
+acronym-form="singular+short"} successfully aligned molecular
+transformers to generate compounds with targeted chemical properties
+(QED, LogP, ring count, molar refractivity) while maintaining $59-84\%$
+chemical validity without regularization. For multi-objective
+optimization, it achieved precise control over property trade-offs using
+weighted energy functions.
+
+@calanzone2025mol-moe also address the challenge of multi-objective
+molecular generation with `MOL-MOE`, a [moe]{acronym-label="moe"
+acronym-form="singular+short"} framework (see
+[\[sec:arch-moes\]](#sec:arch-moes){reference-type="ref+Label"
+reference="sec:arch-moes"} to learn more about [moe]{acronym-label="moe"
+acronym-form="singular+short"} architectures). `MOL-MOE` dynamically
+combines property-specific expert models at test time using
+preference-guided routers toward drug-relevant molecular properties
+enabling flexible steering across multiple objectives without
+re-training. Compared to alternatives like
+`MORLHF`\[@zhou2024one-preference-fits-all\], [sft]{acronym-label="sft"
+acronym-form="singular+short"} with rewards-in-context, and simple model
+merging such as Rewarded Soups\[@rame2023rewarded\]), `MOL-MOE` achieves
+superior performance in both property optimization and
+steerability---particularly in out-of-distribution scenarios where other
+methods struggle.
+
+`CrystalFormer-RL` uses [rl]{acronym-label="rl"
+acronym-form="singular+short"} fine-tuning to optimize
+`CrystalFormer`\[@cao2024space\], a transformer-based crystal generator,
+with rewards from discriminative models (e.g., property
+predictors)\[@cao2025crystalformer-rl\]. [rl]{acronym-label="rl"
+acronym-form="singular+short"} improves stability (lower energy above
+convex hull) and enables property-guided generation (e.g., high
+dielectric constant + band gap). Here, [rl]{acronym-label="rl"
+acronym-form="singular+short"} fine-tuning is shown to outperform
+supervised fine-tuning, enhancing both novel material discovery and
+retrieval of high-performing candidates from the pre-training dataset.
+
+#### Agents
+
+Agent-based frameworks leveraging [llms]{acronym-label="llm"
+acronym-form="plural+short"}, deeply explained in
+[\[sec:agents\]](#sec:agents){reference-type="ref+Label"
+reference="sec:agents"}, have emerged as approaches for autonomous
+molecular and materials generation, demonstrating capabilities that
+extend beyond simple prompting or fine-tuning by incorporating iterative
+feedback loops, tool integration, and human-[ai]{acronym-label="ai"
+acronym-form="singular+short"} collaboration. The `dZiner` framework
+implements this approach for the inverse design of materials, where
+agents input initial [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} strings with optimization task
+descriptions and generate validated candidate molecules by retrieving
+domain knowledge from the literature.\[@ansari2024dziner\] It also uses
+domain-expert surrogate models to evaluate the required property in the
+new molecule/material. These surrogate models are highly customizable to
+the desired property and give the user the option to train their own
+[ml]{acronym-label="ml" acronym-form="singular+short"} model or using an
+existing [sota]{acronym-label="sota" acronym-form="singular+short"}
+model. @ansari2024dziner demonstrated `dZiner`'s capabilities in
+generating surfactants for critical micelle concentration reduction,
+WDR5 inhibitors, and optimizing [mof]{acronym-label="mof"
+acronym-form="singular+short"} organic linkers for adsorption. The
+`CLADD` framework adopts a [rag]{acronym-label="rag"
+acronym-form="singular+short"}-enhanced multi-agent approach where
+specialized teams including "Planning", "Knowledge Graph", and
+"Molecular Understanding" collaborate to dynamically retrieve and
+integrate external biochemical knowledge for drug discovery tasks
+without requiring domain-specific fine-tuning.\[@lee2025rag-enhanced\]
+
+### Validation
+
+#### General validation
+
+The most fundamental validation approaches use cheminformatics tools
+like `RDKit` to verify molecular validity. `RDKit` provides robust tools
+for validating molecules through its ability to parse and sanitize
+molecules from [smiles]{acronym-label="smiles"
+acronym-form="singular+short"} strings. If a step in the
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} to
+structure conversion process fails, then the molecule is considered
+invalid. More sophisticated validation involves quantum mechanical
+calculations to compute molecular properties such as formation
+energies\[@kingsbury2022flexible\]. These computationally expensive
+operations provide deeper insights into whether generated structures are
+viable. Models are also evaluated for their ability to generate unique
+molecules by calculating the proportion of unique molecules in generated
+sets, often using molecular fingerprints or structural descriptors.
+
+The gold standard for validation is experimental synthesis, but
+significant gaps exist between computational generation and laboratory
+realization. Preliminarily, metrics like Tanimoto similarity and Fréchet
+ChemNet distance \[@preuer2018frechet\] quantify structural resemblance,
+which can indicate synthetic feasibility when training data consists of
+known compounds. Retrosynthesis prediction algorithms attempt to bridge
+this gap by evaluating synthetic accessibility and proposing potential
+synthesis routes (see
+[1.3](#sec:retrosynthesis){reference-type="ref+Label"
+reference="sec:retrosynthesis"}). However, these methods still face
+limitations in accurately predicting real-world synthesizability
+\[@zunger2019beware\].
+
+#### Conditional Generation Validation
+
+Beyond establishing the general validity of generated molecules,
+evaluation methods can assess both their novelty relative to training
+data and their ability to meet specific design goals. For inverse design
+tasks, such as optimizing binding affinity or solubility, the *de novo*
+molecule generation benchmark GuacaMol differentiates between
+*distribution-learning* (e.g., generating diverse, valid molecules) and
+*goal-directed* optimization (e.g., rediscovering known drugs or meeting
+multi-objective constraints) \[@brown2019guacamol\]. In the materials
+paradigm, frameworks such as `MatBench Discovery` evaluate analogous
+challenges such as stability, electronic properties, and
+synthesizability, but adapt metrics to periodic systems, such as energy
+above hull or band gap prediction accuracy\[@riebesell2025framework\].
+Recently, they introduced the "discovery acceleration factor", which
+quantifies how effective a model is at finding stable structures
+relative to a random baseline.
+
+## Retrosynthesis {#sec:retrosynthesis}
+
+The practical utility of [gpms]{acronym-label="gpm"
+acronym-form="plural+short"} for generating molecules and materials
+remains limited by a persistent gap in their synthetic feasibility.
+Early work by @schwaller2021mapping laid important groundwork by
+demonstrating how attention-based neural networks can learn meaningful
+representations of chemical reactions, enabling accurate classification
+and prediction of reaction outcomes. Their model, trained on millions of
+reactions from patent and literature data, showed that learned reaction
+embeddings were capable of capturing nuanced chemical relationships.
+
+Recent efforts have built on this foundation by integrating
+synthesizability directly into molecular and materials generation
+pipelines that leverage both domain-specific tools and
+[gpms]{acronym-label="gpm" acronym-form="plural+short"}. For example,
+@sun2025synllama adapted `Llama-3.1-8B` and `Llama-3.2-1B` to predict
+retrosynthetic pathways and identify commercially available building
+blocks for experimentally validated SARS-CoV-2 Mpro inhibitors.
+Similarly, @liu2024multimodal introduced a multimodal framework that
+combines reaction databases with chemical intuition encoded in
+[llms]{acronym-label="llm" acronym-form="plural+short"}, improving the
+prioritization of high-yield, low-cost synthetic routes.
+
+More recent work has explored how fully fine-tuned
+[llms]{acronym-label="llm" acronym-form="plural+short"} can serve as
+comprehensive chemistry assistants for experimental guidance.
+@zhang2025large developed `Chemma`, a fine-tuned `LLaMA-2-7B` model
+trained on 1.28 million chemical reaction question-answer pairs. Through
+an active learning framework that incorporates experimental feedback
+(see [\[sec:rl\]](#sec:rl){reference-type="ref+Label"
+reference="sec:rl"} to learn more about [rl]{acronym-label="rl"
+acronym-form="singular+short"}), human-`Chemma` collaboration
+successfully optimized an unreported Suzuki-Miyaura cross-coupling
+reaction within only 15 experimental runs.
+
+Predictive retrosynthesis has also extended to the inorganic domain.
+@kim2024large demonstrated that fine-tuned `GPT-3.5` and `GPT-4` can
+predict both the synthesizability of inorganic compounds from their
+chemical formulas and select appropriate precursors for synthesis,
+achieving performance comparable to specialized [ml]{acronym-label="ml"
+acronym-form="singular+short"} models with minimal development time and
+cost. In a follow-up work, they extended this approach to
+structure-based predictions of inorganic crystal polymorphs, where
+[llms]{acronym-label="llm" acronym-form="plural+short"} provided
+human-readable explanations for their synthesizability
+assessments\[@kim2025explainable\]. Notably, their structure-aware
+models correctly identified twelve hypothetical compounds as
+non-synthesizable despite their thermodynamic stability, perfectly
+matching experimental outcomes where synthesis attempts failed.
+
+Beyond retrosynthetic prediction, [llms]{acronym-label="llm"
+acronym-form="plural+short"} have also been deployed as reasoning
+engines for autonomous design. @bran2024augmenting developed
+`ChemCrow`, an [llm]{acronym-label="llm"
+acronym-form="singular+short"}-based system that autonomously plans and
+executes the synthesis of novel compounds by integrating specialized
+tools like a retrosynthesis planner (see
+[\[sec:planning\]](#sec:planning){reference-type="ref+Label"
+reference="sec:planning"} to read more about this capability of
+`ChemCrow` and its limitations) and reaction predictors. This approach
+mirrors the iterative experimental design cycle employed by human
+chemists, but is equipped with the scalability of automation. Notably,
+systems like `ChemCrow` rely on high-quality reaction data to ground
+their reasoning in empirically viable chemistry, which, depending on the
+design space, could be a limitation.
+
+## LLMs as Optimizers {#sec:llm-optimizers}
+
+<figure id="fig:optimization">
+<img src="media/figures/rescaled_figures/chemrev_figure22.png" alt="" / width="100%">
+<figcaption><strong>Overview of the iterative optimization loop that
+mirrors the structure of the optimization section</strong>. The blue
+boxes contain the different roles that the <span
+data-acronym-label="llm" data-acronym-form="plural+short">llms</span>
+play in the loop, and which are described in the main text. References
+in which the use of <span data-acronym-label="llm"
+data-acronym-form="plural+short">llms</span> for that step are detailed
+inside the small boxes inside each of the components of the loop. The
+example shown is about obtaining molecules with high
+<code>logP</code>.</figcaption>
+</figure>
+
+Discovering novel compounds and reactions in chemistry and materials
+science has long relied on iterative trial-and-error processes rooted in
+existing domain knowledge \[@Taylor2023brief\]. While, as explained in
+[1.3](#sec:retrosynthesis){reference-type="ref+Label"
+reference="sec:retrosynthesis"}, those methods are used to accelerate
+this process, optimization methods help improve conditions, binding
+affinity, etc. These approaches are slow and labor-intensive.
+Traditional data-driven methods aimed to address these limitations by
+combining predictive [ml]{acronym-label="ml"
+acronym-form="singular+short"} models with optimization frameworks such
+as [bo]{acronym-label="bo" acronym-form="singular+short"} or
+[eas]{acronym-label="ea" acronym-form="plural+short"}. These frameworks
+balance exploration of uncharted regions in chemical space with
+exploitation of known high-performing regions \[@Li2024sequential;
+@Hse2021gryffin; @Shields2021bayesian; @Griffiths2020constrained;
+@RajabiKochi2025adaptive\].
+
+Recent advances in [llms]{acronym-label="llm"
+acronym-form="plural+short"} have unlocked potential for addressing
+optimization challenges in chemistry and related domains
+\[@fernando2023promptbreeder0; @yang2023large; @chen2024instruct\]. A
+key strength of [llms]{acronym-label="llm" acronym-form="plural+short"}
+lies in their capacity to frame optimization tasks through natural
+language, which enhances knowledge incorporation, improves candidate
+comparisons, and increases interpretability. This aligns well with
+chemical problem-solving, where complex phenomena, such as reaction
+pathways or material behaviors, are often poorly captured by standard
+nomenclature; however, they can still be intuitively explained through
+natural language. Moreover, [gpms]{acronym-label="gpm"
+acronym-form="plural+short"}' general capabilities provide flexibility
+beyond classical methods, which have to be trained from scratch if the
+optimization problem or any of its variables changes. By encoding
+domain-specific knowledge---including reaction rules, thermodynamic
+principles, and structure-property relationships---into structured
+prompts, [llms]{acronym-label="llm" acronym-form="plural+short"} can
+synergize expertise with their ability to navigate complex chemical
+optimization problems.
+
+Current [llm]{acronym-label="llm" acronym-form="singular+short"}
+applications in chemistry optimization vary in scope and methodology.
+Many studies integrate [llms]{acronym-label="llm"
+acronym-form="plural+short"} into [bo]{acronym-label="bo"
+acronym-form="singular+short"} frameworks, where models guide
+experimental design by predicting promising candidates
+\[@rankovic2023bochemian\]. Others employ [gas]{acronym-label="ga"
+acronym-form="plural+short"} or hybrid strategies that combine
+[llm]{acronym-label="llm" acronym-form="singular+short"}-generated
+hypotheses with computational screening \[@cisse2025language0based\].
+
+### LLMs as Surrogate Models
+
+A prominent [llm]{acronym-label="llm"
+acronym-form="singular+short"}-driven strategy positions these models as
+surrogate models within optimization loops. Typically implemented as
+[gpr]{acronym-label="gpr" acronym-form="singular+short"}, surrogate
+models learn from prior data to approximate costly feature-outcome
+landscapes, which are often computationally and time-consuming to
+evaluate, thereby guiding the acquisition. [llms]{acronym-label="llm"
+acronym-form="plural+short"} offer major advantages in this role
+primarily through strong low-data performance. Their
+[icl]{acronym-label="icl" acronym-form="singular+short"} capability
+enables task demonstration with minimal prompt examples while leveraging
+chemical knowledge from pre-training to generate accurate predictions.
+This allows [gpms]{acronym-label="gpm" acronym-form="plural+short"} to
+compensate for sparse experimental data effectively.
+
+@ramos2023bayesian demonstrated the viability of this paradigm through
+a simple yet effective framework that combines [icl]{acronym-label="icl"
+acronym-form="singular+short"} using only one example in the prompt with
+a [bo]{acronym-label="bo" acronym-form="singular+short"} workflow. Their
+[bo]{acronym-label="bo"
+acronym-form="singular+short"}-[icl]{acronym-label="icl"
+acronym-form="singular+short"} approach uses few-shot examples formatted
+as question-answer pairs, where the [llm]{acronym-label="llm"
+acronym-form="singular+short"} generates candidate solutions conditioned
+on prior successful iterations. These candidates are ranked using an
+acquisition function, with top-$k$ selections integrated into subsequent
+prompts to refine predictions iteratively. Remarkably, this method
+achieved high performance in optimizing catalytic reaction conditions,
+even matching the top-1 accuracies observed in experimental benchmarks.
+This emphasizes the potential of [llms]{acronym-label="llm"
+acronym-form="plural+short"} as accessible, [icl]{acronym-label="icl"
+acronym-form="singular+short"} optimizers when coupled with
+well-designed prompts.
+
+To address limitations in base [llms]{acronym-label="llm"
+acronym-form="plural+short"}' inherent chemical knowledge---particularly
+their grasp of specialized representations like
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} or
+structure-property mappings---@yu2025collaborative introduced a hybrid
+architecture augmenting pre-trained [llms]{acronym-label="llm"
+acronym-form="plural+short"} with task-specific embedding and prediction
+layers. These layers, fine-tuned on domain data, align latent
+representations of input-output pairs (denoted as `<x>` and `<y>` in
+prompts), enabling the model to map chemical structures and properties
+into a unified, interpretable space. Crucially, the added layers enhance
+chemical reasoning without sacrificing the flexibility of
+[icl]{acronym-label="icl" acronym-form="singular+short"}, allowing the
+system to adapt to trends across iterations, similarly to what was done
+by @ramos2023bayesian. In their evaluations of molecular optimization
+benchmarks, such as the [pmo]{acronym-label="pmo"
+acronym-form="singular+short"} \[@gao2022sample\], they revealed
+improvements over conventional methods, including
+[bo]{acronym-label="bo"
+acronym-form="singular+short"}-[gp]{acronym-label="gp"
+acronym-form="singular+short"}, [rl]{acronym-label="rl"
+acronym-form="singular+short"} methods, and [ga]{acronym-label="ga"
+acronym-form="singular+short"}.
+
+@yu2025collaborative further highlighted the framework's extensibility
+to diverse black-box optimization challenges beyond chemistry. This
+represents one of the most important advantages of using
+[llms]{acronym-label="llm" acronym-form="plural+short"} as orchestrators
+of the optimization process. The flexibility of natural language in this
+process enables the procedure to be applied to any optimization process.
+In contrast, classical methods are constrained to the specific task for
+which they are designed due to the need to train the surrogate model.
+
+### LLMs as Next Candidate Generators
+
+Recent studies demonstrate the potential of [llms]{acronym-label="llm"
+acronym-form="plural+short"} to enhance [eas]{acronym-label="ea"
+acronym-form="plural+short"} \[@lu2024generative\] and
+[bo]{acronym-label="bo" acronym-form="singular+short"}
+\[@amin2025towards\] frameworks by leveraging their embedded chemical
+knowledge and ability to integrate prior information, thereby reducing
+computational effort while improving output quality. Within
+[eas]{acronym-label="ea" acronym-form="plural+short"},
+[llms]{acronym-label="llm" acronym-form="plural+short"} refine molecular
+candidates through mutations (modifying molecular substructures) or
+crossovers (combining parent molecules). In [bo]{acronym-label="bo"
+acronym-form="singular+short"} frameworks, they serve as acquisition
+functions, utilizing surrogate model predictions---both mean and
+uncertainty---to select optimal molecules or reaction conditions for
+evaluation.
+
+For molecule optimization, @yu2025collaborative introduced
+`MultiModel`, a dual-[llm]{acronym-label="llm"
+acronym-form="singular+short"} system where one model proposes
+candidates and the other supplies domain knowledge (see
+[1.4.3](#sec:opt-llm-know-source){reference-type="ref+Label"
+reference="sec:opt-llm-know-source"}). By fine-tuning the "worker"
+[llm]{acronym-label="llm" acronym-form="singular+short"} to recognize
+molecular scaffolds and target properties, and expanding the training
+pool to include a million-size pre-training dataset, they achieved hit
+rates exceeding $90\%$. Similarly, @wang2024efficient developed
+`MoLLEO`, integrating an [llm]{acronym-label="llm"
+acronym-form="singular+short"} into an [ea]{acronym-label="ea"
+acronym-form="singular+short"} to replace random mutations with
+[llm]{acronym-label="llm" acronym-form="singular+short"}-guided
+modifications. Here, `GPT-4` generated optimized offspring from parent
+molecules, significantly accelerating convergence to high fitness
+scores. Notably, while domain-specialized models (`BioT5`,
+`MoleculeSTM`) underperformed, the general-purpose `GPT-4` excelled---a
+finding that underscores the context-dependent utility of
+[llms]{acronym-label="llm" acronym-form="plural+short"}
+
+In a related approach, @lu2024generative showed that well-designed
+prompts---incorporating task-specific constraints, objectives, and
+few-shot examples---enable general [llms]{acronym-label="llm"
+acronym-form="plural+short"} (`Claude-Sonnet`, `o1-preview`) to generate
+high-quality candidates without fine-tuning, outperforming both random
+selection and vanilla [gas]{acronym-label="ga"
+acronym-form="plural+short"} in functional [tmc]{acronym-label="tmc"
+acronym-form="singular+short"} design.
+
+### LLMs as Prior Knowledge Sources {#sec:opt-llm-know-source}
+
+A key advantage of integrating [llms]{acronym-label="llm"
+acronym-form="plural+short"} into optimization frameworks is their
+ability to encode and deploy prior knowledge within the optimization
+loop. As illustrated in
+[4](#fig:optimization){reference-type="ref+Label"
+reference="fig:optimization"}, this knowledge can be directed into
+either the surrogate model or candidate generation module, significantly
+reducing the number of optimization steps required through high-quality
+guidance.
+
+For example, @yu2025collaborative deployed a "research" agent that
+leverages `Google` search and `RDKit` to verify and rank molecules
+generated by "worker" agents against target features and properties.
+Their results demonstrate substantial improvements when this filtering
+mechanism is applied.
+
+Similarly, @cisse2025language0based introduced `BORA`, which
+contextualizes conventional black-box [bo]{acronym-label="bo"
+acronym-form="singular+short"} using an [llm]{acronym-label="llm"
+acronym-form="singular+short"}. `BORA` maintains standard
+[bo]{acronym-label="bo" acronym-form="singular+short"} as the core
+driver but strategically activates the [llm]{acronym-label="llm"
+acronym-form="singular+short"} when progress stalls. This leverages the
+model's [icl]{acronym-label="icl" acronym-form="singular+short"}
+capabilities to hypothesize promising search regions and propose new
+samples, regulated by a lightweight heuristic policy that manages costs
+and incorporates domain knowledge (or user input). Evaluations on
+synthetic benchmarks such as the catalyst optimization task for hydrogen
+generation show that `BORA` accelerates exploration, improves
+convergence, and outperforms existing [llm]{acronym-label="llm"
+acronym-form="singular+short"}-[bo]{acronym-label="bo"
+acronym-form="singular+short"} hybrids.
+
+### How to Face Optimization Problems?
+
+Published works explore different ways of using
+[llms]{acronym-label="llm" acronym-form="plural+short"} for optimization
+problems in chemistry, from simple approaches, such as just prompting
+the model with some initial random set of experimental candidates and
+iterating \[@ramos2023bayesian\], to fine-tuning models in
+[bo]{acronym-label="bo" acronym-form="singular+short"} fashion
+\[@rankovic2025gollum0\]. The most efficient initial point is by relying
+entirely on a [icl]{acronym-label="icl" acronym-form="singular+short"}
+approach, which allows one to obtain a first signal rapidly. Such
+initial results will enable to determine whether a more complex,
+computationally intensive approach is necessary or whether prompt
+engineering is reliable enough for the application. Fine-tuning can be
+used as a way to enhance the chemical knowledge of the
+[llms]{acronym-label="llm" acronym-form="plural+short"} and can lead to
+improvements in optimization tasks where the model requires such
+knowledge to choose or generate better candidates. Fine-tuning might not
+be a game-changer for other approaches that rely more on sampling
+methods \[@wang2025llm0augmented\].
+
+While some initial works showed that [llms]{acronym-label="llm"
+acronym-form="plural+short"} trained specifically on chemistry perform
+better for optimization tasks \[@kristiadi2024sober\], other works
+showed that a [gpm]{acronym-label="gpm" acronym-form="singular+short"}
+such as `GPT-4` combined with an [ea]{acronym-label="ea"
+acronym-form="singular+short"} outperformed all other models
+\[@wang2024efficient\]. Is it better to incorporate a general model or a
+chemistry [lm]{acronym-label="lm" acronym-form="singular+short"} into
+the optimization frameworks? We hypothesize that for models of the same
+size (in number of parameters) and similar training size---attending to
+[pflops]{acronym-label="pflop" acronym-form="plural+short"}---a chemical
+[lm]{acronym-label="lm" acronym-form="singular+short"} (a specialized
+model) will consistently outperform general models. If the models differ
+significantly in size, the larger model will typically perform better.

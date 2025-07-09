@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LamaLab - Lab for AI in Materials Science</title>
+  <style>
+    /* Simple styling to keep it clean and readable */
+    nav ul { list-style-type: none; padding-left: 0; }
+    nav li { margin: 0.5rem 0; }
+    nav a { text-decoration: none; }
+    nav img { max-width: 200px; height: auto; display: block; margin: 0 auto 1rem; }
+  </style>
+</head>
+<body>
+  <nav id="$idprefix$TOC" role="doc-toc">
+    <img src="https://raw.githubusercontent.com/lamalab-org/lamalab.github.io/main/static/png-file.png" alt="LamaLab logo">
+    <h2>LamaLab - Lab for AI in Materials Science</h2>
+    <ul>
+      <li>
+        <a href="https://lamalab.org/"><strong>🌐 Visit our website</strong></a>
+      </li>
+      <li>
+        <a href="https://x.com/jablonkagroup"><strong>🐦 Follow us on X (Twitter)</strong></a>
+      </li>
+      <li>
+        <a href=""><strong>📄 Read our publications</strong></a>
+      </li>
+      <li>
+        <a href="mailto:mail@kjablonka.com"><strong>✉️ Contact us</strong></a>
+      </li>
+    </ul>
+    <hr>
+    $if(toc-title)$
+    <h2 id="$idprefix$toc-title">$toc-title$</h2>
+    $endif$
+    $table-of-contents$
+  </nav>
+</body>
+</html>

@@ -21,7 +21,7 @@ enumerate all variables and their potential values in relevant chemical
 systems. Commonly, many of the essential factors describing a system are
 implicit ("known unknowns" or "unknown unknowns").
 
-#### Irreducible complexity
+### Irreducible complexity
 
 [1](#fig:shape_of_data){reference-type="ref+Label"
 reference="fig:shape_of_data"} illustrates how the state space of
@@ -41,7 +41,7 @@ complexity that emerges from systems that can be described with simple
 equations, such as a double pendulum.
 
 <figure id="fig:shape_of_data">
-<img src="media/figures/rescaled_figures/chemrev_figure1.png" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure1.png" alt="" / width="100%">
 <figcaption><strong>State space description for chemistry at different
 scales</strong>. We illustrate how the number of hidden variables (gray)
 is growing with scale and complexity. For simple systems we can
@@ -106,7 +106,7 @@ lab and the datasets on which [ml]{acronym-label="ml"
 acronym-form="singular+short"} models for chemistry are trained. Much of
 current data-driven modeling in chemistry focuses on a few large,
 structured, and highly-curated datasets where most of the variance is
-explicit (reducible complexity). Such datasets, for
+explicit (reducible complexity). Such datasets, `QM9` for
 example,\[@ramakrishnan2014quantum\] often come from quantum-chemical
 computations. Experimental chemistry, however, tends to have a
 significantly higher variance and a greater degree of irreducible
@@ -115,9 +115,9 @@ datasets are small, and because science is about doing new things for
 the first time, many datasets also contain at least some unique
 variables.
 
-Considering the largest chemistry text dataset, ,\[@mirza2025chempile0\]
-we can look at how the largest subsets fare in comparison to the
-smallest ones (see
+Considering the largest chemistry text dataset,
+`ChemPile`,\[@mirza2025chempile0\] we can look at how the largest
+subsets fare in comparison to the smallest ones (see
 [1](#tab:small_large_datasets){reference-type="ref+Label"
 reference="tab:small_large_datasets"}). The largest dataset is
 approximately three million times larger than the smallest one.
@@ -134,7 +134,7 @@ approximately three million times larger than the smallest one.
 | acronym-form="singular+short"}\[@Kearnes_2021\]  |                   |
 | reaction prediction                              |                   |
 +--------------------------------------------------+-------------------+
-| molecular features                               | 5,000,435,822     |
+| `RDKit` molecular features                       | 5,000,435,822     |
 +--------------------------------------------------+-------------------+
 | *Three smallest ChemPile datasets*                                   |
 +--------------------------------------------------+-------------------+
@@ -149,9 +149,9 @@ approximately three million times larger than the smallest one.
 +--------------------------------------------------+-------------------+
 
 : **Token counts for the three largest and smallest datasets in the
-\[@mirza2025chempile0\] collection.** Dominating datasets contribute a
-large portion of the total token count (a token represents the smallest
-unit of text that a [ml]{acronym-label="ml"
+`ChemPile`\[@mirza2025chempile0\] collection.** Dominating datasets
+contribute a large portion of the total token count (a token represents
+the smallest unit of text that a [ml]{acronym-label="ml"
 acronym-form="singular+short"} model can process), with the small
 datasets significantly increasing the diversity.
 :::
@@ -162,18 +162,21 @@ The prevalence of many small, specialized datasets over large ones is
 commonly referred to as "the long tail problem".\[@heidorn2008shedding\]
 
 <figure id="fig:scale_of_data">
-<img src="media/figures/final_figures/2_DATA_cumulative_histogram.png" width="100%" />
-<figcaption><strong>Cumulative token count based on the tabular datasets
-[@mirza2025chempile0]</strong>. We compare the approximate token count
-for three datasets: training dataset,[@grattafiori2024llama] openly
-available chemistry papers in the dataset, and the dataset. As can be
-seen, by aggregating the collection of tabular datasets converted to
-text format in the subset, we can achieve the same order of magnitude as
-the collection of open chemistry papers. However, without smaller
-datasets, we cannot capture the breadth and complexity of chemistry
-data, which is essential for training <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span>. The tokenization method
-for both and is provided in the respective papers.</figcaption>
+<img src="media/figures/final_figures/2_DATA_cumulative_histogram.png" alt="" / width="100%">
+<figcaption><strong>Cumulative token count based on the
+<code>ChemPile</code> tabular datasets [@mirza2025chempile0]</strong>.
+We compare the approximate token count for three datasets:
+<code>Llama-3</code> training dataset,[@grattafiori2024llama] openly
+available chemistry papers in the <code>ChemPile-Paper</code> dataset,
+and the <code>ChemPile-LIFT</code> dataset. As can be seen, by
+aggregating the collection of tabular datasets converted to text format
+in the <code>ChemPile-LIFT</code> subset, we can achieve the same order
+of magnitude as the collection of open chemistry papers. However,
+without smaller datasets, we cannot capture the breadth and complexity
+of chemistry data, which is essential for training <span
+data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span>.
+The tokenization method for both <code>ChemPile</code> and
+<code>Llama-3</code> is provided in the respective papers.</figcaption>
 </figure>
 
 This can be seen in [2](#fig:scale_of_data){reference-type="ref+Label"
@@ -208,10 +211,10 @@ Strategies for doing so can be broadly categorized into two groups (see
 [3](#fig:data_protocols){reference-type="ref+Label"
 reference="fig:data_protocols"}). One can utilize a "top-down" approach
 where a large and diverse pool of data---e.g., results from web-crawled
-resources such as \[@commoncrawl\]---is filtered using custom-built
-procedures (e.g., using regular expressions or classification models).
-This approach is gaining traction in the development of foundation
-models such as [llms]{acronym-label="llm"
+resources such as `CommonCrawl`\[@commoncrawl\]---is filtered using
+custom-built procedures (e.g., using regular expressions or
+classification models). This approach is gaining traction in the
+development of foundation models such as [llms]{acronym-label="llm"
 acronym-form="plural+short"}.\[@penedo2023refinedweb;
 @penedo2024fineweb; @guo2025deepseek\] Alongside large filtered
 datasets, various data augmentation techniques have further increased
@@ -229,7 +232,7 @@ cases, key techniques include filtering and the generation of synthetic
 data.
 
 <figure id="fig:data_protocols">
-<img src="media/figures/rescaled_figures/chemrev_figure3.png" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure3.png" alt="" / width="100%">
 <figcaption><strong>Dataset creation protocols</strong>. In “top-down”
 approaches, we curate a large corpus of data, which can be used to train
 <span data-acronym-label="gpm"
@@ -250,23 +253,24 @@ Internet has been the primary source of dataset construction for
 the focus was on training on maximally large datasets, empirical
 evidence has shown that smaller, higher-quality datasets can lead to
 better results.\[@gunasekar2023textbooks; @marion2023less\] For
-example, @shao2024deepseekmath0 filtered for mathematical text using a
-combination of regular expressions and a custom, iteratively trained
-classification model\[@bojanowski2017enriching\]. An alternative
-approach was pursued by @thrush2024improving who introduced a
-training-free framework. In this method, the pre-training text was
+example, @shao2024deepseekmath0 filtered `CommonCrawl` for mathematical
+text using a combination of regular expressions and a custom,
+iteratively trained classification model\[@bojanowski2017enriching\]. An
+alternative approach was pursued by @thrush2024improving who introduced
+a training-free framework. In this method, the pre-training text was
 chosen by measuring the correlation of each web-domain's perplexity (a
 metric that measures how well a language model predicts a sequence of
 text)---as scored by $90$ publicly-available [llms]{acronym-label="llm"
 acronym-form="plural+short"}---with downstream benchmark accuracy,
 keeping only the high-correlation domains.
 
-In the chemical domain, \[@mirza2025chempile0\] is the only open-source,
-pre-training scale dataset, that underwent several filtering steps. For
-example, a large subset of the papers in come from the dataset. To
-filter for chemistry papers, a custom classification model was trained
-from scratch using topic-labeled data from the \[@li2023camel\] dataset.
-To evaluate the accuracy of the model ($\text{F1-score}=0.77$),
+In the chemical domain, `ChemPile`\[@mirza2025chempile0\] is the only
+open-source, pre-training scale dataset, that underwent several
+filtering steps. For example, a large subset of the papers in
+`ChemPile-Paper` come from the `Europe PMC` dataset. To filter for
+chemistry papers, a custom classification model was trained from scratch
+using topic-labeled data from the `CAMEL`\[@li2023camel\] dataset. To
+evaluate the accuracy of the model ($\text{F1-score}=0.77$),
 expert-annotated data was used.
 
 ### Synthetic Data {#sec:syn-data}
@@ -291,12 +295,12 @@ approaches vary depending on the modality (e.g., image, text, or audio).
 The most common application of rule-based techniques is on images, via
 image transformations such as distortion, rotation, blurring, or
 cropping.\[@shorten2019survey\] In chemistry, tools like
-\[@brinkhaus2022randepict\] have been used to create enriched datasets
-of chemical representations. These tools generate human-like drawings of
-chemical structures that mimic the common illustrations found in
-scientific literature or even in patents (e.g., by applying image
-templates from different publishers, or emulating the style of older
-manuscripts) and further augment them using conventional
+`RanDepict`\[@brinkhaus2022randepict\] have been used to create enriched
+datasets of chemical representations. These tools generate human-like
+drawings of chemical structures that mimic the common illustrations
+found in scientific literature or even in patents (e.g., by applying
+image templates from different publishers, or emulating the style of
+older manuscripts) and further augment them using conventional
 image-augmentation techniques.
 
 Rule-based augmentations can also be applied to text. Early approaches
@@ -362,9 +366,9 @@ Other recent approaches have harnessed
 auto-formalization\[@NEURIPS2022_d0c6bc64\], a [llm]{acronym-label="llm"
 acronym-form="singular+short"}-powered approach that can turn
 natural-language mathematical proofs into computer-verifiable
-mathematical languages such as \[@de2015lean\] or
-\[@wenzel2008isabelle\]. Such datasets have been utilized to advance
-mathematical capabilities in [lms]{acronym-label="lm"
+mathematical languages such as `Lean`\[@de2015lean\] or
+`Isabelle`\[@wenzel2008isabelle\]. Such datasets have been utilized to
+advance mathematical capabilities in [lms]{acronym-label="lm"
 acronym-form="plural+short"}.\[@xin2024deepseek; @trinh2024solving\]
 
 A drawback of generatively augmented data is that its validity is

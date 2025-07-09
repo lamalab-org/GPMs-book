@@ -520,12 +520,8 @@ def create_index_page(main_tex_path, output_path, extract_media_dir):
         abstract = clean_latex_content(abstract)
 
     # Create index content
-    index_content = f"""---
-title: "{title}"
-unnumbered: true
----
-
-# {title}
+    index_content = create_section_frontmatter() + f"""
+# {title} {.unnumbered}
 
 ## Abstract
 

@@ -1,5 +1,26 @@
 ---
-title: "Implications of GPMs: Education, Safety, and Ethics"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Implications of GPMs: Education, Safety, and Ethics {#sec:implications}
@@ -41,7 +62,7 @@ exams and presentations and deepen their conceptual understanding.
 \[@mollick2024instructors; @Sharma2025role; @wang2025effect\]
 
 <figure id="fig:education">
-<img src="media/figures/rescaled_figures/chemrev_figure23.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure23.png" alt="" width="100%" />
 <figcaption><strong>Possible application examples for students and
 teachers and their specific limitations for <span
 data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in
@@ -216,7 +237,7 @@ acronym-form="plural+short"}. \[@klein2025rethink\]
 ## Safety {#sec:safety}
 
 <figure id="fig:safety-overview">
-<img src="media/figures/safety_chemrev_fig.png" alt="" / width="100%">
+<img src="media/figures/safety_chemrev_fig.png" alt="" width="100%" />
 <figcaption><strong>A conceptual schematic depicting <span
 data-acronym-label="ai" data-acronym-form="singular+short">ai</span>
 risk factors in chemical science</strong>. As one traverses through the

@@ -1,7 +1,28 @@
 ---
-title: "References"
-unnumbered: true
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
+
 
 # References {.unnumbered}
 

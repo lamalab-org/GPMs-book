@@ -1,5 +1,26 @@
 ---
-title: "The Shape and Structure of Chemical Data"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # The Shape and Structure of Chemical Data {#sec:data-section}
@@ -41,7 +62,7 @@ complexity that emerges from systems that can be described with simple
 equations, such as a double pendulum.
 
 <figure id="fig:shape_of_data">
-<img src="media/figures/rescaled_figures/chemrev_figure1.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure1.png" alt="" width="100%" />
 <figcaption><strong>State space description for chemistry at different
 scales</strong>. We illustrate how the number of hidden variables (gray)
 is growing with scale and complexity. For simple systems we can
@@ -125,27 +146,36 @@ approximately three million times larger than the smallest one.
 ::: {#tab:small_large_datasets}
 +--------------------------------------------------+-------------------+
 | **Dataset**                                      | **Token count**   |
+
 +:=================================================+==================:+
 | *Three largest ChemPile datasets*                                    |
+
 +--------------------------------------------------+-------------------+
 | NOMAD crystal structures\[@scheidgen2023nomad\]  | 5,808,052,794     |
+
 +--------------------------------------------------+-------------------+
 | [ord]{acronym-label="ord"                        | 5,347,195,320     |
 | acronym-form="singular+short"}\[@Kearnes_2021\]  |                   |
 | reaction prediction                              |                   |
+
 +--------------------------------------------------+-------------------+
 | `RDKit` molecular features                       | 5,000,435,822     |
+
 +--------------------------------------------------+-------------------+
 | *Three smallest ChemPile datasets*                                   |
+
 +--------------------------------------------------+-------------------+
 | Hydrogen storage                                 | 1,935             |
 | materials\[@hymarcReversibleHydrides\]           |                   |
+
 +--------------------------------------------------+-------------------+
 | List of amino-acids\[@alberts2002molecular\]     | 6,000             |
+
 +--------------------------------------------------+-------------------+
 | [ord]{acronym-label="ord"                        | 8,372             |
 | acronym-form="singular+short"}\[@Kearnes_2021\]  |                   |
 | recipe yield prediction                          |                   |
+
 +--------------------------------------------------+-------------------+
 
 : **Token counts for the three largest and smallest datasets in the
@@ -162,7 +192,7 @@ The prevalence of many small, specialized datasets over large ones is
 commonly referred to as "the long tail problem".\[@heidorn2008shedding\]
 
 <figure id="fig:scale_of_data">
-<img src="media/figures/final_figures/2_DATA_cumulative_histogram.png" alt="" / width="100%">
+<img src="media/figures/final_figures/2_DATA_cumulative_histogram.png" alt="" width="100%" />
 <figcaption><strong>Cumulative token count based on the
 <code>ChemPile</code> tabular datasets [@mirza2025chempile0]</strong>.
 We compare the approximate token count for three datasets:
@@ -232,7 +262,7 @@ cases, key techniques include filtering and the generation of synthetic
 data.
 
 <figure id="fig:data_protocols">
-<img src="media/figures/rescaled_figures/chemrev_figure3.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure3.png" alt="" width="100%" />
 <figcaption><strong>Dataset creation protocols</strong>. In “top-down”
 approaches, we curate a large corpus of data, which can be used to train
 <span data-acronym-label="gpm"

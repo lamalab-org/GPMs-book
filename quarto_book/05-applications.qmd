@@ -1,5 +1,26 @@
 ---
-title: "Applications"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Applications
@@ -100,7 +121,7 @@ useful for some. These elements are shown in
 reference="fig:applications"}, and we discuss next.
 
 <figure id="fig:applications">
-<img src="media/figures/rescaled_figures/chemrev_figure11.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure11.png" alt="" width="100%" />
 <figcaption><strong>Overview of the scientific process</strong>. The
 outer elements represent the typical scientific research process: from
 gathering information and generating hypotheses based on the
@@ -216,7 +237,7 @@ Example queries for both sections are shown at the bottom of
 reference="fig:knowledge_gathering"}.
 
 <figure id="fig:knowledge_gathering">
-<img src="media/figures/rescaled_figures/chemrev_figure12.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure12.png" alt="" width="100%" />
 <figcaption><strong>A. a representation of a typical agent for
 scientific queries.</strong> The <span data-acronym-label="llm"
 data-acronym-form="singular+short">llm</span> is the central piece of
@@ -479,7 +500,7 @@ demonstrating efficient synthesis of ideas presumably not present in its
 training corpus.
 
 <figure id="fig:hypothesis-generation">
-<img src="media/figures/rescaled_figures/chemrev_figure13.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure13.png" alt="" width="100%" />
 <figcaption><strong>Overview of <span data-acronym-label="llm"
 data-acronym-form="singular+short">llm</span>-based hypothesis
 generation</strong>. Current methods are based on <span
@@ -712,7 +733,7 @@ feedback into the planning process, helping define goals, resolve
 ambiguities, and eliminate invalid directions.
 
 <figure id="fig:planning">
-<img src="media/figures/rescaled_figures/chemrev_figure14.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure14.png" alt="" width="100%" />
 <figcaption><strong><span data-acronym-label="gpm"
 data-acronym-form="singular+short">gpm</span>-guided retrosynthesis
 route planning and pruning</strong>. <span data-acronym-label="gpm"
@@ -834,7 +855,7 @@ when discussing approaches to automate experiment execution with
 [gpms]{acronym-label="gpm" acronym-form="plural+short"}.
 
 <figure id="fig:exec">
-<img src="media/figures/rescaled_figures/chemrev_figure15+16.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure15+16.png" alt="" width="100%" />
 <figcaption><strong>Programming languages vs. lab automation. A)
 programming paradigms</strong>: In compiled languages, the entire source
 code is translated ahead of time to machine code by the compiler. This
@@ -1188,7 +1209,7 @@ analyze tables even when they differ in structure, column names, or data
 types.
 
 <figure id="fig:anaylsis">
-<img src="media/figures/rescaled_figures/chemrev_figure17.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure17.png" alt="" width="100%" />
 <figcaption><strong>Static conventional data analysis workflow
 vs. dynamic <span data-acronym-label="gpm"
 data-acronym-form="singular+short">gpm</span> generated
@@ -1375,7 +1396,7 @@ could look like if we were to integrate [gpm]{acronym-label="gpm"
 acronym-form="singular+short"} at each step of the process.
 
 <figure id="fig:writing_with_ml">
-<img src="media/figures/rescaled_figures/chemrev_figure18.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure18.png" alt="" width="100%" />
 <figcaption><strong>Vision for <span data-acronym-label="gpm"
 data-acronym-form="singular+short">gpm</span> in reporting, a
 visualization of the scientific writing process</strong>. <span

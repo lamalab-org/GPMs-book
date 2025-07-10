@@ -1,5 +1,26 @@
 ---
-title: "Evaluations"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Evaluations {#sec:evals}
@@ -77,7 +98,7 @@ curation.
 :::
 
 <figure id="fig:benchmarks">
-<img src="media/figures/rescaled_figures/chemrev_figure8.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure8.png" alt="" width="100%" />
 <figcaption><strong>Comparison of measurement specificity and
 application relevance of chemistry benchmarks.</strong> This figure
 presents a subjective, qualitative positioning of selected
@@ -139,7 +160,7 @@ clearly stated scope and limitations.
 #### Scoring Mechanism
 
 <figure id="fig:scoring">
-<img src="media/figures/final_figures/chembench_scoring.png" alt="" / width="100%">
+<img src="media/figures/final_figures/chembench_scoring.png" alt="" width="100%" />
 <figcaption><strong><code>ChemBench</code> [@mirza2024large] rankings
 based on different scoring metrics</strong>: All metrics are a sum,
 weighted sum, or maximum values over all <span data-acronym-label="mcq"
@@ -245,7 +266,7 @@ limitations, and no single approach can comprehensively capture a
 model's performance across all potential application scenarios.
 
 <figure id="fig:estimators">
-<img src="media/figures/rescaled_figures/chemrev_figure10.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure10.png" alt="" width="100%" />
 <figcaption><strong>Comparison of Evaluation Methodologies</strong>:
 This figure compares five common evaluation methodologies for <span
 data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>

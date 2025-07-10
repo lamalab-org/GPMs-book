@@ -1,5 +1,26 @@
 ---
-title: "Building Principles of GPMs"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Building Principles of GPMs
@@ -56,8 +77,8 @@ values. At its core, all information within a computer is represented as
 bits (zeros and ones). Bits are grouped into bytes (8 bits), and meaning
 is assigned to these sequences through encoding schemes like `ASCII` or
 `UTF-8`. Everything---text, a pixel in an image, or even a chemical
-structure---can be stored as sequences of bytes. For example, "" can be
-translated into the byte sequence, "H", "2", "O". However, using raw
+structure---can be stored as sequences of bytes. For example, "H2O" can
+be translated into the byte sequence, "H", "2", "O". However, using raw
 byte sequences for [ml]{acronym-label="ml"
 acronym-form="singular+short"} presents significant computational
 inefficiency as representing chemical entities requires long byte
@@ -71,23 +92,24 @@ they may struggle to perform well on unseen inputs.
 A more efficient mapping that is built on top of the underlying byte
 representation is [ohe]{acronym-label="ohe"
 acronym-form="singular+short"}. Instead of working with variable-length
-byte sequences, we create a fixed vocabulary ({, , }) where each
-discrete category (in this case, molecule) gets a unique vector: becomes
-\[1, 0, 0\], becomes \[0, 1, 0\], and so on. This provides unambiguous,
-computationally manageable representations. As the number of categories
-grows, one-hot vectors become increasingly long and sparse, making them
-computationally inefficient---particularly for large vocabularies, i.e.,
-many categories. For example, we need a vocabulary of size 118 to model
-only the unique elements in the periodic table. Now, imagine the
-vocabulary required for all unique compounds---the size combinatorially
-explodes. More importantly, while [ohe]{acronym-label="ohe"
-acronym-form="singular+short"} distinguishes molecules or elements, it
-still treats them as entirely independent. It does not capture any
-properties of the entity it represents. For example, the ordering of
-numbers (such as $4<5$) or chemical similarities (such as being more
-similar to but less similar to ) would not be preserved.
-\[@chuang2018comment\] Embeddings (learned encoding), that we will
-discuss in [1.2.3](#sec:embeddings){reference-type="ref+Label"
+byte sequences, we create a fixed vocabulary ({H2O, CO2, HCl}) where
+each discrete category (in this case, molecule) gets a unique vector:
+H2O becomes \[1, 0, 0\], CO2 becomes \[0, 1, 0\], and so on. This
+provides unambiguous, computationally manageable representations. As the
+number of categories grows, one-hot vectors become increasingly long and
+sparse, making them computationally inefficient---particularly for large
+vocabularies, i.e., many categories. For example, we need a vocabulary
+of size 118 to model only the unique elements in the periodic table.
+Now, imagine the vocabulary required for all unique compounds---the size
+combinatorially explodes. More importantly, while
+[ohe]{acronym-label="ohe" acronym-form="singular+short"} distinguishes
+molecules or elements, it still treats them as entirely independent. It
+does not capture any properties of the entity it represents. For
+example, the ordering of numbers (such as $4<5$) or chemical
+similarities (such as Cl being more similar to Br but less similar to
+Na) would not be preserved. \[@chuang2018comment\] Embeddings (learned
+encoding), that we will discuss in
+[1.2.3](#sec:embeddings){reference-type="ref+Label"
 reference="sec:embeddings"}, solve this through learned, dense vector
 representations.
 
@@ -110,41 +132,13 @@ of chemical representations reflects different answers to this question,
 each making distinct trade-offs between simplicity, expressiveness, and
 computational efficiency.
 
-::: {#tab:molecular-representations}
-  **Representation**                                                                                                  **Encoded information**                                                    **Description**                                                                                                                                                                                                                                               **Example**
-  ------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Table  - continued from previous page                                                                                                                                                                                                                                                                                                                                                                                                                        
-  **Representation**                                                                                                  **Encoded info**                                                           **Description**                                                                                                                                                                                                                                               **Example**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-  Elemental composition                                                                                               Stoichiometry                                                              Always available, but non-unique.                                                                                                                                                                                                                             C9H8O4
-  [iupac]{acronym-label="iupac" acronym-form="singular+short"} name                                                   Stoichiometry, bonding, geometry                                           Universally understood, systematic nomenclature, unmanageable for large molecules, and lacks detailed 3D information.                                                                                                                                         -acetyloxybenzoic acid
-  [smiles]{acronym-label="smiles" acronym-form="singular+short"} \[@weininger1988smiles\]                             Stoichiometry, bonding                                                     Massive public corpora and tooling support, however, there are several valid strings per molecule, and it does not contain spatial information.                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-  *etc.*                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-  [selfies]{acronym-label="selfies" acronym-form="singular+short"} \[@krenn2020self; @cheng2023group\]               Stoichiometry, bonding                                                     \% syntactic and semantic validity by construction, including meaningful grouping.                                                                                                                                                                            `[C][C][=Branch1][C][=O][O]` `[C][=C][C][=C][C][=C]` `[Ring1][=Branch1][C]` `[=Branch1][C][=O][O]`
-  [inchi]{acronym-label="inchi" acronym-form="singular+short"}                                                        Stoichiometry, bonding                                                     Canonical one-to-one identifier; encodes stereochemistry layers.                                                                                                                                                                                              `InChI=1S/C9H8O4/c1-6(10)13` `-8-5-3-2-4-7(8)9(11)12/` `h2-5H,1H3,(H,11,12)`
-  Graphs                                                                                                              Stoichiometry, bonding, geometry                                           Strong inductive bias that works with [gnns]{acronym-label="gnn" acronym-form="plural+short"}. Symmetry-equivariant variants available. Long-range interactions are implicit.                                                                                 
-  xyz representation                                                                                                  Stoichiometry, geometry                                                    Exact spatial detail. It is high dimensional, and orientation alignment is needed.                                                                                                                                                                            1.2333 0.5540 0.7792 O -0.6952 -2.7148 -0.7502 O 0.7958 -2.1843 0.8685 O 1.7813 0.8105 -1.4821 O -0.0857 0.6088 0.4403 C ...
-  Multimodal                                                                                                          Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining   Combines complementary signals; boosts robustness and coverage. It is hard to implement, the complexity scales with the amount of representations, some modalities are data-scarce, and the information encoded totally depends on the modalities included.   
-  [cif]{acronym-label="cif" acronym-form="singular+short"} \[@hall1991crystallographic\]                              Stoichiometry, bonding, geometry, periodicity                              Standardized and widely supported, however, it carries heterogeneous keyword sets and parser overhead                                                                                                                                                         `data_Si _symmetry_space_group_name_H-M ’P 1’ _cell_length_a 3.85 …_cell_angle_alpha 60.0 …_symmetry_Int_Tables_number 1 _chemical_formula_structural Si _chemical_formula_sum Si2 _cell_volume 40.33 _cell_formula_units_Z 2 loop_ _symmetry_equiv_pos_site_id _symmetry_equiv_pos_as_xyz 1 ’x, y, z’ loop_ _atom_type_symbol _atom_type_oxidation_number Si0+ 0.0loop_ _atom_site_type_symbol _atom_site_label _atom_site_symmetry_multiplicity _atom_site_fract_x …_atom_site_occupancy Si0+ Si0 1 0.75 0.75 0.75 1.0 Si0+ Si1 1 0.0 0.0 0.0 1.0`
-  Condensed [cif]{acronym-label="cif" acronym-form="singular+short"} \[@gruver2024finetuned; @antunes2024crystal\]   Stoichiometry, geometry, symmetry, periodicity                             Good for crystal generation tasks. It omits occupancies and defects, custom tooling is needed, and only works for crystals                                                                                                                                    `3.8 3.8 3.8 59 59 59 Si0+ 0.75 0.75 0.75 Si0+ 0.00 0.00 0.00`
-  \[@Xiao_2023\]                                                                                                      Stoichiometry, bonding, periodicity                                        Invertible, symmetry-invariant and compact for general crystals. However, it carries ambiguity for disordered sites                                                                                                                                           `Si Si 0 1 + + + 0 1 + + o 0 1 + o + 0 1 o + +`
-  \[@alampara2024mattext\]                                                                                            Stoichiometry, bonding, symmetry, coarse graining                          Treats each coordination polyhedron as a "molecule", it is transferable and compact; but it ignores long-range order and its reconstruction requires post-processing                                                                                          `R-3m Si (2c) [Si][Si]([Si])[Si]`
-  Natural-language description \[@ganose2019robocrystallographer\]                                                    Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining   It is human-readable and more intuitive tokenizable by [llms]{acronym-label="llm" acronym-form="plural+short"}. However, trying to encode all the information can lead to verbose, ambiguous descriptions.                                                    "Silicon crystallizes in the diamond-cubic structure, a lattice you can picture as two face-centred-cubic frameworks gently interpenetrating..."
+::: tabular
+lll
 
-  : **Comparison of common molecular representations**. For the encoded
-  information contained by each representation, we followed the criteria
-  used by @alampara2024mattext. The examples shown are *aspirin* for
-  elemental composition, [iupac]{acronym-label="iupac"
-  acronym-form="singular+short"} name, [smiles]{acronym-label="smiles"
-  acronym-form="singular+short"}, [selfies]{acronym-label="selfies"
-  acronym-form="singular+short"}, , graphs, 3D coordinates; and
-  *silicon* for , condensed , , , and natural-language description. Two
-  non-canonical [smiles]{acronym-label="smiles"
-  acronym-form="singular+short"} are shown to illustrate ambiguity. The
-  examples for 3D coordinates, , and natural-language description are
-  truncated to fit in the table. For the multimodal representation, only
-  one of the possible modalities is shown ($^{13}$C spectrum).
+**Representation** & **Encoded information** & **Description** &
+**Example**\
+
+\
 :::
 
 However, a common strategy is to represent chemical information as a
@@ -349,7 +343,7 @@ rules) and which are "unlikely" or "impossible" (random assortments of
 atoms).
 
 <figure id="fig:training_workflow">
-<img src="media/figures/rescaled_figures/chemrev_figure4.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure4.png" alt="" width="100%" />
 <figcaption><strong>General training workflow through the lens of
 molecular science</strong>. The figure illustrates the progression from
 pre-training through fine-tuning to post-training stages. <strong>(1)
@@ -489,7 +483,7 @@ reference="fig:types_ssl"} illustrates the two main families: generative
 and contrastive, along with example pretext tasks for each.
 
 <figure id="fig:types_ssl">
-<img src="media/figures/rescaled_figures/chemrev_figure5.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure5.png" alt="" width="100%" />
 <figcaption><strong>Main families in <span data-acronym-label="ssl"
 data-acronym-form="plural+short">ssls</span></strong>. The figure
 illustrates the two primary approaches to <span data-acronym-label="ssl"
@@ -584,7 +578,18 @@ input, which establishes the conditional context (see
 [\[eq:nexttoken\]](#eq:nexttoken){reference-type="ref+Label"
 reference="eq:nexttoken"}).
 
-<img src="media/eq_images/nexttoken.png" alt="Tcolorbox: eq:nexttoken" / width="100%">
+::::: tcolorbox
+[]{#eq:nexttoken label="eq:nexttoken"}
+
+:::: center
+::: minipage
+$$\mathcal{L} = 
+-\mathbb{E} \left[ \sum_{t=1}^{T} 
+\log P(\eqnmarkbox[PositiveColor]{pred}{x_t} | \eqnmarkbox[NegativeColor]{context}{x_{<t}})
+\right]
+\label{eq:cross_entropy}$$
+:::
+::::
 
 - **Prediction Term** (Blue): The target token $x_t$ that the model is
   trying to predict at each position.
@@ -609,6 +614,7 @@ reference="eq:nexttoken"}).
 - **Overall Loss Structure**: Cross-entropy loss that encourages the
   model to assign high probability to the correct next token at each
   position, given all previous tokens.
+:::::
 
 #### Denoising {#sec:denoising}
 
@@ -687,7 +693,22 @@ involve contrasting variations of a crystal structure against entirely
 different molecules or materials, enabling the model to grasp the subtle
 similarities and stark differences between them.
 
-<img src="media/eq_images/infonce.png" alt="Tcolorbox: eq:infonce" / width="100%">
+::::: tcolorbox
+:::: center
+::: minipage
+$$\label{eq:infonce}
+%\mathcal{L}_{\text{InfoNCE}}
+\hspace*{-2em}
+\mathcal{L} = 
+%\hspace*{-3em}
+-\mathbb{E} \left[ \log \frac{
+\eqnmarkbox[PositiveColor]{pos}{\exp({\text{sim}(f(\mathbf{x}_i), f(\mathbf{x}_i^+))/\tikzmarknode{tau1}{\tau}})}
+}{
+\eqnmarkbox[PositiveColor]{pos2}{\exp({\text{sim}(f(\mathbf{x}_i), f(\mathbf{x}_i^+))/\tau})} + 
+\eqnmarkbox[NegativeColor]{neg}{\sum_{j=1}^{N} \exp({\text{sim}(f(\mathbf{x}_i), f(\mathbf{x}_j^-))/\tikzmarknode{tau2}{\tau}})}
+} \right]$$
+:::
+::::
 
 - **Positive Pair Term** (Blue): Measures similarity between an anchor
   sample $\mathbf{x}_i$ and its positive pair $\mathbf{x}_i^+$ (e.g.,
@@ -704,6 +725,7 @@ similarities and stark differences between them.
 - **Overall Loss Structure** : A negative log probability that
   encourages the model to maximize similarity for positive pairs while
   minimizing it for negative pairs.
+:::::
 
 #### Clustering-based Contrastive Learning {#sec:clustering_cl}
 
@@ -873,7 +895,44 @@ shape ([1](#fig:training_workflow){reference-type="ref+Label"
 reference="fig:training_workflow"}), but the model learns a new way to
 navigate it, guided by the reward.
 
-<img src="media/eq_images/rl_objective.png" alt="Reinforcement Learning Framework" / width="100%">
+::::: tcolorbox
+[]{#eq:rl label="eq:rl"}
+
+:::: center
+::: minipage
+$$\label{eq:rl_objective}
+\hspace*{-1em}
+\pi(a|s) = \eqnmarkbox[PolicyColor]{policy}{P_{\text{LLM}}} \left( \eqnmarkbox[ActionColor]{action}{\text{next tokens}} \mid \eqnmarkbox[StateColor]{context}{\text{context}} \right) 
+\rightarrow \text{Maximize } \eqnmarkbox[RewardColor]{reward}{\mathbb{E}[R]}$$
+:::
+::::
+
+- **State ($s$)** (Blue): The sequence of tokens generated so far,
+  including the original prompt and any partial response. Represents the
+  current context that the model uses to make decisions.
+
+- **Action ($a$)** (Maroon): The next token that the model chooses to
+  generate from its vocabulary. This is the discrete decision the agent
+  makes at each step.
+
+- **Policy ($\pi$ or $P_{\text{LLM}}$)** (Red): The
+  [llm]{acronym-label="llm" acronym-form="singular+short"} itself, whose
+  parameters define the probability distribution over possible following
+  tokens given the current state. This is what gets optimized during
+  training.
+
+- **Reward ($R$)** (Peach): A numerical score assigned to complete
+  generated sequences, measuring how well the output achieves the
+  desired goal. Used only during training to guide parameter updates.
+
+- **Expectation ($\mathbb{E}$)** (Peach): The average cumulative reward,
+  calculated over many possible sequences that could be generated by the
+  current policy.
+
+- **Training Objective**: Adjust the model's parameters to maximize the
+  expected cumulative reward ($\mathbb{E}[R]$) over complete sequences,
+  enabling the generation of high-quality outputs.
+:::::
 
 ### The Challenge of Reward Design
 
@@ -987,7 +1046,7 @@ reference="fig:architectures"} are examples of foundational backbones
 that we discuss in the following sections.
 
 <figure id="fig:architectures">
-<img src="media/figures/rescaled_figures/chemrev_figure6.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure6.png" alt="" width="100%" />
 <figcaption><strong>Blueprint for <span data-acronym-label="gpm"
 data-acronym-form="plural+short">gpms</span> architectures</strong>.
 This diagram illustrates four distinct neural network architectures
@@ -1565,30 +1624,9 @@ tune the model to new data which updates its parameters. The second
 approach involves coupling the model into a larger system that can
 interact with external sources of information and tools.
 
-::: {#tab:model_adaptation}
-  **Model adaptation**        **Time**   **Data**        **ML knowledge**
-  --------------------------- ---------- --------------- ------------------
-  Pre-training                Weeks      1M--1B+         Very High
-  Zero-shot prompting         Minutes    None            None
-  Few-shot Prompting          Hours      \<10 examples   None
-  Fine-tuning                 Days       \<10k           High
-  **Coupling into systems**                              
-  RAG                         Days       100k--1M+       Low
-  Tool-Augmentation           Days       None / 10k+     Low
-
-  : **Model Adaptation Approaches Overview:** This table provides a
-  rough overview of the estimated time, data, and
-  [ml]{acronym-label="ml" acronym-form="singular+short"} knowledge
-  required for each approach. Each method (listed in the first column)
-  is paired with a triplet that includes: an approximate implementation
-  time, the estimated dataset size, and the level of
-  [ml]{acronym-label="ml" acronym-form="singular+short"} expertise
-  needed. These estimates assume that you have at least a bachelor's
-  level of understanding of chemistry and at least some computational
-  background.
+::: tabular
+lll
 :::
-
-[]{#tab:model_adaptation label="tab:model_adaptation"}
 
 ### Prompting {#sec:prompting}
 
@@ -1722,7 +1760,7 @@ these components represent a set of capabilities that the agent's core
 draw upon to achieve complex objectives.
 
 <figure id="fig:agent-loop">
-<img src="media/figures/rescaled_figures/chemrev_figure7.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure7.png" alt="" width="100%" />
 <figcaption><strong>The execution-cognition-perception capabilities of
 an <span data-acronym-label="llm"
 data-acronym-form="singular+short">llm</span>-agent:</strong> This

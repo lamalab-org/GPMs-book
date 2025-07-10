@@ -1,5 +1,26 @@
 ---
-title: "Introduction"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Introduction
@@ -27,9 +48,9 @@ events to year-long stability studies of pharmaceuticals or batteries,
 demanding data sampled at resolutions tailored to each time regime.
 Spatially, systems range from the atomic to the industrial scale,
 requiring models that bridge molecular behavior to macroscopic
-properties. Representationally, even a single observation (e.g., a -NMR
-spectrum) can be encoded in chemically equivalent formats: a string
-\[@alberts2024unraveling\], vector \[@mirza2024elucidating\], or
+properties. Representationally, even a single observation (e.g., a
+\^13C-NMR spectrum) can be encoded in chemically equivalent formats: a
+string \[@alberts2024unraveling\], vector \[@mirza2024elucidating\], or
 image\[@alberts2024unraveling\]. However, these representations are not
 computationally equivalent and have been empirically shown to produce
 diverse model outputs.\[@atz2024prospective; @alampara2024probing;

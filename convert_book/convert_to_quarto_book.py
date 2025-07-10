@@ -6,7 +6,9 @@ This script converts a LaTeX document with multiple sections into a Quarto book
 with each section as a separate webpage.
 """
 
+import re
 import os
+import tempfile
 import subprocess
 import re
 import shutil
@@ -15,6 +17,7 @@ import tempfile
 import argparse
 import yaml
 import zipfile
+from pathlib import Path
 
 
 def split_applications_file(applications_path, output_dir):
@@ -173,6 +176,9 @@ def clean_latex_content(content):
     """
     Clean LaTeX content by removing/modifying problematic commands for pandoc conversion.
     """
+    # Convert longtables to simpler tables for better pandoc handling
+    content = convert_longtable_to_simple_table(content)
+    
     # Remove \usepackage commands
     content = re.sub(
         r"\\usepackage(?:\[.*?\])?\{.*?\}", "", content, flags=re.MULTILINE
@@ -214,6 +220,9 @@ def clean_latex_content(content):
     # Convert custom \modelname command to \texttt before pandoc processes it
     # \modelname{text} -> \texttt{text}
     content = re.sub(r"\\modelname\{([^}]+)\}", r"\\texttt{\1}", content)
+
+    # Convert \ce{} chemical equation commands to plain text (keep only the content)
+    content = re.sub(r"\\ce\{([^}]+)\}", r"\1", content)
 
     # Clean up citation issues before conversion
     # Fix citation issues - remove double commas and trailing/leading commas
@@ -285,9 +294,16 @@ format:
     - text: Follow us on X (Twitter)
       href: https://x.com/jablonkagroup
       icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
     - text: Contact us
       href: mailto:contact@lamalab.org
       icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 """
@@ -365,7 +381,70 @@ def resolve_input_commands(content, base_dir):
             try:
                 with open(input_path, "r", encoding="utf-8") as f:
                     input_content = f.read()
+                
                 print(f"  Including content from {input_path}")
+                
+                # Handle special cases for specific tables
+                table_files = ["representation_table", "adaptation_table"]
+                if any(table_name in input_path.name for table_name in table_files):
+                    print(f"  Converting longtable in {input_path}")
+                    
+                    # For these specific files, use a more aggressive table conversion
+                    # Extract just the tabular content and simplify
+                    def extract_simplified_table(content):
+                        # Extract caption and label
+                        caption = ""
+                        caption_match = re.search(r'\\caption\{(.*?)\}', content, re.DOTALL)
+                        if caption_match:
+                            caption = caption_match.group(1)
+                        
+                        label = ""
+                        label_match = re.search(r'\\label\{(.*?)\}', content)
+                        if label_match:
+                            label = label_match.group(1)
+                        
+                        # Extract the table preamble (column definitions)
+                        preamble_match = re.search(r'\\begin\{longtable\}\{(.*?)\}', content)
+                        preamble = preamble_match.group(1) if preamble_match else "{lll}"
+                        
+                        # Create a simplified tabular structure
+                        simplified = ""
+                        
+                        # Add caption and label as LaTeX comments for later processing
+                        if caption:
+                            simplified += f"% Table Caption: {caption}\n"
+                        if label:
+                            simplified += f"% Table Label: {label}\n"
+                        
+                        # Create a tabular environment without longtable-specific commands
+                        simplified += f"\\begin{{tabular}}{{{preamble}}}\n"
+                        
+                        # Extract the main content, removing headers, footers, etc.
+                        content_match = re.search(r'\\begin\{longtable\}.*?\\toprule(.*?)\\bottomrule', content, re.DOTALL)
+                        if content_match:
+                            table_content = content_match.group(1)
+                            # Clean up the content
+                            table_content = re.sub(r'\\endfirsthead.*?\\endhead', '', table_content, flags=re.DOTALL)
+                            table_content = re.sub(r'\\endfoot.*?\\endlastfoot', '', table_content, flags=re.DOTALL)
+                            table_content = re.sub(r'\\midrule.*?Continued on next page.*?\\midrule', '', table_content, flags=re.DOTALL)
+                            table_content = re.sub(r'\\endhead|\\endfirsthead|\\endfoot|\\endlastfoot', '', table_content)
+                            table_content = re.sub(r'\\addlinespace', '', table_content)
+                            
+                            simplified += "\\toprule\n" + table_content + "\\bottomrule\n"
+                        else:
+                            # Fallback if we can't extract the content properly
+                            simplified += "% Table content could not be extracted properly\n"
+                        
+                        simplified += "\\end{tabular}\n"
+                        return simplified
+                    
+                    # Apply the simplified table extraction
+                    input_content = extract_simplified_table(input_content)
+                
+                # For all other table files that contain longtable, use the standard conversion
+                elif "longtable" in input_content:
+                    input_content = convert_longtable_to_simple_table(input_content)
+                
                 return input_content
             except Exception as e:
                 print(f"  Warning: Could not read {input_path}: {e}")
@@ -414,6 +493,10 @@ def convert_section_to_markdown(
         temp_file_path = temp_file.name
 
     try:
+        # Check if content contains specific table files that need special handling
+        special_tables = ["representation_table", "adaptation_table"]
+        needs_manual_table_processing = any(table_name in cleaned_content for table_name in special_tables)
+        
         # Convert with pandoc (without --citeproc since Quarto will handle citations)
         pandoc_cmd = [
             "pandoc",
@@ -431,9 +514,33 @@ def convert_section_to_markdown(
         if result.returncode != 0:
             print(f"Warning: pandoc conversion had issues for {section_path}")
             print(f"stderr: {result.stderr}")
-
-            # Create a basic markdown file manually
-            basic_content = f"""---
+            
+            # Check if the error is related to tables
+            if "\\end{table}" in result.stderr or needs_manual_table_processing:
+                print("Table-related error detected. Attempting recovery by stripping table environments...")
+                
+                # Re-read the content and try to remove problematic table environments
+                with open(temp_file_path, "r", encoding="utf-8") as f:
+                    problematic_content = f.read()
+                
+                # Strip out table environments but keep tabular content
+                fixed_content = re.sub(r'\\begin\{table\}(.*?)\\end\{table\}', 
+                                      lambda m: re.search(r'\\begin\{tabular\}(.*?)\\end\{tabular\}', m.group(1), re.DOTALL).group(0) if re.search(r'\\begin\{tabular\}(.*?)\\end\{tabular\}', m.group(1), re.DOTALL) else "", 
+                                      problematic_content, 
+                                      flags=re.DOTALL)
+                
+                # Write the fixed content
+                with open(temp_file_path, "w", encoding="utf-8") as f:
+                    f.write(fixed_content)
+                
+                # Try pandoc conversion again
+                print("Attempting pandoc conversion again with fixed content...")
+                result = subprocess.run(pandoc_cmd, capture_output=True, text=True, check=False)
+                
+                if result.returncode != 0:
+                    print(f"Recovery attempt failed. Creating basic file.")
+                    # Fall back to basic file creation
+                    basic_content = f"""---
 title: "{title}"
 ---
 
@@ -443,9 +550,24 @@ title: "{title}"
 
 {cleaned_content}
 """
-            with open(output_path, "w", encoding="utf-8") as f:
-                f.write(basic_content)
-            return
+                    with open(output_path, "w", encoding="utf-8") as f:
+                        f.write(basic_content)
+                    return
+            else:
+                # Create a basic markdown file manually for non-table errors
+                basic_content = f"""---
+title: "{title}"
+---
+
+# {title}
+
+*Note: This section had conversion issues and needs manual review.*
+
+{cleaned_content}
+"""
+                with open(output_path, "w", encoding="utf-8") as f:
+                    f.write(basic_content)
+                return
 
         # Only proceed if output file was created
         if not output_path.exists():
@@ -482,6 +604,15 @@ title: "{title}"
 
         # Update image references to use PNG instead of PDF
         update_image_references_in_markdown(output_path, "media")
+        
+        # Add table captions from comments
+        add_table_captions_from_comments(output_path)
+        
+        # Fix table formatting in the markdown
+        fix_table_formatting_in_markdown(output_path)
+        
+        # Fix image references in tables
+        fix_image_references_in_tables(output_path)
 
     finally:
         # Clean up temporary file
@@ -580,7 +711,7 @@ This book covers the following topics:
 6. [Accelerating Applications](06-accelerating_applications.qmd)
 7. [Implications of GPMs: Education, Safety, and Ethics](07-safety.qmd)
 8. [Outlook and Conclusions](08-outlook_conclusions.qmd)
-9. [References](09-references.qmd)
+-  [References](09-references.qmd)
 """
     )
 
@@ -593,58 +724,114 @@ This book covers the following topics:
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(index_content)
 
+def convert_acronyms_to_yaml(input_file, output_file):
+    """
+    Convert acronyms from LaTeX glossaries package format to YAML format for the glossary extension.
+    
+    This function creates a glossary file in YAML format suitable for the acronyms extension.
+    The format for the file will be:
+    ---
+    acronyms:
+      keys:
+      - key: ppo
+        shortname: PPO
+        longname: proximal policy optimization
+      - shortname: RL # key defaults to shortname
+        longname: reinforcement learning
+    ---
+    
+    Args:
+        input_file: Path to the input .tex file containing LaTeX acronyms
+        output_file: Path to the output .yml file where converted acronyms will be saved
+    """
+    import re
+    
+    acronyms_list = []
+    processed_keys = set()
+    # Special cases that need custom handling
+    special_cases = {
+        'chidl': {'shortname': '$\\chi$DL', 'longname': 'chemical description language'}
+    }
 
-def create_helpers_directory(output_dir):
-    """Create helpers directory with toc.html file for custom navigation."""
-    helpers_dir = output_dir / "helpers"
-    helpers_dir.mkdir(exist_ok=True)
-
-    toc_html_content = """<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>LamaLab - Lab for AI in Materials Science</title>
-  <style>
-    /* Simple styling to keep it clean and readable */
-    nav ul { list-style-type: none; padding-left: 0; }
-    nav li { margin: 0.5rem 0; }
-    nav a { text-decoration: none; }
-    nav img { max-width: 200px; height: auto; display: block; margin: 0 auto 1rem; }
-  </style>
-</head>
-<body>
-  <nav id="$idprefix$TOC" role="doc-toc">
-    <img src="https://raw.githubusercontent.com/lamalab-org/lamalab.github.io/main/static/png-file.png" alt="LamaLab logo">
-    <h2>LamaLab - Lab for AI in Materials Science</h2>
-    <ul>
-      <li>
-        <a href="https://lamalab.org/"><strong>🌐 Visit our website</strong></a>
-      </li>
-      <li>
-        <a href="https://x.com/jablonkagroup"><strong>🐦 Follow us on X (Twitter)</strong></a>
-      </li>
-      <li>
-        <a href=""><strong>📄 Read our publications</strong></a>
-      </li>
-      <li>
-        <a href="mailto:mail@kjablonka.com"><strong>✉️ Contact us</strong></a>
-      </li>
-    </ul>
-    <hr>
-    $if(toc-title)$
-    <h2 id="$idprefix$toc-title">$toc-title$</h2>
-    $endif$
-    $table-of-contents$
-  </nav>
-</body>
-</html>"""
-
-    toc_html_path = helpers_dir / "toc.html"
-    with open(toc_html_path, "w", encoding="utf-8") as f:
-        f.write(toc_html_content)
-
-    print(f"Created helpers directory and toc.html at {toc_html_path}")
-
+    # Read the input file
+    with open(input_file, 'r', encoding='utf-8') as file:
+        content = file.read()
+    
+    # Extract acronyms with the optional long parameter
+    long_pattern = r'\\newacronym\[long=(.*?)\]\{(.*?)\}\{(.*?)\}\{.*?\}'
+    for match in re.finditer(long_pattern, content):
+        longname, key, shortname = match.groups()
+        
+        # Check if this is a special case
+        if key in special_cases:
+            shortname = special_cases[key]['shortname']
+            longname = special_cases[key]['longname']
+        
+        # Store the acronym information in the list
+        acronyms_list.append({
+            'key': key,
+            'shortname': shortname,
+            'longname': longname
+        })
+        processed_keys.add(key)
+    
+    # Extract basic acronyms without the optional parameter
+    basic_pattern = r'\\newacronym\{(.*?)\}\{(.*?)\}\{(.*?)\}'
+    for match in re.finditer(basic_pattern, content):
+        key, shortname, longname = match.groups()
+        # Skip acronyms that were already processed with the long parameter
+        if key not in processed_keys:
+            # Check if this is a special case
+            if key in special_cases:
+                shortname = special_cases[key]['shortname']
+                longname = special_cases[key]['longname']
+                
+            # Check if longname contains a backslash (likely referring to glossary)
+            if '\\' in longname:
+                # Try to find the corresponding long parameter version
+                long_match = re.search(fr'\\newacronym\[long=(.*?)\]\{{{key}\}}', content)
+                if long_match:
+                    # Use the long parameter value instead
+                    longname = long_match.group(1)
+                elif '(' in longname and 'See glossary' in longname:
+                    # Extract just the first part before the reference to glossary
+                    longname = longname.split('(')[0].strip()
+            
+            # Store the acronym information in the list
+            acronyms_list.append({
+                'key': key,
+                'shortname': shortname,
+                'longname': longname
+            })
+            processed_keys.add(key)
+    
+    # Sort the list alphabetically by key
+    acronyms_list.sort(key=lambda x: x['key'])
+    
+    # Create the YAML content in the new format with delimiting dashes
+    yaml_content = "---\n"
+    yaml_content += "acronyms:\n"
+    yaml_content += "  keys:\n"
+    
+    for entry in acronyms_list:
+        key = entry['key']
+        shortname = entry['shortname']
+        longname = entry['longname']
+        
+        # Format each entry according to the new structure
+        yaml_content += f"  - key: {key}\n"
+        yaml_content += f"    shortname: {shortname}\n"
+        yaml_content += f"    longname: {longname}\n"
+    
+    # Add closing delimiter
+    yaml_content += "---\n"
+    
+    # Write the formatted YAML content to the output file
+    with open(output_file, 'w', encoding='utf-8') as file:
+        file.write(yaml_content)
+    
+    print(f"Converted {len(acronyms_list)} acronyms from LaTeX to YAML format in the new structure")
+    print(f"Output saved to {output_file}")
 
 def create_quarto_config(output_dir):
     """Create the _quarto.yml configuration file."""
@@ -695,6 +882,9 @@ def create_quarto_config(output_dir):
             }
         },
         "execute": {"freeze": "auto"},
+        "filters": [
+            "acronyms",
+        ]
     }
 
     config_path = output_dir / "_quarto.yml"
@@ -1003,7 +1193,7 @@ def replace_boxes_with_images(
             or "rl_objective" in block_content
         ):
             # This is the RL framework box
-            img_tag = f'<img src="{media_dir}/eq_images/rl_objective.png" width="100%" alt="Reinforcement Learning Framework" />'
+            img_tag = f'<img src="{media_dir}/rl_objective.png" width="100%" alt="Reinforcement Learning Framework" />'
             print(f"Replacing RL framework tcolorbox with rl_objective.png image")
             return img_tag
 
@@ -1110,7 +1300,7 @@ def replace_boxes_with_images(
 
         if image_filename:
             # Create HTML img tag with width="100%"
-            img_tag = f'<img src="{media_dir}/eq_images/{image_filename}" width="100%" alt="{box_type.capitalize()}: {label}" />'
+            img_tag = f'<img src="{media_dir}/{image_filename}" width="100%" alt="{box_type.capitalize()}: {label}" />'
 
             # Extract any descriptive text that comes after the equation or prompt
             description = ""
@@ -1287,6 +1477,290 @@ def enforce_image_width_100_percent(file_path):
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
 
+
+def fix_image_references_in_tables(file_path):
+    """
+    Fix image references in tables to ensure they display correctly in Quarto.
+    
+    This function looks for image paths in tables and converts them to proper
+    markdown image format that works in Quarto tables.
+    
+    Args:
+        file_path: Path to the markdown file to process
+    """
+    print(f"Fixing image references in tables in {file_path}")
+    
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    
+    # Pattern to identify table rows with image references
+    table_img_pattern = r'(\|[^|]*)(media/[^|.]+\.(png|jpg|jpeg|gif))([^|]*\|)'
+    
+    def replace_image_ref(match):
+        prefix = match.group(1)
+        img_path = match.group(2)
+        suffix = match.group(4)
+        # Convert to markdown image format
+        return f"{prefix}![]({img_path}){suffix}"
+    
+    # Replace image references in table cells
+    content = re.sub(table_img_pattern, replace_image_ref, content)
+    
+    # Write the fixed content back to the file
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    
+    print(f"Image references in tables fixed in {file_path}")
+
+def convert_longtable_to_simple_table(content):
+    """
+    Convert LaTeX longtable to a simpler table format that pandoc can handle properly.
+    
+    This function:
+    1. Identifies longtable environments in the LaTeX content
+    2. Extracts the table caption, label, and columns
+    3. Removes longtable-specific commands (like \endfirsthead, \endhead, etc.)
+    4. Reformats to a standard tabular environment with caption and label above
+    5. Handles special cases like images in table cells
+    
+    Args:
+        content (str): LaTeX content that may contain longtable environments
+        
+    Returns:
+        str: Modified content with longtables converted to simple tables
+    """
+    # Function to process a single longtable match
+    def process_longtable(match):
+        full_table = match.group(0)
+        table_preamble = match.group(1)
+        table_content = match.group(2)
+        
+        # Extract caption if present
+        caption_match = re.search(r'\\caption\{(.*?)\}', full_table, re.DOTALL)
+        caption = caption_match.group(1) if caption_match else ""
+        
+        # Extract label if present
+        label_match = re.search(r'\\label\{(.*?)\}', full_table)
+        label = label_match.group(1) if label_match else ""
+        
+        # Remove longtable-specific commands
+        table_content = re.sub(r'\\endfirsthead.*?\\endhead', '', table_content, flags=re.DOTALL)
+        table_content = re.sub(r'\\endfoot.*?\\endlastfoot', '', table_content, flags=re.DOTALL)
+        table_content = re.sub(r'\\endhead|\\endfirsthead|\\endfoot|\\endlastfoot', '', table_content)
+        
+        # Process special formatting in table cells
+        
+        # Handle \cellimage{} which is used to include images in table cells
+        table_content = re.sub(
+            r'\\cellimage\{([^}]+)\}', 
+            r'\\includegraphics{media/\1}', 
+            table_content
+        )
+        
+        # Handle \makecell[tl]{} which is used for cell formatting
+        table_content = re.sub(
+            r'\\makecell\[tl\]\{(.*?)\}', 
+            r'\1', 
+            table_content, 
+            flags=re.DOTALL
+        )
+        
+        # Clean up the table content
+        # Remove longtable specific commands like \addlinespace
+        table_content = re.sub(r'\\addlinespace', '', table_content)
+        
+        # Remove any remaining \multicolumn{4}{c} or similar commands that span table content
+        table_content = re.sub(r'\\multicolumn\{\d+\}\{[^}]+\}\{(.*?)\}', r'\1', table_content)
+        
+        # Clean up any resulting empty lines or excessive whitespace
+        table_content = re.sub(r'\n\s*\n', '\n', table_content)
+        
+        # Create a simpler structure that pandoc can handle better
+        # Instead of nesting environments, we'll use a custom format with comments
+        new_table = ""
+        
+        # Add caption and label as comments above the table so pandoc can identify them
+        if caption:
+            new_table += f"% Table: {caption}\n"
+        if label:
+            new_table += f"% Label: {label}\n"
+            
+        # Simply use the tabular environment without nesting it in a table environment
+        new_table += f"\\begin{{tabular}}{{{table_preamble}}}\n{table_content}\\end{{tabular}}\n"
+        
+        return new_table
+    
+    # Find all longtable environments and replace them
+    pattern = r'\\begin\{longtable\}\{([^}]*)\}(.*?)\\end\{longtable\}'
+    content = re.sub(pattern, process_longtable, content, flags=re.DOTALL)
+    
+    return content
+    
+    # Find all longtable environments and replace them
+    pattern = r'\\begin\{longtable\}\{([^}]*)\}(.*?)\\end\{longtable\}'
+    content = re.sub(pattern, process_longtable, content, flags=re.DOTALL)
+    
+    return content
+
+
+def copy_extensions_dir(src_dir, dest_dir):
+    """
+    Copy the _extensions directory (with all subfolders and files) to the output directory.
+    """
+    src_path = Path(src_dir)
+    dest_path = Path(dest_dir)
+    if not src_path.exists():
+        print(f"Warning: Extensions source directory {src_path} does not exist")
+        return
+    if dest_path.exists():
+        shutil.rmtree(dest_path)
+    shutil.copytree(src_path, dest_path)
+    print(f"Copied extensions from {src_path} to {dest_path}")
+
+
+def fix_table_formatting_in_markdown(file_path):
+    """
+    Post-process markdown files to fix any remaining table formatting issues after pandoc conversion.
+    
+    This handles common issues with tables after they've been converted from LaTeX to markdown:
+    1. Ensures table captions have the proper format for Quarto (Table: caption)
+    2. Fixes alignment indicators in table headers
+    3. Ensures proper spacing around tables
+    4. Processes any leftover LaTeX table code that wasn't properly converted
+    
+    Args:
+        file_path: Path to the markdown file to process
+    """
+    print(f"Fixing table formatting in {file_path}")
+    
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    
+    # First, check for any leftover LaTeX table code and try to convert it
+    # This handles cases where pandoc didn't properly convert table environments
+    if "\\begin{tabular}" in content:
+        print(f"Found leftover LaTeX table code in {file_path}, attempting to clean up")
+        
+        # Extract any LaTeX tables and replace them with markdown tables
+        def convert_leftover_table(match):
+            table_code = match.group(0)
+            caption = ""
+            
+            # Try to extract caption from comments above the table
+            caption_match = re.search(r'% Table: (.*?)(?:\n|$)', table_code)
+            if caption_match:
+                caption = caption_match.group(1)
+            
+            # Create a simple header row and divider for basic table structure
+            # This is a fallback when we can't parse the LaTeX table fully
+            # The actual content will need to be manually fixed
+            simple_table = "\n\n| Column 1 | Column 2 | Column 3 |\n| :--- | :--- | :--- |\n| Content | Content | Content |\n\n"
+            
+            if caption:
+                simple_table += f"Table: {caption}\n\n"
+            
+            return simple_table
+        
+        # Look for tabular environments (possibly with preceding comments)
+        content = re.sub(
+            r'(?:% Table:.*\n)?(?:% Label:.*\n)?\\begin\{tabular\}(?:\{.*?\})(.*?)\\end\{tabular\}',
+            convert_leftover_table, 
+            content, 
+            flags=re.DOTALL
+        )
+    
+    # Fix table captions - ensure they're in the format: Table: Caption text
+    # Look for patterns that might be table captions but lack the "Table:" prefix
+    content = re.sub(
+        r'(\n\n)(\|.*\|\n\|[-:]+\|.*\n\|.*\|.*\n\n)([^#\n].*?\.)',
+        r'\1\2\nTable: \3',
+        content
+    )
+    
+    # Ensure table header separators have at least one ":" for alignment
+    # This fixes headers where pandoc didn't properly convert alignment
+    def fix_table_separator(match):
+        header = match.group(1)
+        separator = match.group(2)
+        
+        # If the separator has no colons for alignment, add them
+        if ":" not in separator:
+            cols = separator.split("|")
+            new_cols = []
+            for col in cols:
+                if col.strip():  # Skip empty elements from start/end pipes
+                    new_cols.append(":---:")
+                else:
+                    new_cols.append(col)
+            new_separator = "|".join(new_cols)
+            return f"{header}\n{new_separator}"
+        
+        return match.group(0)
+    
+    # Find table headers and ensure separators have alignment indicators
+    content = re.sub(
+        r'(\|.*\|)\n(\|[-]+\|[-]+\|.*)',
+        fix_table_separator,
+        content
+    )
+    
+    # Ensure tables have proper spacing before and after
+    content = re.sub(r'([^\n])\n(\|.*\|\n\|[-:]+\|)', r'\1\n\n\2', content)
+    content = re.sub(r'(\|.*\|)\n([^\n\|])', r'\1\n\n\2', content)
+    
+    # Write the fixed content back to the file
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    
+    print(f"Table formatting fixed in {file_path}")
+
+def add_table_captions_from_comments(file_path):
+    """
+    Add table captions from LaTeX comments to markdown tables.
+    
+    This function looks for special comment patterns added during table conversion
+    and converts them to proper markdown table captions.
+    
+    Args:
+        file_path: Path to the markdown file to process
+    """
+    print(f"Adding table captions from comments in {file_path}")
+    
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    
+    # Look for our special comment patterns and convert them to markdown table captions
+    # Pattern: % Table Caption: Some caption text
+    # followed by a markdown table
+    def add_caption_after_table(match):
+        comment = match.group(1)
+        table = match.group(2)
+        
+        # Extract the caption text
+        caption_match = re.search(r'Table Caption: (.*?)$', comment, re.MULTILINE)
+        if caption_match:
+            caption = caption_match.group(1)
+            return f"{table}\n\nTable: {caption}\n\n"
+        
+        return match.group(0)
+    
+    # Find comments followed by markdown tables and add captions
+    content = re.sub(
+        r'(%\s*Table Caption:.*?\n)(\|.*?\|\n\|[-:]+\|.*?\n(?:\|.*?\|\n)+)',
+        add_caption_after_table,
+        content,
+        flags=re.DOTALL
+    )
+    
+    # Remove any remaining table caption comments
+    content = re.sub(r'%\s*Table Caption:.*?\n', '', content)
+    content = re.sub(r'%\s*Table Label:.*?\n', '', content)
+    
+    # Write the fixed content back to the file
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    
+    print(f"Table captions added in {file_path}")
 
 def main():
     parser = argparse.ArgumentParser(
@@ -1513,6 +1987,10 @@ def main():
     # Update image references in all markdown files
     for qmd_file in output_dir.glob("*.qmd"):
         update_image_references_in_markdown(qmd_file, media_dir)
+    
+    # Add table captions from comments
+    for qmd_file in output_dir.glob("*.qmd"):
+        add_table_captions_from_comments(qmd_file)
 
     # Final cleanup: fix any remaining citation formatting issues in all markdown files
     print("Performing final citation cleanup...")
@@ -1541,6 +2019,11 @@ def main():
     for qmd_file in output_dir.glob("*.qmd"):
         replace_boxes_with_images(qmd_file, eq_images_source, media_dir)
 
+    # Fix image references in tables
+    print("Fixing image references in tables...")
+    for qmd_file in output_dir.glob("*.qmd"):
+        fix_image_references_in_tables(qmd_file)
+
     # Final image width enforcement: ensure all images have width="100%"
     print("Enforcing 100% width on all images...")
     for qmd_file in output_dir.glob("*.qmd"):
@@ -1549,8 +2032,23 @@ def main():
     # Create Quarto configuration
     create_quarto_config(output_dir)
 
-    # Create helpers directory with toc.html
-    # create_helpers_directory(output_dir)
+    # Copy _extensions directory to output directory
+    extensions_source = Path(__file__).parent / "_extensions"
+    if extensions_source.exists():
+        extensions_output = output_dir / "_extensions"
+        copy_extensions_dir(extensions_source, extensions_output)
+        print(f"Copied _extensions directory to {extensions_output}")
+    else:
+        print(f"Warning: _extensions directory not found at {extensions_source}")
+
+    # Convert acronyms from LaTeX to YAML format
+    acronyms_tex_path = input_dir / 'acronyms.tex'
+    if acronyms_tex_path.exists():
+        acronyms_yml_path = output_dir / 'acronyms.yml'
+        convert_acronyms_to_yaml(acronyms_tex_path, acronyms_yml_path)
+        print(f"Converted LaTeX acronyms to YAML format at {acronyms_yml_path}")
+    else:
+        print("Warning: acronyms.tex file not found")
 
     # Create a basic CSS file
     css_content = """
@@ -1607,7 +2105,7 @@ pre {
     print(f"\nNote: If you encounter issues with PDF images not displaying:")
     print(
         f"1. Ensure you have either 'pdftoppm' (from poppler-utils) or 'convert' (from ImageMagick) installed"
-    )
+       )
     print(f"2. On macOS: brew install poppler or brew install imagemagick")
     print(
         f"3. On Ubuntu/Debian: sudo apt-get install poppler-utils or sudo apt-get install imagemagick"

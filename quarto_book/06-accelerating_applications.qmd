@@ -1,5 +1,26 @@
 ---
-title: "Accelerating Applications"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Accelerating Applications
@@ -15,14 +36,14 @@ machine-readable representation.
 This challenge is particularly evident in the representation of
 molecules and materials, which must balance computational efficiency
 with the preservation of structural, compositional, and functional
-properties. Take, for example, the high-temperature superconductor .
-While atomic positions and coordinates are theoretically sufficient to
-solve the Schrödinger equation and describe this material, such a
-representation may not provide the adaptability necessary for diverse
-tasks. What defines a good representation depends on the problem.
-\[@huang2016understanding\]. A representation designed to predict
-critical temperature must efficiently encode the relationship between
-oxygen stoichiometry and superconducting properties, emphasizing
+properties. Take, for example, the high-temperature superconductor
+YBa2Cu3O\_7-x. While atomic positions and coordinates are theoretically
+sufficient to solve the Schrödinger equation and describe this material,
+such a representation may not provide the adaptability necessary for
+diverse tasks. What defines a good representation depends on the
+problem. \[@huang2016understanding\]. A representation designed to
+predict critical temperature must efficiently encode the relationship
+between oxygen stoichiometry and superconducting properties, emphasizing
 features like oxygen vacancy patterns and charge transfer mechanisms.
 Conversely, a representation for structural stability might prioritize
 different geometric or bonding characteristics.
@@ -146,9 +167,9 @@ employs specialized prompts to guide [lms]{acronym-label="lm"
 acronym-form="plural+short"} through their pre-trained knowledge on
 scientific literature, generating known rules (e.g., molecules weighing
 under 500 Da are more likely to pass the blood-brain barrier) that
-transform molecules into feature vectors (e.g. could translate to a
+transform molecules into feature vectors (e.g. CCO could translate to a
 vector $[2,46.07,1,1]$ where each number represents a feature of the
-molecule, in this example \[# , MW, \# -bond donors, \# -bond
+molecule, in this example \[# C, MW, \# H-bond donors, \# H-bond
 acceptors\]) for use with a random forest model, which they consider
 "interpretable". This approach outperformed specialized
 [sota]{acronym-label="sota" acronym-form="singular+short"} models across
@@ -187,7 +208,20 @@ acronym-form="singular+short"} string molecular graph inputs. They
 finally integrate the graph and text-level embeddings to produce a
 semantically enriched embedding.
 
-<img src="media/eq_images/cot_prompting.png" alt="Promptbox: box: cot_prompting" / width="100%">
+::: promptbox
+[]{#box: cot_prompting label="box: cot_prompting"}
+**[cot]{acronym-label="cot" acronym-form="singular+short"}
+Prompting**\[@srinivas2024crossmodal\]\
+Prompt 1: What is the molecular structure of this chemical
+[smiles]{acronym-label="smiles" acronym-form="singular+short"} string?
+Could you describe its atoms, bonds, functional groups, and overall
+arrangement?\
+Prompt 2: What are the physical properties of this molecule, such as its
+boiling point and melting point?\
+\...\
+Prompt 14: Are there any environmental impacts associated with the
+production, use, or disposal of this molecule?
+:::
 
 In a different implementation of fine-tuning, @balaji2023gptmolberta
 used `ChatGPT` to generate text descriptions of molecules that were then
@@ -209,7 +243,7 @@ can be converted into reliable explanations of said properties.
 ### Fine-Tuning {#sec:prediction_FT}
 
 <figure id="fig:gptchem">
-<img src="media/figures/property_gptchem.png" alt="" / width="100%">
+<img src="media/figures/property_gptchem.png" alt="" width="100%" />
 <figcaption><strong>Fine-tuned <code>GPT-3</code> for predicting
 solid-solution formation in high-entropy alloys</strong> Performance
 comparison of different <span data-acronym-label="ml"
@@ -389,7 +423,7 @@ principles.
 ### Core Limitations {#sec:property_core_limits}
 
 <figure id="fig:property_limitations">
-<img src="media/figures/property_mattext.png" alt="" / width="100%">
+<img src="media/figures/property_mattext.png" alt="" width="100%" />
 <figcaption><strong>Normalized error distributions for materials
 property prediction models across different architectures</strong>. Each
 point represents the normalized error of a model on a specific property
@@ -432,7 +466,7 @@ reasoning in materials tasks.\[@gruver2024promises\]
 ## Molecular and Material Generation {#sec:mol_generation}
 
 <figure id="fig:generation">
-<img src="media/figures/rescaled_figures/chemrev_figure21.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure21.png" alt="" width="100%" />
 <figcaption><strong>Pipeline for molecular and materials
 generation</strong> The workflow begins with input structures
 represented in various formats, which are used to train <span
@@ -682,7 +716,7 @@ existing [sota]{acronym-label="sota" acronym-form="singular+short"}
 model. @ansari2024dziner demonstrated `dZiner`'s capabilities in
 generating surfactants for critical micelle concentration reduction,
 WDR5 inhibitors, and optimizing [mof]{acronym-label="mof"
-acronym-form="singular+short"} organic linkers for adsorption. The
+acronym-form="singular+short"} organic linkers for CO2 adsorption. The
 `CLADD` framework adopts a [rag]{acronym-label="rag"
 acronym-form="singular+short"}-enhanced multi-agent approach where
 specialized teams including "Planning", "Knowledge Graph", and
@@ -810,7 +844,7 @@ design space, could be a limitation.
 ## LLMs as Optimizers {#sec:llm-optimizers}
 
 <figure id="fig:optimization">
-<img src="media/figures/rescaled_figures/chemrev_figure22.png" alt="" / width="100%">
+<img src="media/figures/rescaled_figures/chemrev_figure22.png" alt="" width="100%" />
 <figcaption><strong>Overview of the iterative optimization loop that
 mirrors the structure of the optimization section</strong>. The blue
 boxes contain the different roles that the <span

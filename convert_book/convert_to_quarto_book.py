@@ -1596,12 +1596,6 @@ def convert_longtable_to_simple_table(content):
     
     return content
     
-    # Find all longtable environments and replace them
-    pattern = r'\\begin\{longtable\}\{([^}]*)\}(.*?)\\end\{longtable\}'
-    content = re.sub(pattern, process_longtable, content, flags=re.DOTALL)
-    
-    return content
-
 
 def copy_extensions_dir(src_dir, dest_dir):
     """

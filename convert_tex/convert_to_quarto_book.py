@@ -723,6 +723,7 @@ def create_quarto_config(output_dir):
     config = {
         "project": {
             "type": "book",
+            "output-dir": "../docs",
             "title": "General Purpose Models for the Chemical Sciences",
         },
         "book": {

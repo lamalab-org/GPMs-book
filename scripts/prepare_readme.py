@@ -299,32 +299,87 @@ class ReadmeGenerator:
             "outlook_conclusions": "Outlook and Conclusions",
         }
 
+    def _format_citation(self, citation: Citation) -> str:
+        """Format a citation as 'Year - Title (hyperlinked)'."""
+        title = citation.title if citation.title else f"Citation {citation.key}"
+        year = citation.year if citation.year else "Unknown"
+
+        if citation.url:
+            return f"{year} - [{title}]({citation.url})"
+        else:
+            return f"{year} - {title}"
+
+    # --- START MODIFICATION ---
+    # New helper method to sort and write citations for a given list of keys.
+    def _write_sorted_citations(self, f, cite_keys: List[str]):
+        """
+        Retrieves, sorts, and writes citations for a list of citation keys.
+        The sorting is done by year in descending order.
+        """
+        if not cite_keys:
+            return
+
+        # Separate citations found in the bibliography from those that are missing.
+        found_citations = []
+        missing_keys = []
+        for key in cite_keys:
+            if key in self.citations:
+                found_citations.append(self.citations[key])
+            else:
+                missing_keys.append(key)
+
+        # Helper function to safely extract a numeric year for robust sorting.
+        # It handles non-numeric values like 'in press' or '2024a'.
+        def get_year_for_sort(citation: Citation) -> int:
+            try:
+                # Search for the first 4-digit number in the year string.
+                year_match = re.search(r"\d{4}", str(citation.year))
+                return int(year_match.group(0)) if year_match else 0
+            except (ValueError, TypeError):
+                # If year is invalid or not found, treat as 0 to sort it last.
+                return 0
+
+        # Sort the found citations by year in descending order.
+        sorted_citations = sorted(found_citations, key=get_year_for_sort, reverse=True)
+
+        # Write the sorted citations to the file.
+        for citation in sorted_citations:
+            ref_text = self._format_citation(citation)
+            f.write(f"- {ref_text}\n")
+
+        # List any missing citations at the end of the section.
+        for key in missing_keys:
+            f.write(f"- {key} *(citation not found in bibliography)*\n")
+
+        f.write("\n")
+
     def generate(self, sections_by_file: Dict[str, List[Section]], output_path: Path):
         """Generate README.md file."""
         with open(output_path, "w", encoding="utf-8") as f:
+            # (Preamble content remains unchanged)
             f.write("# General Purpose Models for the Chemical Sciences ✨\n\n")
             f.write("""![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
-![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)
-![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)
+    ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)
+    ![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)
 
-## 📘 Read the Review
+    ## 📘 Read the Review
 
-You can read the review directly on
-or access it as a collaborative online book at:
+    You can read the review directly on
+    or access it as a collaborative online book at:
 
-👉 [arXiv](https://arxiv.org/pdf/2507.07456)
+    👉 [arXiv](https://arxiv.org/pdf/2507.07456)
 
-👉 [Online Book](https://lnkd.in/eWQVf4jJ)
+    👉 [Online Book](https://lnkd.in/eWQVf4jJ)
 
-We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
+    We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
 
-### ✨ Join the Community
+    ### ✨ Join the Community
 
-Help us grow and improve this resource by sharing your feedback or contributing directly via the online platform.
+    Help us grow and improve this resource by sharing your feedback or contributing directly via the online platform.
 
-Together, we can keep this reference **useful**, **relevant**, and **up to date** for everyone!
-This document provides an overview of the research sections and their associated references.
-""")
+    Together, we can keep this reference **useful**, **relevant**, and **up to date** for everyone!
+    This document provides an overview of the research sections and their associated references.
+    """)
             f.write(
                 "This document provides an overview of the research sections and their associated references.\n\n"
             )
@@ -345,63 +400,21 @@ This document provides an overview of the research sections and their associated
                 if not sections:
                     continue
 
-                # Write filename as a top-level header with display name
                 display_name = self.section_display_names.get(filename, filename)
                 f.write(f"## {display_name}\n\n")
 
                 for section in sections:
-                    # Skip section if title matches the file display name (avoid duplication)
                     if section.title.lower() == display_name.lower():
-                        # This section title is the same as the file name, just show citations
-                        sorted_citations = sorted(
-                            section.citations,
-                            key=lambda k: (
-                                self.citations[k].year
-                                if k in self.citations
-                                and self.citations[k].year.isdigit()
-                                else "9999"
-                            ),
-                        )
-
-                        for cite_key in sorted_citations:
-                            if cite_key in self.citations:
-                                citation = self.citations[cite_key]
-                                ref_text = self._format_citation(citation)
-                                f.write(f"- {ref_text}\n")
-                            else:
-                                f.write(
-                                    f"- {cite_key} *(citation not found in bibliography)*\n"
-                                )
-                            f.write("\n")
+                        # Section title is the same as the file name; just write sorted citations.
+                        self._write_sorted_citations(f, section.citations)
                     else:
-                        # Write section header
-                        header_level = "#" * (
-                            section.level + 2
-                        )  # +2 because we start at ##
+                        # Write the subsection header.
+                        header_level = "#" * (section.level + 2)
                         f.write(f"{header_level} {section.title}\n\n")
+                        # Write the sorted citations for this subsection.
+                        self._write_sorted_citations(f, section.citations)
 
-                        # Write citations for this section
-                        if section.citations:
-                            for cite_key in section.citations:
-                                if cite_key in self.citations:
-                                    citation = self.citations[cite_key]
-                                    ref_text = self._format_citation(citation)
-                                    f.write(f"- {ref_text}\n")
-                                else:
-                                    f.write(
-                                        f"- {cite_key} *(citation not found in bibliography)*\n"
-                                    )
-                            f.write("\n")
-
-    def _format_citation(self, citation: Citation) -> str:
-        """Format a citation as 'Year - Title (hyperlinked)'."""
-        title = citation.title if citation.title else f"Citation {citation.key}"
-        year = citation.year if citation.year else "Unknown"
-
-        if citation.url:
-            return f"{year} - [{title}]({citation.url})"
-        else:
-            return f"{year} - {title}"
+    # --- END MODIFICATION ---
 
 
 def main():

@@ -1,9 +1,30 @@
 ---
-title: "General purpose models for the chemical sciences"
-unnumbered: true
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
-# General purpose models for the chemical sciences
+
+# General purpose models for the chemical sciences {.unnumbered}
 
 ## Abstract
 
@@ -41,11 +62,11 @@ A.M. was the main contributor to the [Introduction](01-introduction.qmd) and [Th
 
 M.S.-W. was the main contributor to the [Evaluations](04-evals.qmd), [Education](07-safety.qmd#sec:education) and [Data Analysis](05-applications.qmd#sec:data_analysis) section. M.S.-W. also reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Hypothesis Generation](05-applications.qmd#sec:hypothesis), [Experiment Execution](05-applications.qmd#sec:experiment_execution), [Reporting](05-applications.qmd#sec:reporting) and [Safety](07-safety.qmd#sec:safety) section. Unified all figures. Kept track of upcoming deadlines.
 
+A.A.A. was the main contributor to the [Experiment Execution](05-applications.qmd#sec:experiment_execution) section, including its figure, and a minor contributor to the post-training subsection. A.A.A. reviewed the [Introduction](01-introduction.qmd), [Experiment Planning](05-applications.qmd#sec:planning), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) and [Education](07-safety.qmd#sec:education) sections, edited [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) and [Building Principles of GPMs](03-architectures.qmd) sections, created the glossary, and ensured that most references are accessible via a DOI.
+
 M. S. was the primary contributor to the writing of [Experiment Planning](05-applications.qmd#sec:planning) section and related figure. And also helped in reviewing [Knowledge Gathering](05-applications.qmd#sec:information_gathering), [Property Prediction](05-applications.qmd#sec:prediction), and [LLMs as Optimizers](05-applications.qmd#sec:optimizers) sections.
 
 G.P. was the main contributor to [Model Level Adaptation](03-architectures.qmd#sec:model_adaptation) section, including its writing and table. G.P. additionally reviewed the [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd), [Data Analysis](05-applications.qmd#sec:data_analysis), [Reporting](05-applications.qmd#sec:reporting) and [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) sections.
-
-A.A.A. was the main contributor to the [Experiment Execution](05-applications.qmd#sec:experiment_execution) section, including its figure, and a minor contributor to the post-training subsection. A.A.A. reviewed the [Introduction](01-introduction.qmd), [Experiment Planning](05-applications.qmd#sec:planning), [Molecular and Material Generation](05-applications.qmd#sec:mol_generation) and [Education](07-safety.qmd#sec:education) sections, edited [The Shape and Structure of Chemical Data](02-data_taxonomy.qmd) and [Building Principles of GPMs](03-architectures.qmd) sections, created the glossary, and ensured that most references are accessible via a DOI.
 
 K.M.J. initiated and led the project. K.M.J. edited all sections. 
 
@@ -66,4 +87,4 @@ This book covers the following topics:
 6. [Accelerating Applications](06-accelerating_applications.qmd)
 7. [Implications of GPMs: Education, Safety, and Ethics](07-safety.qmd)
 8. [Outlook and Conclusions](08-outlook_conclusions.qmd)
-9. [References](09-references.qmd)
+-  [References](09-references.qmd)

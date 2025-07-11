@@ -2,26 +2,27 @@
 
 ![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)
-![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)
+[![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)](https://lnkd.in/eWQVf4jJ)
+[![arXiv](https://img.shields.io/badge/arXiv-2507.07456-b31b1b.svg)](https://arxiv.org/abs/2507.07456)
 
-    ## 📘 Read the Review
+## 📘 Read the Review
 
-    You can read the review directly on
-    or access it as a collaborative online book at:
+You can read the review directly on
+or access it as a collaborative online book at:
 
-    👉 [arXiv](https://arxiv.org/pdf/2507.07456)
+👉 [arXiv](https://arxiv.org/pdf/2507.07456)
 
-    👉 [Online Book](https://lnkd.in/eWQVf4jJ)
+👉 [Online Book](https://lnkd.in/eWQVf4jJ)
 
-    We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
+We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
 
-    ### ✨ Join the Community
+### ✨ Join the Community
 
-    Help us grow and improve this resource by sharing your feedback or contributing directly via the online platform.
+Help us grow and improve this resource by sharing your feedback or contributing directly via the online platform.
 
-    Together, we can keep this reference **useful**, **relevant**, and **up to date** for everyone!
-    This document provides an overview of the research sections and their associated references.
-    This document provides an overview of the research sections and their associated references.
+Together, we can keep this reference **useful**, **relevant**, and **up to date** for everyone!
+This document provides an overview of the research sections and their associated references.
+This document provides an overview of the research sections and their associated references.
 
 ## Introduction
 

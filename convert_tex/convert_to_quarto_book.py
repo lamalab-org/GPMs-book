@@ -547,15 +547,15 @@ def create_index_page(main_tex_path, output_path, extract_media_dir):
 
 This work was supported by the Carl-Zeiss Foundation. 
 
-A.A.\ acknowledges financial support for this research by the Fulbright U.S. Student Program, which is sponsored by the U.S. Department of State and the German-American Fulbright Commission. Its contents are solely the responsibility of the author and do not necessarily represent the official views of the Fulbright Program, the Government of the United States, or the German-American Fulbright Commission. 
+A.A. acknowledges financial support for this research by the Fulbright U.S. Student Program, which is sponsored by the U.S. Department of State and the German-American Fulbright Commission. Its contents are solely the responsibility of the author and do not necessarily represent the official views of the Fulbright Program, the Government of the United States, or the German-American Fulbright Commission. 
  
-M. S.-W.\ was supported by Intel and Merck via the AWASES research center. 
+M. S.-W. was supported by Intel and Merck via the AWASES research center. 
 
 A.M.'s work was funded by the SOL-AI project, funded as part of the Helmholtz Foundation Model Initiative of the Helmholtz Association. 
 
 G.P.'s work was supported by the HPC Gateway measure of the Helmholtz Association.
 
-K.M.J.\ is part of the NFDI consortium FAIRmat funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - project 460197019.
+K.M.J. is part of the NFDI consortium FAIRmat funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - project 460197019.
 
 We thank Mimi Lavin and Maximilian Greiner for their feedback on a draft of this article.
 
@@ -580,7 +580,21 @@ G.P. was the main contributor to [Model Level Adaptation](03-architectures.qmd#s
 K.M.J. initiated and led the project. K.M.J. edited all sections. 
 
 ## Conflicts of Interest
-K.M.J.\ has been a paid contractor for OpenAI as part of the Red-Teaming Network.
+
+K.M.J. has been a paid contractor for OpenAI as part of the Red-Teaming Network.
+
+## Citation
+
+If you find this work useful, please cite it using:
+
+```bibtex
+@article{{alampara2025general,
+  title   = {{General purpose models for the chemical sciences}},
+  author  = {{Nawaf Alampara and Anagha Aneesh and Martiño Ríos-García and Adrian Mirza and Mara Schilling-Wilhelmi and Ali Asghar Aghajani and Meiling Sun and Gordan Prastalo and Kevin Maik Jablonka}},
+  year    = {{2025}},
+  journal = {{arXiv preprint arXiv: 2507.07456}}
+}}
+```
 
 ---
 
@@ -735,7 +749,7 @@ def create_quarto_config(output_dir):
                     '<img src="https://raw.githubusercontent.com/lamalab-org/'
                     'lamalab.github.io/main/static/png-file.png" '
                     'alt="Lab for AI in Materials Science logo" '
-                    'style="height:1.4rem;vertical-align:middle;'
+                    'style="height:3rem;vertical-align:middle;'
                     'margin-right:0.4rem;">'
                 ),
                 "right": "Copyright © 2025 Lab for AI in Materials Science",

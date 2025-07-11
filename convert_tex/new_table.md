@@ -25,3 +25,69 @@
   truncated to fit in the table. For the multimodal representation, only
   one of the possible modalities is shown ($^{13}$C spectrum).
 :::
+
+::: {#tab:property_prediction_models}
+
+
+| Model | Property | Dataset | Approach | Task |
+|-------|----------|---------|----------|------|
+| **GPT-Chem** [@jablonka2024leveraging] | HOMO/LUMO | QMUGs [@isert_qmugs_2022] | FT | C, R |
+| | Solubility | DLS-100 [@mitchell_dls-100_2017] | FT | C, R |
+| | Lipophilicity | LipoData [@jablonka2024leveraging] | FT | C, R |
+| | Hydration Free Energy | FreeSolv [@mobley_freesolv_2014] | FT | C, R |
+| | Photoconversion Efficiency | OPV [@jablonka2024leveraging] | FT | C, R |
+| | Toxicology | Tox21 [@richard_tox21_2021] | FT | C, R |
+| | $\text{CO}_{2}$ Henry coeff. of MOFs | MOFSorb-H [@lin_silico_2012] | FT | C, R |
+| **LLM-Prop** [@rubungo_llm-prop_2023] | Band gap | CrystalFeatures-MP2022 [@rubungo_llm-prop_2023] | P | R |
+| | Volume | CrystalFeatures-MP2022 [@rubungo_llm-prop_2023] | P | R |
+| | Is the band gap direct? | CrystalFeatures-MP2022 [@rubungo_llm-prop_2023] | P | C |
+| **LLM4SD** [@zheng2025large] | Blood-brain-barrier penetration | BBBP [@sakiyama_prediction_2021] | P | C |
+| | FDA approval | ClinTox [@wu2018moleculenet] | P | C |
+| | Toxicology | Tox21 [@richard_tox21_2021] | P | C |
+| | Drug-related side effects | SIDER [@kuhn_sider_2016] | P | C |
+| | HIV replication inhibition | HIV [@wu2018moleculenet] | P | C |
+| | β-secretase binding | BACE [@wu2018moleculenet] | P | C |
+| | Solubility | ESOL [@wu2018moleculenet] | P | R |
+| | Hydration Free Energy | FreeSolv [@mobley_freesolv_2014] | P | R |
+| | Lipophilicity | Lipophilicity [@wu2018moleculenet] | P | R |
+| | Quantum mechanics | QM9 [@wu2018moleculenet] | P | R |
+| **LLaMP** [@chiang2024llamp] | Bulk modulus | Materials Project [@riebesell2025framework] | RAG | R |
+| | Formation energy | Materials Project [@riebesell2025framework] | RAG | R |
+| | Electronic band gap | Materials Project [@riebesell2025framework] | RAG | R |
+| | Multi-element band gap | Materials Project [@riebesell2025framework] | RAG | R |
+
+  : **Non-comprehensive list of \arc{gmp}s applied to property-prediction tasks**.The table presents different models and their applications across different molecular and materials property prediction benchmarks, showing the diversity of properties (from molecular toxicology to crystal band gaps), datasets used for evaluation, modeling approaches (prompting, fine-tuning, or retrieval-augmented generation), and task types (classification or regression.)
+:::
+
+::: tablenotes
+*Key:* P = prompting; FT = fine-tuned model; RAG = retrieval-augmented generation; C = classification; R = regression
+:::
+
+::: {#tab:small_large_datasets}
++----------------------------------------------------+-------------------+
+| **Dataset**                                        | **Token count**   |
++:===================================================+==================:+
+| *Three largest ChemPile datasets*                                      |
++----------------------------------------------------+-------------------+
+| NOMAD crystal structures\[@scheidgen2023nomad\]    | 5,808,052,794     |
++----------------------------------------------------+-------------------+
+| \acr{ord}\[@Kearnes_2021\] reaction prediction     | 5,347,195,320     |
++----------------------------------------------------+-------------------+
+| `RDKit` molecular features                         | 5,000,435,822     |
++----------------------------------------------------+-------------------+
+| *Three smallest ChemPile datasets*                                     |
++----------------------------------------------------+-------------------+
+| Hydrogen storage                                   | 1,935             |
+| materials\[@hymarcReversibleHydrides\]             |                   |
++----------------------------------------------------+-------------------+
+| List of amino-acids\[@alberts2002molecular\]       | 6,000             |
++----------------------------------------------------+-------------------+
+| \acr{ord}\[@Kearnes_2021\] recipe yield prediction | 8,372             |
++----------------------------------------------------+-------------------+
+
+: **Token counts for the three largest and smallest datasets in the
+`ChemPile`\[@mirza2025chempile0\] collection.** Dominating datasets
+contribute a large portion of the total token count (a token represents
+the smallest unit of text that a \acr{ml} model can process), with the small
+datasets significantly increasing the diversity.
+:::

@@ -73,6 +73,19 @@ K.M.J. initiated and led the project. K.M.J. edited all sections.
 ## Conflicts of Interest
 K.M.J.\ has been a paid contractor for OpenAI as part of the Red-Teaming Network.
 
+## Citation
+
+If you find this work useful, please cite it using:
+
+```bibtex
+@article{alampara2025general,
+  title   = {General purpose models for the chemical sciences},
+  author  = {Nawaf Alampara and Anagha Aneesh and Martiño Ríos-García and Adrian Mirza and Mara Schilling-Wilhelmi and Ali Asghar Aghajani and Meiling Sun and Gordan Prastalo and Kevin Maik Jablonka},
+  year    = {2025},
+  journal = {arXiv preprint arXiv: 2507.07456}
+}
+```
+
 ---
 
 ## Table of Contents

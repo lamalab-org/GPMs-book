@@ -46,6 +46,11 @@ jobs:
           cd quarto_book
           quarto render
 
+      # Add author randomization script
+      - name: Add author randomization
+        run: |
+          python scripts/randomize_authors_simple.py --docs-dir docs
+
       # Setup Pages
       - name: Setup Pages
         uses: actions/configure-pages@v4

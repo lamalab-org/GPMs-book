@@ -23,7 +23,7 @@ acronyms:
   fromfile: ./acronyms.yml
 ---
 
-# The Shape and Structure of Chemical Data {#sec:data-section}
+# The Shape and Structure of Chemical Data {#sec-data-section}
 
 ## Shape of Scientific Data
 
@@ -43,8 +43,7 @@ implicit ("known unknowns" or "unknown unknowns").
 
 ### Irreducible complexity
 
-[1](#fig:shape_of_data){reference-type="ref+Label"
-reference="fig:shape_of_data"} illustrates how the state space of
+@fig-shape_of_data illustrates how the state space of
 chemistry tends to grow more implicit as we move from describing single
 atoms or small molecules *in vacuo*, to real-world systems. For
 instance, we can completely explain almost all observed phenomena for a
@@ -60,16 +59,11 @@ complexity as "irreducible"\[@Pietsch_2017\], in contrast to "emergent"
 complexity that emerges from systems that can be described with simple
 equations, such as a double pendulum.
 
-<figure id="fig:shape_of_data">
-<img src="media/figures/rescaled_figures/chemrev_figure1.png" alt="" / width="100%">
-<figcaption><strong>State space description for chemistry at different
-scales</strong>. We illustrate how the number of hidden variables (gray)
-is growing with scale and complexity. For simple systems we can
-explicitly write down all variables and their values and perfectly
-describe the system. For more complex systems—closer to practical
-applications—we can no longer do that. Many more variables cannot be
-explicitly enumerated.</figcaption>
-</figure>
+::: {#fig-shape_of_data}
+![](media/figures/rescaled_figures/chemrev_figure1.png){width=100%}
+
+**State space description for chemistry at different scales**. We illustrate how the number of hidden variables (gray) is growing with scale and complexity. For simple systems we can explicitly write down all variables and their values and perfectly describe the system. For more complex systems—closer to practical applications—we can no longer do that. Many more variables cannot be explicitly enumerated.
+:::
 
 For phenomena characterized by irreducible complexity, success is often
 serendipitous. As pointed out by @rulev2017serendipity, chemical
@@ -136,11 +130,10 @@ variables.
 Considering the largest chemistry text dataset,
 `ChemPile`,\[@mirza2025chempile0\] we can look at how the largest
 subsets fare in comparison to the smallest ones (see
-[1](#tab:small_large_datasets){reference-type="ref+Label"
-reference="tab:small_large_datasets"}). The largest dataset is
+@tbl-small_large_datasets). The largest dataset is
 approximately three million times larger than the smallest one.
 
-::: {#tab:small_large_datasets}
+::: {#tbl-small_large_datasets}
 +----------------------------------------------------+-------------------+
 | **Dataset**                                        | **Token count**   |
 +:===================================================+==================:+
@@ -162,43 +155,29 @@ approximately three million times larger than the smallest one.
 | \acr{ord}\[@Kearnes_2021\] recipe yield prediction | 8,372             |
 +----------------------------------------------------+-------------------+
 
-: **Token counts for the three largest and smallest datasets in the
+**Token counts for the three largest and smallest datasets in the
 `ChemPile`\[@mirza2025chempile0\] collection.** Dominating datasets
 contribute a large portion of the total token count (a token represents
 the smallest unit of text that a \acr{ml} model can process), with the small
 datasets significantly increasing the diversity.
 :::
 
-[]{#tab:small_large_datasets label="tab:small_large_datasets"}
+[]{#tbl-small_large_datasets label="tbl-small_large_datasets"}
 
 The prevalence of many small, specialized datasets over large ones is
 commonly referred to as "the long tail problem".\[@heidorn2008shedding\]
 
-<figure id="fig:scale_of_data">
-<img src="media/figures/final_figures/2_DATA_cumulative_histogram.png" alt="" / width="100%">
-<figcaption><strong>Cumulative token count based on the
-<code>ChemPile</code> tabular datasets [@mirza2025chempile0]</strong>.
-We compare the approximate token count for three datasets:
-<code>Llama-3</code> training dataset,[@grattafiori2024llama] openly
-available chemistry papers in the <code>ChemPile-Paper</code> dataset,
-and the <code>ChemPile-LIFT</code> dataset. As can be seen, by
-aggregating the collection of tabular datasets converted to text format
-in the <code>ChemPile-LIFT</code> subset, we can achieve the same order
-of magnitude as the collection of open chemistry papers. However,
-without smaller datasets, we cannot capture the breadth and complexity
-of chemistry data, which is essential for training <span
-data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span>.
-The tokenization method for both <code>ChemPile</code> and
-<code>Llama-3</code> is provided in the respective papers.</figcaption>
-</figure>
+::: {#fig-scale_of_data}
+![](media/figures/final_figures/2_DATA_cumulative_histogram.png){width=100%}
 
-This can be seen in [2](#fig:scale_of_data){reference-type="ref+Label"
-reference="fig:scale_of_data"}. We show that while a few datasets are
+**Cumulative token count based on the ChemPile tabular datasets [@mirza2025chempile0]**. We compare the approximate token count for three datasets: Llama-3 training dataset,[@grattafiori2024llama] openly available chemistry papers in the ChemPile-Paper dataset, and the ChemPile-LIFT dataset. As can be seen, by aggregating the collection of tabular datasets converted to text format in the ChemPile-LIFT subset, we can achieve the same order of magnitude as the collection of open chemistry papers. However, without smaller datasets, we cannot capture the breadth and complexity of chemistry data, which is essential for training \acr{gpm}. The tokenization method for both ChemPile and Llama-3 is provided in the respective papers.
+:::
+
+This can be seen in @fig-scale_of_data. We show that while a few datasets are
 large, the majority of the corpus consists of small but collectively
 significant and chemically diverse datasets. The actual tail of chemical
 data is even larger, as
-[2](#fig:scale_of_data){reference-type="ref+Label"
-reference="fig:scale_of_data"} only shows the distribution for manually
+@fig-scale_of_data only shows the distribution for manually
 curated tabular datasets and not all data actually created in the
 chemical sciences. Given that every dataset in the long tail relies on
 unique sources of variance---it is very difficult to leverage this long
@@ -219,8 +198,7 @@ dataset, compiled in a form that can be efficiently ingested by the
 training pipeline.
 
 Strategies for doing so can be broadly categorized into two groups (see
-[3](#fig:data_protocols){reference-type="ref+Label"
-reference="fig:data_protocols"}). One can utilize a "top-down" approach
+@fig-data_protocols). One can utilize a "top-down" approach
 where a large and diverse pool of data---e.g., results from web-crawled
 resources such as `CommonCrawl`\[@commoncrawl\]---is filtered using
 custom-built procedures (e.g., using regular expressions or
@@ -240,15 +218,11 @@ In practice, a combination of both approaches is often used. In most
 cases, key techniques include filtering and the generation of synthetic
 data.
 
-<figure id="fig:data_protocols">
-<img src="media/figures/rescaled_figures/chemrev_figure3.png" alt="" / width="100%">
-<figcaption><strong>Dataset creation protocols</strong>. In “top-down”
-approaches, we curate a large corpus of data, which can be used to train
-\acr{gpm}s. The “bottom-up” approach
-starts from a problem definition, and the dataset can be collected via
-literature mining and experiments. Both approaches can make use of
-synthetic data to increase the data size and diversity.</figcaption>
-</figure>
+::: {#fig-data_protocols}
+![](media/figures/rescaled_figures/chemrev_figure3.png){width=100%}
+
+**Dataset creation protocols**. In "top-down" approaches, we curate a large corpus of data, which can be used to train \acr{gpm}s. The "bottom-up" approach starts from a problem definition, and the dataset can be collected via literature mining and experiments. Both approaches can make use of synthetic data to increase the data size and diversity.
+:::
 
 ### Filtering
 
@@ -280,7 +254,7 @@ using topic-labeled data from the `CAMEL`\[@li2023camel\] dataset. To
 evaluate the accuracy of the model ($\text{F1-score}=0.77$),
 expert-annotated data was used.
 
-### Synthetic Data {#sec:syn-data}
+### Synthetic Data {#sec-syn-data}
 
 Instead of only relying on existing datasets, one can also leverage
 techniques for generating synthetic data. Generation of synthetic data
@@ -326,8 +300,7 @@ behavior.\[@gonzales2024evaluating\]
 
 We can also apply rule-based augmentation for specific molecular
 representations (for more details on representations see
-[\[sec:common_representations\]](#sec:common_representations){reference-type="ref+Label"
-reference="sec:common_representations"}). For example, the same molecule
+[@sec-common_representations]). For example, the same molecule
 can be represented with multiple different, yet valid
 \acr{smiles} strings.
 @bjerrum2017smiles used this technique to augment a predictive model,

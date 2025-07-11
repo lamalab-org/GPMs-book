@@ -23,7 +23,7 @@ acronyms:
   fromfile: ./acronyms.yml
 ---
 
-# Implications of GPMs: Education, Safety, and Ethics {#sec:implications}
+# Implications of GPMs: Education, Safety, and Ethics {#sec-implications}
 
 The advent of \acr{gpm}s in
 the chemical sciences marks a paradigm shift that extends beyond
@@ -38,14 +38,13 @@ integration of \acr{gpm}s
 requires not only technical innovation but also rigorous pedagogical and
 regulatory frameworks.
 
-## Education {#sec:education}
+## Education {#sec-education}
 
 ### Vision
 
 \acr{gpm}s are opening up
 new directions to create or use educational materials (see
-[1](#fig:education){reference-type="ref+Label"
-reference="fig:education"}). Although many current applications are
+@fig-education). Although many current applications are
 still in their conceptual stage, they begin to highlight the potential
 of these models to personalize learning, increase the fairness of
 evaluations, and improve accessibility. \acr{gpm}s can support both students and educators at
@@ -60,21 +59,12 @@ individual needs. Additionally, they could help students rehearse for
 exams and presentations and deepen their conceptual understanding.
 \[@mollick2024instructors; @Sharma2025role; @wang2025effect\]
 
-<figure id="fig:education">
-<img src="media/figures/rescaled_figures/chemrev_figure23.png" alt="" / width="100%">
-<figcaption><strong>Possible application examples for students and
-teachers and their specific limitations for <span
-data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in
-chemical education.</strong> \acr{gpm}s can be used by students as
-scientific assistants (e.g., for data analysis, coding or lab
-experiments) and tutors (e.g., for question answering, teaching or
-exercises). Teachers can use \acr{gpm}s for evaluation (e.g., for
-grading and detailed feedback) or to personalize materials (e.g., for
-lectures and other learning materials). Current limitations include an
-over-reliance and a lack of critical assessment of the outputs, a lack
-of ready-to-use products, hallucination, a lack of reliability of the
-models, and a technology knowledge deficit of the users.</figcaption>
-</figure>
+::: {#fig-education}
+
+![](media/figures/rescaled_figures/chemrev_figure23.png){width=100%}
+
+**Possible application examples for students and teachers and their specific limitations for <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in chemical education.** \acr{gpm}s can be used by students as scientific assistants (e.g., for data analysis, coding or lab experiments) and tutors (e.g., for question answering, teaching or exercises). Teachers can use \acr{gpm}s for evaluation (e.g., for grading and detailed feedback) or to personalize materials (e.g., for lectures and other learning materials). Current limitations include an over-reliance and a lack of critical assessment of the outputs, a lack of ready-to-use products, hallucination, a lack of reliability of the models, and a technology knowledge deficit of the users.
+:::
 
 In more practice-oriented settings, such as laboratories or coding
 environments, these models could function as scientific assistants. They
@@ -218,18 +208,13 @@ development of critical thinking, creativity, and logical
 reasoning---skills that remain essential and irreplaceable, even---or
 perhaps especially---in the age of \acr{gpm}s. \[@klein2025rethink\]
 
-## Safety {#sec:safety}
+## Safety {#sec-safety}
 
-<figure id="fig:safety-overview">
-<img src="media/figures/safety_chemrev_fig.png" alt="" / width="100%">
-<figcaption><strong>A conceptual schematic depicting <span
-data-acronym-label="ai" data-acronym-form="singular+short">ai</span>
-risk factors in chemical science</strong>. As one traverses through the
-game-like scientific process, there are various obstacles to
-encountering \acr{ai} exacerbated risks. The path
-to superaligned chemical \acr{ai}-assistants is obfuscated by
-unexplored chemical space.</figcaption>
-</figure>
+::: {#fig-safety-overview}
+![](media/figures/safety_chemrev_fig.png){width=100%}
+
+**A conceptual schematic depicting \acr{ai} risk factors in chemical science**. As one traverses through the game-like scientific process, there are various obstacles to encountering \acr{ai} exacerbated risks. The path to superaligned chemical \acr{ai}-assistants is obfuscated by unexplored chemical space.
+:::
 
 A growing coalition within the scientific community has sounded a call
 to action: \acr{ai} poses
@@ -250,8 +235,7 @@ access to hazardous chemical knowledge to enabling autonomous synthesis
 of dangerous compounds, \acr{ai} systems could lower barriers for misuse,
 whether intentional or accidental. \acr{gpm}s alone may not create new risks
 \[@peppin2024reality\], but they can amplify existing ones (see
-[2](#fig:safety-overview){reference-type="ref+Label"
-reference="fig:safety-overview"}).
+@fig-safety-overview).
 
 Even in this amplified context, the ability of these systems to pose
 meaningful safety risks in practice is constrained by real-world
@@ -330,8 +314,7 @@ accessing materials are not an argument for \acr{ai} complacency. Models that lo
 technical or cognitive barriers to weaponization even incrementally risk
 acting as force multipliers for malicious actors. Moreover, a
 red-teaming (discussed in
-[\[para:red_teaming\]](#para:red_teaming){reference-type="ref+Label"
-reference="para:red_teaming"}) effort proved that these practical
+[@sec-red_teaming]) effort proved that these practical
 constraints are circumventable and show that real world checks are prone
 to failure.
 
@@ -365,8 +348,7 @@ actors.
 
 Adversarial testing and red teaming have become prominent methods for
 evaluating the safety of \acr{ai} systems, even in the chemical domain (see
-[\[sec:evals\]](#sec:evals){reference-type="ref+Label"
-reference="sec:evals"}). While such evaluations are valuable to identify
+[@sec-evals]). While such evaluations are valuable to identify
 weaknesses in \acr{gpm}s,
 they are inherently reactive. These approaches highlight failures only
 after a model is trained or deployed, rather than embedding safety into
@@ -511,7 +493,7 @@ require safeguards against misuse and a reevaluation of whether
 \acr{ai}'s role in science
 should be expansive or deliberately constrained.
 
-## Ethics {#sec:ethics}
+## Ethics {#sec-ethics}
 
 The deployment of \acr{gpm}s in the chemical sciences raises several
 critical ethical concerns that require careful consideration. These

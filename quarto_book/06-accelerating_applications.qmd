@@ -27,8 +27,7 @@ acronyms:
 
 The application of accelerated approaches in the scientific discovery
 cycle (see
-[\[fig:applications\]](#fig:applications){reference-type="ref+Label"
-reference="fig:applications"}) hinges on their ability to streamline and
+[@fig-applications]) hinges on their ability to streamline and
 enhance each stage of the process. However, a fundamental challenge in
 effectively implementing these approaches lies in the choice of
 machine-readable representation.
@@ -50,8 +49,7 @@ different geometric or bonding characteristics.
 
 This tension has led to three primary strategies for representing
 molecules and materials (read
-[\[sec:common_representations\]](#sec:common_representations){reference-type="ref+Label"
-reference="sec:common_representations"} to learn in detail about the
+[@sec-common_representations] to learn in detail about the
 different representations that currently exist). First, domain-specific
 text-based formats---such as \acr{smiles} \[@weininger1988smiles\],
 \acr{selfies}
@@ -67,7 +65,7 @@ task? Future advances in accelerated discovery will likely hinge on
 adaptive representations that dynamically balance these competing
 demands.
 
-## Property Prediction {#sec:prediction}
+## Property Prediction {#sec-prediction}
 
 \acr{gpm}s have emerged as
 a powerful tool for predicting molecular and material properties,
@@ -88,15 +86,13 @@ efficiency\[@aneesh2025semantic\].
 Three key methodologies have been explored to adapt
 \acr{llm}s for property
 prediction: prompting techniques (see
-[\[sec:prompting\]](#sec:prompting){reference-type="ref+Label"
-reference="sec:prompting"}), fine-tuning (see
-[\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
-reference="sec:fine-tuning"}) on domain-specific data, and
+[@sec-prompting]), fine-tuning (see
+[@sec-fine-tuning]) on domain-specific data, and
 \acr{rag} (see
-[\[sec:rag\]](#sec:rag){reference-type="ref+Label" reference="sec:rag"})
+[@sec-rag])
 approaches that combine \acr{llm}s with external knowledge bases.
 
-::: {#tab:property_prediction_models}
+::: {#tbl-property_prediction_models}
 
 
 | Model | Property | Dataset | Approach | Task |
@@ -126,7 +122,7 @@ approaches that combine \acr{llm}s with external knowledge bases.
 | | Electronic band gap | Materials Project [@riebesell2025framework] | RAG | R |
 | | Multi-element band gap | Materials Project [@riebesell2025framework] | RAG | R |
 
-  : **Non-comprehensive list of \arc{gmp}s applied to property-prediction tasks**.The table presents different models and their applications across different molecular and materials property prediction benchmarks, showing the diversity of properties (from molecular toxicology to crystal band gaps), datasets used for evaluation, modeling approaches (prompting, fine-tuning, or retrieval-augmented generation), and task types (classification or regression.)
+  **Non-comprehensive list of \arc{gmp}s applied to property-prediction tasks**.The table presents different models and their applications across different molecular and materials property prediction benchmarks, showing the diversity of properties (from molecular toxicology to crystal band gaps), datasets used for evaluation, modeling approaches (prompting, fine-tuning, or retrieval-augmented generation), and task types (classification or regression.)
 :::
 
 ::: tablenotes
@@ -196,8 +192,7 @@ acceptors\]) for use with a random forest model, which they consider
 \acr{sota} models across
 $58$ benchmark tasks, while providing interpretable reasoning about
 prediction logic (see
-[\[tab:property_prediction_models\]](#tab:property_prediction_models){reference-type="ref+Label"
-reference="tab:property_prediction_models"} for properties predicted by
+[@tbl-property_prediction_models] for properties predicted by
 this model). However, its reliance on rule extraction may limit its
 ability to capture complex, non-linear relationships that specialized
 deep learning models can identify.
@@ -212,9 +207,7 @@ generate text embeddings of perovskite solar cell compositions. These
 embeddings were subsequently used to train a \acr{gnn} for predicting power conversion
 efficiency, demonstrating the potential of \acr{llm}s to enhance feature representation in
 materials informatics. Similarly, in the molecular domain,
-@srinivas2024crossmodal used zero-shot \acr{llm} prompting (see
-[\[box: cot_prompting\]](#box: cot_prompting){reference-type="ref+Label"
-reference="box: cot_prompting"} for prompt examples) to generate
+@srinivas2024crossmodal used zero-shot \acr{llm} prompting to generate
 detailed textual descriptions of molecular functional groups, which are
 used to train a small \acr{lm}. This \acr{lm} is used to compute text-level embeddings
 of molecules. Simultaneously, they generate molecular graph-level
@@ -222,7 +215,9 @@ embeddings from \acr{smiles} string molecular graph inputs. They
 finally integrate the graph and text-level embeddings to produce a
 semantically enriched embedding.
 
-<img src="media/eq_images/cot_prompting.png" alt="Promptbox: box: cot_prompting" / width="100%">
+::: {}
+![](media/eq_images/cot_prompting.png){width=100%}
+:::
 
 In a different implementation of fine-tuning, @balaji2023gptmolberta
 used `ChatGPT` to generate text descriptions of molecules that were then
@@ -240,45 +235,34 @@ functional group level. This allowed them to determine which functional
 groups or fragments contribute to molecular properties, which in turn
 can be converted into reliable explanations of said properties.
 
-### Fine-Tuning {#sec:prediction_FT}
+### Fine-Tuning {#sec-prediction_FT}
 
-<figure id="fig:gptchem">
-<img src="media/figures/property_gptchem.png" alt="" / width="100%">
-<figcaption><strong>Fine-tuned <code>GPT-3</code> for predicting
-solid-solution formation in high-entropy alloys</strong> Performance
-comparison of different \acr{ml} approaches as a function of
-the number of training points. Results are shown for
-<code>Automatminer</code> (blue), <code>CrabNet</code> transformer
-(orange), fine-tuned <code>GPT-3</code> (red), with error bars showing
-standard error of the mean. The non-Google test set shows the fine-tuned
-<code>GPT-3</code> model tested on compounds without an exact Google
-search match (dark red). The dashed line shows performance using random
-forest. <code>GPT-3</code> achieves comparable accuracy to traditional
-approaches with significantly fewer training examples. Data adapted from
-@jablonka2024leveraging</figcaption>
-</figure>
+::: {#fig-gptchem}
+
+![](media/figures/property_gptchem.png){width=100%}
+
+**Fine-tuned `GPT-3` for predicting solid-solution formation in high-entropy alloys** Performance comparison of different \acr{ml} approaches as a function of the number of training points. Results are shown for `Automatminer` (blue), `CrabNet` transformer (orange), fine-tuned `GPT-3` (red), with error bars showing standard error of the mean. The non-Google test set shows the fine-tuned `GPT-3` model tested on compounds without an exact Google search match (dark red). The dashed line shows performance using random forest. `GPT-3` achieves comparable accuracy to traditional approaches with significantly fewer training examples. Data adapted from @jablonka2024leveraging
+:::
 
 #### \acr{lift}
 
 @dinh2022lift showed that reformulating regression and classification
 as \acr{qa} tasks enables
 the use of unmodified model architecture while improving performance
-(see [\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
-reference="sec:fine-tuning"} for a deeper discussion of
+(see [@sec-fine-tuning] for a deeper discussion of
 \acr{lift}). In
 recognizing the scarcity of experimental data and acknowledging the
 persistence of this limitation, @jablonka2024leveraging designed a
 \acr{lift}-based
 framework using `GPT-3` fine-tuned on task-specific small datasets (see
-[\[tab:property_prediction_models\]](#tab:property_prediction_models){reference-type="ref+Label"
-reference="tab:property_prediction_models"}). They seminally
+[@tbl-property_prediction_models]). They seminally
 demonstrated that fine-tuned `GPT-3` can match or surpass specialized
 \acr{ml} models in various
 chemistry tasks. A key finding was fine-tuned `GPT-3`'s ability to
 generalize beyond training data. When tested on compounds absent from
 Google Search (and likely its training data), it performed well, proving
 that it was not simply recalling memorized information (see
-[1](#fig:gptchem){reference-type="ref+Label" reference="fig:gptchem"}).
+@fig-gptchem).
 
 In a follow-up to @jablonka2024leveraging's work,
 @vanherck2025assessment systematically evaluated this approach across
@@ -318,8 +302,7 @@ features, offering an alternative to traditional graph-based models like
 \acr{gnn}s.
 
 Fine-tuning has been used to adapt \acr{ssm}s like Mamba (see
-[\[sec:example_architectures\]](#sec:example_architectures){reference-type="ref+Label"
-reference="sec:example_architectures"}). By pre-training on 91 million
+[@sec-example_architectures]). By pre-training on 91 million
 molecules, the Mamba-based model
 $\text{O}_{SMI}-{\text{SSM}-}336\textit{M}$ outperformed transformer
 methods (`Yield-BERT`\[@krzyzanowski2025exploring\]) in reaction yield
@@ -369,7 +352,7 @@ Fine-tuning effectively adapts \acr{llm}s to specialized chemistry tasks, but it
 dependence on static datasets hinders adaptability to new or evolving
 knowledge. \acr{rag},
 whose fundamentals are described in detail in
-[\[sec:rag\]](#sec:rag){reference-type="ref+Label" reference="sec:rag"},
+[@sec-rag],
 overcomes these limitations by dynamically integrating external data
 sources, enabling more flexible and up-to-date reasoning.
 
@@ -383,8 +366,7 @@ of the available tools such as the Materials Project
 Reaction-Network package, or Google Search to use to generate a
 response. \[@Jablonka2023\] `MAPI-LLM` employs a
 \acr{react} prompt (see
-[\[sec:arch_agents\]](#sec:arch_agents){reference-type="ref+Label"
-reference="sec:arch_agents"} to read more about
+[@sec-arch_agents] to read more about
 \acr{react}), to
 convert prompts such as *"Is $Fe_2O_3$ magnetic?"* or *"What is the band
 gap of Mg(Fe3O3)2?"* into queries for Materials Project
@@ -411,23 +393,14 @@ bulk moduli and to exhibit errors in bandgap predictions based on
 compositional patterns learned during training rather than physical
 principles.
 
-### Core Limitations {#sec:property_core_limits}
+### Core Limitations {#sec-property_core_limits}
 
-<figure id="fig:property_limitations">
-<img src="media/figures/property_mattext.png" alt="" / width="100%">
-<figcaption><strong>Normalized error distributions for materials
-property prediction models across different architectures</strong>. Each
-point represents the normalized error of a model on a specific property
-prediction task. Normalization was achieved with min/max values of each
-dataset to produce a range of errors between 0 and 1. The first column
-(blue) shows \acr{gnn} based models, the second
-column (red) displays \acr{llm} approaches, and the third
-column (orange) represents other baseline methods and <span
-data-acronym-label="sota" data-acronym-form="singular+short">sota</span>
-models including <code>CrabNet</code>. [@Wang_2021] Lower values
-indicate better predictive performance. Data adapted from
-@alampara2024mattext</figcaption>
-</figure>
+::: {#fig-property_limitations}
+
+![](media/figures/property_mattext.png){width=100%}
+
+**Normalized error distributions for materials property prediction models across different architectures**. Each point represents the normalized error of a model on a specific property prediction task. Normalization was achieved with min/max values of each dataset to produce a range of errors between 0 and 1. The first column (blue) shows \acr{gnn} based models, the second column (red) displays \acr{llm} approaches, and the third column (orange) represents other baseline methods and <span data-acronym-label="sota" data-acronym-form="singular+short">sota</span> models including `CrabNet`. [@Wang_2021] Lower values indicate better predictive performance. Data adapted from @alampara2024mattext
+:::
 
 @alampara2024mattext introduced `MatText`, a framework for evaluating
 \acr{lm}s ability to predict
@@ -437,8 +410,7 @@ fine-tuned `LLaMA-3-8B`) are effective for tasks relying purely on
 compositional information (e.g., element types and local bonding
 patterns), but struggle to leverage geometric or positional information
 encoded in text, as reflected in
-[2](#fig:property_limitations){reference-type="ref+Label"
-reference="fig:property_limitations"}. This observation suggests that
+@fig-property_limitations. This observation suggests that
 transformer-based architectures may be fundamentally limited to
 applications where spatial understanding is not required. Their
 experiments with data scaling and text representations reveal that
@@ -450,20 +422,14 @@ power-law scaling in chemical \acr{llm}s, but `MatText`'s results imply that suc
 scaling may not overcome architectural biases against geometric
 reasoning in materials tasks.\[@gruver2024promises\]
 
-## Molecular and Material Generation {#sec:mol_generation}
+## Molecular and Material Generation {#sec-mol_generation}
 
-<figure id="fig:generation">
-<img src="media/figures/rescaled_figures/chemrev_figure21.png" alt="" / width="100%">
-<figcaption><strong>Pipeline for molecular and materials
-generation</strong> The workflow begins with input structures
-represented in various formats, which are used to train <span
-data-acronym-label="ml" data-acronym-form="singular+short">ml</span>
-models to generate novel molecular and material structures. The
-generated structures should undergo a feedback loop through validation
-processes before being applied in the real world. Blue boxes indicate
-well-established areas of the pipeline with mature methodologies, while
-the red box represents critical bottlenecks.</figcaption>
-</figure>
+::: {#fig-generation}
+
+![](media/figures/rescaled_figures/chemrev_figure21.png){width=100%}
+
+**Pipeline for molecular and materials generation** The workflow begins with input structures represented in various formats, which are used to train <span data-acronym-label="ml" data-acronym-form="singular+short">ml</span> models to generate novel molecular and material structures. The generated structures should undergo a feedback loop through validation processes before being applied in the real world. Blue boxes indicate well-established areas of the pipeline with mature methodologies, while the red box represents critical bottlenecks.
+:::
 
 Early work in molecular and materials generation relied heavily on
 unconditional generation, where models produce novel structures without
@@ -475,11 +441,10 @@ control. This limitation underscores the need for conditional
 generation, using explicit prompts or constraints (e.g., property
 targets, structural fragments), to steer \acr{gpm}s toward meaningful molecule or material
 designs. Beyond the generation step, as
-[3](#fig:generation){reference-type="ref+Label"
-reference="fig:generation"} shows, critical bottlenecks persist in
+@fig-generation shows, critical bottlenecks persist in
 synthesizability and physical consistency at the validation stage.
 
-### Generation {#sec:generation}
+### Generation {#sec-generation}
 
 #### Prompting
 
@@ -516,11 +481,9 @@ re-training for each new molecular domain.
 To overcome the limitations of prompting, fine-tuning has been adopted
 in molecular and materials generation, much like its use in property
 prediction with \acr{lift}-based frameworks (see
-[\[sec:fine-tuning\]](#sec:fine-tuning){reference-type="ref+Label"
-reference="sec:fine-tuning"} for a deeper explanation of
+[@sec-fine-tuning] for a deeper explanation of
 \acr{lift} and
-[1.1.2](#sec:prediction_FT){reference-type="ref+Label"
-reference="sec:prediction_FT"} for a discussion of
+@sec-prediction_FT for a discussion of
 \acr{lift} applied to
 property prediction tasks). @yu2024llasmol demonstrated that systematic
 fine-tuning in various chemical tasks including molecule generation from
@@ -628,8 +591,7 @@ weighted energy functions.
 
 @calanzone2025mol-moe also address the challenge of multi-objective
 molecular generation with `MOL-MOE`, a \acr{moe} framework (see
-[\[sec:arch-moes\]](#sec:arch-moes){reference-type="ref+Label"
-reference="sec:arch-moes"} to learn more about \acr{moe} architectures). `MOL-MOE` dynamically
+[@sec-arch-moes] to learn more about \acr{moe} architectures). `MOL-MOE` dynamically
 combines property-specific expert models at test time using
 preference-guided routers toward drug-relevant molecular properties
 enabling flexible steering across multiple objectives without
@@ -652,8 +614,7 @@ retrieval of high-performing candidates from the pre-training dataset.
 #### Agents
 
 Agent-based frameworks leveraging \acr{llm}s, deeply explained in
-[\[sec:agents\]](#sec:agents){reference-type="ref+Label"
-reference="sec:agents"}, have emerged as approaches for autonomous
+[@sec-agents], have emerged as approaches for autonomous
 molecular and materials generation, demonstrating capabilities that
 extend beyond simple prompting or fine-tuning by incorporating iterative
 feedback loops, tool integration, and human-\acr{ai} collaboration. The `dZiner` framework
@@ -701,8 +662,7 @@ which can indicate synthetic feasibility when training data consists of
 known compounds. Retrosynthesis prediction algorithms attempt to bridge
 this gap by evaluating synthetic accessibility and proposing potential
 synthesis routes (see
-[1.3](#sec:retrosynthesis){reference-type="ref+Label"
-reference="sec:retrosynthesis"}). However, these methods still face
+@sec-retrosynthesis). However, these methods still face
 limitations in accurately predicting real-world synthesizability
 \[@zunger2019beware\].
 
@@ -724,7 +684,7 @@ Recently, they introduced the "discovery acceleration factor", which
 quantifies how effective a model is at finding stable structures
 relative to a random baseline.
 
-## Retrosynthesis {#sec:retrosynthesis}
+## Retrosynthesis {#sec-retrosynthesis}
 
 The practical utility of \acr{gpm}s for generating molecules and materials
 remains limited by a persistent gap in their synthetic feasibility.
@@ -779,8 +739,7 @@ engines for autonomous design. @bran2024augmenting developed
 `ChemCrow`, an \acr{llm}-based system that autonomously plans and
 executes the synthesis of novel compounds by integrating specialized
 tools like a retrosynthesis planner (see
-[\[sec:planning\]](#sec:planning){reference-type="ref+Label"
-reference="sec:planning"} to read more about this capability of
+[@sec-planning] to read more about this capability of
 `ChemCrow` and its limitations) and reaction predictors. This approach
 mirrors the iterative experimental design cycle employed by human
 chemists, but is equipped with the scalability of automation. Notably,
@@ -788,26 +747,19 @@ systems like `ChemCrow` rely on high-quality reaction data to ground
 their reasoning in empirically viable chemistry, which, depending on the
 design space, could be a limitation.
 
-## LLMs as Optimizers {#sec:llm-optimizers}
+## LLMs as Optimizers {#sec-llm-optimizers}
 
-<figure id="fig:optimization">
-<img src="media/figures/rescaled_figures/chemrev_figure22.png" alt="" / width="100%">
-<figcaption><strong>Overview of the iterative optimization loop that
-mirrors the structure of the optimization section</strong>. The blue
-boxes contain the different roles that the <span
-data-acronym-label="llm" data-acronym-form="plural+short">llms</span>
-play in the loop, and which are described in the main text. References
-in which the use of \acr{llm}s for that step are detailed
-inside the small boxes inside each of the components of the loop. The
-example shown is about obtaining molecules with high
-<code>logP</code>.</figcaption>
-</figure>
+::: {#fig-optimization}
+
+![](media/figures/rescaled_figures/chemrev_figure22.png){width=100%}
+
+**Overview of the iterative optimization loop that mirrors the structure of the optimization section**. The blue boxes contain the different roles that the <span data-acronym-label="llm" data-acronym-form="plural+short">llms</span> play in the loop, and which are described in the main text. References in which the use of \acr{llm}s for that step are detailed inside the small boxes inside each of the components of the loop. The example shown is about obtaining molecules with high `logP`.
+:::
 
 Discovering novel compounds and reactions in chemistry and materials
 science has long relied on iterative trial-and-error processes rooted in
 existing domain knowledge \[@Taylor2023brief\]. While, as explained in
-[1.3](#sec:retrosynthesis){reference-type="ref+Label"
-reference="sec:retrosynthesis"}, those methods are used to accelerate
+@sec-retrosynthesis, those methods are used to accelerate
 this process, optimization methods help improve conditions, binding
 affinity, etc. But these approaches are slow and labor-intensive.
 Traditional data-driven methods aimed to address these limitations by
@@ -918,8 +870,7 @@ evaluation.
 For molecule optimization, @yu2025collaborative introduced
 `MultiModel`, a dual-\acr{llm} system where one model proposes
 candidates and the other supplies domain knowledge (see
-[1.4.3](#sec:opt-llm-know-source){reference-type="ref+Label"
-reference="sec:opt-llm-know-source"}). By fine-tuning the "worker"
+@sec-opt-llm-know-source). By fine-tuning the "worker"
 \acr{llm} to recognize
 molecular scaffolds and target properties, and expanding the training
 pool to include a million-size pre-training dataset, they achieved hit
@@ -939,13 +890,12 @@ few-shot examples---enable general \acr{llm}s (`Claude-Sonnet`, `o1-preview`) to
 high-quality candidates without fine-tuning, outperforming both random
 selection and vanilla \acr{ga}s in functional \acr{tmc} design.
 
-### LLMs as Prior Knowledge Sources {#sec:opt-llm-know-source}
+### LLMs as Prior Knowledge Sources {#sec-opt-llm-know-source}
 
 A key advantage of integrating \acr{llm}s into optimization frameworks is their
 ability to encode and deploy prior knowledge within the optimization
 loop. As illustrated in
-[4](#fig:optimization){reference-type="ref+Label"
-reference="fig:optimization"}, this knowledge can be directed into
+@fig-optimization, this knowledge can be directed into
 either the surrogate model or candidate generation module, significantly
 reducing the number of optimization steps required through high-quality
 guidance.
@@ -974,8 +924,7 @@ fine-tuned a `Llama-2-7B` model using a multitask
 dataset was created with instructions from `GPT-4`. The resulting model
 served as a human assistant or operated within an active learning loop,
 thereby accelerating the exploration of new reaction spaces (see
-[1.3](#sec:retrosynthesis){reference-type="ref+Label"
-reference="sec:retrosynthesis"}). However, as the authors note, even
+@sec-retrosynthesis). However, as the authors note, even
 this task-specialized \acr{llm}s produces suboptimal suggestions for
 optimization tasks. They remain prone to hallucination and cannot assist
 with unreported reactions, but still, they improve for most of the

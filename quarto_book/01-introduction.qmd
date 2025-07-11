@@ -90,8 +90,7 @@ potentials.\[@ahmad2022chemberta; @floge2024oneprot;
 As we will show in the following, \acr{gpm}s---models designed to generalize across a
 wide range of tasks and domains with minimal task-specific
 modifications, typically pre-trained on vast and diverse datasets (see
-[\[sec:taxonomy\]](#sec:taxonomy){reference-type="ref+Label"
-reference="sec:taxonomy"})---are better equipped than domain-specific
+[@sec-taxonomy])---are better equipped than domain-specific
 models to leverage diverse, fuzzy inputs. Thus, this review article
 focuses on their potential to shape the future of research in the
 chemical sciences.\[@white2023future\]

@@ -25,22 +25,11 @@ acronyms:
 
 # Outlook and Conclusions
 
-<figure id="fig:conclusions">
-<img src="media/figures/conclusion_figure_v2.png" alt="" / width="100%">
-<figcaption><strong>Evolution of \acr{gpm}-powered systems.</strong>
-First \acr{gpm} applications directly used
-zero- or few-shot prompted or fine-tuned \acr{gpm}s. More complex tasks could
-be solved by combining multiple \acr{gpm}s in workflows where the
-execution trajectory is pre-determined. In agents, <span
-data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>
-autonomously decide on the execution trajectory and in this way enable
-researchers to address open-ended tasks. Moving forward, coupling the
-validation closer to real-world objectives with further increased
-validation in better, custom user interfaces will enhance the impact of
-\acr{gpm}s. To ensure safe and ethical
-deployment, the community must engage with the broader public and
-policymakers to devise governance strategies.</figcaption>
-</figure>
+::: {#fig-conclusions}
+![](media/figures/conclusion_figure_v2.png){width=100%}
+
+**Evolution of \acr{gpm}-powered systems.** First \acr{gpm} applications directly used zero- or few-shot prompted or fine-tuned \acr{gpm}s. More complex tasks could be solved by combining multiple \acr{gpm}s in workflows where the execution trajectory is pre-determined. In agents, \acr{gpm}s autonomously decide on the execution trajectory and in this way enable researchers to address open-ended tasks. Moving forward, coupling the validation closer to real-world objectives with further increased validation in better, custom user interfaces will enhance the impact of \acr{gpm}s. To ensure safe and ethical deployment, the community must engage with the broader public and policymakers to devise governance strategies.
+:::
 
 As we have explored in this review, \acr{gpm}s---especially \acr{llm}s---hold remarkable promise for the chemical
 sciences. The field moved from using models in simple single calls to a

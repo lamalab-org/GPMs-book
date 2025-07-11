@@ -25,7 +25,7 @@ acronyms:
 
 # Building Principles of GPMs
 
-## Taxonomy of Foundation Models {#sec:taxonomy}
+## Taxonomy of Foundation Models {#sec-taxonomy}
 
 In this review, we focus on \acr{gpm}s, which are commonly trained on vast, often
 unstructured datasets and are able to generalize to new tasks easily.
@@ -44,8 +44,7 @@ change the weights of a \acr{gpm}, since the model can adapt to new
 problems at inference time through techniques such as
 \acr{icl}\[@brown2020language\] or
 \acr{rag} (see
-[1.11](#sec:model_adaptation){reference-type="ref+Label"
-reference="sec:model_adaptation"}).\[@lewis2020retrieval\]
+@sec-model_adaptation).\[@lewis2020retrieval\]
 
 \acr{gpm}s are not
 chemistry-specific models. They are models for general use that leverage
@@ -57,8 +56,7 @@ addition, there is a compelling argument to be made for
 language has evolved to represent all concepts that humans can ponder.
 Thus, leveraging natural language might be a very productive way to
 approach scientific discovery. Furthermore, \acr{gpm}s can be integrated with problem-solving
-tools ([1.12](#sec:agents){reference-type="ref+Label"
-reference="sec:agents"}). Such systems are typically described as being
+tools (@sec-agents). Such systems are typically described as being
 *agentic* and are key to further automation and integration of
 \acr{ai} systems in the
 real world.
@@ -102,11 +100,10 @@ example, the ordering of numbers (such as $4<5$) or chemical
 similarities (such as Cl being more similar to Br but less similar to
 Na) would not be preserved. \[@chuang2018comment\] Embeddings (learned
 encoding), that we will discuss in
-[1.2.3](#sec:embeddings){reference-type="ref+Label"
-reference="sec:embeddings"}, solve this through learned, dense vector
+@sec-embeddings, solve this through learned, dense vector
 representations.
 
-### Common Representations of Molecules and Materials {#sec:common_representations}
+### Common Representations of Molecules and Materials {#sec-common_representations}
 
 Before any chemical entity can be converted into a numerical
 vector---whether through simple \acr{ohe} or complex learned embeddings---it must
@@ -124,7 +121,7 @@ of chemical representations reflects different answers to this question,
 each making distinct trade-offs between simplicity, expressiveness, and
 computational efficiency.
 
-::: {#tab:molecular-representations}
+::: {#tbl-molecular-representations}
   **Representation**                                                   **Encoded information**                                                    **Description**                                                                                                                                                                                                                                               **Example**
   -------------------------------------------------------------------  -------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Elemental composition                                                Stoichiometry                                                              Always available, but non-unique.                                                                                                                                                                                                                             C9H8O4
@@ -141,7 +138,7 @@ computational efficiency.
   \acr{localenv} \[@alampara2024mattext\]                              Stoichiometry, bonding, symmetry, coarse graining                          Treats each coordination polyhedron as a "molecule", it is transferable and compact; but it ignores long-range order and its reconstruction requires post-processing                                                                                          `R-3m Si (2c) [Si][Si]([Si])[Si]`
   Natural-language description \[@ganose2019robocrystallographer\]     Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining   It is human-readable and more intuitive tokenizable by llms. However, trying to encode all the information can lead to verbose, ambiguous descriptions.                                                                                                       "Silicon crystallizes in the diamond-cubic structure, a lattice you can picture as two face-centred-cubic frameworks gently interpenetrating..."
 
-  : **Comparison of common molecular representations**. For the encoded
+  **Comparison of common molecular representations**. For the encoded
   information contained by each representation, we followed the criteria
   used by \[@alampara2024mattext\]. The examples shown are *aspirin* for
   elemental composition, \acr{iupac} name, \acr{smiles}, \acr{selfies}, , graphs, 3D coordinates; and
@@ -169,8 +166,7 @@ representations have significant limitations. The same molecule can have
 multiple valid \acr{smiles} strings (so-called non-canonical
 representations). Although the existence of non-canonical
 representations enables data augmentation (see
-[\[sec:syn-data\]](#sec:syn-data){reference-type="ref+Label"
-reference="sec:syn-data"}), it can also confuse models because the same
+[@sec-syn-data]), it can also confuse models because the same
 molecule would have different encodings, each one originating from a
 different \acr{smiles}
 string. In addition, \acr{smiles} imposes a relatively weak inductive bias;
@@ -249,8 +245,7 @@ described not only by its textual \acr{smiles} string or its connectivity graph,
 also by its experimental spectra (e.g., \acr{nmr}, \acr{ir}), or even a microscopy image. Each of
 these modalities provides a complementary layer of information. A more
 detailed section on using multiple representations is presented in
-[1.9.1](#sec:multimodal_chem){reference-type="ref+Label"
-reference="sec:multimodal_chem"}
+@sec-multimodal_chem
 
 ### Tokenization
 
@@ -295,7 +290,7 @@ model. Ultimately, the tokenization strategy defines the elementary
 units for which the model will learn embeddings, setting the stage for
 learning the powerful and context-aware representations discussed next.
 
-### Embeddings {#sec:embeddings}
+### Embeddings {#sec-embeddings}
 
 Through training, models can learn to map discrete inputs into
 continuous spaces where similar items have meaningful relationships (for
@@ -313,10 +308,8 @@ has further underscored the usefulness of high-quality embeddings. These
 models, trained on vast amounts of chemical data, learn to create
 powerful, generalizable embeddings that can be adapted to a wide range
 of downstream tasks, from property prediction (see
-[\[sec:prediction\]](#sec:prediction){reference-type="ref+Label"
-reference="sec:prediction"}) to molecular generation (see
-[\[sec:mol_generation\]](#sec:mol_generation){reference-type="ref+Label"
-reference="sec:mol_generation"}). The choice of embedding strategy often
+[@sec-prediction]) to molecular generation (see
+[@sec-mol_generation]). The choice of embedding strategy often
 depends on the specific problem at hand. In the following sections, we
 describe the process of generating, refining, and using these embeddings
 through training and different architectures.
@@ -325,8 +318,7 @@ through training and different architectures.
 
 The entire training process of a \acr{gpm} typically contains multiple steps that
 can be divided into two broad groups (see
-[1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"}). \[@howard2018universal\] The first
+@fig-training_workflow). \[@howard2018universal\] The first
 step is pre-training, which is usually done in a self-supervised manner
 and focuses on learning a data distribution---the underlying set of
 rules and patterns that make up the data. Imagine all possible
@@ -335,28 +327,13 @@ describes which molecules are "likely" (stable, following chemical
 rules) and which are "unlikely" or "impossible" (random assortments of
 atoms).
 
-<figure id="fig:training_workflow">
-<img src="media/figures/rescaled_figures/chemrev_figure4.png" alt="" / width="100%">
-<figcaption><strong>General training workflow through the lens of
-molecular science</strong>. The figure illustrates the progression from
-pre-training through fine-tuning to post-training stages. <strong>(1)
-Pre-training:</strong> The model learns the underlying data distribution
-from a vast, unlabeled dataset. This is visualized as transforming an
-unstructured representation space (left, square cloud) into a structured
-manifold (the Swiss roll). At this stage, the model has learned the
-“shape” of the data: the fundamental rules that make a molecule
-chemically valid. However, the representations are not yet specialized
-for any task. <strong>(2) Fine-tuning:</strong> The model is trained on
-specific, labeled tasks, such as predicting solubility (flask icon) and
-toxicity (skull icon). This process “colors” the manifold, adjusting the
-learned representations so that their position now also correlates with
-specific properties (e.g., blue for one property profile, red for
-another). <strong>(3) Post-training Alignment:</strong> The model’s
-behavior is biased towards desired outcomes. This is visualized as
-preferentially sampling from a specific region of the colored manifold,
-such as generating molecules predicted to have high solubility and low
-toxicity (right, the brighter red region).</figcaption>
-</figure>
+::: {#fig-training_workflow}
+
+![](media/figures/rescaled_figures/chemrev_figure4.png){width=100%}
+
+**General training workflow through the lens of molecular science**. The figure illustrates the progression from pre-training through fine-tuning to post-training stages. **(1) Pre-training:** The model learns the underlying data distribution from a vast, unlabeled dataset. This is visualized as transforming an unstructured representation space (left, square cloud) into a structured manifold (the Swiss roll). At this stage, the model has learned the “shape” of the data: the fundamental rules that make a molecule chemically valid. However, the representations are not yet specialized for any task. **(2) Fine-tuning:** The model is trained on specific, labeled tasks, such as predicting solubility (flask icon) and toxicity (skull icon). This process “colors” the manifold, adjusting the learned representations so that their position now also correlates with specific properties (e.g., blue for one property profile, red for another). **(3) Post-training Alignment:** The model’s behavior is biased towards desired outcomes. This is visualized as preferentially sampling from a specific region of the colored manifold, such as generating molecules predicted to have high solubility and low toxicity (right, the brighter red region).
+
+:::
 
 Pre-training a model is teaching it to recognize this pattern. By
 observing millions of valid examples, the model learns the "grammar" of
@@ -368,11 +345,9 @@ language can form new, grammatically correct sentences.
 
 A model does not learn the data distribution by storing an explicit
 formula. Instead, during pre-training (see
-[1.4](#sec:pretraining){reference-type="ref+Label"
-reference="sec:pretraining"} for more details), it learns to create an
+@sec-pretraining for more details), it learns to create an
 internal representation---an embedding (see
-[1.2.3](#sec:embeddings){reference-type="ref+Label"
-reference="sec:embeddings"}). The training process guides the model to
+@sec-embeddings). The training process guides the model to
 map inputs to these embeddings in a structured manner, forming a
 high-dimensional space, where representations of similar, valid inputs
 are clustered together.
@@ -382,8 +357,7 @@ model is adapted to learn task-specific labels and capabilities,
 essentially "coloring" the learned structure with domain-specific
 knowledge. Crucially, fine-tuning does not discard the learned
 distribution but refines it. As shown in
-[1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"}, the fundamental shape of the
+@fig-training_workflow, the fundamental shape of the
 manifold (the Swiss roll) is preserved. The "coloring" process
 corresponds to adjusting the internal representations so they now also
 encode task-specific properties. For example, the model learns to map
@@ -398,32 +372,28 @@ distribution by biasing the model's sampling behavior to favor specific
 modes of the distribution. In terms of the representation space, the
 model learns to prioritize generating or paying attention to points in
 desirable regions. As depicted in the post-training panel of
-[1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"}, this biases the output towards a
+@fig-training_workflow, this biases the output towards a
 specific section of the colored manifold---in this case, perhaps
 molecules with high solubility (the brighter pink region).
 
-## Pre-training: Learning the Shape of Data {#sec:pretraining}
+## Pre-training: Learning the Shape of Data {#sec-pretraining}
 
 Pre-training establishes the foundational knowledge and capabilities of
 the model. During pre-training, the model learns general patterns,
 relationships, and structures from massive datasets (often trillions of
 tokens, see
-[\[fig:scale_of_data\]](#fig:scale_of_data){reference-type="ref+Label"
-reference="fig:scale_of_data"}). The model learns to map input to
+[@fig-scale_of_data]). The model learns to map input to
 internal representations or features through so-called
 \acr{ssl} objectives like
 reconstructing corrupted inputs (predicting masked tokens, or predicting
-future sequences, see [1.4.1](#sec:ssl){reference-type="ref+Label"
-reference="sec:ssl"}).
+future sequences, see @sec-ssl).
 
 This large-scale pre-training allows models to capture rich
 representations of the statistical distributions inherent to the data.
 These learned distributions capture the fundamental patterns and
 structure of the domain (scientific language grammar, physical and
 chemical principles that govern materials).
-[1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"} illustrates the distribution
+@fig-training_workflow illustrates the distribution
 captured, from an uninstructed manifold prior to pre-training (if you
 randomly pick from this manifold, you get noise or non-physical
 molecules) to a structured manifold, where if you sample from this
@@ -438,15 +408,14 @@ ability stems from the development of transferable features, rather than
 mere data memorization \[@brown2020language\].
 
 As illustrated by the Swiss roll in
-[1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"}, the pre-training process creates a
+@fig-training_workflow, the pre-training process creates a
 structured manifold where invalid inputs are mapped far away. Therefore,
 learning high-quality representations is the concrete computational
 method for capturing the abstract statistical distribution of the data;
 the structure of this representation space is the model's learned
 approximation of the data's true shape.
 
-### Self-Supervision {#sec:ssl}
+### Self-Supervision {#sec-ssl}
 
 \acr{ssl}s allows models to
 learn from unlabeled data by generating "pseudo-labels" from the data's
@@ -470,46 +439,15 @@ phase.
 \acr{ssl} encompasses a
 variety of approaches. While distinct methods exist, they can be grouped
 into broader families based on their underlying principles.
-[2](#fig:types_ssl){reference-type="ref+Label"
-reference="fig:types_ssl"} illustrates the two main families: generative
+@fig-types_ssl illustrates the two main families: generative
 and contrastive, along with example pretext tasks for each.
 
-<figure id="fig:types_ssl">
-<img src="media/figures/rescaled_figures/chemrev_figure5.png" alt="" / width="100%">
-<figcaption><strong>Main families in \acr{ssl}s</strong>. The figure
-illustrates the two primary approaches to \acr{ssl}, each using different
-strategies to generate pseudo-labels from the data itself.
-<strong>Generative Methods (Top Panel):</strong> This family focuses on
-reconstruction and prediction. The model learns representations by
-generating missing information. Examples shown correspond to the pretext
-tasks discussed in the text: (1) <em>Predicting masks</em> in a graph,
-analogous to masked modeling (more details in <a
-href="#sec:masked_modeling" data-reference-type="ref+Label"
-data-reference="sec:masked_modeling">[sec:masked_modeling]</a>); (2)
-<em>Learning from context</em>, which is the basis for next token
-prediction (more details in <a href="#sec:next_token_prediction"
-data-reference-type="ref+Label"
-data-reference="sec:next_token_prediction">1.4.3.2</a>); and (3)
-<em>Learning to denoise</em>, where the model reconstructs a clean input
-from a corrupted version. (see <a href="#sec:denoising"
-data-reference-type="ref+Label"
-data-reference="sec:denoising">1.4.3.3</a>) <strong>Contrastive Learning
-(Bottom Panel):</strong> This family learns by comparing samples. The
-model is trained to pull representations of similar samples together
-while pushing dissimilar ones apart. Examples include: (1) <em>Aligning
-embeddings</em> from different augmentations of the same molecule, a
-core idea in Instance Discrimination (more details in <a
-href="#sec:instance_discrimination" data-reference-type="ref+Label"
-data-reference="sec:instance_discrimination">1.4.4.1</a>); (2)
-<em>Learning to cluster</em> similar molecules together, as in
-Clustering-based Contrastive Learning (see <a href="#sec:clustering_cl"
-data-reference-type="ref+Label"
-data-reference="sec:clustering_cl">1.4.4.2</a>); and (3) <em>Cross-modal
-alignment</em>, where representations from different data types (e.g., a
-molecule’s graph and its spectral properties) are learned jointly. (see
-<a href="#sec:contrastive_learning" data-reference-type="ref+Label"
-data-reference="sec:contrastive_learning">1.4.4</a> )</figcaption>
-</figure>
+::: {#fig-types_ssl}
+
+![](media/figures/rescaled_figures/chemrev_figure5.png){width=100%}
+
+**Main families in \acr{ssl}s**. The figure illustrates the two primary approaches to \acr{ssl}, each using different strategies to generate pseudo-labels from the data itself. **Generative Methods (Top Panel):** This family focuses on reconstruction and prediction. The model learns representations by generating missing information. Examples shown correspond to the pretext tasks discussed in the text: (1) *Predicting masks* in a graph, analogous to masked modeling (more details in [sec-masked_modeling]); (2) *Learning from context*, which is the basis for next token prediction (more details in [1.4.3.2](#sec-next_token_prediction)); and (3) *Learning to denoise*, where the model reconstructs a clean input from a corrupted version. (see [1.4.3.3](#sec-denoising)) **Contrastive Learning (Bottom Panel):** This family learns by comparing samples. The model is trained to pull representations of similar samples together while pushing dissimilar ones apart. Examples include: (1) *Aligning embeddings* from different augmentations of the same molecule, a core idea in Instance Discrimination (more details in [1.4.4.1](#sec-instance_discrimination)); (2) *Learning to cluster* similar molecules together, as in Clustering-based Contrastive Learning (see [1.4.4.2](#sec-clustering_cl)); and (3) *Cross-modal alignment*, where representations from different data types (e.g., a molecule's graph and its spectral properties) are learned jointly. (see [1.4.4](#sec-contrastive_learning))
+:::
 
 ### Generative Methods
 
@@ -517,12 +455,11 @@ This family of methods focuses on learning representations by
 reconstructing or predicting parts of the input data from other observed
 parts. The model learns the underlying data distribution by learning to
 re-generate the missing information. Examples shown in
-[2](#fig:types_ssl){reference-type="ref+Label"
-reference="fig:types_ssl"} include predicting masked portions of a
+@fig-types_ssl include predicting masked portions of a
 graph, learning from surrounding text context, and learning to denoise
 an image.
 
-[]{#sec:masked_modeling label="sec:masked_modeling"}
+[]{#sec-masked_modeling label="sec-masked_modeling"}
 
 #### Masked Modeling
 
@@ -541,7 +478,7 @@ guess what is missing), omitting atom or bond types in molecular graphs
 atomic coordinates in 3D structures, or masking sites within a crystal
 lattice.
 
-#### Next Token Prediction {#sec:next_token_prediction}
+#### Next Token Prediction {#sec-next_token_prediction}
 
 Many forms of data, such as text, can be represented as sequences of
 tokens. One of the most powerful \acr{ssl} tasks for such sequential data is
@@ -559,11 +496,9 @@ make good predictions more probable and bad predictions less probable).
 In this context, likelihood refers to the probability of observing the
 actual subsequent token given the preceding tokens in the sequence .
 This is accomplished by making each prediction based on the preceding
-input, which establishes the conditional context (see
-[\[eq:nexttoken\]](#eq:nexttoken){reference-type="ref+Label"
-reference="eq:nexttoken"}).
+input, which establishes the conditional context.
 
-<img src="media/eq_images/nexttoken.png" alt="Tcolorbox: eq:nexttoken" / width="100%">
+![](media/eq_images/nexttoken.png)
 
 - **Prediction Term** (Blue): The target token $x_t$ that the model is
   trying to predict at each position.
@@ -589,7 +524,7 @@ reference="eq:nexttoken"}).
   model to assign high probability to the correct next token at each
   position, given all previous tokens.
 
-#### Denoising {#sec:denoising}
+#### Denoising {#sec-denoising}
 
 Denoising \acr{ssl}s works
 by intentionally adding noise to the inputs and then training models to
@@ -617,7 +552,7 @@ For instance, one can randomly perturb atoms or edges in a molecular
 graph and train a graph neural network to predict the original
 attributes.
 
-### Contrastive Learning {#sec:contrastive_learning}
+### Contrastive Learning {#sec-contrastive_learning}
 
 The other main family of \acr{ssl} techniques is contrastive learning. The
 objective is to train models to understand data by distinguishing
@@ -641,16 +576,12 @@ There are many contrastive learning approaches with variations in loss
 functions. A key design choice in contrastive learning is whether to
 compute the contrastive loss on an instance basis or a cluster basis.
 
-#### Instance Discrimination {#sec:instance_discrimination}
+#### Instance Discrimination {#sec-instance_discrimination}
 
 Instance Discrimination is arguably the most dominant paradigm in recent
 contrastive learning. Each instance (sample) in the dataset is treated
 as its own distinct class. This is typically achieved using contrastive
-loss functions like `InfoNCE` see
-[\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
-reference="eq:infonce"}. \[@oord2018representation\] As detailed in
-[\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
-reference="eq:infonce"}, the loss function is formulated as a
+loss functions like `InfoNCE`. \[@oord2018representation\] The loss function is formulated as a
 categorical cross-entropy loss where the task is to classify the
 positive sample correctly among a set of negatives plus the positive
 itself.
@@ -665,7 +596,8 @@ involve contrasting variations of a crystal structure against entirely
 different molecules or materials, enabling the model to grasp the subtle
 similarities and stark differences between them.
 
-<img src="media/eq_images/infonce.png" alt="Tcolorbox: eq:infonce" / width="100%">
+
+![](media/eq_images/infonce.png)
 
 - **Positive Pair Term** (Blue): Measures similarity between an anchor
   sample $\mathbf{x}_i$ and its positive pair $\mathbf{x}_i^+$ (e.g.,
@@ -683,7 +615,7 @@ similarities and stark differences between them.
   encourages the model to maximize similarity for positive pairs while
   minimizing it for negative pairs.
 
-#### Clustering-based Contrastive Learning {#sec:clustering_cl}
+#### Clustering-based Contrastive Learning {#sec-clustering_cl}
 
 Clustering approaches leverage the idea that similarity often translates
 to closeness in the feature space. Methods like `DeepCluster`
@@ -726,14 +658,10 @@ non-canonical string representations.
 While it might seem that generative and contrastive
 \acr{ssl}s methods optimize
 different things, their underlying goals can often be equivalent. A
-generative masked language model learns the conditional probability (see
-[\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
-reference="eq:infonce"}) , aiming to assign a high probability to the
+generative masked language model learns the conditional probability, aiming to assign a high probability to the
 correct masked token by effectively discriminating it from other
 vocabulary tokens. The `InfoNCE` loss in contrastive learning can be
-viewed as a log-loss for a $(K+1)$-way classification task (see
-[\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
-reference="eq:infonce"}). Here, the model learns to identify the
+viewed as a log-loss for a $(K+1)$-way classification task. Here, the model learns to identify the
 positive pair $f(x_i^+)$ as matching $f(x_i)$ from a set including
 $f(x_i^+)$ and $K$ negative features $f(x_j^-)$. Both approaches
 effectively learn to select the "correct" item (a token or a positive
@@ -746,8 +674,7 @@ representations.
 Pre-training cannot be performed using \acr{ssl} on a single modality alone. For example,
 in models that consider multiple input formats (multimodality, as
 explained in detail in
-[1.9.1](#sec:multimodal_chem){reference-type="ref+Label"
-reference="sec:multimodal_chem"}), alignments between different
+@sec-multimodal_chem), alignments between different
 modalities (e.g., text-image, text-graph) serve as a pre-training
 step.\[@weng2022vlm; @girdhar2023imagebind0\] General-purpose force
 fields are commonly trained in a supervised manner on relaxation and
@@ -766,7 +693,7 @@ The core principle remains: *learning on large datasets to build
 generalizable internal representations before task-specific
 fine-tuning.*
 
-## Fine-Tuning: Learning the Coloring of Data {#sec:fine_tuning_coloring}
+## Fine-Tuning: Learning the Coloring of Data {#sec-fine_tuning_coloring}
 
 While pre-training enables models to learn general structural
 representations of chemical data, fine-tuning refines these
@@ -774,8 +701,7 @@ representations for specific downstream tasks. If pre-training can be
 conceptualized as learning the "structure" of chemical knowledge,
 fine-tuning can be viewed as learning to "color" this structure with
 task-specific knowledge and capabilities (see
-[1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"}). This specialization process
+@fig-training_workflow). This specialization process
 transforms general-purpose internal representations into powerful
 task-specific predictors while retaining the foundational knowledge
 acquired during pre-training.
@@ -785,7 +711,7 @@ training on domain-specific datasets. This typically requires
 substantially less data than pre-training. To make this process even
 more efficient, a common strategy is to "freeze" the majority of the
 model's layers and only train a small subset of the final layers (see
-[1.10.3](#sec:peft){reference-type="ref+Label" reference="sec:peft"}).
+@sec-peft).
 Fine-tuning is particularly valuable in chemistry, where datasets are
 often limited in size. Traditionally, addressing chemistry-specific
 problems required heavily engineered and specialized algorithms that
@@ -800,7 +726,7 @@ terminology sequences. With a large amount of data
 \acr{llm}s compress a lot
 of such sequence relationships into its weights.
 
-## Post-Supervised Adaptation: Learning to Align and Shape Behavior {#sec:rl}
+## Post-Supervised Adaptation: Learning to Align and Shape Behavior {#sec-rl}
 
 Pre-training and fine-tuning equip the model with a learned
 distribution, which represents its knowledge about what outputs are
@@ -841,11 +767,10 @@ become "reward-aware". For example, the representation of a molecule
 might now encode not just its chemical structure, but also its potential
 to become a high-reward final molecule (stable and soluble molecule)
 \[@narayanan2025training\]. The representation space retains its overall
-shape ([1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"}), but the model learns a new way to
+shape (@fig-training_workflow), but the model learns a new way to
 navigate it, guided by the reward.
 
-<img src="media/eq_images/rl_objective.png" alt="Reinforcement Learning Framework" / width="100%">
+![](media/eq_images/rl_objective.png)
 
 ### The Challenge of Reward Design
 
@@ -864,9 +789,7 @@ desired behavior remains an active area of research
 
 When using a \acr{llm} as
 the agent in \acr{rl}, the
-policy (see
-[\[eq:rl_objective\]](#eq:rl_objective){reference-type="ref+Label"
-reference="eq:rl_objective"}) is the \acr{llm} itself. Consider teaching a model to
+policy is the \acr{llm} itself. Consider teaching a model to
 design multi-step synthetic routes for pharmaceutical compounds, using a
 retrosynthetic strategy. The **state** ($s$) represents the synthetic
 plan generated so far. Initially, the state consists of just the target
@@ -877,9 +800,7 @@ which bonds to break or what reagents to use. The
 policy ($\pi$), using its parameters to determine the probability of
 choosing different possible actions given the current context. To put it
 mathematically, this would be
-$\pi(a|s) = P_{\text{LLM}}(\text{next synthetic step}|\text{current plan})$
-(see [\[eq:rl_objective\]](#eq:rl_objective){reference-type="ref+Label"
-reference="eq:rl_objective"}). The model leverages its chemical
+$\pi(a|s) = P_{\text{LLM}}(\text{next synthetic step}|\text{current plan})$. The model leverages its chemical
 knowledge to identify the most promising decisions. The **reward** ($R$)
 scores the completed retrosynthetic route based on practical criteria
 that could be the number of steps, predicted yield, reagent cost, etc.
@@ -898,8 +819,7 @@ provides a strong initialization that effectively constrains the action
 space to reasonable chemical language and valid synthetic steps,
 dramatically reducing the exploration requirements (see how pre-training
 creates a structured manifold in
-[1](#fig:training_workflow){reference-type="ref+Label"
-reference="fig:training_workflow"}).
+@fig-training_workflow).
 
 Recent developments have revealed that \acr{rl} training can elicit reasoning
 capabilities that were previously thought to require explicit
@@ -939,7 +859,7 @@ pathways that led to low rewards are suppressed. The model is now
 inherently more likely to generate outputs that align with the
 preferences and goals encoded in the reward function.
 
-## Example Architectures {#sec:example_architectures}
+## Example Architectures {#sec-example_architectures}
 
 While much effort is currently invested in building foundation models
 based on transformer-based \acr{llm}s, the foundation model paradigm is not
@@ -949,41 +869,22 @@ In the chemical domain, where heterogeneous data such as
 \acr{smiles} and
 graphs for molecular structures prevail, the use of a diverse array of
 architectures is expected. The architectures shown in
-[3](#fig:architectures){reference-type="ref+Label"
-reference="fig:architectures"} are examples of foundational backbones
+@fig-architectures are examples of foundational backbones
 that we discuss in the following sections.
 
-<figure id="fig:architectures">
-<img src="media/figures/rescaled_figures/chemrev_figure6.png" alt="" / width="100%">
-<figcaption><strong>Blueprint for \acr{gpm}s architectures</strong>.
-This diagram illustrates four distinct neural network architectures
-(\acr{lstm}, Transformer, Mamba, and
-\acr{gnn}), highlighting their
-unique approaches to input representation, information processing, and
-output pooling. \acr{lstm}s sequentially process
-tokens, accumulating information in a final hidden state with an
-inductive bias towards order. Transformers, conversely, use multi-head
-attention and positional encodings to capture global interactions
-simultaneously, offering minimal inductive bias but enabling rich
-contextual understanding. Mamba combines local convolutional processing
-with selective state space modeling to efficiently focus on chemically
-relevant parts, also typically using a final hidden state. <span
-data-acronym-label="gnn" data-acronym-form="plural+short">gnns</span>
-leverage the inherent graph structure of molecules, where atoms are
-nodes and bonds are edges, to model local chemical environments through
-message passing, followed by graph-level pooling to create a unified
-representation. Each approach offers unique strengths in how it captures
-molecular features, ranging from sequential to global, and graph-based
-relationships.</figcaption>
-</figure>
+::: {#fig-architectures}
+
+![](media/figures/rescaled_figures/chemrev_figure6.png){width=100%}
+
+**Blueprint for \acr{gpm}s architectures**. This diagram illustrates four distinct neural network architectures (\acr{lstm}, Transformer, Mamba, and \acr{gnn}), highlighting their unique approaches to input representation, information processing, and output pooling. \acr{lstm}s sequentially process tokens, accumulating information in a final hidden state with an inductive bias towards order. Transformers, conversely, use multi-head attention and positional encodings to capture global interactions simultaneously, offering minimal inductive bias but enabling rich contextual understanding. Mamba combines local convolutional processing with selective state space modeling to efficiently focus on chemically relevant parts, also typically using a final hidden state. <span data-acronym-label="gnn" data-acronym-form="plural+short">gnns</span> leverage the inherent graph structure of molecules, where atoms are nodes and bonds are edges, to model local chemical environments through message passing, followed by graph-level pooling to create a unified representation. Each approach offers unique strengths in how it captures molecular features, ranging from sequential to global, and graph-based relationships.
+:::
 
 ### \acr{lstm}
 
 \acr{lstm} networks
 \[@hochreiter1997long\] are well-suited for processing sequential data,
 such as text or time series.
-[3](#fig:architectures){reference-type="ref+Label"
-reference="fig:architectures"} illustrates how chemical information is
+@fig-architectures illustrates how chemical information is
 processed to predict \acr{lstm}s.
 
 - **Input**: Molecules are represented as tokenized sequences (e.g.,
@@ -1037,8 +938,7 @@ connected to every other token and can impact its representation.
 
 - **Input**: Similar to \acr{lstm}s, data is tokenized and often enhanced
   with positional encodings (see
-  [3](#fig:architectures){reference-type="ref+Label"
-  reference="fig:architectures"}, the tokenized sequence is added with
+  @fig-architectures, the tokenized sequence is added with
   positional information, e.g., using a sinusoidal signal---the red-blue
   spectrum) to maintain information about where in a sequence a token is
   placed (the attention mechanism itself does not preserve this
@@ -1096,15 +996,13 @@ dataset of \acr{smiles} samples.\[@soares2025mamba-based\]
 \acr{gnn} is an
 architecture that complements graph representations (see the section
 discussing graph-based representation
-[1.2.1](#sec:common_representations){reference-type="ref+Label"
-reference="sec:common_representations"}). Molecules are represented as
+@sec-common_representations). Molecules are represented as
 graphs, where atoms are nodes and bonds are edges.
 \acr{gnn}s operate on these
 graphs by processing node and edge representations. Based on how the
 nodes are connected through edges, the information in these
 representations is updated multiple times. This procedure is called
-message passing (see [3](#fig:architectures){reference-type="ref+Label"
-reference="fig:architectures"}). Information from neighbors is
+message passing (see @fig-architectures). Information from neighbors is
 aggregated, and this aggregation occurs for all nodes and sometimes also
 for edges.
 
@@ -1154,8 +1052,7 @@ each modality (e.g., a \acr{gnn} for molecular structures and a
 Transformer for text). These encoders independently map their respective
 inputs into their own high-dimensional vector spaces. The key learning
 objective, often driven by contrastive learning (see
-[1.4.4](#sec:contrastive_learning){reference-type="ref+Label"
-reference="sec:contrastive_learning"}), is to align these separate
+@sec-contrastive_learning), is to align these separate
 spaces.
 
 Another common approach is input-level fusion, where different data
@@ -1172,8 +1069,7 @@ more recent and highly efficient variant is adapter-based integration,
 where a powerful, pre-trained unimodal model (models that take a single
 type of representation) (like an \acr{llm}) is frozen, and a small "adapter network"
 (see discussion about adapter in
-[1.11](#sec:model_adaptation){reference-type="ref+Label"
-reference="sec:model_adaptation"}) is trained to project the embeddings
+@sec-model_adaptation) is trained to project the embeddings
 from a secondary modality (e.g., a molecule) into the
 \acr{llm}'s existing
 latent space. This adapter effectively learns to translate the new data
@@ -1186,7 +1082,7 @@ pattern in molecular diagrams and produces characteristic peaks in
 This cross-modal understanding enables more comprehensive and
 contextually rich analysis than any single modality alone could provide.
 
-### Multimodal Integration in Chemistry {#sec:multimodal_chem}
+### Multimodal Integration in Chemistry {#sec-multimodal_chem}
 
 A molecule's \acr{smiles} string alone might not reveal its 3-D
 conformational preferences. A spectrum alone could suggest many
@@ -1218,14 +1114,12 @@ textual description) by replacing chemical names in scientific texts
 with their corresponding \acr{smiles} strings and description. This
 pre-training approach enables `MolXPT` to learn the context of molecules
 within text and achieve zero-shot text-to-molecule generation (see
-[\[sec:mol_generation\]](#sec:mol_generation){reference-type="ref+Label"
-reference="sec:mol_generation"} for more details on this application).
+[@sec-mol_generation] for more details on this application).
 
 Contrastive learning emerged as an alternative, aligning separate text
 and molecule encoders in a shared embedding space. The principle of
 learning here is the same as that explained in
-[\[{sec:contrastive_learning}\]](#{sec:contrastive_learning}){reference-type="ref+Label"
-reference="{sec:contrastive_learning}"}. `MoleculeSTM`
+[@{sec-contrastive_learning}]"}. `MoleculeSTM`
 \[@Liu2023multi0modal\] aligns separate text and molecule encoders in a
 shared space using paired data. This dual-encoder approach enables tasks
 such as retrieving molecules from text queries and shows strong
@@ -1266,8 +1160,7 @@ A more recent approach is the integration of molecular encoders with
 pre-trained \acr{llm}s.
 Models like `InstructMol` \[@cao2023instructmol0\] and `ChemVLM`
 \[@li2024seeing\] use an "adapter" (see discussion about `LoRa` in
-[1.11](#sec:model_adaptation){reference-type="ref+Label"
-reference="sec:model_adaptation"}) to project molecular information into
+@sec-model_adaptation) to project molecular information into
 the \acr{llm}'s existing
 knowledge space. This two-stage process first projects molecule
 representations into the \acr{llm}'s token space through pre-training on
@@ -1301,7 +1194,7 @@ for efficient scaling, quantization, and mixed precision for memory and
 computational efficiency, and knowledge distillation for creating
 specialized, lightweight models.
 
-### Mixture-of-Experts {#sec:arch-moes}
+### Mixture-of-Experts {#sec-arch-moes}
 
 \acr{moe} is a neural
 network architecture that uses multiple specialized "expert" networks
@@ -1373,7 +1266,7 @@ experts may not learn meaningful functions. Despite these hurdles,
 \acr{moe}s remain a
 promising optimization strategy to handle the breadth of chemical space.
 
-### Quantization and Mixed Precision {#sec:quantization}
+### Quantization and Mixed Precision {#sec-quantization}
 
 Quantization is a technique for making models more computationally
 efficient by reducing their numerical precision. In experimental
@@ -1413,7 +1306,7 @@ resources. Quantization can be a valuable optimization tool for reducing
 computational burden while increasing inference speed, which is crucial
 for real-time applications.
 
-### Parameter-Efficient Tuning {#sec:peft}
+### Parameter-Efficient Tuning {#sec-peft}
 
 While full fine-tuning is computationally expensive, memory-intensive,
 and results in a complete, multi-gigabyte copy of the model for every
@@ -1436,8 +1329,7 @@ parameters-often less than 0.1% of the original model-the computational
 and memory requirements for training are drastically reduced.
 
 These optimization strategies can be combined with quantization (see
-[1.10.2](#sec:quantization){reference-type="ref+Label"
-reference="sec:quantization"}) for even greater efficiency.
+@sec-quantization) for even greater efficiency.
 @dettmers2023qlora introduced \acr{qlora}. In this approach, the large pre-trained
 model is first quantized down to a very low precision (typically 4-bit),
 dramatically shrinking its memory footprint. Then, the lightweight
@@ -1475,7 +1367,7 @@ the teacher is too large or complex compared to the student, the student
 may struggle to emulate it, leading to degraded performance.
 \[@liu2024wisdom\]
 
-## Model Level Adaptation {#sec:model_adaptation}
+## Model Level Adaptation {#sec-model_adaptation}
 
 Although promising, \acr{gpm}s such as \acr{llm}s rarely work straight out of the box for
 specialized tasks and often need customization. This is especially true
@@ -1497,7 +1389,7 @@ tune the model to new data which updates its parameters. The second
 approach involves coupling the model into a larger system that can
 interact with external sources of information and tools.
 
-::: {#tab:model_adaptation}
+::: {#tbl-model_adaptation}
   **Model adaptation**        **Time**   **Data**        **ML knowledge**
   --------------------------- ---------- --------------- ------------------
   Pre-training                Weeks      1M--1B+         Very High
@@ -1508,7 +1400,7 @@ interact with external sources of information and tools.
   RAG                         Days       100k--1M+       Low
   Tool-Augmentation           Days       None / 10k+     Low
 
-  : **Model Adaptation Approaches Overview:** This table provides a
+  **Model Adaptation Approaches Overview:** This table provides a
   rough overview of the estimated time, data, and
   \acr{ml} knowledge
   required for each approach. Each method (listed in the first column)
@@ -1520,9 +1412,9 @@ interact with external sources of information and tools.
   background.
 :::
 
-[]{#tab:model_adaptation label="tab:model_adaptation"}
+[]{#tbl-model_adaptation label="tbl-model_adaptation"}
 
-### Prompting {#sec:prompting}
+### Prompting {#sec-prompting}
 
 \acr{llm}s have
 demonstrated the ability to perform a wide range of tasks based solely
@@ -1556,15 +1448,14 @@ learning, they have proven very useful for a range of chemical tasks,
 including chemical data extraction, \acr{qa}, and property prediction
 \[@liu2025integrating; @zheng2023chatgpt; @mirza2024large\].
 
-#### Fine-tuning {#sec:fine-tuning}
+#### Fine-tuning {#sec-fine-tuning}
 
 What separates fine-tuning from the other approaches discussed is that
 it directly changes the weights of the model as well as its broad
 applicability across different model architectures, not just
 \acr{llm}s. Apart from
 changing the weights (see
-[1.6](#sec:fine_tuning_coloring){reference-type="ref+Label"
-reference="sec:fine_tuning_coloring"}), unlike techniques like
+@sec-fine_tuning_coloring), unlike techniques like
 \acr{icl} or prompt
 engineering that are limited to \acr{llm}s, fine-tuning can be applied to a wide
 variety of architectures, including other transformer-based models,
@@ -1585,7 +1476,7 @@ connected layers are replaced and re-trained. In some cases, it may be
 necessary to fine-tune the entire model, an especially
 resource-intensive process for \acr{llm}s, whose parameters can be in billions. To
 speed up this process, methods like \acr{peft} have been developed (see more details in
-[1.10.3](#sec:peft){reference-type="ref+Label" reference="sec:peft"}).
+@sec-peft).
 Despite these innovations, one key limitation of fine-tuning remains:
 adapting to a new modality, which often requires architectural changes
 or switching to a different model. However, \acr{llm}s offer a unique workaround. Many regression
@@ -1605,7 +1496,7 @@ approaches that operate during inference time. This is achieved by
 coupling \acr{llm} into a
 system of resources.
 
-## System-level Integration: Agents {#sec:agents}
+## System-level Integration: Agents {#sec-agents}
 
 While powerful, \acr{gpm}s
 are fundamentally static entities. Their knowledge is frozen at the time
@@ -1631,8 +1522,7 @@ accordingly. For chemists and material scientists, this paradigm shift
 is profound. It moves from asking a model a question to giving it a
 research goal, which it can then pursue autonomously.
 
-[4](#fig:agent-loop){reference-type="ref+Label"
-reference="fig:agent-loop"} illustrates the fundamental components of an
+@fig-agent-loop illustrates the fundamental components of an
 agentic framework, often conceptualized through the interacting modules
 of perception, cognition, and execution. It is important to note that
 this is one possible way to formalize an agent's architecture; other
@@ -1641,28 +1531,14 @@ these components represent a set of capabilities that the agent's core
 \acr{llm} can dynamically
 draw upon to achieve complex objectives.
 
-<figure id="fig:agent-loop">
-<img src="media/figures/rescaled_figures/chemrev_figure7.png" alt="" / width="100%">
-<figcaption><strong>The execution-cognition-perception capabilities of
-an \acr{llm}-agent:</strong> This
-figure illustrates how agents orchestrate complex problems. At the core,
-an \acr{llm}-agent coordinates multiple
-capabilities. Upon prompting, the agent can execute tools. Tools include
-but are not limited to running code, searching for information, or
-calling functions. These actions feed into the agent’s perception
-system, which transforms raw data into structured representations (in
-combination, for example, agents can obtain figures’ information by
-executing \acr{ocr} tools on paper). The
-cognitive architecture underneath serves as the “agent’s brain”,
-utilizing both memory systems (long-term knowledge storage and
-short-term contextual awareness) alongside reasoning mechanisms and
-planning strategies. This creates a dynamic setup, where execution
-produces observations, cognition interprets those observations and
-formulates plans, and new actions are taken based on improved
-understanding.</figcaption>
-</figure>
+::: {#fig-agent-loop}
 
-### Core Components of an Agentic System {#sec:arch_agents}
+![](media/figures/rescaled_figures/chemrev_figure7.png){width=100%}
+
+**The execution-cognition-perception capabilities of an \acr{llm}-agent:** This figure illustrates how agents orchestrate complex problems. At the core, an \acr{llm}-agent coordinates multiple capabilities. Upon prompting, the agent can execute tools. Tools include but are not limited to running code, searching for information, or calling functions. These actions feed into the agent's perception system, which transforms raw data into structured representations (in combination, for example, agents can obtain figures' information by executing \acr{ocr} tools on paper). The cognitive architecture underneath serves as the "agent's brain", utilizing both memory systems (long-term knowledge storage and short-term contextual awareness) alongside reasoning mechanisms and planning strategies. This creates a dynamic setup, where execution produces observations, cognition interprets those observations and formulates plans, and new actions are taken based on improved understanding.
+:::
+
+### Core Components of an Agentic System {#sec-arch_agents}
 
 An agent is a system composed of several key components that work in
 concert.
@@ -1672,11 +1548,10 @@ concert.
 This is typically a powerful \acr{llm}. It is responsible for all high-level
 reasoning, including understanding the user's objective, breaking it
 down into smaller, manageable steps (see planning
-[\[sec:planning\]](#sec:planning){reference-type="ref+Label"
-reference="sec:planning"}), and deciding which tools to use to
+[@sec-planning]), and deciding which tools to use to
 accomplish each step.
 
-#### Tool Augmentations (Execution) {#sec:tool_augmentation}
+#### Tool Augmentations (Execution) {#sec-tool_augmentation}
 
 Tools are external programs or functions that the agent can call upon to
 perform actions. They allow agents to interact with the world beyond
@@ -1691,7 +1566,7 @@ using specialized software, a search \acr{api} for querying chemical databases l
 `PubChem`, or a controller for a robotic synthesis platform
 \[@boiko2023autonomous; @darvish2025organa; @bran2024augmenting\].
 
-#### Memory & \acr{rag}  {#sec:rag}
+#### Memory & \acr{rag}  {#sec-rag}
 
 Agents need to maintain context over long and complex tasks. The memory
 module provides this capability. Short-term memory is often handled
@@ -1760,7 +1635,7 @@ handle alone by enabling agents to communicate, delegate, and debate.
 \[@lazaridou2020emergent\] Several collaborative paradigms have emerged,
 each offering unique advantages:
 
-#### Specialization and Division of Labor {#sec:multi-agent}
+#### Specialization and Division of Labor {#sec-multi-agent}
 
 Just as a human research group has members with different roles,
 multi-agent systems can be composed of specialized agents. For example,

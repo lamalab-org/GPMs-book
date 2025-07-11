@@ -718,11 +718,13 @@ prioritization of high-yield, low-cost synthetic routes.
 More recent work has explored how fully fine-tuned
 \acr{llm}s can serve as
 comprehensive chemistry assistants for experimental guidance.
-@zhang2025large developed `Chemma`, a fine-tuned `LLaMA-2-7B` model
-trained on 1.28 million chemical reaction question-answer pairs. Through
-an active learning framework that incorporates experimental feedback
-(see [\[sec:rl\]](#sec:rl){reference-type="ref+Label"
-reference="sec:rl"} to learn more about \acr{rl}), human-`Chemma` collaboration
+@zhang2025large used a two-stage training process to first develop
+`Chemma-\acr{SFT}` by fine-tuning `LLaMA-2-7B` on 1.28 million chemical
+reaction question-answer pairs about reaction prediction, single-step
+retrosynthesis, and reaction condition generation tasks. In the second
+stage of training, they developed `Chemma-RM` using
+\acr{rlhf} and applied
+it to optimize the experimental reaction conditions. `Chemma`
 successfully optimized an unreported Suzuki-Miyaura cross-coupling
 reaction within only 15 experimental runs.
 
@@ -775,7 +777,7 @@ existing domain knowledge \[@Taylor2023brief\]. While, as explained in
 [1.3](#sec:retrosynthesis){reference-type="ref+Label"
 reference="sec:retrosynthesis"}, those methods are used to accelerate
 this process, optimization methods help improve conditions, binding
-affinity, etc. These approaches are slow and labor-intensive.
+affinity, etc. But these approaches are slow and labor-intensive.
 Traditional data-driven methods aimed to address these limitations by
 combining predictive \acr{ml} models with optimization frameworks such
 as \acr{bo} or
@@ -933,6 +935,19 @@ and incorporates domain knowledge (or user input). Evaluations on
 synthetic benchmarks such as the catalyst optimization task for hydrogen
 generation show that `BORA` accelerates exploration, improves
 convergence, and outperforms existing \acr{llm}-\acr{bo} hybrids.
+
+To enhance the task-specific knowledge of the \acr{llm} generating feedback, @zhang2025large
+fine-tuned a `Llama-2-7B` model using a multitask
+\acr{qa} dataset. This
+dataset was created with instructions from `GPT-4`. The resulting model
+served as a human assistant or operated within an active learning loop,
+thereby accelerating the exploration of new reaction spaces (see
+[1.3](#sec:retrosynthesis){reference-type="ref+Label"
+reference="sec:retrosynthesis"}). However, as the authors note, even
+this task-specialized \acr{llm}s produces suboptimal suggestions for
+optimization tasks. They remain prone to hallucination and cannot assist
+with unreported reactions, but still, they improve for most of the
+applications, using pure classical methods.
 
 ### How to Face Optimization Problems?
 

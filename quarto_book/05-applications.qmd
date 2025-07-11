@@ -217,9 +217,9 @@ task, it often involves multiple different steps, visually described in
 [2](#fig:knowledge_gathering){reference-type="ref+Label"
 reference="fig:knowledge_gathering"}. We split the discussion in this
 section in two: structured data extraction and question answering.
-Example queries for both sections are shown at the bottom of
+Example queries for both sections are in
 [2](#fig:knowledge_gathering){reference-type="ref+Label"
-reference="fig:knowledge_gathering"}.
+reference="fig:knowledge_gathering"}B.
 
 <figure id="fig:knowledge_gathering">
 <img src="media/figures/rescaled_figures/chemrev_figure12.png" alt="" / width="100%">
@@ -935,19 +935,19 @@ messages, etc.) which the agent analyzes and decides on the next action.
 This allows for dynamic branching and conditional logic during the
 experiment execution.
 
-*Coscientist* \[@boiko2023autonomous\] is an \acr{llm}-based chemistry assistant built around
+`Coscientist` \[@boiko2023autonomous\] is an \acr{llm}-based chemistry assistant built around
 `GPT-4` that can autonomously design and execute experiments. It can
-take high-level goals and call tools to write the code in real-time in
-order to control an Opentrons OT-2 liquid-handling robot. The
-architecture included tool calls: a web-search module, a documentation
-module (to read instrument manuals), a `Python` execution module (to run
-generated code in a sandbox), and an experiment execution module that
-sends code to actual lab equipment. If an error occurred, the system
-would get feedback and `GPT-4` would debug its own code. `Coscientist`
-successfully planned and executed multistep syntheses with minimal human
-intervention. For example, it efficiently optimized a palladium
-cross-coupling reaction with minimal human input, outperforming a
-standard Bayesian optimizer baseline in finding high-yield conditions.
+take high-level goals and call tools to write code in real-time in order
+to control an Opentrons OT-2 liquid-handling robot. The architecture
+included a web-search module, a documentation module (to read instrument
+manuals), a `Python` execution module (to run generated code in a
+sandbox), and an experiment execution module that sends code to actual
+lab equipment. If an error occurred, the system would get feedback and
+`GPT-4` would debug its own code. `Coscientist` successfully planned and
+executed multistep syntheses with minimal human intervention. For
+example, it efficiently optimized a palladium cross-coupling reaction
+with minimal human input, outperforming a standard Bayesian optimizer
+baseline in finding high-yield conditions.
 
 Another example is `ChemCrow` \[@bran2024augmenting\], a `GPT-4`-based
 agent augmented with $18$ expert-designed tools for tasks like compound

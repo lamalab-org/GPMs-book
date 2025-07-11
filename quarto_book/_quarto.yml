@@ -1,6 +1,5 @@
 project:
   type: book
-  output-dir: ../docs
   title: General Purpose Models for the Chemical Sciences
 book:
   title: General Purpose Models for the Chemical Sciences

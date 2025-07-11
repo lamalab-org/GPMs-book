@@ -135,10 +135,10 @@ exams at `ETH Zürich`. While the model performed reasonably well on
 short derivations, it failed to track detailed rubrics or interpret
 hand-drawn diagrams reliably. In chemistry education,
 @kharchenko2024advantages compared `ChatGPT 3.5`, `Gemini`, and
-`Copilot` on domain-specific tasks and found that while the models
-performed adequately on simple recall questions, they failed in tasks
-that required chemical reasoning, structural understanding, or logical
-analysis.
+`Copilot` (detailed model names were not specified) on domain-specific
+tasks and found that while the models performed adequately on simple
+recall questions, they failed in tasks that required chemical reasoning,
+structural understanding, or logical analysis.
 
 Together, these findings suggest that while zero-shot prompting enables
 rapid deployment of \acr{gpm}s in educational contexts, current models

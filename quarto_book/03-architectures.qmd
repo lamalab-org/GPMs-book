@@ -1724,7 +1724,7 @@ been used to answer domain-specific questions based on scientific
 literature and assist in experimental design \[@chen2023chemist;
 @skarlinski2024language\].
 
-### Approaches for building Agentic System
+### Approaches for Building Agentic System
 
 A well-known approach for building \acr{llm}-based agents is called
 \acr{react}\[@yao2023react\]. In

@@ -8,7 +8,7 @@
 \end{figure}
 
 Discovering novel compounds and reactions in chemistry and materials science has long relied on iterative trial-and-error processes rooted in existing domain knowledge \autocite{Taylor2023brief}. While, as explained in \Cref{sec:retrosynthesis}, those methods are used to accelerate this process, optimization methods help improve conditions, binding affinity, etc.
-These approaches are slow and labor-intensive. 
+But these approaches are slow and labor-intensive. 
 Traditional data-driven methods aimed to address these limitations by combining predictive \gls{ml} models with optimization frameworks such as \gls{bo} or \glspl{ea}. 
 These frameworks balance exploration of uncharted regions in chemical space with exploitation of known high-performing regions \autocite{Li2024sequential, Hse2021gryffin, Shields2021bayesian, Griffiths2020constrained, RajabiKochi2025adaptive}.
 
@@ -66,6 +66,11 @@ Their results demonstrate substantial improvements when this filtering mechanism
 Similarly, \textcite{cisse2025language0based} introduced \modelname{BORA}, which contextualizes conventional black-box \gls{bo} using an \gls{llm}. \modelname{BORA} maintains standard \gls{bo} as the core driver but strategically activates the \gls{llm} when progress stalls. 
 This leverages the model’s \gls{icl} capabilities to hypothesize promising search regions and propose new samples, regulated by a lightweight heuristic policy that manages costs and incorporates domain knowledge (or user input). 
 Evaluations on synthetic benchmarks such as the catalyst optimization task for hydrogen generation show that \modelname{BORA} accelerates exploration, improves convergence, and outperforms existing \gls{llm}-\gls{bo} hybrids.
+
+To enhance the task-specific knowledge of the \gls{llm} generating feedback, \textcite{zhang2025large} fine-tuned a \modelname{Llama-2-7B} model using a multitask \gls{qa} dataset. This dataset was created with instructions from \modelname{GPT-4}. 
+The resulting model served as a human assistant or operated within an active learning loop, thereby accelerating the exploration of new reaction spaces (see \Cref{sec:retrosynthesis}). 
+However, as the authors note, even this task-specialized \glspl{llm} produces suboptimal suggestions for optimization tasks. 
+They remain prone to hallucination and cannot assist with unreported reactions, but still, they improve for most of the applications, using pure classical methods.
 
 \subsubsection{How to Face Optimization Problems?}
 

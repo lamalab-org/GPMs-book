@@ -27,7 +27,7 @@ Still, most applications of \glspl{gpm} focus on using these models for one spec
 
 \subsection{Knowledge Gathering}\label{sec:information_gathering}
 The rate of publishing keeps growing, and as a result, it is increasingly challenging to manually collect all relevant knowledge, potentially stymying scientific progress.\autocite{schilling2025text, Chu_2021}
-Even though knowledge collection might seem like a simple task, it often involves multiple different steps, visually described in \Cref{fig:knowledge_gathering}. We split the discussion in this section in two: structured data extraction and question answering.  Example queries for both sections are shown at the bottom of \Cref{fig:knowledge_gathering}.
+Even though knowledge collection might seem like a simple task, it often involves multiple different steps, visually described in \Cref{fig:knowledge_gathering}. We split the discussion in this section in two: structured data extraction and question answering. Example queries for both sections are in \Cref{fig:knowledge_gathering}B.
 
 \begin{figure}[!ht]
     \centering
@@ -205,8 +205,7 @@ A chemical compiler (or \enquote{chempiler} \autocite{steiner2019organic}) then 
 One of the prominent examples of such languages is \gls{chidl}\autocite{xdl2023spec}, developed as part of the Chemputer architecture \autocite{steiner2019organic, mehr2020universal, hammer2021chemputation}. 
 \gls{chidl} uses a \gls{json}-like format, and the experimental protocol is described by defining \modelname{Reagents}, \modelname{Vessels}, etc, and using abstract chemical commands such as \modelname{Add}, \modelname{Stir}, \modelname{Filter}, etc. 
 In the next step, the \modelname{Chempiler} software takes this \gls{chidl} script and a description of the physical connectivity and composition of the automated platform as a graph and translates it into \gls{chasm} which is specific to the platform (akin to machine code). 
-In practice, \gls{chidl}  has been used to automate multi-step organic syntheses with yields comparable to manual experiments.\autocite{mehr2020universal} 
-%The \gls{chidl} code can be published or shared, enabling remote execution \autocite{rauschen2024universal, strieth-kalthoff2024delocalized}. 
+In practice, \gls{chidl}  has been used to automate multi-step organic syntheses with yields comparable to manual experiments.\autocite{mehr2020universal}  
 
 Developing experimental protocols in a formal language is a non-trivial task, often requiring specialized coding expertise. 
 Within the compiled approach, the role of the \gls{gpm} is to translate natural-language protocols into their formalized, machine-readable counterparts.\autocite{Lamas2024DSLXpert, jiang2024protocode, conrad2025lowering, inagaki2023robotic} \textcite{Vaucher2020AutoExtraction} used an encoder-decoder transformer model to convert English experimental procedures to structured sequences of pre-defined synthesis actions (e.g., \modelname{MakeSolution}, \modelname{SetTemperature}, \modelname{Extract}). They pre-trained the model on $2$M sentence-action pairs extracted by a rule-based \gls{nlp} algorithm and then fine-tuned it on manually annotated samples to improve accuracy. 
@@ -237,8 +236,8 @@ We refer to such systems as \enquote{interpreted automation} systems.
 In contrast to the deterministic, preplanned nature of compiled systems, interpreted architectures introduce real-time decision-making.
 As each action completes, the system collects sensor data (instrument readings, spectra, error messages, etc.) which the agent analyzes and decides on the next action. This allows for dynamic branching and conditional logic during the experiment execution. 
 
-\emph{Coscientist} \autocite{boiko2023autonomous} is an \gls{llm}-based chemistry assistant built around \modelname{GPT-4} that can autonomously design and execute experiments. 
-It can take high-level goals and call tools to write the code in real-time in order to control an Opentrons OT-2 liquid-handling robot. The architecture included tool calls: a web-search module, a documentation module (to read instrument manuals), a \modelname{Python} execution module (to run generated code in a sandbox), and an experiment execution module that sends code to actual lab equipment.
+\modelname{Coscientist} \autocite{boiko2023autonomous} is an \gls{llm}-based chemistry assistant built around \modelname{GPT-4} that can autonomously design and execute experiments. 
+It can take high-level goals and call tools to write code in real-time in order to control an Opentrons OT-2 liquid-handling robot. The architecture included a web-search module, a documentation module (to read instrument manuals), a \modelname{Python} execution module (to run generated code in a sandbox), and an experiment execution module that sends code to actual lab equipment.
 If an error occurred, the system would get feedback and \modelname{GPT-4} would debug its own code. \modelname{Coscientist} successfully planned and executed multistep syntheses with minimal human intervention. 
 For example, it efficiently optimized a palladium cross-coupling reaction with minimal human input, outperforming a standard Bayesian optimizer baseline in finding high-yield conditions.
 

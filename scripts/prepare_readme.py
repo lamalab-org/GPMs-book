@@ -19,7 +19,9 @@ try:
     BIBTEXPARSER_AVAILABLE = True
 except ImportError:
     BIBTEXPARSER_AVAILABLE = False
-    print("Note: bibtexparser not available, using fallback parser.")
+    print(
+        "Note: bibtexparser not available, using fallback parser. Install with: pip install bibtexparser"
+    )
 
 
 @dataclass
@@ -300,7 +302,29 @@ class ReadmeGenerator:
     def generate(self, sections_by_file: Dict[str, List[Section]], output_path: Path):
         """Generate README.md file."""
         with open(output_path, "w", encoding="utf-8") as f:
-            f.write("# Research Sections and References\n\n")
+            f.write("# General Purpose Models for the Chemical Sciences ✨\n\n")
+            f.write("""![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)
+
+## 📘 Read the Review
+
+You can read the review directly on
+or access it as a collaborative online book at:
+
+👉 [arXiv](https://arxiv.org/pdf/2507.07456)
+
+👉 [Online Book](https://lnkd.in/eWQVf4jJ)
+
+We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
+
+### ✨ Join the Community
+
+Help us grow and improve this resource by sharing your feedback or contributing directly via the online platform.
+
+Together, we can keep this reference **useful**, **relevant**, and **up to date** for everyone!
+This document provides an overview of the research sections and their associated references.
+""")
             f.write(
                 "This document provides an overview of the research sections and their associated references.\n\n"
             )
@@ -329,16 +353,25 @@ class ReadmeGenerator:
                     # Skip section if title matches the file display name (avoid duplication)
                     if section.title.lower() == display_name.lower():
                         # This section title is the same as the file name, just show citations
-                        if section.citations:
-                            for cite_key in section.citations:
-                                if cite_key in self.citations:
-                                    citation = self.citations[cite_key]
-                                    ref_text = self._format_citation(citation)
-                                    f.write(f"- {ref_text}\n")
-                                else:
-                                    f.write(
-                                        f"- {cite_key} *(citation not found in bibliography)*\n"
-                                    )
+                        sorted_citations = sorted(
+                            section.citations,
+                            key=lambda k: (
+                                self.citations[k].year
+                                if k in self.citations
+                                and self.citations[k].year.isdigit()
+                                else "9999"
+                            ),
+                        )
+
+                        for cite_key in sorted_citations:
+                            if cite_key in self.citations:
+                                citation = self.citations[cite_key]
+                                ref_text = self._format_citation(citation)
+                                f.write(f"- {ref_text}\n")
+                            else:
+                                f.write(
+                                    f"- {cite_key} *(citation not found in bibliography)*\n"
+                                )
                             f.write("\n")
                     else:
                         # Write section header

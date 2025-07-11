@@ -1,51 +1,113 @@
-# Research Sections and References
+# General Purpose Models for the Chemical Sciences ✨
 
+![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)
+
+## 📘 Read the Review
+
+You can read the review directly on
+or access it as a collaborative online book at:
+
+👉 [arXiv](https://arxiv.org/pdf/2507.07456)
+
+👉 [Online Book](https://lnkd.in/eWQVf4jJ)
+
+We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
+
+### ✨ Join the Community
+
+Help us grow and improve this resource by sharing your feedback or contributing directly via the online platform.
+
+Together, we can keep this reference **useful**, **relevant**, and **up to date** for everyone!
+This document provides an overview of the research sections and their associated references.
 This document provides an overview of the research sections and their associated references.
 
 ## Introduction
 
-- 2020 - [Big-data science in porous materials: materials genomics and machine learning](https://doi.org/10.1021/acs.chemrev.0c00004)
-- 2018 - [Machine learning for molecular and materials science](https://doi.org/10.1038/s41586-018-0337-2)
-- 2022 - [The case for data science in experimental chemistry: examples and recommendations](https://doi.org/10.1038/s41570-022-00382-w)
-- 2022 - [Machine learning for a sustainable energy future](https://doi.org/10.1038/s41578-022-00490-5)
-- 2017 - [Use machine learning to find energy materials](https://doi.org/10.1038/d41586-017-07820-6)
-- 2023 - [Scientific discovery in the age of artificial intelligence](https://doi.org/10.1038/s41586-023-06221-2)
-- 2024 - [A holistic platform for accelerating sorbent-based carbon capture](https://doi.org/10.1038/s41586-024-07683-8)
-- 2020 - [When machine learning meets multiscale modeling in chemical reactions](https://doi.org/10.1063/5.0015779)
-- 2021 - [Origins of structural and electronic transitions in disordered silicon](https://doi.org/10.1038/s41586-020-03072-z)
-- 2023 - [Autonomous chemical research with large language models](https://doi.org/10.1038/s41586-023-06792-0)
-- 2019 - [A robotic platform for flow synthesis of organic compounds informed by AI planning](https://doi.org/10.1126/science.aax1566)
-- 2025 - [From text to insight: large language models for chemical data extraction](https://doi.org/10.1039/d4cs00913d)
-- 2024 - [Fine-tuning large language models for chemical text mining](https://doi.org/10.1039/D4SC00924J)
-- 2024 - [Structured information extraction from scientific text with large language models](https://doi.org/10.1038/s41467-024-45563-x)
-- 2024 - [Leveraging large language models for predictive chemistry](https://doi.org/10.1038/s42256-023-00788-1)
-- 2023 - [Machine learning for industrial processes: Forecasting amine emissions from a carbon capture plant](https://doi.org/10.1126/sciadv.adc9576)
-- 2024 - [Automatic Prediction of Molecular Properties Using Substructure Vector Embeddings within a Feature Selection Workflow](https://doi.org/10.1021/acs.jcim.4c01862)
+- 2009 - [The tacit dimension](https://monoskop.org/images/1/11/Polanyi_Michael_The_Tacit_Dimension.pdf)
+
 - 2012 - [Fast and Accurate Modeling of Molecular Atomization Energies with Machine Learning](https://doi.org/10.1103/physrevlett.108.058301)
-- 2021 - [Combining Machine Learning and Computational Chemistry for Predictive Insights Into Chemical Systems](https://doi.org/10.1021/acs.chemrev.1c00107)
-- 2024 - [Inverse design workflow discovers hole-transport materials tailored for perovskite solar cells](http://dx.doi.org/10.1126/science.ads0901)
-- 2024 - [Unraveling Molecular Structure: A Multimodal Spectroscopic Dataset for Chemistry](https://doi.org/10.48550/arXiv.2407.17492)
-- 2024 - [Elucidating Structures from Spectra Using Multimodal Embeddings and Discrete Optimization](https://doi.org/10.26434/chemrxiv-2024-f3b18-v2)
-- 2024 - [Prospective de novo drug design with deep interactome learning](s41467-024-47613-w)
-- 2024 - [Probing the limitations of multimodal language models for chemistry and materials research](https://doi.org/10.48550/arXiv.2411.16955)
-- 2024 - [t-SMILES: a fragment-based molecular representation framework for de novo ligand design](https://doi.org/10.1038/s41467-024-49388-6)
-- 2024 - [Invalid SMILES are beneficial rather than detrimental to chemical language models](https://doi.org/10.1038/s42256-024-00821-x)
-- 2021 - [Using automated serendipity to discover how trace water promotes and inhibits lead halide perovskite crystal formation](https://doi.org/10.1063/5.0059767)
+
 - 2014 - [The significance of implicit knowledge for learning and teaching chemistry](https://doi.org/10.1039/c4rp00124a)
-- 2009 - The tacit dimension
-- 2022 - [Making the collective knowledge of chemistry open and machine actionable](https://doi.org/10.1038/s41557-022-00910-7)
-- 2024 - [Chemllm: A chemical large language model](https://doi.org/10.48550/arXiv.2402.06852)
-- 2025 - [Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning](https://doi.org/10.48550/arXiv.2501.12948)
-- 2023 - [GPT-4 Technical Report](https://doi.org/10.48550/arXiv.2303.08774)
-- 2025 - [System Card: Claude Opus 4 \& Claude Sonnet 4](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf)
-- 2024 - [nach0: Multimodal natural and chemical languages foundation model](https://doi.org/10.1039/d4sc00966e)
+
+- 2017 - [Use machine learning to find energy materials](https://doi.org/10.1038/d41586-017-07820-6)
+
+- 2018 - [Machine learning for molecular and materials science](https://doi.org/10.1038/s41586-018-0337-2)
+
+- 2019 - [A robotic platform for flow synthesis of organic compounds informed by AI planning](https://doi.org/10.1126/science.aax1566)
+
+- 2020 - [Big-data science in porous materials: materials genomics and machine learning](https://doi.org/10.1021/acs.chemrev.0c00004)
+
+- 2020 - [When machine learning meets multiscale modeling in chemical reactions](https://doi.org/10.1063/5.0015779)
+
 - 2020 - [Language models are few-shot learners](https://doi.org/10.48550/arXiv.2005.14165)
-- 2022 - [Chemberta-2: Towards chemical foundation models](https://doi.org/10.48550/arXiv.2209.01712)
-- 2024 - [OneProt: Towards Multi-Modal Protein Foundation Models](https://doi.org/10.48550/arXiv.2411.04863)
-- 2023 - [A foundation model for atomistic materials chemistry](https://doi.org/10.48550/arXiv.2401.00096)
-- 2022 - [A universal graph deep learning interatomic potential for the periodic table](https://doi.org/10.1038/s43588-022-00349-3)
+
+- 2021 - [Origins of structural and electronic transitions in disordered silicon](https://doi.org/10.1038/s41586-020-03072-z)
+
+- 2021 - [Combining Machine Learning and Computational Chemistry for Predictive Insights Into Chemical Systems](https://doi.org/10.1021/acs.chemrev.1c00107)
+
+- 2021 - [Using automated serendipity to discover how trace water promotes and inhibits lead halide perovskite crystal formation](https://doi.org/10.1063/5.0059767)
+
 - 2021 - [Machine learning force fields](https://doi.org/10.1021/acs.chemrev.0c01111)
+
+- 2022 - [The case for data science in experimental chemistry: examples and recommendations](https://doi.org/10.1038/s41570-022-00382-w)
+
+- 2022 - [Machine learning for a sustainable energy future](https://doi.org/10.1038/s41578-022-00490-5)
+
+- 2022 - [Making the collective knowledge of chemistry open and machine actionable](https://doi.org/10.1038/s41557-022-00910-7)
+
+- 2022 - [Chemberta-2: Towards chemical foundation models](https://doi.org/10.48550/arXiv.2209.01712)
+
+- 2022 - [A universal graph deep learning interatomic potential for the periodic table](https://doi.org/10.1038/s43588-022-00349-3)
+
+- 2023 - [Scientific discovery in the age of artificial intelligence](https://doi.org/10.1038/s41586-023-06221-2)
+
+- 2023 - [Autonomous chemical research with large language models](https://doi.org/10.1038/s41586-023-06792-0)
+
+- 2023 - [Machine learning for industrial processes: Forecasting amine emissions from a carbon capture plant](https://doi.org/10.1126/sciadv.adc9576)
+
+- 2023 - [GPT-4 Technical Report](https://doi.org/10.48550/arXiv.2303.08774)
+
+- 2023 - [A foundation model for atomistic materials chemistry](https://doi.org/10.48550/arXiv.2401.00096)
+
 - 2023 - [The future of chemistry is language](https://doi.org/10.1038/s41570-023-00502-0)
+
+- 2024 - [A holistic platform for accelerating sorbent-based carbon capture](https://doi.org/10.1038/s41586-024-07683-8)
+
+- 2024 - [Fine-tuning large language models for chemical text mining](https://doi.org/10.1039/D4SC00924J)
+
+- 2024 - [Structured information extraction from scientific text with large language models](https://doi.org/10.1038/s41467-024-45563-x)
+
+- 2024 - [Leveraging large language models for predictive chemistry](https://doi.org/10.1038/s42256-023-00788-1)
+
+- 2024 - [Automatic Prediction of Molecular Properties Using Substructure Vector Embeddings within a Feature Selection Workflow](https://doi.org/10.1021/acs.jcim.4c01862)
+
+- 2024 - [Inverse design workflow discovers hole-transport materials tailored for perovskite solar cells](http://dx.doi.org/10.1126/science.ads0901)
+
+- 2024 - [Unraveling Molecular Structure: A Multimodal Spectroscopic Dataset for Chemistry](https://doi.org/10.48550/arXiv.2407.17492)
+
+- 2024 - [Elucidating Structures from Spectra Using Multimodal Embeddings and Discrete Optimization](https://doi.org/10.26434/chemrxiv-2024-f3b18-v2)
+
+- 2024 - [Prospective de novo drug design with deep interactome learning](s41467-024-47613-w)
+
+- 2024 - [Probing the limitations of multimodal language models for chemistry and materials research](https://doi.org/10.48550/arXiv.2411.16955)
+
+- 2024 - [t-SMILES: a fragment-based molecular representation framework for de novo ligand design](https://doi.org/10.1038/s41467-024-49388-6)
+
+- 2024 - [Invalid SMILES are beneficial rather than detrimental to chemical language models](https://doi.org/10.1038/s42256-024-00821-x)
+
+- 2024 - [Chemllm: A chemical large language model](https://doi.org/10.48550/arXiv.2402.06852)
+
+- 2024 - [nach0: Multimodal natural and chemical languages foundation model](https://doi.org/10.1039/d4sc00966e)
+
+- 2024 - [OneProt: Towards Multi-Modal Protein Foundation Models](https://doi.org/10.48550/arXiv.2411.04863)
+
+- 2025 - [From text to insight: large language models for chemical data extraction](https://doi.org/10.1039/d4cs00913d)
+
+- 2025 - [Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning](https://doi.org/10.48550/arXiv.2501.12948)
+
+- 2025 - [System Card: Claude Opus 4 \& Claude Sonnet 4](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf)
 
 ## The Shape and Structure of Chemical Data
 
@@ -66,7 +128,7 @@ This document provides an overview of the research sections and their associated
 - 2023 - [NOMAD: A distributed web-based platform for managing materials science research data](https://doi.org/10.21105/joss.05388)
 - 2021 - [The Open Reaction Database](https://doi.org/10.1021/jacs.1c09820)
 - 2019 - [Hydrogen Storage Materials Database](https://www.hymarc.org/home)
-- 2002 - Molecular biology of the cell
+- 2002 - [Molecular biology of the cell](https://www.ncbi.nlm.nih.gov/books/NBK21054/)
 - 2008 - [Shedding light on the dark data in the long tail of science](https://doi.org/10.1353/lib.0.0036)
 - 2024 - [The Llama 3 Herd of Models](https://doi.org/10.48550/arXiv.2407.21783)
 
@@ -105,10 +167,10 @@ This document provides an overview of the research sections and their associated
 - 2021 - [Maxsmi: maximizing molecular property prediction performance with confidence estimation using smiles augmentation and deep learning](https://doi.org/10.1016/j.ailsci.2021.100014)
 - 2023 - [Chemical representation learning for toxicity prediction](https://doi.org/10.1039/d2dd00099g)
 - 2019 - [Randomized SMILES strings improve the quality of molecular generative models](https://doi.org/10.1186/s13321-019-0393-0)
-- 2018 - A convolutional neural network-based screening tool for X-ray serial crystallography
-- 2022 - Application of data augmentation techniques towards metabolomics
-- 2019 - Fast and interpretable classification of small X-ray diffraction datasets using data augmentation and deep neural networks
-- 2020 - General protocol for the accurate prediction of molecular 13C/1H NMR chemical shifts via machine learning augmented DFT
+- 2018 - [A convolutional neural network-based screening tool for X-ray serial crystallography](https://pubmed.ncbi.nlm.nih.gov/29714177/)
+- 2022 - [Application of data augmentation techniques towards metabolomics](https://pubmed.ncbi.nlm.nih.gov/35961091/)
+- 2019 - [Fast and interpretable classification of small X-ray diffraction datasets using data augmentation and deep neural networks](https://www.nature.com/articles/s41524-019-0196-x)
+- 2020 - [General protocol for the accurate prediction of molecular 13C/1H NMR chemical shifts via machine learning augmented DFT](https://pubs.acs.org/doi/full/10.1021/acs.jcim.0c00388)
 - 2024 - [Rephrasing the Web: A Recipe for Compute and Data-Efficient Language Modeling](https://doi.org/10.48550/arXiv.2401.16380)
 - 2018 - [Contextual Augmentation: Data Augmentation by Words with Paradigmatic Relations](https://doi.org/10.48550/arXiv.1805.06201)
 - 2018 - [Understanding Back-Translation at Scale](https://doi.org/10.48550/arXiv.1808.09381)
@@ -402,7 +464,7 @@ This document provides an overview of the research sections and their associated
 - 2018 - [Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs](https://doi.org/10.1109/tpami.2018.2889473)
 - 2021 - [Automated Chemical Reaction Extraction from Scientific Literature](https://doi.org/10.1021/acs.jcim.1c00284)
 - 2019 - [SciBERT: A Pretrained Language Model for Scientific Text](https://doi.org/10.18653/v1/D19-1371)
-- 2022 - Quantifying the advantage of domain-specific pre-training on named entity recognition tasks in materials science
+- 2022 - [Quantifying the advantage of domain-specific pre-training on named entity recognition tasks in materials science](https://pubmed.ncbi.nlm.nih.gov/35465225/)
 
 ##### Structured Data Extraction
 
@@ -416,9 +478,9 @@ This document provides an overview of the research sections and their associated
 - 2025 - [Automated Data Extraction from Solar Cell Literature Using Large Language Models](https://openreview.net/forum?id=gwLX7cdESk)
 - 2024 - [Extracting accurate materials data from research papers with conversational language models and prompt engineering](https://doi.org/10.1038/s41467-024-45914-8)
 - 2024 - [Reconstructing the materials tetrahedron: challenges in materials information extraction](https://doi.org/10.1039/d4dd00032c)
-- 2025 - MechBERT: Language Models for Extracting Chemical and Property Relationships about Mechanical Stress and Strain
-- 2025 - A large language models-guided grand canonical DFT framework for accelerating the discovery of efficient electrocatalysts
-- 2022 - BatteryBERT: A pretrained language model for battery database enhancement
+- 2025 - [MechBERT: Language Models for Extracting Chemical and Property Relationships about Mechanical Stress and Strain](https://pubs.acs.org/doi/full/10.1021/acs.jcim.4c00857)
+- 2025 - [A large language models-guided grand canonical DFT framework for accelerating the discovery of efficient electrocatalysts](https://chemrxiv.org/engage/chemrxiv/article-details/68496a4f1a8f9bdab588dc8b)
+- 2022 - [BatteryBERT: A pretrained language model for battery database enhancement](https://pubs.acs.org/doi/10.1021/acs.jcim.2c00035)
 - 2021 - [The Open Reaction Database](https://doi.org/10.1021/jacs.1c09820)
 - 2024 - [An Autonomous Large Language Model Agent for Chemical Literature Data Mining](https://doi.org/10.48550/arXiv.2402.12993)
 - 2024 - [ChatMOF: an artificial intelligence system for predicting and generating metal-organic frameworks using large language models](https://doi.org/10.1038/s41467-024-48998-4)
@@ -445,7 +507,7 @@ This document provides an overview of the research sections and their associated
 
 ##### LLMs to Decompose Problems into Plans
 
-- 2011 - Thinking, Fast and Slow
+- 2011 - [Thinking, Fast and Slow](https://www.amazon.de/-/en/Thinking-Fast-Slow-Daniel-Kahneman/dp/0141033576)
 - 2025 - [A Survey of Test-Time Compute: From Intuitive Inference to Deliberate Reasoning](https://doi.org/10.48550/arXiv.2501.02497)
 - 2024 - [Chain of thoughtlessness? an analysis of cot in planning](https://doi.org/10.48550/arXiv.2405.04776)
 - 2024 - [Planning in natural language improves llm search for code generation](https://doi.org/10.48550/arXiv.2409.03733)
@@ -565,7 +627,7 @@ This document provides an overview of the research sections and their associated
 
 - 2018 - [MoleculeNet: a benchmark for molecular machine learning](https://doi.org/10.1039/c7sc02664a)
 - 2020 - [{ChemBERTa: Large-Scale Self-Supervised Pretraining for Molecular Property Prediction}](https://doi.org/10.48550/arXiv.2010.09885)
-- 2025 - [Semantic Device Graphs for Perovskite Solar Cell Design](<https://openreview.net/forum?id=AGCClISEXL&referrer=%5Bthe%20profile%20of%20Anagha%20Aneesh%5D(%2Fprofile%3Fid%3D~Anagha_Aneesh1)>)
+- 2025 - [Semantic Device Graphs for Perovskite Solar Cell Design](https://openreview.net/forum?id=AGCClISEXL&referrer=%5Bthe%20profile%20of%20Anagha%20Aneesh%5D(%2Fprofile%3Fid%3D~Anagha_Aneesh1))
 - 2024 - [Leveraging large language models for predictive chemistry](https://doi.org/10.1038/s42256-023-00788-1)
 - 2022 - [{QMugs, quantum mechanical properties of drug-like molecules}](https://doi.org/10.1038/s41597-022-01390-7)
 - 2017 - [{DLS-100 Solubility Dataset}](https://doi.org/10.17630/3A3A5ABC-8458-4924-8E6C-B804347605E8)
@@ -673,7 +735,7 @@ This document provides an overview of the research sections and their associated
 
 ##### Are these Systems Capable of Real Autonomous Research?
 
-- 2025 - [Zochi Publishes A\* Paper](https://www.intology.ai/blog/zochi-acl)
+- 2025 - [Zochi Publishes A* Paper](https://www.intology.ai/blog/zochi-acl)
 - 2025 - [When AI Co-Scientists Fail: SPOT-a Benchmark for Automated Verification of Scientific Research](https://doi.org/10.48550/arXiv.2505.11855)
 
 ## Implications of GPMs: Education, Safety, and Ethics
@@ -713,7 +775,7 @@ This document provides an overview of the research sections and their associated
 - Unknown - [Statement on AI Risk CAIS](https://www.safe.ai/work/statement-on-ai-risk)
 - 2023 - [Levels of AGI for Operationalizing Progress on the Path to AGI](https://doi.org/10.48550/arXiv.2311.02462)
 - 2024 - [The Reality of AI and Biorisk](https://doi.org/10.48550/arXiv.2412.01946)
-- 2009 - The tacit dimension
+- 2009 - [The tacit dimension](https://monoskop.org/images/1/11/Polanyi_Michael_The_Tacit_Dimension.pdf)
 
 ##### Evaluating Risk Amplification in the Chemical Discovery Cycle
 
@@ -728,11 +790,11 @@ This document provides an overview of the research sections and their associated
 
 ##### Existing Approaches to Safety
 
-- 2025 - Open Problems in Machine Unlearning for AI Safety
+- 2025 - [Open Problems in Machine Unlearning for AI Safety](https://arxiv.org/abs/2501.04952)
 - 2022 - [Constitutional AI: Harmlessness from AI Feedback](https://doi.org/10.48550/arXiv.2212.08073)
 - 2025 - [OS-Harm: A Benchmark for Measuring Safety of Computer Use Agents](https://doi.org/10.48550/arXiv.2506.14866)
 - Unknown - [Stealing User Prompts from Mixture of Experts](https://doi.org/10.48550/arXiv.2410.22884)
-- 2025 - Agentic Misalignment: How LLMs Could be an Insider Threat
+- 2025 - [Agentic Misalignment: How LLMs Could be an Insider Threat](https://www.anthropic.com/research/agentic-misalignment)
 - 2023 - [Sparse Autoencoders Find Highly Interpretable Features in Language Models](https://doi.org/10.48550/arXiv.2309.08600)
 - 2023 - [Is This the Subspace You Are Looking for? An Interpretability Illusion for Subspace Activation Patching](https://doi.org/10.48550/arXiv.2311.17030)
 - 2024 - [Augmenting large language models with chemistry tools](https://doi.org/10.1038/s42256-024-00832-8)
@@ -769,7 +831,7 @@ This document provides an overview of the research sections and their associated
 - 2023 - [Written Evidence to [Committee Name]](https://committees.parliament.uk/writtenevidence/126981/pdf/)
 - 2021 - [On the dangers of stochastic parrots: Can language models be too big?](https://doi.org/10.1145/3442188.3445922)
 - 2023 - [Artificial intelligence in scientific writing: a friend or a foe?](https://doi.org/10.1016/j.rbmo.2023.04.009)
-- 2023 - [The dangers of using large language models for peer review](<https://doi.org/10.1016/s1473-3099(23)00290-6>)
+- 2023 - [The dangers of using large language models for peer review](https://doi.org/10.1016/s1473-3099(23)00290-6)
 
 ##### Bias and Discrimination
 
@@ -779,7 +841,7 @@ This document provides an overview of the research sections and their associated
 - 2023 - [Algorithmic fairness in artificial intelligence for medicine and healthcare](https://doi.org/10.1038/s41551-023-01056-8)
 - 2023 - [Bias in AI-based models for medical applications: challenges and mitigation strategies](https://doi.org/10.1038/s41746-023-00858-z)
 - 2019 - [Value-laden Disciplinary Shifts in Machine Learning](https://doi.org/10.1145/3351095.3373157)
-- Unknown - Invisible women: exposing data bias in a world designed for men
+- 2019 - [Invisible women: exposing data bias in a world designed for men](https://www.goodreads.com/book/show/41104077-invisible-women)
 
 ##### Democratization of Power
 
@@ -787,9 +849,11 @@ This document provides an overview of the research sections and their associated
 
 ## Outlook and Conclusions
 
-- 2025 - Welcome to the era of experience
 - 2014 - [Machine learning: The high interest credit card of technical debt](https://research.google/pubs/machine-learning-the-high-interest-credit-card-of-technical-debt/)
+
 - 2025 - [Exclusive: Start-up FutureHouse debuts powerful AI ‘reasoning model’ for science](https://doi.org/10.1038/d41586-025-01753-1)
+
+- silver2025welcome *(citation not found in bibliography)*
 
 ## optimizers
 
@@ -831,13 +895,13 @@ This document provides an overview of the research sections and their associated
 #### Hypothesis Generation
 
 - 2018 - [A hypothesis can't be right unless it can be proven wrong](https://www.stjude.org/research/progress/2018/hypothesis-must-be-falsifiable.html)
-- 1999 - The Principia: Mathematical Principles of Natural Philosophy
+- 1999 - [The Principia: Mathematical Principles of Natural Philosophy](https://www.amazon.de/-/en/Principia-Mathematical-Principles-Natural-Philosophy/dp/0520290879)
 - 2017 - [What Goes Up... Gravity and Scientific Method](https://doi.org/10.1017/9781316417003)
 - 2022 - [The Roles of a Secondary Data Analytics Tool and Experience in Scientific Hypothesis Generation in Clinical Research: Protocol for a Mixed Methods Study](https://doi.org/10.2196/39414)
 - 2025 - [Sparks of Science: Hypothesis Generation Using Structured Paper Data](https://doi.org/10.48550/arXiv.2504.12976)
 - 2017 - [Open-endedness: The Last Grand Challenge You've Never Heard Of](https://www.oreilly.com/radar/open-endedness-the-last-grand-challenge-youve-never-heard-of/)
 - 2019 - [AI-GAs: AI-generating algorithms, an alternate paradigm for producing general artificial intelligence](https://doi.org/10.48550/arXiv.1905.10985)
-- 1959 - The Logic of Scientific Discovery
+- 1959 - [The Logic of Scientific Discovery](https://www.amazon.de/-/en/Logic-Scientific-Discovery-Routledge-Classics/dp/0415278449)
 - 2015 - [Why Greatness Cannot Be Planned: The Myth of the Objective](https://doi.org/10.1007/978-3-319-15524-1)
 
 ##### Initial Sparks
@@ -858,7 +922,7 @@ This document provides an overview of the research sections and their associated
 ##### Are LLMs Actually Capable of Novel Hypothesis Generation?
 
 - 2020 - [Autonomous discovery in the chemical sciences part I: Progress](https://doi.org/10.1002/anie.201909987)
-- 1962 - The Structure of Scientific Revolutions
+- 1962 - [The Structure of Scientific Revolutions](https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions)
 - 2025 - [EXP-Bench: Can AI Conduct AI Research Experiments?](https://doi.org/10.48550/arXiv.2505.24785)
 - 2024 - [Interesting Scientific Idea Generation using Knowledge Graphs and LLMs: Evaluations with 100 Research Group Leaders](https://doi.org/10.48550/arXiv.2405.17044)
 - 2025 - [Tempest: Autonomous Multi-Turn Jailbreaking of Large Language Models with Tree Search](https://doi.org/10.48550/arXiv.2503.10619)
@@ -866,9 +930,10 @@ This document provides an overview of the research sections and their associated
 - 2025 - [The Ideation-Execution Gap: Execution Outcomes of LLM-Generated versus Human Research Ideas](https://doi.org/10.48550/arXiv.2506.20803)
 - 1929 - [On the Antibacterial Action of Cultures of a Penicillium, with Special Reference to Their Use in the Isolation of B. influenzae](https://www.jstor.org/stable/4452419)
 - 1964 - [Penicillin](https://www.nobelprize.org/uploads/2018/06/fleming-lecture.pdf)
-- 1959 - The Logic of Scientific Discovery
-- 1970 - Falsification and the Methodology of Scientific Research Programmes
+- 1959 - [The Logic of Scientific Discovery](https://www.amazon.de/-/en/Logic-Scientific-Discovery-Routledge-Classics/dp/0415278449)
+- 1970 - [Falsification and the Methodology of Scientific Research Programmes](https://www.cambridge.org/core/books/abs/criticism-and-the-growth-of-knowledge/falsification-and-the-methodology-of-scientific-research-programmes/B1AAD974814D6E7BF35E6449691AA58F)
 - 2015 - [Why Greatness Cannot Be Planned: The Myth of the Objective](https://doi.org/10.1007/978-3-319-15524-1)
 - 2025 - [AlphaEvolve: A coding agent for scientific and algorithmic discovery](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/AlphaEvolve.pdf)
-- 2006 - The Millennium Prize Problems
+- 2006 - [The Millennium Prize Problems](https://www.claymath.org/millennium-problems/)
 - 2024 - [Hypothesis-Generating Research](https://researchethics.dk/guidelines/-guidance-on-hypothesis-generating-research)
+

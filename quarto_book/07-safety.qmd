@@ -1,10 +1,31 @@
 ---
-title: "Implications of GPMs: Education, Safety, and Ethics"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Implications of GPMs: Education, Safety, and Ethics {#sec:implications}
 
-The advent of [gpms]{acronym-label="gpm" acronym-form="plural+short"} in
+The advent of \acr{gpm}s in
 the chemical sciences marks a paradigm shift that extends beyond
 methodological advances to fundamentally alter the conceptual frameworks
 through which scientific knowledge is produced and validated. As these
@@ -13,7 +34,7 @@ is closely linked to critical challenges in cultivating discerning
 learners, mitigating emergent risks in automated discovery, and
 navigating ethical dilemmas arising from biased systems. Here, these
 tripartite implications are examined, and it is argued that responsible
-integration of [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+integration of \acr{gpm}s
 requires not only technical innovation but also rigorous pedagogical and
 regulatory frameworks.
 
@@ -21,19 +42,18 @@ regulatory frameworks.
 
 ### Vision
 
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} are opening up
+\acr{gpm}s are opening up
 new directions to create or use educational materials (see
 [1](#fig:education){reference-type="ref+Label"
 reference="fig:education"}). Although many current applications are
 still in their conceptual stage, they begin to highlight the potential
 of these models to personalize learning, increase the fairness of
-evaluations, and improve accessibility. [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} can support both students and educators at
+evaluations, and improve accessibility. \acr{gpm}s can support both students and educators at
 various stages of the learning process and across different media forms,
 indicating a shift toward more adaptive and personalized educational
 frameworks. \[@Mollick2024\]
 
-For students, [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+For students, \acr{gpm}s
 could act as intelligent companions in a variety of tasks. As adaptive
 tutors, they could tailor explanations, exercises, and feedback to
 individual needs. Additionally, they could help students rehearse for
@@ -45,12 +65,10 @@ exams and presentations and deepen their conceptual understanding.
 <figcaption><strong>Possible application examples for students and
 teachers and their specific limitations for <span
 data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> in
-chemical education.</strong> <span data-acronym-label="gpm"
-data-acronym-form="plural+short">gpms</span> can be used by students as
+chemical education.</strong> \acr{gpm}s can be used by students as
 scientific assistants (e.g., for data analysis, coding or lab
 experiments) and tutors (e.g., for question answering, teaching or
-exercises). Teachers can use <span data-acronym-label="gpm"
-data-acronym-form="plural+short">gpms</span> for evaluation (e.g., for
+exercises). Teachers can use \acr{gpm}s for evaluation (e.g., for
 grading and detailed feedback) or to personalize materials (e.g., for
 lectures and other learning materials). Current limitations include an
 over-reliance and a lack of critical assessment of the outputs, a lack
@@ -62,9 +80,7 @@ In more practice-oriented settings, such as laboratories or coding
 environments, these models could function as scientific assistants. They
 may provide real-time feedback on experimental setups, assist with how
 to use lab equipment, or help identify potential safety
-concerns.\[@Du2024\] Coupled with [ar]{acronym-label="ar"
-acronym-form="singular+short"}, [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} could also enable immersive simulations of
+concerns.\[@Du2024\] Coupled with \acr{ar}, \acr{gpm}s could also enable immersive simulations of
 lab procedures, allowing students to familiarize themselves with
 workflows and instruments before entering a physical lab. Moreover, by
 supporting students in technical areas such as coding, data analysis, or
@@ -72,8 +88,7 @@ simulations, they could reduce the entry barrier or learning curve and
 thus foster interdisciplinary competence---particularly in contexts
 where instructor support is limited.
 
-At the same time, [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} could ease the workload of educators. They
+At the same time, \acr{gpm}s could ease the workload of educators. They
 offer new possibilities for generating and adapting course
 materials---ranging from lecture slides and exercises to individualized
 exam questions---thus enabling a better alignment with diverse learning
@@ -85,8 +100,7 @@ timely, detailed feedback would otherwise be difficult to provide.
 
 ### Current Status
 
-Despite these envisioned potentials of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} in chemistry education, current
+Despite these envisioned potentials of \acr{gpm}s in chemistry education, current
 applications are often still fragmented and lack integration into
 cohesive educational systems. In many cases, models are used via
 general-purpose interfaces without subject-specific customization or
@@ -96,8 +110,8 @@ tools or platforms, their use remains largely exploratory.
 #### General Systems
 
 Early applications often rely on zero-shot prompting of general-purpose
-[llms]{acronym-label="llm" acronym-form="plural+short"} or
-[vlms]{acronym-label="vlm" acronym-form="plural+short"} to aid with
+\acr{llm}s or
+\acr{vlm}s to aid with
 student-oriented learning tasks. These include plotting data
 \[@Subasinghe2025\], writing code \[@Tsai2023\], or generating analogies
 to explain abstract chemical concepts \[@shao2025unlocking\].
@@ -113,8 +127,7 @@ critically.
 Two recent studies have explored zero-shot prompting in more realistic,
 assessment-focused settings. @baral2025drawedumath0 introduced a
 benchmark of more than 2,000 student-drawn math images and found that
-state-of-the-art [vlms]{acronym-label="vlm"
-acronym-form="plural+short"}, including `GPT-4o` and `Claude 3.5`,
+state-of-the-art \acr{vlm}s, including `GPT-4o` and `Claude 3.5`,
 struggled to assess student reasoning and correctness, particularly in
 open-ended or diagram-based answers. Similarly, @Kortemeyer2024
 investigated the use of `GPT-4` for grading handwritten thermodynamics
@@ -122,31 +135,28 @@ exams at `ETH Zürich`. While the model performed reasonably well on
 short derivations, it failed to track detailed rubrics or interpret
 hand-drawn diagrams reliably. In chemistry education,
 @kharchenko2024advantages compared `ChatGPT 3.5`, `Gemini`, and
-`Copilot` on domain-specific tasks and found that while the models
-performed adequately on simple recall questions, they failed in tasks
-that required chemical reasoning, structural understanding, or logical
-analysis.
+`Copilot` (detailed model names were not specified) on domain-specific
+tasks and found that while the models performed adequately on simple
+recall questions, they failed in tasks that required chemical reasoning,
+structural understanding, or logical analysis.
 
 Together, these findings suggest that while zero-shot prompting enables
-rapid deployment of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} in educational contexts, current models
+rapid deployment of \acr{gpm}s in educational contexts, current models
 lack the reliability, consistency, and domain grounding required for
 chemistry education---not only from a pedagogical standpoint, but also
 from ethical and legal perspectives.
 
 #### Specialized Systems
 
-A growing number of applications embed [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} in specialized educational systems that
-combine [gpms]{acronym-label="gpm" acronym-form="plural+short"} with
-structured components such as [rag]{acronym-label="rag"
-acronym-form="singular+short"}, tracking learning progress, or the
+A growing number of applications embed \acr{gpm}s in specialized educational systems that
+combine \acr{gpm}s with
+structured components such as \acr{rag}, tracking learning progress, or the
 ability to work with multiple sources of content such as textbooks,
 lecture slides, or handwritten notes.
 
 For example, @perez2025large presented a biology
-[qa]{acronym-label="qa" acronym-form="singular+short"} system that used
-a [rag]{acronym-label="rag" acronym-form="singular+short"} pipeline to
+\acr{qa} system that used
+a \acr{rag} pipeline to
 deliver curriculum-aligned answers. The I-Digest team \[@Jablonka2023\]
 introduced a platform that generates lecture summaries and follow-up
 questions to support continuous learning. Some systems also integrate
@@ -163,8 +173,7 @@ purpose-built platform for higher education with a "Learning Mode" that
 uses the Socratic method to guide students rather than directly giving
 the answer to their queries. The intention here is to promote active
 learning and mitigate the risks of passive tool use. While such systems
-illustrate the potential of structured [gpm]{acronym-label="gpm"
-acronym-form="singular+short"}-based learning environments, fully
+illustrate the potential of structured \acr{gpm}-based learning environments, fully
 integrated applications remain rare---particularly in domain-specific
 contexts such as chemistry. Furthermore, current models must still
 strengthen their robustness and domain-specific reasoning before they
@@ -172,13 +181,12 @@ can be trusted in demanding fields, including chemistry.
 
 ### Outlook and Limitations
 
-While [gpms]{acronym-label="gpm" acronym-form="plural+short"} offer
+While \acr{gpm}s offer
 promising opportunities for chemistry education, their use also raises
 critical ethical and pedagogical concerns.
 
 A first concern is the lack of transparency in how these models generate
-responses. Although [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} produce fluent and plausible explanations,
+responses. Although \acr{gpm}s produce fluent and plausible explanations,
 they do so without genuine understanding---and often with no clear
 indication of uncertainty or possible errors. This can lead students to
 accept incorrect or misleading information as fact, particularly when
@@ -193,16 +201,14 @@ A related but distinct issue is the risk of over-reliance and
 deskilling. When students delegate a large portion of the learning
 process to generative tools, they might be able to complete assignments
 without engaging in the mental work needed to develop subject-specific
-competence. In such cases, [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} can disrupt the connection between concrete
+competence. In such cases, \acr{gpm}s can disrupt the connection between concrete
 tasks---such as solving a problem or writing an explanation---and the
 broader educational goals they are meant to support, such as developing
 chemical understanding or analytical thinking
 skills.\[@dung2025learning; @Sharma2025role\]
 
 Today---and even more so in the future---students and learners will
-increasingly use [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}, both in education and in their future
+increasingly use \acr{gpm}s, both in education and in their future
 professions. Attempting to restrict their use is neither realistic nor
 educationally meaningful. Therefore, educators must guide their use
 thoughtfully and adapt both the learning process and assessment
@@ -210,8 +216,7 @@ practices accordingly. Furthermore, the question of what to learn needs
 to be redefined. What we learn must increasingly center around the
 development of critical thinking, creativity, and logical
 reasoning---skills that remain essential and irreplaceable, even---or
-perhaps especially---in the age of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}. \[@klein2025rethink\]
+perhaps especially---in the age of \acr{gpm}s. \[@klein2025rethink\]
 
 ## Safety {#sec:safety}
 
@@ -221,37 +226,29 @@ acronym-form="plural+short"}. \[@klein2025rethink\]
 data-acronym-label="ai" data-acronym-form="singular+short">ai</span>
 risk factors in chemical science</strong>. As one traverses through the
 game-like scientific process, there are various obstacles to
-encountering <span data-acronym-label="ai"
-data-acronym-form="singular+short">ai</span> exacerbated risks. The path
-to superaligned chemical <span data-acronym-label="ai"
-data-acronym-form="singular+short">ai</span>-assistants is obfuscated by
+encountering \acr{ai} exacerbated risks. The path
+to superaligned chemical \acr{ai}-assistants is obfuscated by
 unexplored chemical space.</figcaption>
 </figure>
 
 A growing coalition within the scientific community has sounded a call
-to action: [ai]{acronym-label="ai" acronym-form="singular+short"} poses
+to action: \acr{ai} poses
 existential risks that deserve the same urgent attention as pandemics
 and nuclear war \[@cais2023statement\]. This call, formalized in a
-statement signed by hundreds of prominent [ai]{acronym-label="ai"
-acronym-form="singular+short"} researchers, reflects mounting
-recognition that advanced [ai]{acronym-label="ai"
-acronym-form="singular+short"} systems could fundamentally alter, or
+statement signed by hundreds of prominent \acr{ai} researchers, reflects mounting
+recognition that advanced \acr{ai} systems could fundamentally alter, or
 threaten, human civilization. While the ongoing discourse has focused on
-abstract notions of [agi]{acronym-label="agi"
-acronym-form="singular+short"}, the immediate risks may emerge through
-the integration of [ai]{acronym-label="ai"
-acronym-form="singular+short"} into specific domains where the stakes
+abstract notions of \acr{agi}, the immediate risks may emerge through
+the integration of \acr{ai} into specific domains where the stakes
 are already high \[@morris2023levels\].
 
 Chemistry represents one such domain. The rapid integration of
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} in chemistry is
+\acr{gpm}s in chemistry is
 a dual-edged sword. Although these technologies can accelerate
 discovery, they also introduce unprecedented risks. From democratizing
 access to hazardous chemical knowledge to enabling autonomous synthesis
-of dangerous compounds, [ai]{acronym-label="ai"
-acronym-form="singular+short"} systems could lower barriers for misuse,
-whether intentional or accidental. [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} alone may not create new risks
+of dangerous compounds, \acr{ai} systems could lower barriers for misuse,
+whether intentional or accidental. \acr{gpm}s alone may not create new risks
 \[@peppin2024reality\], but they can amplify existing ones (see
 [2](#fig:safety-overview){reference-type="ref+Label"
 reference="fig:safety-overview"}).
@@ -265,7 +262,7 @@ processes. Tacit knowledge, the expertise gained through hands-on
 experience and intuition, cannot be fully acquired from textbooks or
 datasets alone, as it is normally shared verbally and encompasses small
 learnings, often considered insignificant. This gap between theoretical
-[ai]{acronym-label="ai" acronym-form="singular+short"} outputs and
+\acr{ai} outputs and
 practical execution underscores why risks, though serious, might remain
 manageable with proactive safeguards.
 
@@ -277,12 +274,10 @@ operational, and governance levels.
 
 #### Dual Use
 
-A critical question is whether [llms]{acronym-label="llm"
-acronym-form="plural+short"} provide maliciously acting novices with new
+A critical question is whether \acr{llm}s provide maliciously acting novices with new
 avenues to obtain harmful knowledge beyond what is already easily
 accessible (e.g., via the internet)\[@sandbrink2023artificial\].
-Preliminary research has explored whether [llms]{acronym-label="llm"
-acronym-form="plural+short"} can exacerbate biorisks, a concern that
+Preliminary research has explored whether \acr{llm}s can exacerbate biorisks, a concern that
 extends analogously to chemical safety under the "information access"
 threat model \[@peppin2024reality\]. @urbina2022dual explored how their
 de novo molecular generator, `MegaSyn`, could be used to design toxic
@@ -308,7 +303,7 @@ They also evaluated `GPT-4`'s impact on experts and students across five
 biological threat creation stages: ideation, acquisition, magnification,
 formulation, and release. \[@openai2024building\] Their key finding was
 that biorisk information is widely accessible without
-[ai]{acronym-label="ai" acronym-form="singular+short"} and that
+\acr{ai} and that
 practical constraints such as wet lab access or domain expertise are
 more limiting than information scarcity.
 
@@ -322,9 +317,8 @@ that supply chain control of chemicals, the flow of goods (e.g.,
 chemical reagents) from suppliers to consumers, remains crucial as these
 systems continue to evolve and barriers to accessing knowledge are
 continuously lowered. For example, although @he2023control showed that
-[llms]{acronym-label="llm" acronym-form="plural+short"} can generate
-pathways for explosives like [petn]{acronym-label="petn"
-acronym-form="singular+short"} or nerve agents like sarin, the supply
+\acr{llm}s can generate
+pathways for explosives like \acr{petn} or nerve agents like sarin, the supply
 chain of obtaining precursor chemicals for weapons like sarin is tightly
 regulated. In addition, access to lab infrastructure like fume hoods or
 inert environments is not trivial to obtain for non-experts.
@@ -332,8 +326,7 @@ inert environments is not trivial to obtain for non-experts.
 In the status quo it remains true that these risks are mitigated by
 material and logistical hurdles \[@sandbrink2023artificial\].
 Nonetheless, existing information access or presumed barriers to
-accessing materials are not an argument for [ai]{acronym-label="ai"
-acronym-form="singular+short"} complacency. Models that lower the
+accessing materials are not an argument for \acr{ai} complacency. Models that lower the
 technical or cognitive barriers to weaponization even incrementally risk
 acting as force multipliers for malicious actors. Moreover, a
 red-teaming (discussed in
@@ -344,13 +337,11 @@ to failure.
 
 #### Hallucinations
 
-Another critical risk of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} is their propensity for hallucination,
+Another critical risk of \acr{gpm}s is their propensity for hallucination,
 leading to factually incorrect outputs.\[@pantha2024challenges;
 @ji2023survey\] These errors risk propagating misinformation, such as
 inventing non-existent chemical reactions or falsifying safety
-protocols. Additionally, [llms]{acronym-label="llm"
-acronym-form="plural+short"} suffer from temporal misalignment; their
+protocols. Additionally, \acr{llm}s suffer from temporal misalignment; their
 static training data renders outputs obsolete in fast-evolving fields
 like drug discovery \[@pantha2024challenges\]. Therefore, their accuracy
 in chemistry decays sharply for research published after the training
@@ -362,22 +353,21 @@ The convergence of individual steps of the chemical discovery cycle in
 autonomous laboratory systems or cloud-based laboratories represents a
 high-risk scenario \[@rouleau2025risks\]. Beyond traditional
 cybersecurity threats, these systems face a critical timeline mismatch:
-[ai]{acronym-label="ai" acronym-form="singular+short"} systems are
+\acr{ai} systems are
 projected to achieve superhuman hacking capabilities by 2027 while
 operating within inadequately secured infrastructure
 \[@dean2025security\]. For autonomous laboratories, this means
-[ai]{acronym-label="ai" acronym-form="singular+short"} systems capable
+\acr{ai} systems capable
 of designing hazardous compounds could be compromised by external
 actors.
 
 ### Existing Approaches to Safety
 
 Adversarial testing and red teaming have become prominent methods for
-evaluating the safety of [ai]{acronym-label="ai"
-acronym-form="singular+short"} systems, even in the chemical domain (see
+evaluating the safety of \acr{ai} systems, even in the chemical domain (see
 [\[sec:evals\]](#sec:evals){reference-type="ref+Label"
 reference="sec:evals"}). While such evaluations are valuable to identify
-weaknesses in [gpms]{acronym-label="gpm" acronym-form="plural+short"},
+weaknesses in \acr{gpm}s,
 they are inherently reactive. These approaches highlight failures only
 after a model is trained or deployed, rather than embedding safety into
 the model's architecture. Moreover, adversarial testing is often
@@ -395,13 +385,13 @@ can become hazardous when combined or misused. Second, unlearning risks
 can lead to a model's utility degradation, and the resulting challenge
 of balancing the trade-off between safety and functionality remains
 unresolved. This balance is especially challenging for
-[gpms]{acronym-label="gpm" acronym-form="plural+short"}, which must
+\acr{gpm}s, which must
 achieve broad applicability with strict safety constraints.
 
 A more implicit safety strategy is alignment, which aims to steer model
 behavior toward human values through techniques like
-[rlhf]{acronym-label="rlhf" acronym-form="singular+short"} or
-Constitutional [ai]{acronym-label="ai" acronym-form="singular+short"}
+\acr{rlhf} or
+Constitutional \acr{ai}
 \[@bai2022constitutional\]. Although alignment can reduce harmful
 outputs, it may not generalize well to novel or domain-specific threats.
 For instance, a chemically aligned model might refuse to synthesize a
@@ -411,22 +401,19 @@ still prone to produce risky and harmful content and will always be
 susceptible to jailbreaks \[@kuntz2025os-harm; @yona2024stealing;
 @lynch2025agentic\].
 
-In an effort to train trustworthy models, many [ai]{acronym-label="ai"
-acronym-form="singular+short"} researchers have turned to
+In an effort to train trustworthy models, many \acr{ai} researchers have turned to
 "interpretability", an approach that aims to explain how the
-computations [gpms]{acronym-label="gpm" acronym-form="plural+short"} are
+computations \acr{gpm}s are
 linked to the output. \[@cunningham2023sparse\] However, in a recent
-global evaluation of [ai]{acronym-label="ai"
-acronym-form="singular+short"} safety, @bengio2025international argue
-that [sota]{acronym-label="sota" acronym-form="singular+short"}
+global evaluation of \acr{ai} safety, @bengio2025international argue
+that \acr{sota}
 interpretability tools have not proven their reliability in
 understanding models to modify them to alleviate safety
 risks.\[@makelov2023subspace\]
 
 #### Challenges in Developing Safeguards
 
-Even chemistry-specific [llms]{acronym-label="llm"
-acronym-form="plural+short"} agents like `ChemCrow`
+Even chemistry-specific \acr{llm}s agents like `ChemCrow`
 \[@bran2024augmenting\] or `Coscientist`\[@boiko2023autonomous\] exhibit
 vulnerabilities. For instance, `ChemCrow`'s safeguards block known
 controlled substances, yet @he2023control demonstrated a flaw in its
@@ -434,8 +421,7 @@ safety protocols. The agent's refusals are reactive rather than
 proactive, as they rely on post-query web search checks rather than
 embedded safeguards.
 
-The capabilities and ensuing risks posed by [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} need to be contextualized around user
+The capabilities and ensuing risks posed by \acr{gpm}s need to be contextualized around user
 intent \[@tang2024prioritizing\]. Under a paradigm of malicious intent,
 the user intentionally creates a dangerous situation or application
 using the tool. However, an uninformed, benign user (e.g., a chemistry
@@ -444,21 +430,20 @@ model output and unable to differentiate hallucinated responses.
 
 ### Solutions
 
-The gaps in current [ai]{acronym-label="ai"
-acronym-form="singular+short"} safety measures reveal a pressing need
+The gaps in current \acr{ai} safety measures reveal a pressing need
 for proactive frameworks that address technical and systemic risks.
 \[@bengio2025international\]
 
-#### Regulatory Framework for Chemical [ai]{acronym-label="ai" acronym-form="singular+short"} Models
+#### Regulatory Framework for Chemical \acr{ai} Models
 
 Drawing from emerging biosecurity governance models, as a first step,
-chemical [ai]{acronym-label="ai" acronym-form="singular+short"}
+chemical \acr{ai}
 oversight should focus on a narrow class of "advanced chemical models"
 that meet specific risk thresholds. Similar to proposed biological model
 regulations, these could include models trained on not widely
 accessible, particularly sensitive chemical data \[@bloomfield2024ai\].
 This targeted approach is preferable to regulating all chemical
-[ai]{acronym-label="ai" acronym-form="singular+short"} models because it
+\acr{ai} models because it
 avoids creating compliance burdens that would disproportionately affect
 low-risk research while capturing the systems that actually pose
 security concerns.
@@ -466,87 +451,69 @@ security concerns.
 #### Existing Institutional Efforts
 
 Recent governmental initiatives have begun to address
-[ai]{acronym-label="ai" acronym-form="singular+short"} safety concerns.
-The US [ai]{acronym-label="ai" acronym-form="singular+short"} Safety
-Institute \[@nist2024safety\] and the UK [ai]{acronym-label="ai"
-acronym-form="singular+short"} Safety Institute have been tasked with
+\acr{ai} safety concerns.
+The US \acr{ai} Safety
+Institute \[@nist2024safety\] and the UK \acr{ai} Safety Institute have been tasked with
 designing safety evaluations for frontier models and researching
-catastrophic risks from [ai]{acronym-label="ai"
-acronym-form="singular+short"} systems. In contrast, the
-[eu]{acronym-label="eu" acronym-form="singular+short"} has taken a more
-pragmatic regulatory approach through the [eu]{acronym-label="eu"
-acronym-form="singular+short"} [ai]{acronym-label="ai"
-acronym-form="singular+short"} Act \[@EU2024regulation\], which
-classifies [ai]{acronym-label="ai" acronym-form="singular+short"}
+catastrophic risks from \acr{ai} systems. In contrast, the
+\acr{eu} has taken a more
+pragmatic regulatory approach through the \acr{eu} \acr{ai} Act \[@EU2024regulation\], which
+classifies \acr{ai}
 systems by risk levels and imposes obligations ranging from transparency
 requirements to prohibited uses. These nascent efforts, while promising,
 face significant limitations. National institutes operate within
 frameworks that may prioritize domestic interests over global safety.
-While more comprehensive in scope, the [eu]{acronym-label="eu"
-acronym-form="singular+short"} [ai]{acronym-label="ai"
-acronym-form="singular+short"} Act focuses primarily on general
-[ai]{acronym-label="ai" acronym-form="singular+short"} applications
+While more comprehensive in scope, the \acr{eu} \acr{ai} Act focuses primarily on general
+\acr{ai} applications
 rather than domain-specific risks such as chemical synthesis, and its
 risk classification system may not adequately capture the unique
-dual-use nature of chemical [ai]{acronym-label="ai"
-acronym-form="singular+short"} models.
+dual-use nature of chemical \acr{ai} models.
 
 #### Future Institutional Oversight and Transparency
 
 A critical step forward is establishing neutral and independent
-regulatory bodies to oversee [ai]{acronym-label="ai"
-acronym-form="singular+short"} development. Unlike self-regulation,
-which risks conflicts of interest, an [iaio]{acronym-label="iaio"
-acronym-form="singular+short"} comprised of [ai]{acronym-label="ai"
-acronym-form="singular+short"} researchers, policymakers, ethicists, and
+regulatory bodies to oversee \acr{ai} development. Unlike self-regulation,
+which risks conflicts of interest, an \acr{iaio} comprised of \acr{ai} researchers, policymakers, ethicists, and
 security experts could harmonize standards and prevent a "race to the
 bottom" in regulatory laxity \[@trager2023international\]. Such a body
-could mandate pre-approval for high-risk [ai]{acronym-label="ai"
-acronym-form="singular+short"} research (like [agi]{acronym-label="agi"
-acronym-form="singular+short"}-aligned projects), similar to
+could mandate pre-approval for high-risk \acr{ai} research (like \acr{agi}-aligned projects), similar to
 institutional review boards that exist in the biomedical research space
 \[@pistono2016unethical\]. Precedents for this exist in
-[cern]{acronym-label="cern" acronym-form="singular+short"}, which tries
+\acr{cern}, which tries
 to balance civilian duties with dual-use risks and nuclear
 non-proliferation treaties that tie market access to
 compliance.\[@cern_nuclear_safeguards_2024\] Effective governance also
 requires binding enforcement mechanisms. One approach is conditional
-market access, where [ai]{acronym-label="ai"
-acronym-form="singular+short"} products and precursors can only be
-traded internationally if certified by the [iaio]{acronym-label="iaio"
-acronym-form="singular+short"}. Participating states would then enact
+market access, where \acr{ai} products and precursors can only be
+traded internationally if certified by the \acr{iaio}. Participating states would then enact
 domestic laws to align with these standards, ensuring corporate and
 national compliance. This model leverages economic incentives rather
 than voluntary guidelines to enforce safety. Transparency must also be
 enforced, particularly in red-teaming and safety testing. Currently,
 many companies conduct red-teaming privately, with no obligation to
 disclose the findings or corrective actions. To address this,
-[ai]{acronym-label="ai" acronym-form="singular+short"} developers should
+\acr{ai} developers should
 be required to publicly report red-teaming results and undergo
 third-party safety audits for high-stakes
 applications.\[@carlini2025career\]
 
-The risks posed by [ai]{acronym-label="ai"
-acronym-form="singular+short"} in chemistry demand immediate action from
+The risks posed by \acr{ai} in chemistry demand immediate action from
 governments and institutions. Yet these challenges also invite a deeper
-question: *Is the integration of [ai]{acronym-label="ai"
-acronym-form="singular+short"} into scientific discovery fundamentally
+question: *Is the integration of \acr{ai} into scientific discovery fundamentally
 advancing our understanding or merely accelerating the production of
 epistemic noise?* As @narayanan2025why cautioned,
-[ai]{acronym-label="ai" acronym-form="singular+short"}'s predictive
+\acr{ai}'s predictive
 abilities often obscure its inability to explain underlying mechanisms.
-In chemistry, this tension is acute: [ai]{acronym-label="ai"
-acronym-form="singular+short"}-driven tools may optimize reactions or
+In chemistry, this tension is acute: \acr{ai}-driven tools may optimize reactions or
 design toxins with equal ease, but their black-box nature complicates
 accountability and obscures causal relationships. True progress may
 require safeguards against misuse and a reevaluation of whether
-[ai]{acronym-label="ai" acronym-form="singular+short"}'s role in science
+\acr{ai}'s role in science
 should be expansive or deliberately constrained.
 
 ## Ethics {#sec:ethics}
 
-The deployment of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} in the chemical sciences raises several
+The deployment of \acr{gpm}s in the chemical sciences raises several
 critical ethical concerns that require careful consideration. These
 issues range from perpetuating harmful biases to environmental impacts
 and intellectual property concerns \[@crawford2021atlas\].
@@ -554,16 +521,15 @@ and intellectual property concerns \[@crawford2021atlas\].
 ### Environmental Impact and Climate Ethics
 
 The computational requirements for training and deploying
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} contribute to
+\acr{gpm}s contribute to
 environmental degradation through excessive energy consumption and
 carbon emissions. \[@spotte-smith2025considering; @nature2023carbon\]
 These computational resources are often powered by fossil fuel-based
 energy sources, which directly contribute to anthropogenic climate
-change. \[@strubell2019energy\] The emphasis on [ai]{acronym-label="ai"
-acronym-form="singular+short"} research has superseded some of the
+change. \[@strubell2019energy\] The emphasis on \acr{ai} research has superseded some of the
 commitments made by big technological companies to carbon neutrality.
 For example, Google rescinded its commitment to carbon neutrality amid a
-surge in [ai]{acronym-label="ai" acronym-form="singular+short"} usage
+surge in \acr{ai} usage
 (65$\%$ increase in carbon emissions between 2021-24) and
 funding.\[@bhuiyan2025google\] Additionally, the water consumption for
 cooling data centers that support these models is another concern,
@@ -573,45 +539,43 @@ The irony is particularly stark when considering that in the chemical
 sciences, these models are used to address climate-related challenges,
 such as the development of sustainable materials or carbon capture
 technologies. As a scientific community, we must grapple with the
-questions about the sustainability of current [ai]{acronym-label="ai"
-acronym-form="singular+short"} development trajectories and consider
+questions about the sustainability of current \acr{ai} development trajectories and consider
 more efficient and renewable approaches to model development and
 deployment. \[@kolbert2024obscene\]
 
 ### Copyright Infringement and Plagiarism Concerns
 
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} are typically
+\acr{gpm}s are typically
 trained on a vast corpora of copyrighted scientific literature, patents,
 and proprietary databases, often without explicit permission, a practice
 that has sparked legal disputes, such as *Getty Images v. Stability
-[ai]{acronym-label="ai" acronym-form="singular+short"}*, where
+\acr{ai}*, where
 plaintiffs allege unauthorized scraping of protected content.
 \[@kirchhubel2024intellectual\] Developers at `OpenAI` claimed in a
-statement to the [uk]{acronym-label="uk" acronym-form="singular+short"}
-House of Lords that training [sota]{acronym-label="sota"
-acronym-form="singular+short"} models is "impossible" without
+statement to the \acr{uk}
+House of Lords that training \acr{sota} models is "impossible" without
 copyrighted material, highlighting a fundamental tension between
-[ip]{acronym-label="ip" acronym-form="singular+short"} law and
-[ai]{acronym-label="ai" acronym-form="singular+short"} advancement.
+\acr{ip} law and
+\acr{ai} advancement.
 \[@openai2023written\] In the chemical sciences, this challenge persists
 through the training of models on experimental results from pay-walled
 journals. A potential resolution to this in the scientific sphere lies
 in the expansion of open-access research frameworks. Initiatives like
-the [cas]{acronym-label="cas" acronym-form="singular+short"} Common
+the \acr{cas} Common
 Chemistry database provide legally clear training data while maintaining
-attribution. [llms]{acronym-label="llm" acronym-form="plural+short"}
+attribution. \acr{llm}s
 have shown a high propensity to regurgitate elements from their training
 data. When generating text, models may reproduce near-verbatim fragments
 of training data without citation, effectively obscuring intellectual
 contributions.\[@bender2021dangers\] While some praise
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} for overcoming
+\acr{gpm}s for overcoming
 "blank-page syndrome" for early-career scientists
 \[@altmae2023artificial\], others warn that uncritical reliance on their
 outputs risks eroding scientific rigor.\[@donker2023dangers\]
 
 ### Bias and Discrimination
 
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} inherit and
+\acr{gpm}s inherit and
 amplify harmful prejudices and stereotypes present in their training
 data, which pose significant risks when applied translationally to
 medicinal chemistry and biochemistry. \[@spotte-smith2025considering;
@@ -620,7 +584,7 @@ inaccurate and harmful assumptions based on race and gender about drug
 efficacy, toxicity, and disease susceptibility, leading to misdiagnosis
 and mistreatment. \[@chen2023algorithmic\] Historical medical literature
 contains biased representations of how different populations respond to
-treatments, and [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+treatments, and \acr{gpm}s
 trained on such data can reinforce these misconceptions.
 \[@mittermaier2023bias\] The problem extends to broader contexts in
 chemical research. Biased models can influence research priorities,
@@ -635,12 +599,11 @@ data necessary to train unbiased models can only exist if clinical
 studies of drug efficacy are conducted on diverse populations in the
 real world.\[@criado-perez2019invisible\] To complement improved data
 collection, standard evaluations for bias testing must be developed and
-mandated prior to deployment of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}.
+mandated prior to deployment of \acr{gpm}s.
 
 ### Democratization of Power
 
-Although [ai]{acronym-label="ai" acronym-form="singular+short"} tools
+Although \acr{ai} tools
 have the potential to democratize access to advanced chemical research
 capabilities, they may also concentrate power in the hands of a few
 large companies that control the frontier models. This concentration

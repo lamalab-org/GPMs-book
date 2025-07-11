@@ -1,17 +1,36 @@
 ---
-title: "Applications"
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
 ---
 
 # Applications
 
 ## Automating the Scientific Workflow {#sec:ai-scientists}
 
-Recent advances in [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}, particularly [llms]{acronym-label="llm"
-acronym-form="plural+short"}, have enabled initial demonstrations of
-fully autonomous [ai]{acronym-label="ai" acronym-form="singular+short"}
+Recent advances in \acr{gpm}s, particularly \acr{llm}s, have enabled initial demonstrations of
+fully autonomous \acr{ai}
 scientists \[@schmidgall2025agent\]. We define these as
-[llm]{acronym-label="llm" acronym-form="singular+short"}-powered
+\acr{llm}-powered
 architectures capable of executing end-to-end research workflows based
 solely on the final objectives, e.g., "*Unexplained rise of
 antimicrobial resistance in Pseudomonas. Formulate hypotheses, design
@@ -21,16 +40,14 @@ through all components of the scientific process outlined in
 [1](#fig:applications){reference-type="ref+Label"
 reference="fig:applications"}, and detailed in the subsequent sections.
 
-While significant applications emerge in [ml]{acronym-label="ml"
-acronym-form="singular+short"} and programming, scientific
+While significant applications emerge in \acr{ml} and programming, scientific
 implementations remain less explored.
 
 ### Coding and ML Applications of AI Scientists
 
 Notable frameworks, including `Co-Scientist` \[@gottweis2025towards\],
-and [`ai`]{acronym-label="ai" acronym-form="singular+short"}`-Scientist`
-\[@yamada2025ai\], aim to automate the entire [ml]{acronym-label="ml"
-acronym-form="singular+short"} research pipeline, typically employing
+and `\acr{ai}``-Scientist`
+\[@yamada2025ai\], aim to automate the entire \acr{ml} research pipeline, typically employing
 multi-agent architectures (described in detail in
 [\[sec:multi-agent\]](#sec:multi-agent){reference-type="ref+Label"
 reference="sec:multi-agent"}) where specialized agents manage distinct
@@ -38,63 +55,58 @@ phases of the scientific method \[@schmidgall2025agentrxiv\]. Critical
 to these systems is self-reflection
 \[@renze2024self0reflection\]---iterative evaluation and criticism of
 results within validation loops. However, comparative analyses reveal
-that [llm]{acronym-label="llm" acronym-form="singular+short"}-based
+that \acr{llm}-based
 evaluations frequently overscore outputs relative to human assessments
 \[@huang2023mlagentbench0; @chan2024mle; @starace2025paperbench0\].
 From an engineering perspective, alternative approaches focus
 specifically on iterative code optimization, enabling systems to refine
 their codebases \[@zhang2025darwin\] or generate improved agents
 autonomously \[@hu2024automated\]. In another work, `AlphaEvolve`
-\[@novikov2025alphaevolve\], which is an [llm]{acronym-label="llm"
-acronym-form="singular+short"} operating within a
-[ga]{acronym-label="ga" acronym-form="singular+short"} environment,
+\[@novikov2025alphaevolve\], which is an \acr{llm} operating within a
+\acr{ga} environment,
 found novel algorithms for matrix multiplication (which had seen no
 innovation in fifty years) and sorting.
 
 ### Chemistry and Related Fields
 
 In chemistry, proposed systems show promising results. `Robin`
-identified ripasudil as a treatment for [damd]{acronym-label="damd"
-acronym-form="singular+short"} \[@ghareeb2025robin0\]---despite pending
+identified ripasudil as a treatment for \acr{damd} \[@ghareeb2025robin0\]---despite pending
 clinical trials and the general debate for these systems about novelty
 of their findings\[@Listgarten2024perpetual\]. However, automation of
 experiment execution poses a major constraint for the chemistry-focused
-[ai]{acronym-label="ai" acronym-form="singular+short"}-scientists due to
+\acr{ai}-scientists due to
 hardware requirements, making computational chemistry the most feasible
 subfield in which agents have successfully run simple quantum
 simulations \[@Zou2025ElAgente\]. Further, the
-[llms]{acronym-label="llm" acronym-form="plural+short"} powering these
+\acr{llm}s powering these
 systems exhibit limited chemical knowledge \[@mirza2024large\]. Despite
 this, `ether0` \[@narayanan2025training\]---the first
-chemistry-specialized reasoning [llm]{acronym-label="llm"
-acronym-form="singular+short"} (see
+chemistry-specialized reasoning \acr{llm} (see
 [\[sec:rl\]](#sec:rl){reference-type="ref+Label" reference="sec:rl"} for
 a deeper discussion on reasoning models)---demonstrated strong
 capabilities in molecular design and accurate reaction prediction,
 positioning it as a promising foundation for chemistry-focused
-[ai]{acronym-label="ai" acronym-form="singular+short"} scientists.
+\acr{ai} scientists.
 
 ### Are these Systems Capable of Real Autonomous Research?
 
 Although agents like `Zochi` \[@intologyai2025zochi\] achieved
-peer-reviewed publication in top-tier venues ([acl]{acronym-label="acl"
-acronym-form="singular+short"} 2025), their capacity for truly
+peer-reviewed publication in top-tier venues (\acr{acl} 2025), their capacity for truly
 autonomous end-to-end research remains debatable \[@son2025ai\]. Even
 when generating hypotheses that appear novel and impactful, their
 execution and reporting of these ideas, as demonstrated by
 @si2025ideation1execution, yield results deemed less attractive than
 those produced by humans. Additionally, this autonomy raises a critical
-question: *What should the role of [ai]{acronym-label="ai"
-acronym-form="singular+short"} in science be?* While these systems can
+question: *What should the role of \acr{ai} in science be?* While these systems can
 generate hypotheses, conduct experiments, and produce publication-ready
 manuscripts, their integration demands careful consideration (refer to
 [\[sec:ethics\]](#sec:ethics){reference-type="ref+Label"
 reference="sec:ethics"} for further discussion about moral concerns
 around these systems). Beyond the vision of fully autonomous scientists,
-[gpms]{acronym-label="gpm" acronym-form="plural+short"}---primarily
-[llms]{acronym-label="llm" acronym-form="plural+short"}---are already
+\acr{gpm}s---primarily
+\acr{llm}s---are already
 utilized across most scientific workflow components, for which
-[llms]{acronym-label="llm" acronym-form="plural+short"} have proven
+\acr{llm}s have proven
 useful for some. These elements are shown in
 [1](#fig:applications){reference-type="ref+Label"
 reference="fig:applications"}, and we discuss next.
@@ -113,8 +125,7 @@ sections.</figcaption>
 
 ## Existing GPMs for Chemical Science
 
-The development of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} for chemical science represents a departure
+The development of \acr{gpm}s for chemical science represents a departure
 from traditional single-task approaches. Rather than fine-tuning
 pre-trained models for specific applications such as property prediction
 or molecular generation, these chemistry-aware language models are
@@ -137,8 +148,7 @@ classification tasks concurrently.
 
 Building on similar principles, `nach0` introduced a unified
 encoder-decoder transformer architecture for cross-domain chemical tasks
-\[@livne2024nach0\]. Pre-trained using [ssl]{acronym-label="ssl"
-acronym-form="singular+short"} on both natural language and chemical
+\[@livne2024nach0\]. Pre-trained using \acr{ssl} on both natural language and chemical
 data, `nach0` tackles diverse downstream applications including
 molecular structure generation, chemical property prediction, and
 reaction prediction. Notably, the authors found that combining
@@ -151,7 +161,7 @@ materials discovery framework that uses transformer-based embeddings
 (e.g., `MatBERT`\[@wan2024tokens\]) to represent and generate novel
 crystal structures. Candidates are first recalled via similarity in
 embedding space, then ranked using a multitask multi-gate
-[moe]{acronym-label="moe" acronym-form="singular+short"} model that
+\acr{moe} model that
 predicts the desired properties jointly. Their method successfully
 identifies novel high-performance materials (e.g., halide perovskites)
 and demonstrates that language representations encode latent knowledge
@@ -159,11 +169,9 @@ for task-agnostic materials design.
 
 #### Domain-Specific Pre-Training Strategies
 
-A second category of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} emphasizes deep domain knowledge through
-specialized pre-training. `LLaMat` employed [peft]{acronym-label="peft"
-acronym-form="singular+short"} specifically on crystal structure data in
-[cif]{acronym-label="cif" acronym-form="singular+short"} format,
+A second category of \acr{gpm}s emphasizes deep domain knowledge through
+specialized pre-training. `LLaMat` employed \acr{peft} specifically on crystal structure data in
+\acr{cif} format,
 enabling the generation of thermodynamically stable structures
 \[@mishra2024foundational\].
 
@@ -180,14 +188,12 @@ generation \[@zhang2024chemllm\].
 
 #### Reasoning-Based Approaches
 
-A recent development in chemical [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} incorporates explicit reasoning
+A recent development in chemical \acr{gpm}s incorporates explicit reasoning
 capabilities. `ether0` demonstrates this approach as a 24 billion
 parameter reasoning model trained on over 640k experimentally-grounded
 chemistry problems across diverse tasks, including retrosynthesis,
 solubility editing, and property prediction \[@narayanan2025training\].
-Unlike previous models, `ether0` uses [rl]{acronym-label="rl"
-acronym-form="singular+short"} (see
+Unlike previous models, `ether0` uses \acr{rl} (see
 [\[sec:rl\]](#sec:rl){reference-type="ref+Label" reference="sec:rl"}) to
 develop reasoning behaviors like verification and backtracking,
 demonstrating that structured problem-solving approaches can
@@ -195,9 +201,9 @@ significantly improve performance on complex chemical tasks while
 maintaining grounding in experimental data.
 
 These diverse approaches illustrate the evolving landscape of chemical
-[gpms]{acronym-label="gpm" acronym-form="plural+short"}, each balancing
+\acr{gpm}s, each balancing
 broad applicability with domain-specific precision. Still, most
-applications of [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+applications of \acr{gpm}s
 focus on using these models for one specific application and we will
 review those in the following.
 
@@ -211,22 +217,20 @@ task, it often involves multiple different steps, visually described in
 [2](#fig:knowledge_gathering){reference-type="ref+Label"
 reference="fig:knowledge_gathering"}. We split the discussion in this
 section in two: structured data extraction and question answering.
-Example queries for both sections are shown at the bottom of
+Example queries for both sections are in
 [2](#fig:knowledge_gathering){reference-type="ref+Label"
-reference="fig:knowledge_gathering"}.
+reference="fig:knowledge_gathering"}B.
 
 <figure id="fig:knowledge_gathering">
 <img src="media/figures/rescaled_figures/chemrev_figure12.png" alt="" / width="100%">
 <figcaption><strong>A. a representation of a typical agent for
-scientific queries.</strong> The <span data-acronym-label="llm"
-data-acronym-form="singular+short">llm</span> is the central piece of
+scientific queries.</strong> The \acr{llm} is the central piece of
 the system, surrounded by typical tools that improve its
 question-answering capabilities, together forming an agentic system. The
 tools represented in this figure are semantic search, citation
 traversal, evidence gathering, and question answering. Semantic search
 finds relevant documents. Evidence gathering ranks and filters chunks of
-text using <span data-acronym-label="llm"
-data-acronym-form="plural+short">llms</span>. The citation traversal
+text using \acr{llm}s. The citation traversal
 tool provides model access to citation graphs, enabling accurate
 referencing of each chunk and facilitating the discovery of additional
 sources. Finally, the question-answering tool (an <span
@@ -241,7 +245,7 @@ section.</figcaption>
 ### Semantic Search
 
 A step that is key to most, if not all, knowledge-gathering tasks is
-[rag]{acronym-label="rag" acronym-form="singular+short"}, discussed in
+\acr{rag}, discussed in
 more detail in [\[sec:rag\]](#sec:rag){reference-type="ref+Label"
 reference="sec:rag"}. Most commonly, this involves semantic search,
 intended to identify chunks of text with similar meaning. The difference
@@ -258,7 +262,7 @@ reference="sec:embeddings"}).\[@bojanowski2017enriching\] They represent
 the content of a document as a vector in a learned vector space and
 hence allow for similarity search by vector comparison (e.g., using
 cosine similarity for small databases or more sophisticated algorithms
-like [hnsw]{acronym-label="hnsw" acronym-form="singular+short"} for
+like \acr{hnsw} for
 large databases\[@malkov2018efficient\]).
 
 In chemistry, semantic search has been used extensively to classify and
@@ -270,12 +274,9 @@ identify chemical text.\[@Guo2021; @beltagy2019scibert0;
 Semantic search can help us find relevant resources. However, for many
 applications it can be useful to collect data in a structured form,
 e.g., tables with fixed columns. Obtaining such a dataset based on
-extracting data from the literature using [llms]{acronym-label="llm"
-acronym-form="plural+short"} is currently one of the most practical
-avenues for the use of [llms]{acronym-label="llm"
-acronym-form="plural+short"} in the chemical sciences
-\[@schilling2025text\]. Currently, [llms]{acronym-label="llm"
-acronym-form="plural+short"} are used in various forms for this
+extracting data from the literature using \acr{llm}s is currently one of the most practical
+avenues for the use of \acr{llm}s in the chemical sciences
+\[@schilling2025text\]. Currently, \acr{llm}s are used in various forms for this
 application.
 
 #### Data Extraction Using Prompting
@@ -297,18 +298,16 @@ prompting a large model. In addition, models might lack specialized
 knowledge and might not follow certain style guides, which can be
 introduced with fine-tuning. @ai2024extracting fine-tuned the
 `LLaMa-2-7B` model to extract procedural chemical reaction data from
-[uspto]{acronym-label="uspto" acronym-form="singular+short"}, and
-converted it to a [json]{acronym-label="json"
-acronym-form="singular+short"} format compatible with the schema of
-[ord]{acronym-label="ord"
-acronym-form="singular+short"}\[@Kearnes_2021\], achieving an overall
+\acr{uspto}, and
+converted it to a \acr{json} format compatible with the schema of
+\acr{ord}\[@Kearnes_2021\], achieving an overall
 accuracy of more than $90\%$. In a different work, @zhang2024fine
 fine-tuned `GPT-3.5-Turbo` to recognize and extract chemical entities
-from [uspto]{acronym-label="uspto" acronym-form="singular+short"}.
+from \acr{uspto}.
 Fine-tuning improved the performance of the base model on the same task
 by more than $15\%$. Similarly, @dagdelen2024structured proposed a
 human-in-the-loop data annotation process, where humans correct the
-outputs from an [llm]{acronym-label="llm" acronym-form="singular+short"}
+outputs from an \acr{llm}
 extraction instead of extracting data from scratch.
 
 #### Agents for Data Extraction
@@ -320,14 +319,13 @@ For example, @ansari2024agent introduced `Eunomia`, an agent that
 autonomously extracts structured materials science data from scientific
 literature without requiring fine-tuning, demonstrating performance
 comparable to or better than fine-tuned methods. Their agent is an
-[llm]{acronym-label="llm" acronym-form="singular+short"} with access to
+\acr{llm} with access to
 tools such as chemical databases (e.g., the `Materials Project`
 database) and research papers from various sources.
 
 While the authors claim this approach simplifies dataset creation for
 materials discovery, the evaluation is limited to a narrow set of
-materials science tasks (mostly focusing on [mofs]{acronym-label="mof"
-acronym-form="plural+short"}), indicating the need for the creation of
+materials science tasks (mostly focusing on \acr{mof}s), indicating the need for the creation of
 agent evaluation tools.
 
 #### Limitations
@@ -345,7 +343,7 @@ improve wrong results.\[@du2023improving\]
 ### Question Answering
 
 Besides extracting information from documents in a structured format,
-[llms]{acronym-label="llm" acronym-form="plural+short"} can also be used
+\acr{llm}s can also be used
 to answer questions---such as "Has X been tried before" by synthesizing
 knowledge from a corpus of documents (and potentially automatically
 retrieving additional documents).
@@ -356,9 +354,8 @@ answering as well as for traversing citation graphs, which are shown in
 [2](#fig:knowledge_gathering){reference-type="ref+Label"
 reference="fig:knowledge_gathering"}. The evidence-gathering tool
 collects the most relevant chunks of information via the semantic search
-and performs [llm]{acronym-label="llm"
-acronym-form="singular+short"}-based re-ranking of these chunks (i.e.
-the [llm]{acronym-label="llm" acronym-form="singular+short"} changes the
+and performs \acr{llm}-based re-ranking of these chunks (i.e.
+the \acr{llm} changes the
 order of the chunks depending on what is needed to answer the query).
 Subsequently, only the top-$n$ most relevant chunks are kept. To further
 ground the responses, citation traversal tools (e.g., Semantic
@@ -382,10 +379,9 @@ observation of a falling apple \[@kosso2017whatgoesup\].
 
 In modern research, hypothesis generation increasingly relies on
 data-driven tools. For example, clinical research employs frameworks
-such as [viads]{acronym-label="viads" acronym-form="singular+short"} to
+such as \acr{viads} to
 derive testable hypotheses from well-curated datasets
-\[@Jing2022roles\]. Similarly, advances in [llms]{acronym-label="llm"
-acronym-form="plural+short"} are now being explored for their potential
+\[@Jing2022roles\]. Similarly, advances in \acr{llm}s are now being explored for their potential
 to automate and enhance idea generation across scientific domains
 \[@oneill2025sparks\]. However, such approaches face significant
 challenges due to the inherently open-ended nature of scientific
@@ -405,8 +401,7 @@ scientific inquiry.
 
 ### Initial Sparks
 
-Recent efforts in the [ml]{acronym-label="ml"
-acronym-form="singular+short"} community have sought to simulate the
+Recent efforts in the \acr{ml} community have sought to simulate the
 hypothesis formulation process \[@Gu2025forecasting;
 @arlt2024meta0designing\], primarily leveraging multi-agent systems
 \[@jansen2025codescientist0; @kumbhar2025hypothesis\]. In such
@@ -415,7 +410,7 @@ previous related work---grounding hypothesis generation in existing
 literature \[@naumov2025dora; @ghareeb2025robin0;
 @gu2024interesting\]. A key challenge, however, lies in evaluating the
 generated hypotheses. While some studies leverage
-[llms]{acronym-label="llm" acronym-form="plural+short"} to evaluate
+\acr{llm}s to evaluate
 novelty or interestingness \[@zhang2024omni0\], recent work has
 introduced critic agents---specialized components designed to monitor
 and iteratively correct outputs from other agents---into multi-agent
@@ -427,17 +422,16 @@ refinement through continuous feedback mechanisms.
 
 However, the reliability of purely model-based evaluation remains
 contentious. @si2025llms argued that relying on a
-[gpm]{acronym-label="gpm" acronym-form="singular+short"} to evaluate
+\acr{gpm} to evaluate
 hypotheses lacks robustness, advocating instead for human assessment.
 This approach was adopted in their work, where human evaluators
 validated hypotheses produced by their system, finding more novel
-[llm]{acronym-label="llm" acronym-form="singular+short"}-produced
+\acr{llm}-produced
 hypotheses compared to the ones proposed by humans. Notably,
 @yamada2025ai advanced the scope of such systems by automating the
-entire research [ml]{acronym-label="ml" acronym-form="singular+short"}
+entire research \acr{ml}
 process, from hypothesis generation to article writing. Their system's
-outputs were submitted to workshops at the [iclr]{acronym-label="iclr"
-acronym-form="singular+short"} 2025, with one contribution ultimately
+outputs were submitted to workshops at the \acr{iclr} 2025, with one contribution ultimately
 accepted. However, the advancements made by such works are currently
 incremental instead of unveiling new, paradigm-shifting research (see
 [3](#fig:hypothesis-generation){reference-type="ref+Label"
@@ -449,7 +443,7 @@ In scientific fields such as chemistry and materials science, hypothesis
 generation requires domain intuition, mastery of specialized
 terminology, and the ability to reason through foundational concepts
 \[@miret2024llms\]. To address potential knowledge gaps in
-[llms]{acronym-label="llm" acronym-form="plural+short"},
+\acr{llm}s,
 @wang2023scimon0 proposed a few-shot learning approach (see
 [\[sec:prompting\]](#sec:prompting){reference-type="ref+Label"
 reference="sec:prompting"}) for hypothesis generation and compared it
@@ -466,8 +460,7 @@ outperformed fine-tuned models in generating hypotheses with greater
 technical specificity and iterative refinement of such hypotheses.
 
 Complementing this work, @yang2025moose introduced the `Moose-Chem`
-framework to evaluate the novelty of [llm]{acronym-label="llm"
-acronym-form="singular+short"}-generated hypotheses. To avoid data
+framework to evaluate the novelty of \acr{llm}-generated hypotheses. To avoid data
 contamination, their benchmark exclusively uses papers published after
 the knowledge cutoff date of the evaluated model, `GPT-4o`. Ground-truth
 hypotheses were derived from articles in high-impact journals (e.g.,
@@ -480,24 +473,19 @@ training corpus.
 
 <figure id="fig:hypothesis-generation">
 <img src="media/figures/rescaled_figures/chemrev_figure13.png" alt="" / width="100%">
-<figcaption><strong>Overview of <span data-acronym-label="llm"
-data-acronym-form="singular+short">llm</span>-based hypothesis
+<figcaption><strong>Overview of \acr{llm}-based hypothesis
 generation</strong>. Current methods are based on <span
 data-acronym-label="llm"
 data-acronym-form="singular+short">llm</span>-sampling methods in which
-an <span data-acronym-label="llm"
-data-acronym-form="singular+short">llm</span> proposes new hypotheses.
+an \acr{llm} proposes new hypotheses.
 The generated hypotheses are evaluated in terms of novelty and impact
-either by another <span data-acronym-label="llm"
-data-acronym-form="singular+short">llm</span> or by a human. Then,
+either by another \acr{llm} or by a human. Then,
 through experimentation, the hypotheses are transformed into results
-which showcase that current <span data-acronym-label="llm"
-data-acronym-form="plural+short">llms</span> cannot produce
+which showcase that current \acr{llm}s cannot produce
 groundbreaking ideas, limited to their training corpus, resulting in the
 best cases, in incremental work. This is shown metaphorically with the
 puzzle. The “pieces of chemical knowledge” based on the hypothesis
-produced by <span data-acronym-label="llm"
-data-acronym-form="plural+short">llms</span> are already present in the
+produced by \acr{llm}s are already present in the
 “chemistry puzzle”, not unveiling new parts of it.</figcaption>
 </figure>
 
@@ -509,29 +497,26 @@ achieving this milestone remains challenging, as generating novel and
 impactful ideas requires questioning current scientific paradigms
 \[@Kuhn1962Structure\]---a skill typically refined through years of
 experience---which is currently impossible for most
-[ml]{acronym-label="ml" acronym-form="singular+short"} systems.
+\acr{ml} systems.
 
-Current progress in [ml]{acronym-label="ml"
-acronym-form="singular+short"} illustrates these limitations
+Current progress in \acr{ml} illustrates these limitations
 \[@kon2025exp0bench0; @gu2024interesting\]. Although some studies claim
-success in [ai]{acronym-label="ai"
-acronym-form="singular+short"}-generated ideas accepted at workshops in
-[ml]{acronym-label="ml" acronym-form="singular+short"} conferences via
+success in \acr{ai}-generated ideas accepted at workshops in
+\acr{ml} conferences via
 double-blind review \[@zhou2025tempest0\], these achievements are
 limited. First, accepted submissions often focus on coding tasks, one of
-the strongest domains for [llms]{acronym-label="llm"
-acronym-form="plural+short"}. Second, workshop acceptances are less
+the strongest domains for \acr{llm}s. Second, workshop acceptances are less
 competitive than main conferences, as they prioritize early-stage ideas
 over rigorously validated contributions. In chemistry, despite some
 works showing promise on these systems \[@yang2025moose0chem20\],
-[llms]{acronym-label="llm" acronym-form="plural+short"} struggle to
+\acr{llm}s struggle to
 propose functional hypotheses \[@si2025ideation1execution\]. Their
 apparent success often hinges on extensive sampling and iterative
 refinement, rather than genuine conceptual innovation.
 
 As @Kuhn1962Structure argued, generating groundbreaking ideas demands
 challenging prevailing paradigms---a capability missing in current
-[ml]{acronym-label="ml" acronym-form="singular+short"} models (they are
+\acr{ml} models (they are
 trained to make the existing paradigm more likely in training rather
 than questioning their training data), as shown in
 [3](#fig:hypothesis-generation){reference-type="ref+Label"
@@ -544,11 +529,10 @@ originate from deliberate critique of existing knowledge
 often breakthroughs can also not be achieved by optimizing for a simple
 metric---as we often do not fully understand the problem and, hence,
 cannot design a metric.\[@stanley2015greatness\] Despite some
-publications suggesting that [ai]{acronym-label="ai"
-acronym-form="singular+short"} scientists already exist, such claims are
+publications suggesting that \acr{ai} scientists already exist, such claims are
 supported only by narrow evaluations that yield incremental progress
 \[@novikov2025alphaevolve\], not paradigm-shifting insights. For
-[ai]{acronym-label="ai" acronym-form="singular+short"} to evolve from
+\acr{ai} to evolve from
 research assistants into autonomous scientists, it must demonstrate
 efficacy in addressing societally consequential challenges, such as
 solving complex, open-ended problems at scale (e.g., "millennium" math
@@ -569,27 +553,26 @@ Before a human or robot can execute any experiments, a plan must be
 created. Planning can be formalized as the process of decomposing a
 high-level task into a structured sequence of actionable steps aimed at
 achieving a specific goal. The term planning is often confused with
-scheduling and [rl]{acronym-label="rl" acronym-form="singular+short"},
+scheduling and \acr{rl},
 which are closely related but distinct concepts. Scheduling is a more
 specific process focused on the timing and sequence of tasks. It ensures
 that resources are efficiently allocated, experiments are conducted in
 an optimal order, and constraints (such as lab availability, time, and
 equipment) are respected.\[@kambhampati2023llmplanning\]
-[rl]{acronym-label="rl" acronym-form="singular+short"} is about adapting
+\acr{rl} is about adapting
 and improving plans over time based on ongoing results.\[@chen2022deep\]
 
 ### Conventional Planning
 
 Early experimental planning in chemistry relied on human intuition and
 domain expertise. One example of this is retrosynthesis. Since the
-1960s, systems like [lhasa]{acronym-label="lhasa"
-acronym-form="singular+short"} \[@corey1972computer\] began automating
+1960s, systems like \acr{lhasa} \[@corey1972computer\] began automating
 retrosynthesis using hand-coded rules and heuristics\[@warr2014short\].
 Later tools, such as `Chematica`\[@grzybowski2018chematica\], expanded
 these efforts by integrating larger template libraries and optimization
 strategies. As reaction data grew in volume and complexity, manual rule
 encoding became unsustainable. Platforms like ASKCOS\[@tu2025askcos\]
-integrated [gnns]{acronym-label="gnn" acronym-form="plural+short"} and
+integrated \acr{gnn}s and
 neural classifiers to predict reactivity and suggest conditions,
 enabling actionable synthetic routes.
 
@@ -597,28 +580,24 @@ All applications, however, face the problem that planning is difficult
 because search spaces are combinatorially large and evaluating potential
 paths, in principle, requires a model that can perfectly predict the
 outcomes of different actions. Conventional approaches often rely on
-various forms of search algorithms such as [bfs]{acronym-label="bfs"
-acronym-form="singular+short"}, [dfs]{acronym-label="dfs"
-acronym-form="singular+short"}, [mcts]{acronym-label="mcts"
-acronym-form="singular+short"} \[@segler2017towards\]. Those, however,
+various forms of search algorithms such as \acr{bfs}, \acr{dfs}, \acr{mcts} \[@segler2017towards\]. Those, however,
 are often still not efficient enough to tackle long-horizon planning for
 complex problems.
 
 ### LLMs to Decompose Problems into Plans
 
-[gpms]{acronym-label="gpm" acronym-form="plural+short"}, in particular
-[llms]{acronym-label="llm" acronym-form="plural+short"}, can potentially
+\acr{gpm}s, in particular
+\acr{llm}s, can potentially
 assist in planning with two modes of thinking. Deliberate
 (system-2-like) thinking can be used to score potential options or to
 decompose problems into plans. Intuitive (system-1-like) thinking can be
 used to efficiently prune search spaces. These two modes align with
 psychological frameworks known as system-1 and system-2 thinking.
 \[@kahneman2011thinking\] In the system-1 thinking,
-[llms]{acronym-label="llm" acronym-form="plural+short"} support rapid
+\acr{llm}s support rapid
 decision-making by leveraging heuristics and pattern recognition to
 quickly narrow down options. In contrast, system-2 thinking represents a
-slower, more analytical process, in which [llms]{acronym-label="llm"
-acronym-form="plural+short"} solve complex tasks---such as logical
+slower, more analytical process, in which \acr{llm}s solve complex tasks---such as logical
 reasoning and planning---by explicitly generating step-by-step
 reasoning. \[@ji2025test\]
 
@@ -626,42 +605,35 @@ Decomposing a goal into actionable milestones relies on this deliberate,
 system-2-style reasoning, enabling the model to evaluate alternatives
 and structure plans effectively. A variety of strategies have been
 proposed to improve the reasoning capabilities of
-[llms]{acronym-label="llm" acronym-form="plural+short"} during
-inference. Methods such as [cot]{acronym-label="cot"
-acronym-form="singular+short"} and least-to-most prompting guide models
+\acr{llm}s during
+inference. Methods such as \acr{cot} and least-to-most prompting guide models
 to decompose problems into interpretable steps, improving transparency
 and interpretability. However, their effectiveness in planning is
 limited by error accumulation and linear thinking
 patterns.\[@stechly2024chain\] To address these limitations, recent
 test-time strategies such as repeat sampling and tree search have been
-proposed to enhance planning capabilities in [llms]{acronym-label="llm"
-acronym-form="plural+short"}. Repeated sampling allows the model to
+proposed to enhance planning capabilities in \acr{llm}s. Repeated sampling allows the model to
 generate multiple candidate reasoning paths, encouraging diversity in
 thought and increasing the chances of discovering effective subgoal
 decompositions. \[@wang2024planning\] Meanwhile, tree search methods
-like [tot]{acronym-label="tot" acronym-form="singular+short"} and
-[rap]{acronym-label="rap" acronym-form="singular+short"} treat reasoning
+like \acr{tot} and
+\acr{rap} treat reasoning
 as a structured search, also using algorithms like
-[mcts]{acronym-label="mcts" acronym-form="singular+short"} to explore
+\acr{mcts} to explore
 and evaluate multiple solution paths, facilitating more global and
 strategic decision-making. \[@hao2023reasoning\]
 
-Beyond purely linguistic reasoning, [llms]{acronym-label="llm"
-acronym-form="plural+short"} have also been used to interpret
+Beyond purely linguistic reasoning, \acr{llm}s have also been used to interpret
 natural-language queries and to translate them into structured planning
-steps, as demonstrated by systems like [llm]{acronym-label="llm"
-acronym-form="singular+short"}+P\[@liu2023llm\] and
-[llm]{acronym-label="llm"
-acronym-form="singular+short"}-DP\[@dagan2023dynamic\], which integrated
-[llms]{acronym-label="llm" acronym-form="plural+short"} with classical
-planners to convert planning problems into [pddl]{acronym-label="pddl"
-acronym-form="singular+short"}. [llms]{acronym-label="llm"
-acronym-form="plural+short"} have also been applied to generate
+steps, as demonstrated by systems like \acr{llm}+P\[@liu2023llm\] and
+\acr{llm}-DP\[@dagan2023dynamic\], which integrated
+\acr{llm}s with classical
+planners to convert planning problems into \acr{pddl}. \acr{llm}s have also been applied to generate
 structured procedures from limited observations. For example, in quantum
 physics, a model was trained to infer reusable experimental templates
 from measurement data, producing Python code that generalized across
 system sizes. \[@arlt2024meta0designing\] This demonstrates how
-[llms]{acronym-label="llm" acronym-form="plural+short"} can support
+\acr{llm}s can support
 scientific planning by synthesizing high-level protocols from low-level
 evidence, moving beyond symbolic reasoning to executable plan
 generation.
@@ -673,33 +645,30 @@ options during the search to reduce the computational burden. Because
 the number of potential pathways can grow exponentially, exhaustive
 search may be computationally intensive. Classical planners employ
 heuristics, value functions, or logical filters to perform
-pruning\[@bonet2012action\]. [llms]{acronym-label="llm"
-acronym-form="plural+short"} can emulate pruning through learned
+pruning\[@bonet2012action\]. \acr{llm}s can emulate pruning through learned
 heuristics, intuitive judgment, or context-driven evaluation,
 \[@gao2025synergizing\] reflecting system-1 thinking.
 [4](#fig:planning){reference-type="ref+Label" reference="fig:planning"}
-illustrates how [llms]{acronym-label="llm" acronym-form="plural+short"}
+illustrates how \acr{llm}s
 can support experimental planning by selectively pruning options.
 Rule-based heuristics derived from domain knowledge can automatically
 discard routes involving unfavorable motifs, such as chemically strained
 rings or complex aromatic scaffolds. Meanwhile,
-[llms]{acronym-label="llm" acronym-form="plural+short"} can emulate an
+\acr{llm}s can emulate an
 expert chemist's intuition by discarding synthetic routes that appear
 unnecessarily long, inefficient, or mechanistically implausible.
 
-To further enhance planning efficacy, [llms]{acronym-label="llm"
-acronym-form="plural+short"} can be augmented with external tools that
+To further enhance planning efficacy, \acr{llm}s can be augmented with external tools that
 estimate the feasibility or performance of candidate plans, enabling
 targeted pruning of the search space before costly execution. In
-`ChemCrow`, the [llm]{acronym-label="llm" acronym-form="singular+short"}
+`ChemCrow`, the \acr{llm}
 collaborated with specialized chemical tools with knowledge about
 molecular and reaction properites. While `ChemCrow` does not explicitly
 generate and prune a large pool of candidate plans, these tools serve as
 real-time evaluators that help the model avoid unfeasible or inefficient
 directions during synthesis or reaction planning.
 
-In addition to external tools, [llms]{acronym-label="llm"
-acronym-form="plural+short"} can also engage in self-correction, a
+In addition to external tools, \acr{llm}s can also engage in self-correction, a
 reflective strategy that identifies and prunes flawed reasoning steps
 within their own outputs. This introspective pruning supports more
 robust and coherent planning by discarding faulty intermediate steps
@@ -713,10 +682,8 @@ ambiguities, and eliminate invalid directions.
 
 <figure id="fig:planning">
 <img src="media/figures/rescaled_figures/chemrev_figure14.png" alt="" / width="100%">
-<figcaption><strong><span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span>-guided retrosynthesis
-route planning and pruning</strong>. <span data-acronym-label="gpm"
-data-acronym-form="plural+short">gpms</span> can systematically evaluate
+<figcaption><strong>\acr{gpm}-guided retrosynthesis
+route planning and pruning</strong>. \acr{gpm}s can systematically evaluate
 and prune retrosynthetic routes using multiple reasoning capabilities to
 discriminate between viable and problematic approaches. The partially
 overlapping arrows at the start of each route indicate multiple steps.
@@ -747,8 +714,7 @@ evaluations can be performed in simulated or real embodied environments
 \[@song2023llm; @choi2024lota\], offering interactive feedback on
 feasibility. In parallel, automatic evaluation methods are emerging. For
 example, `BioPlanner`\[@o2023bioplanner\] used pseudocode-based
-evaluation, comparing [llm]{acronym-label="llm"
-acronym-form="singular+short"}-generated protocols to expert-written
+evaluation, comparing \acr{llm}-generated protocols to expert-written
 pseudocode representations to assess plausibility and correctness
 without requiring manual review or physical execution.
 
@@ -768,8 +734,7 @@ vitro* are not fundamentally different---both follow an essentially
 identical workflow: Plan $\rightarrow$ Instructions $\rightarrow$
 Execution $\rightarrow$ Analysis. In a computer simulation, a researcher
 writes a program (plan), which is then compiled or interpreted into
-machine code (instructions) for the [cpu]{acronym-label="cpu"
-acronym-form="singular+short"}, executed to produce data, and finally
+machine code (instructions) for the \acr{cpu}, executed to produce data, and finally
 the outputs are analyzed. In an automated laboratory, the scientist
 specifies a protocol (plan), which must be translated into instrument
 commands (instructions), executed on a robotic platform, followed by the
@@ -779,35 +744,31 @@ decision-making based on the acquired results.
 
 The execution of *in silico* experiments can be reduced to two essential
 steps: preparing input files and running the computational code;
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} can be used in
+\acr{gpm}s can be used in
 both steps.\[@Liu2025ASA; @Mendible-Barreto2025DynaMate;
 @Zou2025ElAgente; @Campbell2025MDCrow\] @Jacobs2025orca found that
-using a combination of fine-tuning, [cot]{acronym-label="cot"
-acronym-form="singular+short"} and [rag]{acronym-label="rag"
-acronym-form="singular+short"} (see
+using a combination of fine-tuning, \acr{cot} and \acr{rag} (see
 [\[sec:model_adaptation\]](#sec:model_adaptation){reference-type="ref+Label"
 reference="sec:model_adaptation"}) can improve the performance of
-[llms]{acronym-label="llm" acronym-form="plural+short"} in generating
+\acr{llm}s in generating
 executable input files for the quantum chemistry software
 *ORCA*\[@ORCA5\], while @Gadde2025chatbot created `AutosolvateWeb`, an
-[llm]{acronym-label="llm" acronym-form="singular+short"}-based platform
+\acr{llm}-based platform
 that assists users in preparing input files for
-[qmmm]{acronym-label="qmmm" acronym-form="singular+short"} simulations
+\acr{qmmm} simulations
 of explicitly solvated molecules and running them on a remote computer.
-Examples of [gpm]{acronym-label="gpm"
-acronym-form="singular+short"}-based autonomous agents (see
+Examples of \acr{gpm}-based autonomous agents (see
 [\[sec:agents\]](#sec:agents){reference-type="ref+Label"
 reference="sec:agents"}) capable of performing the entire computational
 workflow (i.e., preparing inputs, executing the code, and analyzing the
 results) are `MDCrow` \[@Campbell2025MDCrow\] (for molecular dynamics)
 and `El Agente Q` \[@Zou2025ElAgente\] (for quantum chemistry).
 
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} can also assist
+\acr{gpm}s can also assist
 in automating *in vitro* experiments. We can draw parallels from
 programming language paradigms---compiled vs. interpreted (see
 [5](#fig:exec){reference-type="ref+Label" reference="fig:exec"}A)---to
-better understand how [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} can be useful in different approaches of
+better understand how \acr{gpm}s can be useful in different approaches of
 experiment automation. In compiled languages (like `C++` or `Fortran`),
 the entire code is converted ahead of time by another program called the
 "compiler" into binary machine code, which is directly executable by the
@@ -824,40 +785,34 @@ categorize different approaches to experiment automation into two
 different groups: "compiled automation" and "interpreted automation"
 (see [5](#fig:exec){reference-type="ref+Label" reference="fig:exec"}B).
 In the compiled approach, the entire protocol is translated---either by
-a human or a [gpm]{acronym-label="gpm"
-acronym-form="singular+short"}---to low-level instructions before
+a human or a \acr{gpm}---to low-level instructions before
 execution, while in interpreted automation, the
-[gpm]{acronym-label="gpm" acronym-form="singular+short"} plays a central
+\acr{gpm} plays a central
 role, acting as the "interpreter" and executing the protocol step by
 step. As we show below, it can be instructive to use this perspective
 when discussing approaches to automate experiment execution with
-[gpms]{acronym-label="gpm" acronym-form="plural+short"}.
+\acr{gpm}s.
 
 <figure id="fig:exec">
 <img src="media/figures/rescaled_figures/chemrev_figure15+16.png" alt="" / width="100%">
 <figcaption><strong>Programming languages vs. lab automation. A)
 programming paradigms</strong>: In compiled languages, the entire source
 code is translated ahead of time to machine code by the compiler. This
-stand-alone code is then given to the <span data-acronym-label="os"
-data-acronym-form="singular+short">os</span>, which is responsible for
+stand-alone code is then given to the \acr{os}, which is responsible for
 scheduling and distributing tasks to the hardware. In interpreted
 languages, the interpreter reads and translates each line of the source
-code to machine code and hands it to the <span data-acronym-label="os"
-data-acronym-form="singular+short">os</span> for execution. <strong>B)
+code to machine code and hands it to the \acr{os} for execution. <strong>B)
 automation paradigms</strong>: In the compiled approach, a <span
 data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span>
 formalizes the protocol, a compiler, such as the
 chempiler[@steiner2019organic], translates the formalized protocol to
 hardware-specific low-level steps, which the controller then executes—a
 central hub tasked with scheduling and distributing commands to chemical
-hardware. In the interpreted approach, a <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span>, acting as the
+hardware. In the interpreted approach, a \acr{gpm}, acting as the
 interpreter, first breaks down the protocol into specific steps, then
-sends them (via an <span data-acronym-label="api"
-data-acronym-form="singular+short">api</span>) for execution one by one.
+sends them (via an \acr{api}) for execution one by one.
 The strength of interpreted systems is dynamic feedback: after the
-execution of each step, the <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span> receives a signal (e.g.,
+execution of each step, the \acr{gpm} receives a signal (e.g.,
 data, errors), which can influence its behavior for the next
 steps.</figcaption>
 </figure>
@@ -865,8 +820,7 @@ steps.</figcaption>
 ### Compiled Automation
 
 In the case of "compiled automation", the experiment protocol needs to
-be formalized in a high-level or [dsl]{acronym-label="dsl"
-acronym-form="singular+short"} that describes exactly what operations to
+be formalized in a high-level or \acr{dsl} that describes exactly what operations to
 perform in what order. A chemical compiler (or "chempiler"
 \[@steiner2019organic\]) then converts this high-level protocol into
 low-level code for the specific lab hardware, which is then executed by
@@ -878,33 +832,28 @@ of [5](#fig:exec){reference-type="ref+Label" reference="fig:exec"}B).
 While `Python`-based scripts are frequently used as the *de facto*
 protocol language due to `Python`'s accessibility and
 flexibility,\[@pylabrobot; @vriza2023polybot; @wang2025polybot\]
-specialized languages ([dsls]{acronym-label="dsl"
-acronym-form="plural+short"}) have also been developed to provide more
+specialized languages (\acr{dsl}s) have also been developed to provide more
 structured and semantically rich representations of experimental
 procedures.\[@wang2022ulsa; @ananthanarayanan2010biocoder;
 @autoprotocol2023; @Park2023CMDL\] One of the prominent examples of
-such languages is [chidl]{acronym-label="chidl"
-acronym-form="singular+short"}\[@xdl2023spec\], developed as part of the
+such languages is \acr{chidl}\[@xdl2023spec\], developed as part of the
 Chemputer architecture \[@steiner2019organic; @mehr2020universal;
-@hammer2021chemputation\]. [chidl]{acronym-label="chidl"
-acronym-form="singular+short"} uses a [json]{acronym-label="json"
-acronym-form="singular+short"}-like format, and the experimental
+@hammer2021chemputation\]. \acr{chidl} uses a \acr{json}-like format, and the experimental
 protocol is described by defining `Reagents`, `Vessels`, etc, and using
 abstract chemical commands such as `Add`, `Stir`, `Filter`, etc. In the
 next step, the `Chempiler` software takes this
-[chidl]{acronym-label="chidl" acronym-form="singular+short"} script and
+\acr{chidl} script and
 a description of the physical connectivity and composition of the
 automated platform as a graph and translates it into
-[chasm]{acronym-label="chasm" acronym-form="singular+short"} which is
+\acr{chasm} which is
 specific to the platform (akin to machine code). In practice,
-[chidl]{acronym-label="chidl" acronym-form="singular+short"} has been
+\acr{chidl} has been
 used to automate multi-step organic syntheses with yields comparable to
 manual experiments.\[@mehr2020universal\]
 
 Developing experimental protocols in a formal language is a non-trivial
 task, often requiring specialized coding expertise. Within the compiled
-approach, the role of the [gpm]{acronym-label="gpm"
-acronym-form="singular+short"} is to translate natural-language
+approach, the role of the \acr{gpm} is to translate natural-language
 protocols into their formalized, machine-readable
 counterparts.\[@Lamas2024DSLXpert; @jiang2024protocode;
 @conrad2025lowering; @inagaki2023robotic\] @Vaucher2020AutoExtraction
@@ -912,7 +861,7 @@ used an encoder-decoder transformer model to convert English
 experimental procedures to structured sequences of pre-defined synthesis
 actions (e.g., `MakeSolution`, `SetTemperature`, `Extract`). They
 pre-trained the model on $2$M sentence-action pairs extracted by a
-rule-based [nlp]{acronym-label="nlp" acronym-form="singular+short"}
+rule-based \acr{nlp}
 algorithm and then fine-tuned it on manually annotated samples to
 improve accuracy. The model achieved exact sentence-pair matching in
 $61\%$ of the test samples and had more than $75\%$ overlap in $82\%$ of
@@ -925,25 +874,21 @@ execution.
 papers into executable code. The first agent extracts all
 synthesis-relevant text, including supporting information; a procedure
 agent then sanitizes the data and tries to fill the gaps from chemical
-databases (using [rag]{acronym-label="rag"
-acronym-form="singular+short"}); another agent translates procedures
-into [chidl]{acronym-label="chidl" acronym-form="singular+short"} and
+databases (using \acr{rag}); another agent translates procedures
+into \acr{chidl} and
 simulates them on virtual hardware; finally, a critique agent
 cross-checks the translation and fixes errors.
 
 The example above shows one of the strengths of the compiled approach:
 it allows for pre-validation. The protocol can be simulated or checked
 for any errors before running on the actual hardware, ensuring safety.
-Another example of [llm]{acronym-label="llm"
-acronym-form="singular+short"}-based validators for chemistry protocols
+Another example of \acr{llm}-based validators for chemistry protocols
 is `CLAIRify`.\[@Yoshikawa2023CLAIRify\] Leveraging an iterative
 prompting strategy, it uses `GPT-3.5` to first translate the
-natural-language protocol into [chidl]{acronym-label="chidl"
-acronym-form="singular+short"} script, then automatically verifies its
+natural-language protocol into \acr{chidl} script, then automatically verifies its
 syntax and structure, identifies any errors, appends those errors to the
-prompt, and prompts the [llm]{acronym-label="llm"
-acronym-form="singular+short"} again---iterating this process until a
-valid [chidl]{acronym-label="chidl" acronym-form="singular+short"}
+prompt, and prompts the \acr{llm} again---iterating this process until a
+valid \acr{chidl}
 script is produced.
 
 Similar to how compiled software can be recompiled for different
@@ -970,12 +915,12 @@ needed.
 
 Interpreted programming languages support higher levels of abstraction,
 enabling the use of more general and flexible command structures.
-Similarly, since [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+Similarly, since \acr{gpm}s
 can translate high-level goals into concrete steps\[@ahn2022can;
 @huang2022language\], they can act as an "interpreter" between the
 experimental intent and lab hardware. For instance, given an instruction
 "titrate the solution until it turns purple", a
-[gpm]{acronym-label="gpm" acronym-form="singular+short"} agent (see
+\acr{gpm} agent (see
 [\[sec:agents\]](#sec:agents){reference-type="ref+Label"
 reference="sec:agents"}) can break it down into smaller steps and
 convert each step to executable code, allowing it to perform incremental
@@ -990,20 +935,19 @@ messages, etc.) which the agent analyzes and decides on the next action.
 This allows for dynamic branching and conditional logic during the
 experiment execution.
 
-*Coscientist* \[@boiko2023autonomous\] is an [llm]{acronym-label="llm"
-acronym-form="singular+short"}-based chemistry assistant built around
+`Coscientist` \[@boiko2023autonomous\] is an \acr{llm}-based chemistry assistant built around
 `GPT-4` that can autonomously design and execute experiments. It can
-take high-level goals and call tools to write the code in real-time in
-order to control an Opentrons OT-2 liquid-handling robot. The
-architecture included tool calls: a web-search module, a documentation
-module (to read instrument manuals), a `Python` execution module (to run
-generated code in a sandbox), and an experiment execution module that
-sends code to actual lab equipment. If an error occurred, the system
-would get feedback and `GPT-4` would debug its own code. `Coscientist`
-successfully planned and executed multistep syntheses with minimal human
-intervention. For example, it efficiently optimized a palladium
-cross-coupling reaction with minimal human input, outperforming a
-standard Bayesian optimizer baseline in finding high-yield conditions.
+take high-level goals and call tools to write code in real-time in order
+to control an Opentrons OT-2 liquid-handling robot. The architecture
+included a web-search module, a documentation module (to read instrument
+manuals), a `Python` execution module (to run generated code in a
+sandbox), and an experiment execution module that sends code to actual
+lab equipment. If an error occurred, the system would get feedback and
+`GPT-4` would debug its own code. `Coscientist` successfully planned and
+executed multistep syntheses with minimal human intervention. For
+example, it efficiently optimized a palladium cross-coupling reaction
+with minimal human input, outperforming a standard Bayesian optimizer
+baseline in finding high-yield conditions.
 
 Another example is `ChemCrow` \[@bran2024augmenting\], a `GPT-4`-based
 agent augmented with $18$ expert-designed tools for tasks like compound
@@ -1011,12 +955,11 @@ lookup, spectral analysis, and retrosynthesis. `ChemCrow` can perform
 tasks across synthesis planning, drug discovery, and materials design by
 invoking external software for things like retrosynthesis, property
 prediction, database queries, etc. It planned and executed the syntheses
-of an insect repellent, [deet]{acronym-label="deet"
-acronym-form="singular+short"}, and three different organocatalysts and
+of an insect repellent, \acr{deet}, and three different organocatalysts and
 even guided the discovery of a new chromophore dye.
 
 The interpreted paradigm is highly generalizable; in principle, the same
-[llm]{acronym-label="llm" acronym-form="singular+short"} agent
+\acr{llm} agent
 controlling a chemistry experiment could be re-purposed to a biology or
 materials experiment with minimal reprogramming because it operates at
 the level of intent and semantic understanding. However, fully
@@ -1029,13 +972,13 @@ often need prompting nudges and human correction. In addition, these
 models can replicate known procedures and use databases, but they lack
 an understanding of mechanisms or underlying principles. Another issue
 is full reproducibility and long-term experiment tracking. Since the
-[gpm]{acronym-label="gpm" acronym-form="singular+short"}'s response
+\acr{gpm}'s response
 might not be deterministic, small changes in prompts can yield different
 results and closed-source models like `GPT-4` can change over time.
 Hallucinations remain a risk, especially in planning complex or
 sensitive reactions. In addition, allowing an agent to control hardware
 brings safety considerations; the flexibility of
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} means that they
+\acr{gpm}s means that they
 can devise unanticipated actions. Designing safety nets for these
 systems is an active area of research. (see
 [\[sec:safety\]](#sec:safety){reference-type="ref+Label"
@@ -1046,43 +989,40 @@ reference="sec:safety"})
 Between the two extremes of fully compiled vs. fully interpreted
 automation lies a hybrid approach that seeks to combine the best of both
 paradigms: the safety and reliability of compiled protocols and the
-[ai]{acronym-label="ai" acronym-form="singular+short"}-driven
+\acr{ai}-driven
 flexibility of interpreted systems.
 
 The key difference from purely interpreted systems is that during each
 experiment run, the plan is fixed, ensuring safety and reproducibility,
 but between runs, the plan can dynamically change based on the
-[gpm]{acronym-label="gpm" acronym-form="singular+short"}'s
+\acr{gpm}'s
 interpretation of results. Once the initial plan (ideally devised by the
-same [gpm]{acronym-label="gpm" acronym-form="singular+short"} in a
+same \acr{gpm} in a
 previous step) is provided to a hybrid system, instead of reducing it to
 smaller steps and directly sending the instructions to a laboratory one
 at a time, the protocol is first formalized---i.e., it is translated to
-a formal machine-readable format such as [chidl]{acronym-label="chidl"
-acronym-form="singular+short"}. Once validated, the formalized protocol
+a formal machine-readable format such as \acr{chidl}. Once validated, the formalized protocol
 is compiled and executed. After the completion of execution, the
-[gpm]{acronym-label="gpm" acronym-form="singular+short"} receives the
+\acr{gpm} receives the
 results and decides what experiment to perform next. This cycle repeats,
 creating an autonomous optimization or discovery loop.
 
 This hybrid strategy is attractive because it provides a safety net
-against mistakes made by the [gpm]{acronym-label="gpm"
-acronym-form="singular+short"} interpreter; any generated procedure must
+against mistakes made by the \acr{gpm} interpreter; any generated procedure must
 pass through a formalization and verification stage before real
 execution, and therefore, erroneous or hallucinated steps can be caught.
 For example, if the interpreter hallucinated adding 1000 mL of a solvent
 but the hardware has only 100 mL capacity, it can be flagged as an
 error.
 
-`ORGANA` \[@darvish2025organa\] is an [llm]{acronym-label="llm"
-acronym-form="singular+short"}-based robotic assistant following this
+`ORGANA` \[@darvish2025organa\] is an \acr{llm}-based robotic assistant following this
 hybrid paradigm. It allows human chemists to describe their experimental
 goal in natural language. The system can converse with the user to
 clarify ambiguous requests (the agent would ask "do you mean X or Y?" if
 the instructions are unclear). Once the goal is understood, it uses
 `CLAIRify` \[@Yoshikawa2023CLAIRify\] to convert and validate the
 natural-language description of a chemistry experiment into a
-[chidl]{acronym-label="chidl" acronym-form="singular+short"} script,
+\acr{chidl} script,
 which can be executed on a compatible platform. In one case, `ORGANA`
 carried out a multistep electrochemistry procedure---polishing
 electrodes, running an experiment, and analyzing the data---involving 19
@@ -1098,7 +1038,7 @@ the agent to handle low-level decisions.
 While compiled paradigms continue to provide the backbone for reliable
 automation, interpreted paradigms will drive exploratory research, where
 adaptability is key. Hybrid systems are likely to be the bridge that
-brings [ai]{acronym-label="ai" acronym-form="singular+short"} into
+brings \acr{ai} into
 mainstream lab operations, ensuring that flexibility comes with
 accountability. A brief comparison of the three mentioned approaches is
 given in [1](#tab:execution_comparison){reference-type="ref+Label"
@@ -1126,12 +1066,10 @@ While we are essentially witnessing the rise of self-driving
 laboratories, autonomous experimentation systems present a range of
 challenges.\[@Tom2024SDL; @Seifrid2022SDL\] First, translating
 high-level natural-language goals into precise laboratory actions
-remains difficult, as [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} can misinterpret ambiguous instructions,
+remains difficult, as \acr{gpm}s can misinterpret ambiguous instructions,
 leading to invalid or unsafe procedures. This problem is compounded by
 the lack of universally adopted standards for protocol formalization;
-while languages like [chidl]{acronym-label="chidl"
-acronym-form="singular+short"} show promise, inconsistencies in
+while languages like \acr{chidl} show promise, inconsistencies in
 abstraction, device compatibility, and community uptake limit
 interoperability. Real-time execution adds further complexity, as
 systems must detect and respond to failures or unexpected behaviors;
@@ -1172,93 +1110,76 @@ largely infeasible, as they cannot generalize across the long tail of
 edge cases and exceptions found in real-world workflows.
 
 However, this exact complexity makes data analysis in chemistry a
-promising candidate for [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}. They are designed to operate flexibly
+promising candidate for \acr{gpm}s. They are designed to operate flexibly
 across diverse tasks and formats, relying on implicit knowledge captured
 from broad training data. In other domains, @narayan2022can showed that
 models like `GPT-3 DaVinci` can already perform classical data
 processing tasks such as cleaning, transformation, and error detection
 through prompting alone. @kayali2023chorus introduced `Chorus` that
-shows that [llms]{acronym-label="llm" acronym-form="plural+short"} can
+shows that \acr{llm}s can
 analyze heterogeneous tabular data without task-specific training.
 `Chorus` demonstrates that by converting tables into a standardized text
 format and using zero-shot prompting (i.e., prompts with no examples),
-[llms]{acronym-label="llm" acronym-form="plural+short"} can flexibly
+\acr{llm}s can flexibly
 analyze tables even when they differ in structure, column names, or data
 types.
 
 <figure id="fig:anaylsis">
 <img src="media/figures/rescaled_figures/chemrev_figure17.png" alt="" / width="100%">
 <figcaption><strong>Static conventional data analysis workflow
-vs. dynamic <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span> generated
+vs. dynamic \acr{gpm} generated
 workflow</strong>. The chemical analysis can be done with a variety of
 possible instruments and techniques, resulting in a large number of
-possible output data formats. The <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span> can use these diverse, raw
+possible output data formats. The \acr{gpm} can use these diverse, raw
 data and process it into easy-to-understand plots, analysis and reports.
 A hard-coded workflow, in contrast, is specifically made to analyze one
 specific data format and spectra and produces a fixed output format,
-e.g., the <span data-acronym-label="smiles"
-data-acronym-form="singular+short">smiles</span> of the analyzed
+e.g., the \acr{smiles} of the analyzed
 molecule.</figcaption>
 </figure>
 
 ### Prompting
 
-Initial evaluations demonstrated that [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} can support basic data analysis workflows.
+Initial evaluations demonstrated that \acr{gpm}s can support basic data analysis workflows.
 \[@Fu2025large\] For example, in chemistry, this enabled the
-classification of [xps]{acronym-label="xps"
-acronym-form="singular+short"} signals \[@decurt2024large\] based on
+classification of \acr{xps} signals \[@decurt2024large\] based on
 peak positions, intensities, or characteristic spectral patterns).
 
 Spectroscopic data are not always available in structured textual form.
 In many practical cases, it appears as raw plots or images, making
-direct interpretation by [vlms]{acronym-label="vlm"
-acronym-form="plural+short"} a more natural starting point for automated
-analysis. A broad assessment of [vlm]{acronym-label="vlm"
-acronym-form="singular+short"}-based spectral analysis was introduced
+direct interpretation by \acr{vlm}s a more natural starting point for automated
+analysis. A broad assessment of \acr{vlm}-based spectral analysis was introduced
 with the `MaCBench` benchmark \[@alampara2024probing\], which
-systematically evaluates how [vlms]{acronym-label="vlm"
-acronym-form="plural+short"} interpret experimental data in chemistry
+systematically evaluates how \acr{vlm}s interpret experimental data in chemistry
 and materials science---including various types of spectra such as
-[ir]{acronym-label="ir" acronym-form="singular+short"},
-[nmr]{acronym-label="nmr" acronym-form="singular+short"}, and
-[xrd]{acronym-label="xrd" acronym-form="singular+short"}q---directly
-from images. They showed that while [vlms]{acronym-label="vlm"
-acronym-form="plural+short"} can correctly extract isolated features
+\acr{ir},
+\acr{nmr}, and
+\acr{xrd}q---directly
+from images. They showed that while \acr{vlm}s can correctly extract isolated features
 from plots, the performance substantially drops in tasks requiring
 deeper spatial reasoning. To overcome these limitations,
 @kawchak2024high explored two-step pipelines that decouple visual
 perception from chemical reasoning. First, the model interprets each
-spectrum individually (e.g., converting [ir]{acronym-label="ir"
-acronym-form="singular+short"}, [nmr]{acronym-label="nmr"
-acronym-form="singular+short"}, or [ms]{acronym-label="ms"
-acronym-form="singular+short"} images into textual peak descriptions),
-and second, a [llm]{acronym-label="llm" acronym-form="singular+short"}
+spectrum individually (e.g., converting \acr{ir}, \acr{nmr}, or \acr{ms} images into textual peak descriptions),
+and second, a \acr{llm}
 analyzes these outputs to propose a molecular structure based on the
 molecular formula.
 
 ### Agentic Systems
 
-Beyond zero-shot prompting of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}, one can develop agentic systems that
+Beyond zero-shot prompting of \acr{gpm}s, one can develop agentic systems that
 combine multiple analysis steps end-to-end. In this regard,
 @ghareeb2025robin0 developed `Robin`---a multi-agent system for
 assisting biological research with hypothesis generation (see
 [3](#fig:hypothesis-generation){reference-type="ref+Label"
 reference="fig:hypothesis-generation"}) and experimental analysis. The
 data analysis agent `Finch` performs autonomous analysis of raw or
-preprocessed experimental data, such as [rna]{acronym-label="rna"
-acronym-form="singular+short"} sequencing and flow cytometry. Given a
-user prompt (e.g., "[rna]{acronym-label="rna"
-acronym-form="singular+short"} sequencing differential expression
+preprocessed experimental data, such as \acr{rna} sequencing and flow cytometry. Given a
+user prompt (e.g., "\acr{rna} sequencing differential expression
 analysis"), `Finch` executes code in a Jupyter notebook to process the
 data, apply relevant statistical methods, and generate interpretable
 outputs. For flow cytometry, this includes gating strategies and
-significance testing, while for [rna]{acronym-label="rna"
-acronym-form="singular+short"} sequencing, it encompasses differential
+significance testing, while for \acr{rna} sequencing, it encompasses differential
 expression and gene ontology enrichment analysis. Currently, only these
 two data types are supported, and expert-designed prompts are still
 required to ensure reliable results.
@@ -1266,9 +1187,8 @@ required to ensure reliable results.
 Recent work extends agentic systems beyond single-step data evaluation
 toward executing and optimizing entire workflows. @mandal2024autonomous
 introduced `AILA` (Artificially Intelligent Lab Assistant) utilizing
-[llm]{acronym-label="llm" acronym-form="singular+short"}-agents to plan,
-code, execute, and revise complete [afm]{acronym-label="afm"
-acronym-form="singular+short"} analysis pipelines. The system handles
+\acr{llm}-agents to plan,
+code, execute, and revise complete \acr{afm} analysis pipelines. The system handles
 tasks such as image processing, defect detection, clustering, and
 extraction of physical parameters. Compared to systems like `Finch`,
 `AILA` shifts the focus from generating summaries to performing and
@@ -1277,7 +1197,7 @@ maintaining transparency and reproducibility through code and reports.
 
 ### Current Limitations
 
-While [gpms]{acronym-label="gpm" acronym-form="plural+short"} offer
+While \acr{gpm}s offer
 promising capabilities for automating scientific data analysis, several
 limitations remain. Recent evaluations such as `FMs4Code`
 \[@tian2024scicode\] have shown that even state-of-the-art models like
@@ -1302,38 +1222,32 @@ validation, and human oversight remain essential components in practice.
 ## Reporting
 
 To share insights obtained from data analysis, one often converts them
-into scientific reports. Also, in this step, [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} can take a central role, which we discuss
+into scientific reports. Also, in this step, \acr{gpm}s can take a central role, which we discuss
 in the following.
 
 Reporting refers to converting scientific results into shareable
 reports, scientific publications, blogs, and other forms of content.
 This section describes two main applications of
-[llms]{acronym-label="llm" acronym-form="plural+short"} in scientific
+\acr{llm}s in scientific
 reporting: converting data into explanations and the first steps towards
 using these models as fully-fledged writing assistants.
 
 ### From Data to Explanation
 
-The lack of explainability of [ml]{acronym-label="ml"
-acronym-form="singular+short"} predictions generates skepticism among
+The lack of explainability of \acr{ml} predictions generates skepticism among
 experimental chemists\[@wellawatte2025human\], hindering the wider
 adoption of such models.\[@wellawatte2022model\] One promising approach
 to address this challenge is to convey explanations of model predictions
 in natural language. An approach proposed by @wellawatte2025human is to
-couple [llms]{acronym-label="llm" acronym-form="plural+short"} with
-feature importance analysis tools, such as [shap]{acronym-label="shap"
-acronym-form="singular+short"} or [lime]{acronym-label="lime"
-acronym-form="singular+short"}. In this framework,
-[llms]{acronym-label="llm" acronym-form="plural+short"} can additionally
-interact with tools such as [rag]{acronym-label="rag"
-acronym-form="singular+short"} over `arxiv` to provide evidence-based
+couple \acr{llm}s with
+feature importance analysis tools, such as \acr{shap} or \acr{lime}. In this framework,
+\acr{llm}s can additionally
+interact with tools such as \acr{rag} over `arxiv` to provide evidence-based
 explanations.
 
 ### Writing Assistance
 
-When considering [ml]{acronym-label="ml"
-acronym-form="singular+short"}-based assistance in scientific writing,
+When considering \acr{ml}-based assistance in scientific writing,
 we can distinguish two primary modes: systems that aid authors during
 the active writing process and tools that optimize or refine scientific
 articles after initial drafting.
@@ -1346,21 +1260,18 @@ applications like writing alt-text (descriptive text that explains the
 meaning and purpose of an image in digital
 content)\[@singh2024figura11y\].
 
-Under the latter mode, [gpm]{acronym-label="gpm"
-acronym-form="singular+short"} can be used to assist non-native English
+Under the latter mode, \acr{gpm} can be used to assist non-native English
 speakers with scientific writing \[@giglio2023use\]. It could even allow
 authors to write in their native language and use
-[gpm]{acronym-label="gpm" acronym-form="singular+short"} for
+\acr{gpm} for
 communicating scientific results in English.
 
-Another application of [llm]{acronym-label="llm"
-acronym-form="singular+short"} is to assist with completing checklists
+Another application of \acr{llm} is to assist with completing checklists
 before submitting a publication. For example, @goldberg2024usefulness
-benchmark the use of [llms]{acronym-label="llm"
-acronym-form="plural+short"} in completing the author checklist for the
-[neurips]{acronym-label="neurips" acronym-form="singular+short"} 2025.
+benchmark the use of \acr{llm}s in completing the author checklist for the
+\acr{neurips} 2025.
 They concluded that $70\%$ of the authors found the
-[llm]{acronym-label="llm" acronym-form="singular+short"}-assistant
+\acr{llm}-assistant
 useful, with the same fraction indicating they would revise their own
 checklist based on the model feedback.
 
@@ -1368,23 +1279,20 @@ checklist based on the model feedback.
 
 Few have ventured into fully automating the writing
 process.\[@yamada2025ai\] While at its inception, reporting using
-[gpm]{acronym-label="gpm" acronym-form="singular+short"} has tremendous
+\acr{gpm} has tremendous
 potential. In [7](#fig:writing_with_ml){reference-type="ref+Label"
 reference="fig:writing_with_ml"} we showcase how the future of reporting
-could look like if we were to integrate [gpm]{acronym-label="gpm"
-acronym-form="singular+short"} at each step of the process.
+could look like if we were to integrate \acr{gpm} at each step of the process.
 
 <figure id="fig:writing_with_ml">
 <img src="media/figures/rescaled_figures/chemrev_figure18.png" alt="" / width="100%">
-<figcaption><strong>Vision for <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span> in reporting, a
+<figcaption><strong>Vision for \acr{gpm} in reporting, a
 visualization of the scientific writing process</strong>. <span
 data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>
 can be used at every stage of the process. For creating the pre-print,
 we can utilize the multimodal capabilities of these models to write
 detailed captions for figures. For the peer-review process, we can
-harness the ability of <span data-acronym-label="gpm"
-data-acronym-form="plural+short">gpms</span> to summarize and prioritize
+harness the ability of \acr{gpm}s to summarize and prioritize
 information (e.g., design a time-efficient plan to address the peer
 review). When converting a document from a peer-reviewed pre-print, we
 often need to implement the publisher’s requirements. In this case, we

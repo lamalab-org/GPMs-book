@@ -1,0 +1,361 @@
+---
+acronyms:
+  keys:
+  - key: acl
+    shortname: ACL
+    longname: association for computational linguistics
+  - key: afm
+    shortname: AFM
+    longname: atomic force microscopy
+  - key: agi
+    shortname: AGI
+    longname: artificial general intelligence
+  - key: ai
+    shortname: AI
+    longname: artificial intelligence
+  - key: api
+    shortname: API
+    longname: application programming interface
+  - key: ar
+    shortname: AR
+    longname: augmented reality
+  - key: bfs
+    shortname: BFS
+    longname: breadth-first search
+  - key: bleu
+    shortname: BLEU
+    longname: bilingual evaluation understudy
+  - key: bo
+    shortname: BO
+    longname: Bayesian optimization
+  - key: camp
+    shortname: CAMP
+    longname: context-aware molecule prediction
+  - key: cas
+    shortname: CAS
+    longname: chemical abstracts service
+  - key: casp
+    shortname: CASP
+    longname: computer-aided synthesis planning
+  - key: caspr
+    shortname: CASP
+    longname: critical assessment of techniques for protein structure prediction
+  - key: cern
+    shortname: CERN
+    longname: The European Organization for Nuclear Research
+  - key: chasm
+    shortname: ChASM
+    longname: chemical assembly language
+  - key: chidl
+    shortname: $\chi$DL
+    longname: chemical description language
+  - key: cif
+    shortname: CIF
+    longname: crystallographic information file
+  - key: cnn
+    shortname: CNN
+    longname: convolutional neural network
+  - key: cot
+    shortname: CoT
+    longname: chain-of-thought
+  - key: cpu
+    shortname: CPU
+    longname: central processing unit
+  - key: damd
+    shortname: dAMD
+    longname: dry age-related macular degeneration
+  - key: deet
+    shortname: DEET
+    longname: N,N-diethyl-meta-toluamide
+  - key: dfs
+    shortname: DFS
+    longname: depth-first search
+  - key: dft
+    shortname: DFT
+    longname: density functional theory
+  - key: dl
+    shortname: DL
+    longname: deep learning
+  - key: dora
+    shortname: DoRA
+    longname: weight-decomposed low-rank adaptation
+  - key: dpo
+    shortname: DPO
+    longname: direct preference optimization
+  - key: dsl
+    shortname: DSL
+    longname: domain-specific language
+  - key: ea
+    shortname: EA
+    longname: evolutionary algorithm
+  - key: ecfp
+    shortname: ECFP
+    longname: extended connectivity fingerprint
+  - key: era
+    shortname: ERA
+    longname: energy ranking alignment
+  - key: eu
+    shortname: EU
+    longname: European Union
+  - key: fm
+    shortname: FM
+    longname: foundation model
+  - key: fnn
+    shortname: FNN
+    longname: feed-forward neural network
+  - key: ga
+    shortname: GA
+    longname: genetic algorithm
+  - key: gnn
+    shortname: GNN
+    longname: graph neural network
+  - key: go
+    shortname: GO
+    longname: gene ontology
+  - key: gp
+    shortname: GP
+    longname: Gaussian process
+  - key: gpm
+    shortname: GPM
+    longname: general-purpose model
+  - key: gpr
+    shortname: GPR
+    longname: Gaussian process regression
+  - key: hnsw
+    shortname: HNSW
+    longname: hierarchical navigable small world
+  - key: homo
+    shortname: HOMO
+    longname: highest occupied molecular orbital
+  - key: iaio
+    shortname: IAIO
+    longname: International Artificial Intelligence Oversight organization
+  - key: icl
+    shortname: ICL
+    longname: in-context learning
+  - key: iclr
+    shortname: ICLR
+    longname: International Conference on Learning Representations
+  - key: icma
+    shortname: ICMA
+    longname: in-context molecule adaptation
+  - key: inchi
+    shortname: InChI
+    longname: international chemical identifier
+  - key: ip
+    shortname: IP
+    longname: intellectual property
+  - key: ir
+    shortname: IR
+    longname: infrared spectroscopy
+  - key: irt
+    shortname: IRT
+    longname: item response theory
+  - key: iupac
+    shortname: IUPAC
+    longname: International Union of Pure and Applied Chemistry
+  - key: json
+    shortname: JSON
+    longname: JavaScript object notation
+  - key: lhasa
+    shortname: LHASA
+    longname: logic and heuristics applied to synthetic analysis
+  - key: lift
+    shortname: LIFT
+    longname: language-interfaced finetuning
+  - key: lime
+    shortname: LIME
+    longname: local interpretable model-agnostic explanations
+  - key: llm
+    shortname: LLM
+    longname: large language model
+  - key: lm
+    shortname: LM
+    longname: language model
+  - key: localenv
+    shortname: Local-Env
+    longname: local-environment
+  - key: lora
+    shortname: LoRA
+    longname: low-rank adaptation
+  - key: lstm
+    shortname: LSTM
+    longname: long short-term memory
+  - key: lumo
+    shortname: LUMO
+    longname: lowest unoccupied molecular orbital
+  - key: mae
+    shortname: MAE
+    longname: mean absolute error
+  - key: mcq
+    shortname: MCQ
+    longname: multiple-choice question
+  - key: mcts
+    shortname: MCTS
+    longname: Monte Carlo tree search
+  - key: md
+    shortname: MD
+    longname: molecular dynamics
+  - key: ml
+    shortname: ML
+    longname: machine learning
+  - key: mlip
+    shortname: MLIP
+    longname: machine-learning interatomic potential
+  - key: moe
+    shortname: MoE
+    longname: mixture of experts
+  - key: mof
+    shortname: MOF
+    longname: metal-organic framework
+  - key: mpnn
+    shortname: MPNN
+    longname: message-passing neural network
+  - key: ms
+    shortname: MS
+    longname: mass spectrometry
+  - key: neurips
+    shortname: NeurIPS
+    longname: Conference on Neural Information Processing Systems
+  - key: nih
+    shortname: NIH
+    longname: National Institutes of Health
+  - key: nlp
+    shortname: NLP
+    longname: natural-language processing
+  - key: nmr
+    shortname: NMR
+    longname: nuclear magnetic resonance
+  - key: ocr
+    shortname: OCR
+    longname: optical character recognition
+  - key: ohe
+    shortname: OHE
+    longname: One-hot encoding
+  - key: ord
+    shortname: ORD
+    longname: Open Reaction Database
+  - key: os
+    shortname: OS
+    longname: operating system
+  - key: pddl
+    shortname: PDDL
+    longname: planning domain definition language
+  - key: peft
+    shortname: PEFT
+    longname: parameter-efficient fine-tuning
+  - key: petn
+    shortname: PETN
+    longname: pentaerythritol tetranitrate
+  - key: pflop
+    shortname: PFLOP
+    longname: peta floating point operations per second
+  - key: pmo
+    shortname: PMO
+    longname: practical molecular optimization
+  - key: ppo
+    shortname: PPO
+    longname: proximal policy optimization
+  - key: qa
+    shortname: Q\&A
+    longname: questions \& answers
+  - key: qlora
+    shortname: QLoRA
+    longname: quantized low-rank adaptation
+  - key: qmmm
+    shortname: QM/MM
+    longname: quantum mechanics/molecular mechanics
+  - key: rag
+    shortname: RAG
+    longname: retrieval-augmented generation
+  - key: rap
+    shortname: RAP
+    longname: reasoning via planning
+  - key: react
+    shortname: ReAct
+    longname: reasoning and acting
+  - key: rfm
+    shortname: RFM
+    longname: Riemannian flow-matching
+  - key: rl
+    shortname: RL
+    longname: reinforcement learning
+  - key: rlhf
+    shortname: RLHF
+    longname: reinforcement learning from human feedback
+  - key: rmse
+    shortname: RMSE
+    longname: root mean squared error
+  - key: rna
+    shortname: RNA
+    longname: ribonucleic acid
+  - key: rnn
+    shortname: RNN
+    longname: recurrent neural network
+  - key: roc_auc
+    shortname: ROC-AUC
+    longname: receiver operating characteristic --- area under the curve
+  - key: selfies
+    shortname: SELFIES
+    longname: self-referencing embedded strings
+  - key: sft
+    shortname: SFT
+    longname: supervised fine-tuning
+  - key: shap
+    shortname: SHAP
+    longname: shapley additive explanations
+  - key: slices
+    shortname: SLICES
+    longname: simplified line-input crystal-encoding system
+  - key: sm
+    shortname: SM
+    longname: statistical mechanics
+  - key: smiles
+    shortname: SMILES
+    longname: simplified molecular input line entry system
+  - key: sota
+    shortname: SOTA
+    longname: state-of-the-art
+  - key: ssl
+    shortname: SSL
+    longname: self-supervised learning
+  - key: ssm
+    shortname: SSM
+    longname: selective state space model
+  - key: tgm-dlm
+    shortname: TGM-DLM
+    longname: text-guided molecule generation with diffusion language modeling
+  - key: tmc
+    shortname: TMC
+    longname: transition metal complexes
+  - key: tot
+    shortname: ToT
+    longname: tree-of-thought
+  - key: uk
+    shortname: UK
+    longname: United Kingdom
+  - key: uspto
+    shortname: USPTO
+    longname: United States Patent and Trademark Office
+  - key: uv-nir
+    shortname: UV-NIR
+    longname: ultra-violet near-infrared
+  - key: uv-vis
+    shortname: UV-Vis
+    longname: ultra-violet visible
+  - key: viads
+    shortname: VIADS
+    longname: visual interactive analytic tool for filtering and summarizing large health data sets
+  - key: vlm
+    shortname: VLM
+    longname: vision language model
+  - key: xlstm
+    shortname: xLSTM
+    longname: extended long short-term memory
+  - key: xps
+    shortname: XPS
+    longname: X-ray photoelectron spectroscopy
+  - key: xrd
+    shortname: XRD
+    longname: X-ray diffraction
+---

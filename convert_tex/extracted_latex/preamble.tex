@@ -1,0 +1,189 @@
+\usepackage[english]{babel}
+\usepackage{geometry}  
+\usepackage{graphicx}      
+\usepackage{tabularx}      
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{breaklinks=true}
+\usepackage[backend=biber,style=chem-acs, doi=true, articletitle=true, isbn=false, date=year, url=true, autopunct=true]{biblatex}
+\addbibresource{references.bib}
+
+\makeatletter
+\renewbibmacro*{textcite}{%
+  \iffieldequals{namehash}{\cbx@lasthash}
+    {\usebibmacro{cite:comp}}
+    {\usebibmacro{cite:dump}%
+     \ifbool{cbx:parens}
+       {\bibclosebracket\global\boolfalse{cbx:parens}}
+       {}%
+     \iffirstcitekey
+       {}
+       {\textcitedelim}%
+     \usebibmacro{cite:init}%
+     \ifnameundef{labelname}
+       {\printfield[citetitle]{labeltitle}}
+       {\printnames{labelname}}%
+     \addspace
+     \ifnumequal{\value{citecount}}{1}
+       {\usebibmacro{prenote}}
+       {}%
+     \mkbibsuperscript{\usebibmacro{cite:comp}}%
+     \stepcounter{textcitecount}%
+     \savefield{namehash}{\cbx@lasthash}}}
+\makeatother
+
+\usepackage[version=4]{mhchem}
+
+\usepackage{csquotes}
+\usepackage{cleveref}
+\usepackage{siunitx}
+\usepackage{geometry}
+\usepackage{multirow}
+\geometry{left=3.7cm, right=3.7cm}
+
+\usepackage[dvipsnames,table,xcdraw]{xcolor}
+\definecolor{tumblue}{rgb}{0.0980392157,0.2901960784,0.5058823529}
+%	25	74	129
+
+\usepackage{xspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{authblk} 
+
+
+\usepackage{marvosym}
+
+\usepackage{sectsty} 
+
+% \sectionfont{\color{tumblue}\selectfont\sffamily}
+% \subsectionfont{\color{tumblue}\selectfont\sffamily}
+% \subsubsectionfont{\color{tumblue}\selectfont\sffamily}
+\paragraphfont{\selectfont\sffamily}
+%\subparagraphfont{\color{gray}\selectfont\sffamily}
+
+
+\renewcommand*{\Authfont}{\sf}
+\renewcommand*{\Affilfont}{\sf}
+
+
+% \definecolor{halfgray}{gray}{0.55}
+% \renewcommand\labelitemi{\color{halfgray}$\bullet$} 
+
+%\usepackage{kpfonts}
+
+
+\clubpenalty = 10000 
+\widowpenalty = 10000 
+\displaywidowpenalty = 10000
+
+
+% if the \fonts folder exists, use fontspec to change fonts
+\IfFileExists{./fonts/Heliotrope-Bold.otf}{
+    \usepackage{fontspec}
+    \setmainfont{Heliotrope}[Extension = .otf, UprightFont = *-Regular, ItalicFont = *-Italic, BoldFont=*-Bold, Path = ./fonts/]
+}{
+    \usepackage{biolinum}
+    \renewcommand{\familydefault}{\sfdefault}
+}
+
+
+
+\usepackage{lipsum}
+\usepackage[labelfont=bf]{caption}
+\usepackage[nonumberlist,acronym]{glossaries-extra}
+\input{glossary}
+\makenoidxglossaries 
+
+\setabbreviationstyle[acronym]{long-short}
+%https://github.com/tectonic-typesetting/tectonic/issues/704
+\input{acronyms}
+\makenoidxglossaries 
+
+
+\renewcommand{\Affilfont}{\scriptsize}
+\renewcommand{\Authfont}{\normalsize}
+ \usepackage{microtype}
+ \usepackage{fontawesome}
+
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+\errorcontextlines=50
+
+%\definecolor{linkcolor}{RGB}{0, 102, 204} % Define the link color
+\definecolor{linkcolor}{RGB}{0, 0, 0}
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor=linkcolor,
+%     urlcolor=linkcolor,
+%     citecolor=linkcolor
+% }
+
+\newcommand{\OnlineMaterial}[2]{%
+  \href{#2}{\textcolor{linkcolor}{\faGlobe\, Online Material |  #1}}%
+}
+
+\newcommand{\nougat}{Nougat\xspace}
+\newcommand{\marker}{Marker\xspace}
+\newcommand{\gptfouro}{GPT-4o\xspace}
+\newcommand{\gptfourvision}{GPT-4 Vision\xspace}
+\newcommand{\gptfour}{GPT-4\xspace}
+\newcommand{\gptthreefive}{GPT-3.5\xspace}
+\newcommand{\gptthreeturbo}{GPT-3.5 Turbo\xspace}
+\newcommand{\gptthree}{GPT-3\xspace}
+\newcommand{\claudethree}{Claude 3\xspace}
+\newcommand{\claudethreeopus}{Claude 3 Opus\xspace}
+\newcommand{\llamathree}{Llama 3\xspace}
+\newcommand{\llamathreeseventy}{Llama 3-70B\xspace}
+\newcommand{\llamatwo}{Llama 2\xspace}
+\newcommand{\llamatwoseven}{Llama 2-7B\xspace}
+\newcommand{\geminipro}{Gemini Pro\xspace}
+
+\renewcommand{\thefootnote}{\roman{footnote}}
+
+\usepackage{tikz}
+\usepackage{annotate-equations}
+
+\definecolor{PositiveColor}{RGB}{25, 74, 129}   % SeaGreen
+\definecolor{NegativeColor}{RGB}{102, 17, 36}   % Firebrick
+\definecolor{TemperatureColor}{RGB}{255, 140, 0}   % DarkOrange
+\definecolor{SimilarityColor}{RGB}{70, 130, 180}   % SteelBlue
+\definecolor{OverallColor}{RGB}{75, 0, 130}   % Indigo
+
+\definecolor{StateColor}{RGB}{25, 74, 129} % Blue
+\definecolor{ActionColor}{RGB}{102, 17, 36 } % maroon
+\definecolor{PolicyColor}{RGB}{179, 28, 43} % red red
+\definecolor{RewardColor}{RGB}{244, 165, 130} % orange
+
+\definecolor{promptblue}{HTML}{194a81}
+\definecolor{promptlightblue}{HTML}{92c4de}
+\newcommand{\modelname}[1]{\texttt{#1}}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{listings, breakable}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newtcolorbox{promptbox}[1][]{
+    title = LLM Prompt Example,
+    breakable,
+    enhanced,
+    colback=white,
+    colframe=promptblue,
+    colbacktitle=promptblue,
+    fonttitle=\bfseries,
+    boxrule=0.5mm,
+    left=2mm,
+    right=2mm,
+    top=4mm,
+    bottom=4mm,
+    middle=10mm,
+    #1
+}
+
+%25, 74, 129 Blue
+%102, 17, 36 maroon

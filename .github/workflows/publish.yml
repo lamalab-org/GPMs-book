@@ -1,0 +1,62 @@
+on:
+  push:
+    branches:
+      - main
+
+name: Render and Publish
+
+# Set permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # To install LaTeX to build PDF book 
+          tinytex: true 
+          # uncomment below and fill to pin a version
+          # version: SPECIFIC-QUARTO-VERSION-HERE
+      
+      # add software dependencies here and any libraries
+      - name: install librsvg
+        run: sudo apt-get install librsvg2-bin
+         
+      # From https://github.com/actions/setup-python
+      - name: Setup Python
+        uses: actions/setup-python@v5
+
+      # Render the Quarto book
+      - name: Render Quarto Project
+        run: |
+          cd quarto_book
+          quarto render
+
+      # Setup Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      # Upload artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+          
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

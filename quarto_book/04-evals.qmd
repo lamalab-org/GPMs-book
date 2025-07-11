@@ -27,12 +27,11 @@ acronyms:
 
 ## The Evolution of Model Evaluation
 
-Assessing modern [gpms]{acronym-label="gpm" acronym-form="plural+short"}
+Assessing modern \acr{gpm}s
 is challenging due to their broad applicability across diverse domains.
 Unlike traditional models, which are designed for specific tasks and can
 be directly tested on well-defined objectives \[@raschka2018model\], it
-is impractical to evaluate [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} on every possible capability. As a result,
+is impractical to evaluate \acr{gpm}s on every possible capability. As a result,
 many evaluations rely on structured benchmarks that measure proficiency
 in key areas such as mathematics, chemistry, and language understanding
 \[@tikhonov2023post\]. However, such benchmarks often fall short in
@@ -45,8 +44,7 @@ based on their ability to predict molecular properties from molecular
 structures. \[@wu2018moleculenet\] While useful, these evaluations
 largely emphasized numerical accuracy on the isolated tasks the models
 were fine-tuned on, without probing the more complex reasoning or
-generative capabilities that [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} aim to capture. Over time, this evolution
+generative capabilities that \acr{gpm}s aim to capture. Over time, this evolution
 expanded to exam-like problem-solving, assessing structured tasks
 similar to those found in academic chemistry courses.
 \[@zaki2023mascqa0; @li2023camel\] More recent efforts aim to evaluate
@@ -58,8 +56,7 @@ consider the specific context and nature of each task. Rather than
 relying solely on static benchmarks, there is a growing demand for
 assessments that dynamically account for the diversity of chemical tasks
 and the specific capabilities required to solve them---mirroring the
-multifaceted potential of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} in chemistry.
+multifaceted potential of \acr{gpm}s in chemistry.
 [\[tab:chemistry_benchmarks,fig:benchmarks\]](#tab:chemistry_benchmarks,fig:benchmarks){reference-type="ref+Label"
 reference="tab:chemistry_benchmarks,fig:benchmarks"} gives an overview
 of some benchmarks that have been used in the chemical sciences.
@@ -67,8 +64,8 @@ of some benchmarks that have been used in the chemical sciences.
 ::: {#tab:chemistry_benchmarks}
   **Benchmark name**                       **Overall topic**                                                                                                                                 **Curation method**   **Count**
   ---------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------- --------------------- -----------
-  CAMEL - Chemistry \[@li2023camel\]       General Chemistry [mcq]{acronym-label="mcq" acronym-form="singular+short"}                                                                        A, L                  20 K
-  ChemBench \[@mirza2024large\]            General Chemistry [mcq]{acronym-label="mcq" acronym-form="singular+short"}, Reasoning                                                             M                     2.7 K
+  CAMEL - Chemistry \[@li2023camel\]       General Chemistry \acr{mcq}                                                                        A, L                  20 K
+  ChemBench \[@mirza2024large\]            General Chemistry \acr{mcq}, Reasoning                                                             M                     2.7 K
   ChemIQ \[@runcie2025assessing\]          Molecule Naming, Reasoning, Reaction Generation, Spectrum Interpretation                                                                          A                     796
   ChemLLM \[@zhang2024chemllm\]            Molecule Naming, Property Prediction, Reaction Prediction, Reaction Conditions Prediction, Molecule & Reaction Generation, Molecule Description   A, L                  4.1 K
   ChemLLMBench \[@guo2023large\]           Molecule Naming, Property Prediction, Reaction Prediction, Reaction Conditions Prediction, Molecule & Reaction Generation                         A, L                  800
@@ -84,8 +81,7 @@ of some benchmarks that have been used in the chemical sciences.
 
   : **Non-comprehensive overview of chemistry benchmarks**. Overview of
   chemistry benchmarks including the topics covered, the curation method
-  (automated, using [llms]{acronym-label="llm"
-  acronym-form="plural+short"}, manual), and the number of questions. We
+  (automated, using \acr{llm}s, manual), and the number of questions. We
   limit our scope here to benchmarks (and exclude other evaluation
   methods), since they constitute the most actively used and publicly
   available resources in the field at present.
@@ -93,12 +89,12 @@ of some benchmarks that have been used in the chemical sciences.
 
 ::: tablenotes
 **Abbreviations:** A: Automated methods, L: Usage of
-[llms]{acronym-label="llm" acronym-form="plural+short"}, M: Manual
+\acr{llm}s, M: Manual
 curation.
 :::
 
 <figure id="fig:benchmarks">
-<img src="media/figures/rescaled_figures/chemrev_figure8.png" alt="" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure8.png" alt="" / width="100%">
 <figcaption><strong>Comparison of measurement specificity and
 application relevance of chemistry benchmarks.</strong> This figure
 presents a subjective, qualitative positioning of selected
@@ -106,8 +102,7 @@ chemistry-related benchmarks along the axes of application relevance and
 measurement specificity (the extent to which a benchmark evaluates
 well-defined and objectively measurable outputs—such as physical or
 chemical properties—rather than more ambiguous tasks like answering
-general chemistry trivia or <span data-acronym-label="mcq"
-data-acronym-form="singular+short">mcq</span>). The icons indicate
+general chemistry trivia or \acr{mcq}). The icons indicate
 whether a benchmark incorporates multimodal inputs (e.g., images or
 spectra), when it is actively maintained (based on GitHub activity
 within the past 6 months), and if it supports end-to-end evaluation via
@@ -119,19 +114,17 @@ authors.</figcaption>
 
 ### Desired Properties for Evaluations
 
-To meaningfully evaluate [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}, we must first consider what makes a good
+To meaningfully evaluate \acr{gpm}s, we must first consider what makes a good
 evaluation. Ideally, an evaluation should provide insights that
 translate into real-world impact, allowing comparisons between models.
 Thus, evaluation results must be stable over time and reproducible
 across different environments---assuming access to the same model
 weights or version, which is not always guaranteed when using
-proprietary [apis]{acronym-label="api" acronym-form="plural+short"}.
+proprietary \acr{api}s.
 \[@Ollion2024dangers\] A key challenge is so-called construct
 validity---ensuring that evaluations measure what truly matters rather
 than what is easiest to quantify. For example, asking a model to
-generate valid [smiles]{acronym-label="smiles"
-acronym-form="singular+short"} strings may test surface-level structure
+generate valid \acr{smiles} strings may test surface-level structure
 learning but fails to assess whether the model understands chemical
 reactivity or synthesis planning. Many methods fall into the trap of
 assessing proxy tasks instead of meaningful competencies, which leads to
@@ -145,7 +138,7 @@ The choice of what and how to measure is highly impacted by the data.
 Datasets in chemistry often differ in subtle but impactful ways: biases
 in chemical space coverage (e.g., overrepresented reaction types)
 \[@Jia_2019anthropogenic; @Fujinuma_2022why\], variations in data
-fidelity (e.g., [dft]{acronym-label="dft" acronym-form="singular+short"}
+fidelity (e.g., \acr{dft}
 vs. experimental measurements), inconsistent underlying assumptions
 (e.g., simulation level or experimental conditions), and differences in
 task difficulty. These differences can distort what evaluations actually
@@ -160,11 +153,10 @@ clearly stated scope and limitations.
 #### Scoring Mechanism
 
 <figure id="fig:scoring">
-<img src="media/figures/final_figures/chembench_scoring.png" alt="" width="100%" />
+<img src="media/figures/final_figures/chembench_scoring.png" alt="" / width="100%">
 <figcaption><strong><code>ChemBench</code> [@mirza2024large] rankings
 based on different scoring metrics</strong>: All metrics are a sum,
-weighted sum, or maximum values over all <span data-acronym-label="mcq"
-data-acronym-form="plural+short">mcqs</span>. The weighted sums are
+weighted sum, or maximum values over all \acr{mcq}s. The weighted sums are
 calculated by taking the manually rated difficulty (basic, immediate,
 advanced) of the question into account. For equal weighting, all
 categories are weighted equally, regardless of the number of questions.
@@ -216,8 +208,7 @@ evaluation process should be clearly specified, from prompt formulation
 and data pre-processing to metric selection and aggregation.
 Standardized evaluation protocols, careful tracking of environmental
 variables (e.g., hardware, model version, and sampling settings such as
-the inference temperature for [llms]{acronym-label="llm"
-acronym-form="plural+short"}), and consistent version control
+the inference temperature for \acr{llm}s), and consistent version control
 (documenting the exact version of the used model) are essential to avoid
 unintentional variation across runs. Additionally, communicating
 limitations and design decisions openly can help the broader community
@@ -231,8 +222,7 @@ others to interpret, reproduce, and build upon the results.
 
 ### Representational vs. Pragmatic Evaluations
 
-It is useful to think of evaluations in [ml]{acronym-label="ml"
-acronym-form="singular+short"} as living on a spectrum from
+It is useful to think of evaluations in \acr{ml} as living on a spectrum from
 representational to pragmatic. Representational evaluations focus on
 measuring concepts that exist in the real world. For instance, one might
 ask how well a model predicts a physically significant quantity like the
@@ -241,9 +231,8 @@ in pragmatic evaluations, the concept we measure is defined by the
 evaluation procedure itself. A well-known example of this is IQ tests.
 The IQ is not a physical property that exists in the world independent
 of the test. It is rather defined by the measurement procedure. In the
-practice of evaluating [ml]{acronym-label="ml"
-acronym-form="singular+short"} models, this includes tasks like
-answering [mcq]{acronym-label="mcq" acronym-form="singular+short"} or
+practice of evaluating \acr{ml} models, this includes tasks like
+answering \acr{mcq} or
 completing structured benchmarks, where meaning emerges primarily
 through performance comparison. Such evaluations are essential for
 standardization and progress tracking; however, they risk creating
@@ -253,8 +242,7 @@ or biases.\[@alampara2025lessons; @skalse2022defining\]
 
 #### Estimator Types
 
-To systematically evaluate [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}, various methods (so-called estimators)
+To systematically evaluate \acr{gpm}s, various methods (so-called estimators)
 have been developed, yet their application in chemistry remains limited.
 Broadly, these approaches summarized in
 [3](#fig:estimators){reference-type="ref+Label"
@@ -266,7 +254,7 @@ limitations, and no single approach can comprehensively capture a
 model's performance across all potential application scenarios.
 
 <figure id="fig:estimators">
-<img src="media/figures/rescaled_figures/chemrev_figure10.png" alt="" width="100%" />
+<img src="media/figures/rescaled_figures/chemrev_figure10.png" alt="" / width="100%">
 <figcaption><strong>Comparison of Evaluation Methodologies</strong>:
 This figure compares five common evaluation methodologies for <span
 data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>
@@ -283,8 +271,7 @@ position.</figcaption>
 #### Traditional Benchmarks {#para:trad_benchmarks}
 
 Traditional benchmarks can provide a fast and scalable evaluation of the
-models. In the context of [ml]{acronym-label="ml"
-acronym-form="singular+short"}, a benchmark typically refers to a
+models. In the context of \acr{ml}, a benchmark typically refers to a
 curated collection of tasks or questions alongside a defined evaluation
 protocol, which allows different models to be compared under the same
 conditions. Despite their advantages, summarized in
@@ -357,8 +344,7 @@ coordination and oversight by a trusted third party.
 Such challenges have been rare in chemistry to date, though recent
 examples in areas like polymer property prediction \[@gang2025neurips\]
 suggest this is beginning to change. More successful examples exist in
-related domains---most notably the [caspr]{acronym-label="caspr"
-acronym-form="singular+short"} competition\[@Moult2005\] for protein
+related domains---most notably the \acr{caspr} competition\[@Moult2005\] for protein
 structure prediction in biology, and the crystal structure prediction
 blind test challenge\[@Lommerse2000\] in materials science.
 
@@ -394,8 +380,7 @@ to identify alternatives to harmful substances.\[@urbina2022dual\]
 #### Real-World Deployment Studies
 
 Real-world deployment studies evaluate models in practical use settings,
-such as testing a [gpm]{acronym-label="gpm"
-acronym-form="singular+short"} in a laboratory environment.
+such as testing a \acr{gpm} in a laboratory environment.
 \[@he2020deployment\] Unlike controlled benchmarks, these studies
 provide insights into how models perform in dynamic, real-world
 conditions, capturing challenges that predefined evaluations may
@@ -434,7 +419,7 @@ improvements in prompt design and training strategies.
 
 ### Emerging Evaluations Needs
 
-To evaluate [gpms]{acronym-label="gpm" acronym-form="plural+short"} in
+To evaluate \acr{gpm}s in
 real-world conditions, more open-ended, multimodal, and robust
 approaches are needed. This is particularly evident in chemistry, where
 meaningful tasks often extend beyond text and require interpreting
@@ -467,7 +452,7 @@ solutions may exist.
 In parallel to capability assessments, the evaluation of safety (see
 [\[sec:safety\]](#sec:safety){reference-type="ref+Label"
 reference="sec:safety"}) is becoming increasingly important---especially
-as [gpms]{acronym-label="gpm" acronym-form="plural+short"} gain access
+as \acr{gpm}s gain access
 to sensitive scientific knowledge and tools.\[@bran2024augmenting;
 @boiko2023autonomous\] Current safety evaluations often rely on manual
 red teaming [1.3](#sec:eval_methods){reference-type="ref+Label"
@@ -480,16 +465,14 @@ contexts.\[@goldstein2023generative\]
 Moreover, evaluations should not be limited to static benchmarks. One
 promising avenue could be the organization of recurring community-wide
 challenges, similar to established competitions in other fields (e.g.,
-[caspr]{acronym-label="caspr"
-acronym-form="singular+short"}\[@Moult2005\]). These
+\acr{caspr}\[@Moult2005\]). These
 challenges---ideally coordinated by major research consortia or national
 labs---can serve as shared reference points, drive innovation in
 evaluation design.
 
 #### Standardization Efforts
 
-One persistent challenge in evaluating [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} is the lack of common standards---whether
+One persistent challenge in evaluating \acr{gpm}s is the lack of common standards---whether
 in benchmark design, metric selection, or reporting protocols. This
 fragmentation makes it challenging to compare results or ensure
 reproducibility. While some degree of standardization can support
@@ -500,7 +483,6 @@ more open-ended, adaptive evaluations.
 A more feasible path may lie in promoting transparent documentation of
 evaluation choices and developing meta-evaluation tools that assess the
 validity, coverage, and robustness of different approaches. Emerging
-frameworks such as [irt]{acronym-label="irt"
-acronym-form="singular+short"} offer promising directions for such
+frameworks such as \acr{irt} offer promising directions for such
 reflective evaluations, enabling nuanced insights beyond surface-level
 metrics. \[@schilling2025lifting\]

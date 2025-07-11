@@ -26,32 +26,25 @@ acronyms:
 # Outlook and Conclusions
 
 <figure id="fig:conclusions">
-<img src="media/figures/conclusion_figure_v2.png" alt="" width="100%" />
-<figcaption><strong>Evolution of <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span>-powered systems.</strong>
-First <span data-acronym-label="gpm"
-data-acronym-form="singular+short">gpm</span> applications directly used
-zero- or few-shot prompted or fine-tuned <span data-acronym-label="gpm"
-data-acronym-form="plural+short">gpms</span>. More complex tasks could
-be solved by combining multiple <span data-acronym-label="gpm"
-data-acronym-form="plural+short">gpms</span> in workflows where the
+<img src="media/figures/conclusion_figure_v2.png" alt="" / width="100%">
+<figcaption><strong>Evolution of \acr{gpm}-powered systems.</strong>
+First \acr{gpm} applications directly used
+zero- or few-shot prompted or fine-tuned \acr{gpm}s. More complex tasks could
+be solved by combining multiple \acr{gpm}s in workflows where the
 execution trajectory is pre-determined. In agents, <span
 data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span>
 autonomously decide on the execution trajectory and in this way enable
 researchers to address open-ended tasks. Moving forward, coupling the
 validation closer to real-world objectives with further increased
 validation in better, custom user interfaces will enhance the impact of
-<span data-acronym-label="gpm"
-data-acronym-form="plural+short">gpms</span>. To ensure safe and ethical
+\acr{gpm}s. To ensure safe and ethical
 deployment, the community must engage with the broader public and
 policymakers to devise governance strategies.</figcaption>
 </figure>
 
-As we have explored in this review, [gpms]{acronym-label="gpm"
-acronym-form="plural+short"}---especially [llms]{acronym-label="llm"
-acronym-form="plural+short"}---hold remarkable promise for the chemical
+As we have explored in this review, \acr{gpm}s---especially \acr{llm}s---hold remarkable promise for the chemical
 sciences. The field moved from using models in simple single calls to a
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} to developing
+\acr{gpm}s to developing
 workflows, in which a sequence of calls is performed, to increasingly
 complex autonomous agents in which the model decides on its own
 trajectory (see [1](#fig:conclusions){reference-type="ref+Label"
@@ -82,8 +75,7 @@ imposes some natural speed limits: Some experiments simply take their
 time.
 
 Overall, this landscape suggests a future rich with opportunity. But
-realizing the potential impact of [gpms]{acronym-label="gpm"
-acronym-form="plural+short"} demands clear-eyed caution: while it is now
+realizing the potential impact of \acr{gpm}s demands clear-eyed caution: while it is now
 deceptively easy to spin up prototypes, transforming them into robust,
 reliable tools is a far more arduous task. \[@sculley2014machine\] More
 crucial still is our need for rigorous measurement and
@@ -93,14 +85,14 @@ design of sensible governance. No single discipline can shoulder this
 alone; chemists, policy experts, and computer scientists must broaden
 their ranks and collaborate. This is particularly since science has
 always benefited from embracing a diversity of approaches. While
-[gpm]{acronym-label="gpm" acronym-form="singular+short"}-powered
+\acr{gpm}-powered
 approaches for science, such as "AI scientists", hold promise, a myopic
 focus on "AI scientists" might lead to "scientific
 monocultures".\[@Savitsky_2025\] We hope this review lowers the barrier
 to entry to the background and applications of
-[gpms]{acronym-label="gpm" acronym-form="plural+short"} in the chemical
+\acr{gpm}s in the chemical
 sciences, inviting a wider spectrum of contributors to adopt a
 systems-science mindset---and, in doing so, to help harness the best of
-what [gpms]{acronym-label="gpm" acronym-form="plural+short"} can offer
+what \acr{gpm}s can offer
 for tackling the chemical sciences' most persistent and pressing
 challenges.

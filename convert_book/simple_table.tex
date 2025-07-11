@@ -1,0 +1,39 @@
+\begin{tabular}{%
+  >{\raggedright\arraybackslash}p{0.20\textwidth}
+  >{\raggedright\arraybackslash}p{0.15\textwidth}
+  >{\raggedright\arraybackslash}p{0.25\textwidth}
+  >{\raggedright\arraybackslash}p{0.32 \textwidth}
+}
+  
+  \toprule
+  \textbf{Representation} & \textbf{Encoded information} & \textbf{Description} & \textbf{Example} \\
+  \midrule
+
+  \midrule
+
+    Elemental composition & Stoichiometry & Always available, but non-unique. & C9H8O4 \\
+    \addlinespace
+    \gls{iupac} name & Stoichiometry, bonding, geometry & Universally understood, systematic nomenclature, unmanageable for large molecules, and lacks detailed 3D information. & 2-acetyloxybenzoic acid \\
+    \addlinespace
+    \gls{smiles} \autocite{weininger1988smiles} & Stoichiometry, bonding & Massive public corpora and tooling support, however, there are several valid strings per molecule, and it does not contain spatial information. & \footnotesize \texttt{CC(=O)OC1=CC=CC=C1C(=O)O}, \texttt{O=C(O)c1ccccc1OC(C)=O}, \emph{etc.} \\
+    \addlinespace
+    \gls{selfies} \autocite{krenn2020self,cheng2023group} & Stoichiometry, bonding & 100\% syntactic and semantic validity by construction, including meaningful grouping. & \footnotesize \texttt{[C][C][=Branch1][C][=O][O][C][=C][C][=C][C][=C][Ring1][=Branch1][C][=Branch1][C][=O][O]} \\
+    \addlinespace
+    \gls{inchi} & Stoichiometry, bonding & Canonical one-to-one identifier; encodes stereochemistry layers. & \footnotesize \texttt{InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)} \\
+    \addlinespace
+    Graphs & Stoichiometry, bonding, geometry & Strong inductive bias that works with \glspl{gnn}. Symmetry-equivariant variants available. Long-range interactions are implicit. & [Image: figures/Aspirin.png] \\
+    \addlinespace
+    xyz representation & Stoichiometry, geometry & Exact spatial detail. It is high dimensional, and orientation alignment is needed. & \footnotesize 1.2333    0.5540    0.7792 O -0.6952   -2.7148   -0.7502 O 0.7958   -2.1843    0.8685 O 1.7813    0.8105   -1.4821 O -0.0857    0.6088    0.4403 C \ldots \\ 
+    \addlinespace
+    Multimodal & Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining & Combines complementary signals; boosts robustness and coverage. It is hard to implement, the complexity scales with the amount of representations, some modalities are data-scarce, and the information encoded totally depends on the modalities included. & [Image: figures/60031761.jpeg] \\
+    \addlinespace
+    \gls{cif} \autocite{hall1991crystallographic} & Stoichiometry, bonding, geometry, periodicity & Standardized and widely supported, however, it carries heterogeneous keyword sets and parser overhead & \footnotesize \texttt{data\_Si \_symmetry\_space\_group\_name\_H-M   'P 1' \_cell\_length\_a   3.85 \ldots \_cell\_angle\_alpha   60.0 \ldots \_symmetry\_Int\_Tables\_number   1 \_chemical\_formula\_structural   Si \_chemical\_formula\_sum   Si2 \_cell\_volume   40.33 \_cell\_formula\_units\_Z   2 loop\_ \_symmetry\_equiv\_pos\_site\_id  \_symmetry\_equiv\_pos\_as\_xyz   1  'x, y, z' loop\_ \_atom\_type\_symbol \_atom\_type\_oxidation\_number  Si0+  0.0loop\_ \_atom\_site\_type\_symbol \_atom\_site\_label \_atom\_site\_symmetry\_multiplicity \_atom\_site\_fract\_x \ldots \_atom\_site\_occupancy  Si0+  Si0  1  0.75  0.75  0.75  1.0 Si0+  Si1  1  0.0  0.0  0.0  1.0}\\ 
+    \addlinespace
+    Condensed \gls{cif} \autocite{gruver2024finetuned, antunes2024crystal} & Stoichiometry, geometry, symmetry, periodicity & Good for crystal generation tasks. It omits occupancies and defects, custom tooling is needed, and only works for crystals & \footnotesize \texttt{3.8 3.8 3.8 59 59 59 Si0+ 0.75 0.75 0.75 Si0+ 0.00 0.00 0.00}\\
+    \addlinespace
+    \glslink{slices}{SLICES} \autocite{Xiao_2023} & Stoichiometry, bonding, periodicity & Invertible, symmetry-invariant and compact for general crystals. However, it carries ambiguity for disordered sites & \footnotesize \texttt{Si Si 0 1 + + + 0 1 + + o 0 1 + o + 0 1 o + +}   \\
+    \addlinespace
+    \glslink{localenv}{Local-Env}\autocite{alampara2024mattext} & Stoichiometry, bonding, symmetry, coarse graining & Treats each coordination polyhedron as a \enquote{molecule}, it is transferable and compact; but it ignores long-range order and its reconstruction requires post-processing & \footnotesize \texttt{R-3m Si (2c) [Si][Si]([Si])[Si]} \\
+    \addlinespace
+    Natural-language description \autocite{ganose2019robocrystallographer} & Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining & It is human-readable and more intuitive tokenizable by \glspl{llm}. However, trying to encode all the information can lead to verbose, ambiguous descriptions. & \enquote{Silicon crystallizes in the diamond-cubic structure, a lattice you can picture as two face-centred-cubic frameworks gently interpenetrating\ldots} \\
+\end{tabular}

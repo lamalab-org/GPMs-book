@@ -23,6 +23,7 @@ book:
   - 07-safety.qmd
   - 08-outlook_conclusions.qmd
   - 09-references.qmd
+  - glossary.qmd
 bibliography: references.bib
 format:
   html:

@@ -101,3 +101,4 @@ This book covers the following topics:
 7. [Implications of GPMs: Education, Safety, and Ethics](07-safety.qmd)
 8. [Outlook and Conclusions](08-outlook_conclusions.qmd)
 -  [References](09-references.qmd)
+-  [Glossary](glossary.qmd)

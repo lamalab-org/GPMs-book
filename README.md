@@ -22,7 +22,6 @@ Help us grow and improve this resource by sharing your feedback or contributing 
 
 Together, we can keep this reference **useful**, **relevant**, and **up to date** for everyone!
 This document provides an overview of the research sections and their associated references.
-This document provides an overview of the research sections and their associated references.
 
 ## Introduction
 

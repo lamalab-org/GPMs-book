@@ -14,7 +14,7 @@ or access it as a collaborative online book at:
 
 👉 [Online Book](https://gpmbook.lamalab.org/)
 
-We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
+We also **welcome community contributions** — this is a living resource of references we have used in the review, and we aim to keep current with the evolving ecosystem. If you don't find your work or your favourite work here, please add it.
 
 ### ✨ Join the Community
 

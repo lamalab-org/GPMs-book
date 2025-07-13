@@ -12,7 +12,7 @@ or access it as a collaborative online book at:
 
 👉 [arXiv](https://arxiv.org/pdf/2507.07456)
 
-👉 [Online Book](https://lnkd.in/eWQVf4jJ)
+👉 [Online Book](https://gpmbook.lamalab.org/)
 
 We also **welcome community contributions** — this is a living resource of references we ahve used in the review we aim to keep current with the evolving ecosystem. If you dont find your work or your favourite work here, please add it.
 

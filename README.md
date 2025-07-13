@@ -2,7 +2,7 @@
 
 ![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)
-[![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)](https://lnkd.in/eWQVf4jJ)
+[![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)](https://gpmbook.lamalab.org/)
 [![arXiv](https://img.shields.io/badge/arXiv-2507.07456-b31b1b.svg)](https://arxiv.org/abs/2507.07456)
 
 ## 📘 Read the Review

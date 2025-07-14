@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Glossary – General Purpose Models for the Chemical Sciences</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./09-references.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fffb2cfd06bc0bcd22fa5e79382abad9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glossary.html">Glossary</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">General Purpose Models for the Chemical Sciences</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General purpose models for the chemical sciences</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data_taxonomy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Shape and Structure of Chemical Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-architectures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Building Principles of GPMs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-evals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Evaluations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-accelerating_applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Accelerating Applications</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-safety.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Implications of GPMs: Education, Safety, and Ethics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-outlook_conclusions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Outlook and Conclusions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://lamalab.org/"><i class="bi bi-globe"></i>Visit our website</a></li><li><a href="https://x.com/jablonkagroup"><i class="bi bi-twitter-x"></i>Follow us on X (Twitter)</a></li><li><a href="https://forms.fillout.com/t/eoGA7AhnAKus"><i class="bi bi-person-badge"></i>We are hiring!</a></li><li><a href="mailto:contact@lamalab.org"><i class="bi bi-mailbox"></i>Contact us</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Glossary</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="glossary">
+<dl>
+<dt>alignment</dt>
+<dd>
+The process of ensuring that a machine-learning model’s behavior is consistent with human intentions, values, or task objectives. In the context of large language models (LLMs), alignment often involves fine-tuning with human feedback to produce helpful, honest, and harmless outputs. Alignment can also refer to aligning representations or embeddings across different modalities—such as text and images—in multi-modal systems, enabling meaningful cross-modal reasoning and retrieval.
+</dd>
+<dt>agent</dt>
+<dd>
+An entity that interacts with an environment by taking actions based on observations to achieve a goal. In reinforcement learning (RL), agents learn from feedback to optimize behavior over time. In the context of LLMs, agents can use tools, retrieve external information, and perform multi-step reasoning to complete complex, goal-oriented tasks.
+</dd>
+<dt>application programming interface (API)</dt>
+<dd>
+A set of rules and protocols that allow different software systems to communicate with each other. APIs enable developers to access the functionality of external services or applications programmatically, often over a network. For example, the PubChem API allows programmatic access to chemical-compound data, enabling automated retrieval of molecular structures and properties.
+</dd>
+<dt>benchmark</dt>
+<dd>
+A standardized task or dataset used to evaluate and compare the performance of models or methods. Benchmarks help assess progress and identify strengths and weaknesses of different approaches.
+</dd>
+<dt>breadth-first search (BFS)</dt>
+<dd>
+A graph-traversal algorithm that explores all neighbors of a node before moving to the next level of nodes. It is often used to find the shortest path in unweighted graphs.
+</dd>
+<dt>bilingual evaluation understudy (BLEU)</dt>
+<dd>
+A metric for evaluating the quality of text generated by a model by comparing it to one or more reference texts. BLEU measures n-gram overlap between the generated output and the reference. Higher BLEU scores indicate closer matches.
+</dd>
+<dt>Bayesian optimization (BO)</dt>
+<dd>
+A global optimization strategy for expensive black-box functions. It does not require access to derivatives of the objective function. BO builds a probabilistic surrogate model, typically a Gaussian process (GP), to guide the selection of query points by balancing exploration and exploitation.
+</dd>
+<dt>convolutional neural network (CNN)</dt>
+<dd>
+A type of neural network (NN) designed to process data with a grid-like structure, such as images. CNNs use convolutional layers to automatically learn spatial hierarchies of features from the input.
+</dd>
+<dt>chain-of-thought (CoT)</dt>
+<dd>
+A prompting strategy that involves a series of intermediate natural-language reasoning steps that lead to the final output. CoT encourages an LLM to explain its reasoning step by step (e.g., by prompting it to “think step by step”), and it is intended to improve the ability of LLMs to perform complex reasoning.
+</dd>
+<dt>compositionality</dt>
+<dd>
+When a complex structure can be constructed by combining simpler components, it is said to have the compositional property. In the context of machine learning (ML), a model or function (f(x,y)) exhibits compositionality if it can be constructed from (h(x)) and (k(y)) as its components: (f(x,y)=g[h(x),k(y)]), where (h), (k), and (g) are learned functions. This structure allows modularity, parameter sharing, and generalization to novel input combinations by leveraging the learned behavior of the components. In many deep-learning architectures, compositionality is achieved by the hierarchical application of simpler transformations, such as feed-forward neural networks (FNNs).
+</dd>
+<dt>computational scaling</dt>
+<dd>
+The way in which the computational cost of an algorithm or model increases with problem size (e.g., the number of atoms, data points, or parameters). Understanding scaling behavior is important for assessing feasibility and performance at larger scales. For example, traditional implementations of density functional theory (DFT) scale as ((N^3)) with the number of basis functions, making large systems computationally expensive.
+</dd>
+<dt>context window</dt>
+<dd>
+The span of input tokens that a model considers at once when generating predictions. In LLMs, the context window defines how much preceding (and possibly surrounding) text the model can attend to. Larger context windows allow the model to capture longer dependencies but increase computational cost.
+</dd>
+<dt>dry age-related macular degeneration (dAMD)</dt>
+<dd>
+A chronic eye disease that causes gradual loss of central vision due to the thinning of the macula. dAMD is the more common and less severe form of age-related macular degeneration, typically progressing slowly over time.
+</dd>
+<dt>data augmentation</dt>
+<dd>
+A technique used to artificially increase the size and diversity of a training dataset by applying transformations or generating variations of the original data. Data augmentation helps improve model generalization and robustness.
+</dd>
+<dt>data chunk</dt>
+<dd>
+A contiguous block or segment of data treated as a unit for processing, storage, or transmission. Data chunks are used to divide large datasets into manageable parts—for example, when streaming text or segmenting long sequences. Unlike a <em>batch</em>, which typically refers to a set of independent samples processed together in training, a data chunk often preserves sequential or structural continuity within a single sample.
+</dd>
+<dt><em>de novo</em> design</dt>
+<dd>
+The process of generating novel molecules or materials from scratch, guided by desired properties or objectives rather than by modifying known structures.
+</dd>
+<dt>dense/sparse vector</dt>
+<dd>
+Two categories of vector representations used in machine learning (ML) and data processing. <em>Dense vectors</em> have most or all elements non-zero and are typically used for learned embeddings. <em>Sparse vectors</em> contain mostly zero values and are common in high-dimensional representations such as one-hot encodings (OHEs). Sparse vectors are more memory-efficient when stored in specialized formats, while dense vectors are preferred for neural computation because they contain richer information.
+</dd>
+<dt>depth-first search (DFS)</dt>
+<dd>
+A graph-traversal algorithm that explores as far as possible along each branch before backtracking. DFS is often used for pathfinding, cycle detection, and analyzing graph structures.
+</dd>
+<dt>deep learning (DL)</dt>
+<dd>
+A subfield of machine learning (ML) that uses neural networks (NNs) with many layers to model complex patterns in data. Deep learning has enabled major advances in image recognition, natural-language processing, and molecular modeling.
+</dd>
+<dt>weight-decomposed low-rank adaptation (DoRA)</dt>
+<dd>
+An extension of low-rank adaptation (LoRA) that separates weight adaptation into magnitude and direction components. DoRA achieves efficient fine-tuning of LLMs by modifying only the direction of weights while preserving the pre-trained magnitude, improving stability and performance.
+</dd>
+<dt>direct preference optimization (DPO)</dt>
+<dd>
+A method for fine-tuning LLMs based on human preference data without using reinforcement learning. DPO directly optimizes the model (policy) to prefer outputs ranked higher by human annotators, simplifying the reinforcement learning from human feedback (RLHF) pipeline.
+</dd>
+<dt>domain-specific language (DSL)</dt>
+<dd>
+A programming language tailored to a particular application domain. DSLs offer specialized syntax and abstractions that make it easier to express solutions within that domain, such as chemical synthesis.
+</dd>
+<dt>evolutionary algorithm (EA)</dt>
+<dd>
+A family of optimization algorithms inspired by natural selection. EAs evolve a population of candidate solutions over multiple generations using operations such as mutation, crossover, and score-based selection to find high-performing solutions.
+</dd>
+<dt>extended connectivity fingerprint (ECFP)</dt>
+<dd>
+A type of molecular fingerprint that represents chemical structures as binary or count vectors based on local atomic environments. ECFPs are generated by iteratively hashing the neighborhoods of each atom up to a given radius, capturing information about connectivity and substructures. These fingerprints are invariant to atom indexing and are commonly used in machine-learning pipelines for tasks such as virtual screening, molecular similarity, and property modeling. A widely used variant is ECFP4, which uses a radius of 2.
+</dd>
+<dt>embedding</dt>
+<dd>
+A representation of discrete or high-dimensional data in a continuous vector space that preserves relevant relationships or structure. Embeddings are commonly used for words, molecules, graphs, and other symbolic data.
+</dd>
+<dt>energy rank alignment (ERA)</dt>
+<dd>
+A method for aligning the training of generative models with energy-based evaluations. ERA encourages the model to assign higher probabilities to lower-energy (more favorable) configurations by matching the model’s ranking of samples to their energy scores.
+</dd>
+<dt>F<span class="math inline">\(_1\)</span> score</dt>
+<dd>
+A performance metric for classification tasks that balances precision and recall. It is defined as the harmonic mean of precision and recall:<br>
+(F_1 = 2 ).<br>
+The F<span class="math inline">\(_1\)</span> score ranges from 0 to 1. Because the harmonic mean is dominated by the smaller of the two numbers, a high F<span class="math inline">\(_1\)</span> score means that both precision and recall are high, making this metric useful when classes are imbalanced or when both false positives and false negatives are important.
+</dd>
+<dt>fine-tuning</dt>
+<dd>
+The process of taking a pre-trained model and continuing its training on a smaller, task-specific dataset to adapt it to a particular application. Fine-tuning updates the model parameters to specialize its behavior while retaining the general knowledge learned during pre-training.
+</dd>
+<dt>feed-forward neural network (FNN)</dt>
+<dd>
+The simplest class of neural networks in which information flows in one direction from input to output through a series of connected layers, without cycles or feedback connections.
+</dd>
+<dt>fused representation</dt>
+<dd>
+A joint representation that integrates information from multiple modalities into a single embedding space. See <strong>latent fusion</strong>.
+</dd>
+<dt>gating mechanism</dt>
+<dd>
+A neural network component that controls the flow of information by modulating one signal using another, typically via element-wise multiplication. After computing a gate vector <span class="math inline">\(g(x)\)</span>, the gating mechanism applies it to an input signal <span class="math inline">\(z\)</span> as <span class="math inline">\(z' = g(x) \odot z\)</span>, where <span class="math inline">\(\odot\)</span> denotes element-wise multiplication. This allows the model to selectively suppress or pass through different components of <span class="math inline">\(z\)</span> based on the learned gating function <span class="math inline">\(g\)</span>. Gating mechanisms are central to architectures like LSTMs, where they regulate memory updates, retention, and output generation.
+</dd>
+<dt>genetic algorithm (GA)</dt>
+<dd>
+This subset of evolutionary algorithms models candidate solutions as individuals represented by strings of “genes” (e.g., binary digits or symbols). Unlike broader evolutionary algorithms, GAs focus heavily on genetic representations and recombination to explore the search space.
+</dd>
+<dt>graph neural network (GNN)</dt>
+<dd>
+A type of neural network architecture designed to operate on graph-structured data. GNNs learn representations by passing and aggregating information between neighboring nodes, making them well-suited for tasks involving chemical structures, such as molecules and crystals.
+</dd>
+<dt>general-purpose model (GPM)</dt>
+<dd>
+A model that is designed to generalize across a wide range of tasks and domains with minimal task-specific modifications. General-purpose models are typically pre-trained on vast, diverse datasets using self-supervised objectives. They can be efficiently adapted to new tasks via prompting or finetuning. Examples include architectures such as large language models and vision-language models.
+</dd>
+<dt>Gaussian process (GP)</dt>
+<dd>
+A non-parametric probabilistic model used to define a distribution over functions. It is commonly used in Bayesian optimization and regression to make predictions with uncertainty estimates.
+</dd>
+<dt>hallucination</dt>
+<dd>
+The phenomenon where a model generates output that seems plausible but is factually incorrect or unsupported by the input or training data. Hallucinations are common in large language models and pose challenges for applications requiring reliability and factual accuracy.
+</dd>
+<dt>hierarchical navigable small world (HNSW)</dt>
+<dd>
+An efficient algorithm for approximate nearest-neighbor search in high-dimensional spaces. It builds a graph-based data structure with multiple layers of navigable small-world graphs, where most nodes can be reached in a few steps through well-connected hubs. This structure allows fast and scalable similarity search. In chemistry, HNSW is often used for rapid retrieval of structurally similar molecules in large compound libraries.
+</dd>
+<dt>in-context learning (ICL)</dt>
+<dd>
+In this method, large language models are adapted to perform new tasks at inference time by conditioning them on examples provided directly in the input prompt, without updating their parameters. The model uses patterns inferred from these examples to predict or generate appropriate outputs for new inputs.
+</dd>
+<dt>InChI (International Chemical Identifier)</dt>
+<dd>
+A textual representation for chemical substances developed by IUPAC, designed to provide a standard and machine-readable representation of molecular structures. InChI encodes information such as connectivity, hydrogen atoms, stereochemistry, and isotopes in a structured sequence of layers. The general format is <code>InChI=version/layers</code>.
+</dd>
+<dt>inductive bias</dt>
+<dd>
+The set of assumptions a learning algorithm uses to generalize from limited training data to unseen examples. Inductive bias guides which solutions a model is likely to prefer and can arise from model architecture, input representations, or training objectives. <em>Hard</em> inductive biases are built into the structure of the model and define the solution space, while <em>soft</em> inductive biases, which nudge the model to different parts of the solution space, are encouraged by training choices or priors but can be overridden by the data.
+</dd>
+<dt>inference</dt>
+<dd>
+In the context of large language models, inference is the computational process by which a trained model produces output tokens given an input sequence. Inference involves executing a forward pass through the model to evaluate the conditional probability distribution over possible next tokens, and then sampling from that distribution using a decoding strategy. Unlike training, inference does not involve gradient computation or parameter updates, and is often optimized for speed and throughput.
+</dd>
+<dt>item response theory (IRT)</dt>
+<dd>
+This statistical framework was originally developed in psychometrics to model the relationship between a person’s latent ability and their probability of correctly answering test items. In machine learning, IRT is used to analyze model performance by treating test examples as items and estimating their difficulty, allowing for more nuanced evaluation than aggregate accuracy.
+</dd>
+<dt>latent fusion</dt>
+<dd>
+A method for integrating information from multiple modalities by combining their representations in a shared latent space. Latent fusion enables models to reason jointly over heterogeneous data, such as combining text and molecular structure embeddings for property prediction or generation tasks.
+</dd>
+<dt>latent space</dt>
+<dd>
+An abstract, typically lower-dimensional space where input data is represented after being transformed by a model. Latent spaces often aim to capture meaningful features or structures that are not explicitly present in the original data.
+</dd>
+<dt>latent state</dt>
+<dd>
+An internal, unobserved representation maintained by a model to capture relevant information about the input or sequence history. Latent states are used in models like recurrent neural networks and state-space models.
+</dd>
+<dt>language-interfaced fine-tuning (LIFT)</dt>
+<dd>
+A method for fine-tuning models by framing structured tasks such as classification or regression as natural-language prompts. LIFT enables the use of large language models for supervised tasks without modifying the model architecture, leveraging prompt-based interfaces to adapt to diverse formats.
+</dd>
+<dt>large language model (LLM)</dt>
+<dd>
+A language model that has a large number of parameters, usually on the scale of billions. For example, <code>Llama 3</code>, <code>GPT-3</code>, and <code>GPT-4</code> contain 70 B, 175 B, and 1.76 T parameters, respectively, while <code>Claude 3 Opus</code> is estimated to have 2 T parameters. Most current large language models are based on the transformer architecture. LLMs can perform many language tasks, such as generating human-like text, understanding context, translation, summarization, and question answering.
+</dd>
+<dt>language model (LM)</dt>
+<dd>
+A model that estimates the probability of a token or sequence of tokens occurring in a longer sequence of tokens. This probability is used to predict the most likely next token based on the previous sequence. Language models are trained on large datasets of text, learning the patterns and structures of language to understand, interpret, and generate natural language.
+</dd>
+<dt>Local-Env</dt>
+<dd>
+A textual representation of crystal structures, inspired by Pauling’s rule of parsimony and designed to leverage the structural redundancy often found in the local atomic arrangement of crystals. It begins with the crystal’s space group, followed by a list of distinct coordination environments, each specified by its Wyckoff label and a corresponding SMILES string.
+</dd>
+<dt>low-rank adaptation (LoRA)</dt>
+<dd>
+A parameter-efficient fine-tuning technique that freezes the pre-trained model weights and decomposes the update matrix into two lower-rank matrices that contain a reduced number of trainable parameters to be optimized during finetuning.
+</dd>
+<dt>loss function</dt>
+<dd>
+Optimization processes often try to minimize a loss function, which is a mathematical function that quantifies the difference between a model’s prediction and the true target. It guides the optimization process during training by indicating how well the model is performing.
+</dd>
+<dt>long short-term memory (LSTM)</dt>
+<dd>
+A type of recurrent neural network architecture designed to capture long-range dependencies in sequential data. LSTMs use gating mechanisms to control the flow of information, making them effective for tasks like language modeling, time-series prediction, and speech recognition.
+</dd>
+<dt>Monte Carlo tree search (MCTS)</dt>
+<dd>
+A heuristic search algorithm used for decision-making in sequential environments, particularly in games and planning problems. MCTS incrementally builds a search tree by simulating many random playouts from different states to estimate action values. It typically proceeds through four phases: selection, expansion, simulation, and backpropagation. MCTS has been notably used in systems like AlphaGo for planning in high-dimensional, sparse-reward environments.
+</dd>
+<dt>machine learning (ML)</dt>
+<dd>
+This field of computer science is focused on developing algorithms that enable systems to learn patterns from data and make predictions or decisions without being explicitly programmed.
+</dd>
+<dt>machine-learning interatomic potential (MLIP)</dt>
+<dd>
+A model that approximates the potential energy surface of atomic systems using machine learning techniques. MLIPs are typically trained on reference data from quantum-mechanical calculations such as density functional theory (DFT), learning to predict both energies and forces. They serve as a data-driven alternative to classical force fields, enabling more accurate and transferable atomistic simulations at a fraction of the cost of <em>ab initio</em> methods.
+</dd>
+<dt>modality</dt>
+<dd>
+A form of data characterized by a particular sensory or representational channel, such as text, images, audio, or molecular graphs. In machine learning, handling multiple modalities enables models to integrate and reason across diverse data sources.
+</dd>
+<dt>model temperature</dt>
+<dd>
+The term originates from statistical physics, where temperature controls the entropy of a system. In the context of machine learning, temperature is a parameter used during sampling from a probabilistic model to control the randomness of the output distribution. Lower temperatures sharpen the distribution, making outputs more deterministic, while higher temperatures flatten it, increasing diversity. In large language models (LLMs), temperature is commonly tuned during text generation to balance creativity and coherence.
+</dd>
+<dt>mixture of experts (MoE)</dt>
+<dd>
+A general modeling framework in which multiple specialized sub-models, or <em>experts</em>, are combined using a function that selects or weights their contributions based on the input.
+</dd>
+<dt>message-passing neural network (MPNN)</dt>
+<dd>
+A class of graph neural networks (GNNs) that operate on graphs by iteratively updating node representations through the exchange of messages with neighboring nodes. MPNNs are widely used in molecular property prediction and other graph-structured tasks.
+</dd>
+<dt>n-gram</dt>
+<dd>
+A contiguous sequence of <em>n</em> tokens from a given text. N-grams are commonly used in language modeling and text analysis.
+</dd>
+<dt>natural language processing (NLP)</dt>
+<dd>
+A subfield of computer science that uses machine learning to enable computers to process and generate human language. Primary tasks in NLP include speech recognition, text classification, natural language understanding, and natural language generation.
+</dd>
+<dt>neural network (NN)</dt>
+<dd>
+One of the most prevalent model components used in deep learning, inspired by the structure of the brain. Neural networks are made up of layers of connected units called neurons. Each layer takes a vector <strong>x</strong> as input, performs a simple calculation <em>f(x)</em>, and passes the result to the next layer. A typical layer can be represented as <em>f(x) = σ(Wx + b)</em>, where <strong>W</strong> is a matrix of learned weights, <strong>b</strong> a learned bias term, and σ a non-linear activation function. By stacking many such layers, neural networks can approximate complex functions. See also: <strong>compositionality</strong>.
+</dd>
+<dt>optical character recognition (OCR)</dt>
+<dd>
+A technique used to identify and convert images of printed or handwritten text into a machine-readable format. This involves segmentation of text regions, character recognition, and post-processing to correct errors and enhance accuracy.
+</dd>
+<dt>one-hot encoding (OHE)</dt>
+<dd>
+A method for representing categorical variables as binary vectors, where each category is assigned a unique position set to 1 and all others are 0. One-hot encoding is commonly used to input discrete features into machine-learning models that require numerical input.
+</dd>
+<dt>operating system (OS)</dt>
+<dd>
+Software that manages computer resources, providing an interface between hardware and software. The operating system handles tasks such as memory management, process scheduling, and device control.
+</dd>
+<dt>planning domain definition language (PDDL)</dt>
+<dd>
+A formal language used to specify planning problems in automated planning. PDDL defines the initial state, goal conditions, and available actions with their preconditions and effects, enabling planners to generate sequences of actions to achieve the desired outcomes. It has been applied to domains such as robotic control and retrosynthetic planning.
+</dd>
+<dt>parameter-efficient fine-tuning (PEFT)</dt>
+<dd>
+A methodology to efficiently fine-tune large pre-trained models without modifying their original parameters. PEFT strategies adjust only a small number of additional parameters during fine-tuning on a new, smaller dataset, significantly reducing computational and storage costs while achieving performance comparable to full fine-tuning. Common PEFT methods include Low-Rank Adaptation (LoRA), Quantized LoRA (QLoRA), and Delta-Orthogonal Rank Adaptation (DoRA).
+</dd>
+<dt>policy</dt>
+<dd>
+In reinforcement learning, a policy defines an agent’s behavior by mapping states to actions, typically denoted as π(a | s). A policy can be deterministic or stochastic and may be represented by a parameterized function such as a neural network. The goal of reinforcement learning (RL) is to learn a policy that maximizes expected cumulative reward.
+</dd>
+<dt>proximal policy optimization (PPO)</dt>
+<dd>
+A reinforcement-learning (RL) algorithm used to train large language models (LLMs) for alignment. PPO adjusts the policy parameters while keeping changes within a predefined safe range to maintain stability and improve learning efficiency. PPO is often used as part of reinforcement learning from human feedback (RLHF).
+</dd>
+<dt>prompting</dt>
+<dd>
+The practice of providing input to a large language model (LLM) in the form of natural-language instructions, questions, or examples to guide its behavior. Prompting can influence the model’s responses without changing its parameters.
+</dd>
+<dt>retrieval augmented generation (RAG)</dt>
+<dd>
+A technique for improving text generation by providing large language models (LLMs) with access to information retrieved from external knowledge sources. In practice, relevant retrieved text snippets are added to the prompt.
+</dd>
+<dt>regular expression (regex)</dt>
+<dd>
+A sequence of characters that defines a search pattern for matching text. Regular expressions are widely used for tasks such as string validation, extraction, and substitution.
+</dd>
+<dt>reinforcement learning (RL)</dt>
+<dd>
+In this machine-learning paradigm, an agent learns to take actions in an environment to maximize cumulative reward through trial and error. See also: <strong>policy</strong>.
+</dd>
+<dt>reinforcement learning from human feedback (RLHF)</dt>
+<dd>
+A mechanism that uses reinforcement learning (RL) to align large language models (LLMs) with user preferences by fine-tuning on human feedback. Users rate the quality of model responses; a preference model is trained on these ratings and then used in an RL setup to optimize the LLM’s generations.
+</dd>
+<dt>recurrent neural network (RNN)</dt>
+<dd>
+A type of neural network designed for processing sequential data by maintaining a hidden state that captures information from previous time steps. Without special mechanisms, RNNs struggle to capture long-range dependencies.
+</dd>
+<dt>receiver operating characteristic—area under the curve (ROC-AUC)</dt>
+<dd>
+A performance metric for binary classifiers representing the area under the ROC curve, which plots true-positive rate against false-positive rate at various thresholds. A higher ROC-AUC indicates better class-distinguishing ability, with 1.0 being perfect and 0.5 representing random guessing.
+</dd>
+<dt>semantic search</dt>
+<dd>
+Rather than retrieving text based on exact keyword matching, semantic search is a technique that retrieves information based on meaning. Semantic search uses vector representations (see <strong>embedding</strong>) of queries and documents to capture contextual similarity, enabling more accurate retrieval of relevant results even when different words are used.
+</dd>
+<dt>self-referencing embedded strings (SELFIES)</dt>
+<dd>
+A textual representation of molecular structures designed to be 100% robust, meaning every SELFIES string maps to a valid molecule. Unlike SMILES, SELFIES uses a grammar-based system to encode molecular structures in a way that prevents syntactic invalidity, making it especially useful for generative models.
+</dd>
+<dt>simplified line-input crystal-encoding system (SLICES)</dt>
+<dd>
+A string-based representation of crystal structures in a human-readable and machine-interpretable form. SLICES aims to facilitate generative modeling in materials science by representing crystalline structures as linear sequences amenable to sequence-based models.
+</dd>
+<dt>supervised fine-tuning (SFT)</dt>
+<dd>
+One of the simplest forms of the fine-tuning process, in which a pre-trained LLM is fine-tuned on a smaller, labeled dataset for a specific task.
+</dd>
+<dt>implified molecular input line entry system (SMILES)</dt>
+<dd>
+A non-unique textual representation of molecular structures, often small organic molecules, using a sequence of ASCII characters. SMILES encodes atoms and bonds in a linear form suitable for storage, search, and ML applications. The term <em>canonical</em> SMILES refers to a SMILES string that is generated using a deterministic algorithm (e.g., by RDKit) to ensure consistency.
+</dd>
+<dt>state-of-the-art (SOTA)</dt>
+<dd>
+In the context of ML, this term is used to describe the most advanced models or techniques that represent the highest level of performance achievable today. They are typically the result of extensive research and development and serve as benchmarks for researchers and developers.
+</dd>
+<dt>state space</dt>
+<dd>
+The set of all possible internal configurations (states) a system or model can occupy. In ML, the state space defines how the system evolves over time and is used to model sequential behavior.
+</dd>
+<dt>supervised learning</dt>
+<dd>
+In this ML paradigm, the model is trained on labeled data, learning to map inputs to known outputs.
+</dd>
+<dt>self-supervised learning (SSL)</dt>
+<dd>
+An ML technique that involves generating labels from the input data itself instead of relying on external labeled data. It has been foundational for the success of LLMs, as their pre-training task (next-word prediction or filling-in of masked words) is a self-supervised task.
+</dd>
+<dt>selective state space model (SSM)</dt>
+<dd>
+A neural architecture that models sequential data using latent states and learned transitions, while selectively controlling which components of the state are updated at each step. SSMs aim to improve long-range reasoning and efficiency, and are used as alternatives to attention mechanisms in tasks like language modeling.
+</dd>
+<dt>token</dt>
+<dd>
+A basic unit of text used by LMs, typically corresponding to a word, subword, or character depending on the tokenizer. Models process and generate text as sequences of tokens.
+</dd>
+<dt>transferability</dt>
+<dd>
+The degree to which knowledge learned in one setting—such as a task, domain, or data distribution—can be effectively reused or adapted in another. High transferability indicates that representations or models generalize well to new contexts, and it is a key objective in transfer learning, foundation models, and general-purpose architectures.
+</dd>
+<dt>transfer learning</dt>
+<dd>
+In this ML paradigm, knowledge gained from one task or domain is reused to improve performance on a different, often related, task. Transfer learning typically involves pre-training a model on a large dataset and then fine-tuning it on a smaller, task-specific dataset, making it particularly valuable in low-data settings.
+</dd>
+<dt>tree-of-thought (ToT)</dt>
+<dd>
+This prompting and reasoning framework extends chain-of-thought by exploring multiple reasoning paths in a tree structure. ToT allows a model to evaluate and revise intermediate steps, enabling more deliberate decision-making in complex tasks.
+</dd>
+<dt>unsupervised learning</dt>
+<dd>
+In this ML paradigm, the model is trained on unlabeled data to discover hidden patterns or structure, such as clusters or latent variables.
+</dd>
+<dt>vision-language model (VLM)</dt>
+<dd>
+A multi-modal model that can simultaneously learn from images and texts, generating text outputs.
+</dd>
+</dl>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-references.html" class="pagination-link" aria-label="References">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="https://raw.githubusercontent.com/lamalab-org/lamalab.github.io/main/static/png-file.png" alt="Lab for AI in Materials Science logo" style="height:3rem;vertical-align:middle;margin-right:0.4rem;"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Copyright © 2025 Lab for AI in Materials Science</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

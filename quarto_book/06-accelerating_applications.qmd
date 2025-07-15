@@ -711,7 +711,7 @@ More recent work has explored how fully fine-tuned
 \acr{llm}s can serve as
 comprehensive chemistry assistants for experimental guidance.
 @zhang2025large used a two-stage training process to first develop
-`Chemma-\acr{SFT}` by fine-tuning `LLaMA-2-7B` on 1.28 million chemical
+`Chemma-SFT` by fine-tuning `LLaMA-2-7B` on 1.28 million chemical
 reaction question-answer pairs about reaction prediction, single-step
 retrosynthesis, and reaction condition generation tasks. In the second
 stage of training, they developed `Chemma-RM` using
@@ -868,7 +868,7 @@ uncertainty---to select optimal molecules or reaction conditions for
 evaluation.
 
 For molecule optimization, @yu2025collaborative introduced
-`MultiModel`, a dual-\acr{llm} system where one model proposes
+`MultiMol`, a dual-\acr{llm} system where one model proposes
 candidates and the other supplies domain knowledge (see
 @sec-opt-llm-know-source). By fine-tuning the "worker"
 \acr{llm} to recognize

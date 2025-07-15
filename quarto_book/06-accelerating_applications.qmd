@@ -590,14 +590,14 @@ optimization, it achieved precise control over property trade-offs using
 weighted energy functions.
 
 @calanzone2025mol-moe also address the challenge of multi-objective
-molecular generation with `MOL-MOE`, a \acr{moe} framework (see
-[@sec-arch-moes] to learn more about \acr{moe} architectures). `MOL-MOE` dynamically
+molecular generation with `Mol-MoE`, a \acr{moe} framework (see
+[@sec-arch-moes] to learn more about \acr{moe} architectures). `Mol-MoE` dynamically
 combines property-specific expert models at test time using
 preference-guided routers toward drug-relevant molecular properties
 enabling flexible steering across multiple objectives without
 re-training. Compared to alternatives like
 `MORLHF`\[@zhou2024one-preference-fits-all\], \acr{sft} with rewards-in-context, and simple model
-merging such as Rewarded Soups\[@rame2023rewarded\]), `MOL-MOE` achieves
+merging such as Rewarded Soups\[@rame2023rewarded\], `Mol-MoE` achieves
 superior performance in both property optimization and
 steerability---particularly in out-of-distribution scenarios where other
 methods struggle.

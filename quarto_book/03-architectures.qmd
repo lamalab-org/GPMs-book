@@ -142,11 +142,11 @@ computational efficiency.
   information contained by each representation, we followed the criteria
   used by \[@alampara2024mattext\]. The examples shown are *aspirin* for
   elemental composition, \acr{iupac} name, \acr{smiles}, \acr{selfies}, , graphs, 3D coordinates; and
-  *silicon* for , condensed , , , and natural-language description. Two
+  *silicon* for \acr{cif}, condensed \acr{cif}, \acr{slices}, \acr{localenv}, and natural-language description. Two
   non-canonical \acr{smiles} are shown to illustrate ambiguity. The
-  examples for 3D coordinates, , and natural-language description are
+  examples for 3D coordinates, \acr{cif}, and natural-language description are
   truncated to fit in the table. For the multimodal representation, only
-  one of the possible modalities is shown ($^{13}$C spectrum).
+  one of the possible modalities is shown ($^{13}$C \acr{nmr} spectrum).
 :::
 
 However, a common strategy is to represent chemical information as a
@@ -446,7 +446,7 @@ and contrastive, along with example pretext tasks for each.
 
 ![](media/figures/rescaled_figures/chemrev_figure5.png){width=100%}
 
-**Main families in \acr{ssl}s**. The figure illustrates the two primary approaches to \acr{ssl}, each using different strategies to generate pseudo-labels from the data itself. **Generative Methods (Top Panel):** This family focuses on reconstruction and prediction. The model learns representations by generating missing information. Examples shown correspond to the pretext tasks discussed in the text: (1) *Predicting masks* in a graph, analogous to masked modeling (more details in [sec-masked_modeling]); (2) *Learning from context*, which is the basis for next token prediction (more details in [1.4.3.2](#sec-next_token_prediction)); and (3) *Learning to denoise*, where the model reconstructs a clean input from a corrupted version. (see [1.4.3.3](#sec-denoising)) **Contrastive Learning (Bottom Panel):** This family learns by comparing samples. The model is trained to pull representations of similar samples together while pushing dissimilar ones apart. Examples include: (1) *Aligning embeddings* from different augmentations of the same molecule, a core idea in Instance Discrimination (more details in [1.4.4.1](#sec-instance_discrimination)); (2) *Learning to cluster* similar molecules together, as in Clustering-based Contrastive Learning (see [1.4.4.2](#sec-clustering_cl)); and (3) *Cross-modal alignment*, where representations from different data types (e.g., a molecule's graph and its spectral properties) are learned jointly. (see [1.4.4](#sec-contrastive_learning))
+**Main families in \acr{ssl}s**. The figure illustrates the two primary approaches to \acr{ssl}, each using different strategies to generate pseudo-labels from the data itself. **Generative Methods (Top Panel):** This family focuses on reconstruction and prediction. The model learns representations by generating missing information. Examples shown correspond to the pretext tasks discussed in the text: (1) *Predicting masks* in a graph, analogous to masked modeling (more details in @sec-masked_modeling); (2) *Learning from context*, which is the basis for next token prediction (more details in @sec-next_token_prediction); and (3) *Learning to denoise*, where the model reconstructs a clean input from a corrupted version. (see @sec-denoising) **Contrastive Learning (Bottom Panel):** This family learns by comparing samples. The model is trained to pull representations of similar samples together while pushing dissimilar ones apart. Examples include: (1) *Aligning embeddings* from different augmentations of the same molecule, a core idea in Instance Discrimination (more details in @sec-instance_discrimination); (2) *Learning to cluster* similar molecules together, as in Clustering-based Contrastive Learning (see @sec-clustering_cl); and (3) *Cross-modal alignment*, where representations from different data types (e.g., a molecule's graph and its spectral properties) are learned jointly. (see @sec-contrastive_learning)
 :::
 
 ### Generative Methods
@@ -459,9 +459,7 @@ re-generate the missing information. Examples shown in
 graph, learning from surrounding text context, and learning to denoise
 an image.
 
-[]{#sec-masked_modeling label="sec-masked_modeling"}
-
-#### Masked Modeling
+#### Masked Modeling {#sec-masked_modeling}
 
 In this method, portions of the input data are intentionally obscured or
 "masked". The model's primary objective is then to reconstruct these

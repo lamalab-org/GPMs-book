@@ -103,5 +103,5 @@ This book covers the following topics:
 -  [References](09-references.qmd)
 -  [Glossary](glossary.qmd)
 
-### Appendices: How do we use LLMs?
+### How do we use LLMs?
 - [Example on LLMs for Literature Search](tutorial-literature.qmd)

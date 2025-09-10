@@ -1,4 +1,29 @@
-# Surveying the literature with LLMs 
+---
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
+---
+
+# Surveying the literature with LLMs {.unnumbered}
 
 One of my primary usecases for using LLM-based workflows is to survey the literature. 
 LLM-based agents are very useful for quickly obtaining an overview of what has been done in a field. 
@@ -30,7 +55,7 @@ For surveying scientific papers, I often use the [FutureHouse Plaform](https://w
 
 An alternative tool, [Asta](https://asta.allen.ai/chat), built by Ai2 can perform similar search and I often use it in combination with the FutureHouse Plaform.
 
-![](./media/figures/tutorials/asta.png)
+![](./media/figures/tutorials/allenai.png)
 
 ### OpenAI Deep Research (💵)
 

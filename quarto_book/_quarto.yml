@@ -24,7 +24,10 @@ book:
   - 08-outlook_conclusions.qmd
   - 09-references.qmd
   - glossary.qmd
-  - tutorial-literature.qmd
+  appendices:
+  - part: "How do we use LLMs?"
+    chapters:
+    - tutorial-literature.qmd
 bibliography: references.bib
 format:
   html:

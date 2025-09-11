@@ -63,6 +63,15 @@ Especially with [GPT-5 Pro, Deep Research](https://chatgpt.com/) can sometimes d
 
 ![](./media/figures/tutorials/deep_research.png)
 
+
+## "Consuming papers"
+
+For more easily digesting papers, we use different tools:
+
+- [NotebookLM](https://notebooklm.google.com/) is excellent for converting paper(s) into forms that are easier to consume, such as podcasts, mindmaps, reports, videos. We mostly use it to generate podcasts and study guides. The podcasts are particularly useful for getting key ideas (or even differences) between papers in a form that can be consumed on the go. Sometimes the results are also useful to inspire a narrative. 
+
+- [Speechify](https://speechify.com) can be useful to listen to papers (instead of reading them).
+
 ## Guidelines 
 
 - [ ] Use the results as starting point to help you be faster in identifying relevant literature

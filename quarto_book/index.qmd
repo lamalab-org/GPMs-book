@@ -102,3 +102,6 @@ This book covers the following topics:
 8. [Outlook and Conclusions](08-outlook_conclusions.qmd)
 -  [References](09-references.qmd)
 -  [Glossary](glossary.qmd)
+
+### How do we use LLMs?
+- [Example on LLMs for Literature Search](tutorial-literature.qmd)

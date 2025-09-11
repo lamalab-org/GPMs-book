@@ -25,7 +25,7 @@ acronyms:
 
 # Surveying the literature with LLMs {.unnumbered}
 
-One of my primary usecases for using LLM-based workflows is to survey the literature. 
+One of our primary usecases for using LLM-based workflows is to survey the literature. 
 LLM-based agents are very useful for quickly obtaining an overview of what has been done in a field. 
 
 One still has to keep a few caveats in mind: 
@@ -35,7 +35,7 @@ One still has to keep a few caveats in mind:
 
 ## Answering general questions 
 
-For answering general questions I often default to [Perplexity](https://www.perplexity.ai/).
+For answering general questions we often default to [Perplexity](https://www.perplexity.ai/).
 This is based on web search and can compile answers to questions based on the search results.
 It is fast, but will only give superficial answers to scientific questions.
 
@@ -47,13 +47,13 @@ It is fast, but will only give superficial answers to scientific questions.
 
 ### FutureHouse Platform
 
-For surveying scientific papers, I often use the [FutureHouse Plaform](https://www.platform.futurehouse.org). On there, they have different agents. 
+For surveying scientific papers, we often use the [FutureHouse Plaform](https://www.platform.futurehouse.org). On there, they have different agents. 
 
 ![](./media/figures/tutorials/falcon.png)
 
 ### Asta 
 
-An alternative tool, [Asta](https://asta.allen.ai/chat), built by Ai2 can perform similar search and I often use it in combination with the FutureHouse Plaform.
+An alternative tool, [Asta](https://asta.allen.ai/chat), built by Ai2 can perform similar search and we often use it in combination with the FutureHouse Plaform.
 
 ![](./media/figures/tutorials/allenai.png)
 

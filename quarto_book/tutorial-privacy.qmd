@@ -18,8 +18,8 @@ format:
       href: mailto:contact@lamalab.org
       icon: mailbox
 acronyms:
-  insert_loa: false 
-  insert_links: false  
+  insert_loa: false
+  insert_links: false
   fromfile: ./acronyms.yml
 ---
 

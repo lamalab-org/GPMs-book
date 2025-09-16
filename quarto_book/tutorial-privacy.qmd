@@ -37,7 +37,7 @@ acronyms:
 - **Cross-user mix-ups/bugs.** Multi-tenant UIs are convenient—and brittle. Example incident: [OpenAI’s March 20, 2023 outage postmortem](https://openai.com/index/march-20-chatgpt-outage/).  
 - **What providers actually collect/share (snapshot).** Reports detail data sources (web, partners, brokers) and sharing with service providers, affiliates, research partners, and in some cases ad partners; mobile apps may collect precise location, phone numbers, photos, and telemetry. Read: [heise: “LLM-Betreiber sammeln …”](https://www.heise.de/news/Prompts-Telefon-Standort-Social-Media-LLMs-sammeln-massiv-persoenlich-Daten-10466018.html).
 
-Note that often data shared via APIs is --- in contrast to data shared via web frontends --- not used for training purposes.
+Note that often data shared via APIs is — in contrast to data shared via web frontends — not used for training purposes.
 
 ## Safer usage patterns
 

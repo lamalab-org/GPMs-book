@@ -30,7 +30,7 @@ acronyms:
 > - Independent reporting shows platforms collect broad personal data and may share prompts with service providers and other parties; mobile apps can add precise location, phone numbers, and photos. See: [*heise developer*](https://www.heise.de/news/Prompts-Telefon-Standort-Social-Media-LLMs-sammeln-massiv-persoenlich-Daten-10466018.html).  
 > - Safer patterns exist: **local** ([Ollama](https://ollama.com/) + [Open WebUI](https://open-webui.com/) / [LM Studio](https://lmstudio.ai/) / [GPT4All](https://www.nomic.ai/gpt4all) / [llama.cpp](https://github.com/ggml-org/llama.cpp)), **institution-hosted** gateways, or **enterprise** plans with no-training defaults and retention/residency controls. See the [Hamburg DPA checklist](https://datenschutz-hamburg.de/fileadmin/user_upload/HmbBfDI/Datenschutz/Informationen/20231113_Checklist_LLM_Chatbots_EN.pdf).
 
-## What can go wrong 
+## What can go wrong? {.unnumbered}
 
 - **Training on your content (consumer front-ends).** For services “for individuals,” chats may be used to train models unless you opt out. Business/API offerings typically do not train on your inputs by default. See: [OpenAI Enterprise Privacy](https://openai.com/enterprise-privacy/), [Azure OpenAI FAQ](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/faq), [Vertex AI data governance](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).  
 - **Memorization & extraction.** LLMs can regurgitate training snippets or leak prompt content. In one case, [Carlini et al. (2021)](https://www.usenix.org/system/files/sec21-carlini-extracting.pdf) demonstrated that GPT-2 had memorized hundreds of examples such as individuals’ contact information and could output them on command. 

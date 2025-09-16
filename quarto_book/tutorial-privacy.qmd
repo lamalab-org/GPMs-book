@@ -1,0 +1,53 @@
+---
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false
+  insert_links: false
+  fromfile: ./acronyms.yml
+---
+
+
+> **TL;DR**  
+> - Treat anything you paste into a *consumer* chatbot UI as data that may be logged and used to improve the service. Prefer **API/enterprise** endpoints or **institution-hosted/local** models for work with personal data, unpublished results, or proprietary code. See statements from [OpenAI (Enterprise Privacy)](https://openai.com/enterprise-privacy/), [Azure OpenAI (Data & Privacy)](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/openai/data-privacy), and [Google Vertex AI (Data Governance & Zero Data Retention)](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).  
+> - Multi-tenant chat UIs have had cross-user exposure incidents (see OpenAI’s postmortem on the [March 20, 2023 ChatGPT outage](https://openai.com/index/march-20-chatgpt-outage/)).  
+> - Independent reporting shows platforms collect broad personal data and may share prompts with service providers and other parties; mobile apps can add precise location, phone numbers, and photos. See: [*heise developer*](https://www.heise.de/news/Prompts-Telefon-Standort-Social-Media-LLMs-sammeln-massiv-persoenlich-Daten-10466018.html).  
+> - Safer patterns exist: **local** ([Ollama](https://ollama.com/) + [Open WebUI](https://open-webui.com/) / [LM Studio](https://lmstudio.ai/) / [GPT4All](https://www.nomic.ai/gpt4all) / [llama.cpp](https://github.com/ggml-org/llama.cpp)), **institution-hosted** gateways, or **enterprise** plans with no-training defaults and retention/residency controls. See the [Hamburg DPA checklist](https://datenschutz-hamburg.de/fileadmin/user_upload/HmbBfDI/Datenschutz/Informationen/20231113_Checklist_LLM_Chatbots_EN.pdf).
+
+## What can go wrong? {.unnumbered}
+
+- **Training on your content (consumer front-ends).** For services “for individuals,” chats may be used to train models unless you opt out. Business/API offerings typically do not train on your inputs by default. See: [OpenAI Enterprise Privacy](https://openai.com/enterprise-privacy/), [Azure OpenAI FAQ](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/faq), [Vertex AI data governance](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).  
+- **Memorization & extraction.** LLMs can regurgitate training snippets or leak prompt content. In one case, [Carlini et al. (2021)](https://www.usenix.org/system/files/sec21-carlini-extracting.pdf) demonstrated that GPT-2 had memorized hundreds of examples such as individuals’ contact information and could output them on command. 
+- **Cross-user mix-ups/bugs.** Multi-tenant UIs are convenient—and brittle. Example incident: [OpenAI’s March 20, 2023 outage postmortem](https://openai.com/index/march-20-chatgpt-outage/).  
+- **What providers actually collect/share (snapshot).** Reports detail data sources (web, partners, brokers) and sharing with service providers, affiliates, research partners, and in some cases ad partners; mobile apps may collect precise location, phone numbers, photos, and telemetry. Read: [heise: “LLM-Betreiber sammeln …”](https://www.heise.de/news/Prompts-Telefon-Standort-Social-Media-LLMs-sammeln-massiv-persoenlich-Daten-10466018.html).
+
+Note that often data shared via APIs is — in contrast to data shared via web frontends — not used for training purposes.
+
+## Safer usage patterns
+
+### A) **Local-only** (no data leaves your machine)
+Run models locally with: [Ollama](https://ollama.com/) + [Open WebUI](https://open-webui.com/) or the [Open WebUI docs](https://docs.openwebui.com/), [LM Studio](https://lmstudio.ai/), [GPT4All](https://www.nomic.ai/gpt4all), or [llama.cpp](https://github.com/ggml-org/llama.cpp).  
+**Best for:** human-subject data, embargoed results, export-controlled material.
+
+### B) **Institution-hosted** (on-prem/HPC/VPN/VPC)
+Spin up vLLM/llama.cpp/Ollama behind your VPN. Add a **prompt-gateway** to redact PII, block risky uploads, and log usage for audit. A self-hosted UI like [Open WebUI](https://open-webui.com/) makes this approachable.
+
+### C) **Enterprise/per-tenant cloud**
+Use your lab or university’s tenant with no-training defaults, retention controls, and regional hosting. See: [OpenAI Enterprise Privacy](https://openai.com/enterprise-privacy/), [Azure OpenAI data & privacy](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/openai/data-privacy), [Vertex AI data governance](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).
+

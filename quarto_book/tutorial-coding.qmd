@@ -27,7 +27,7 @@ acronyms:
 
 # Coding with LLMs {.unnumbered}
 
-One of our major use-cases: writing, improving, and reviewing code using LLMs.  
+One of our major use-cases for LLMs is writing, improving, and reviewing code.  
 We mostly use frontends (Claude, ChatGPT) for interactive work; use agents or "code LLM tools" when we want more scaffolded output or automation.
 
 We draw inspiration from [Jeremy Howard ("Solve It With Code")](https://www.answer.ai/posts/2024-11-07-solveit.html) and [Simon Willison ("Using LLMs to write code")](https://simonwillison.net/2025/Mar/11/using-llms-for-code/).

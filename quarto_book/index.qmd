@@ -105,4 +105,5 @@ This book covers the following topics:
 
 ### How do we use LLMs?
 - [Example on LLMs for Literature Search](tutorial-literature.qmd)
+- [Example on LLMs for coding](tutorial-coding.qmd)
 - [Concerns and Recommendations on Privacy](tutorial-privacy.qmd)

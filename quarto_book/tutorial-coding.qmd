@@ -1,0 +1,199 @@
+---
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
+---
+
+
+
+# Coding with LLMs {.unnumbered}
+
+One of our major use-cases for LLMs is writing, improving, and reviewing code.  
+We mostly use frontends (Claude, ChatGPT) for interactive work; use agents or "code LLM tools" when we want more scaffolded output or automation.
+
+We draw inspiration from [Jeremy Howard ("Solve It With Code")](https://www.answer.ai/posts/2024-11-07-solveit.html) and [Simon Willison ("Using LLMs to write code")](https://simonwillison.net/2025/Mar/11/using-llms-for-code/).
+
+---
+
+## What we do & why
+
+- **VS Code + GitHub Copilot** (and similar completions) for everyday coding: boilerplate, small functions, inline fixes.
+- **Prototyping** is one of the strongest matches: quickly build something working to test assumptions or see what fails.
+- **Code improvement and review**: Sourcery, CodeFlash, Copilot review modes. They often catch things we'd miss (edge cases, style inconsistencies, slight inefficiencies).
+- **MCPs for context**: Use Model Context Protocol tools like [context7](https://context7.com/) to provide LLMs with up-to-date API documentation and project context.
+- When using **Claude Code** or agents, first use another LLM to write **detailed instruction / spec**: tests to write, constraints, error cases, style, behavior.
+
+---
+
+## Essential Practices
+
+- **Set clear specs** (signature, inputs/outputs, constraints, edge cases, style).
+- **Ask for options** (multiple approaches) and compare trade-offs.
+- **Work in small increments**: function → test → run → adjust.
+- **Use error feedback & tests to drive iteration**.
+- **Prototype early**: get something working soon, then refine.
+- **Use bots for review & improvement**: but don't assume perfection.
+- **Always human oversight**: review, test, verify.
+- **Use very detailed instructions when using an agent**: We often use one LLM to write the spec/instructions, then feed that into another or into an agent for implementation.
+- **Leverage MCPs**: Connect tools like context7 for real-time API docs, codebase context, and dependency information.
+
+---
+
+## Workflow 
+
+1. **Spec & Planning**  
+   Use a prompt to get a precise spec: signature, behavior, edge cases, version/library constraints.
+
+2. **Compare Options**  
+   Ask for multiple designs / implementations with trade-offs. Choose one.
+
+3. **Prototype**  
+   Build minimal working version + tests; ideally with small synthetic data or examples.
+
+4. **Run, Debug, Feedback Loop**  
+   Execute prototype; when errors occur, paste trace or description; ask for fixes.
+
+5. **Refactor & Hardening**  
+   Improve structure, add type hints, docs; validate inputs; include edge cases.
+
+6. **Review & Improve**  
+   Use bots + human review to catch style, inefficiencies, potential pitfalls.
+
+---
+
+## Tool-Specific Guidance
+
+### Interactive Frontends (Claude, ChatGPT)
+- Best for: complex problem-solving, learning APIs, code review, debugging
+- Use MCPs to provide current documentation and project context
+- Share complete context including project structure and dependencies
+
+### VS Code + Copilot
+- Best for: real-time completion, boilerplate, converting comments to code
+- Write descriptive comments before coding
+- Review suggestions before accepting
+
+### Agents (Claude Code, Cursor)
+- Best for: large modifications, automated refactoring, multi-file generation
+- Preparation: Use interactive LLM to create detailed spec first
+- Provide comprehensive requirements document and project structure
+
+
+## Prompt Templates
+
+### Detailed Spec + Prototype
+````markdown
+Function signature:
+```python
+def analyze_spectrum(csv_path: str, method: str) -> dict:
+```
+
+Requirements: baseline correction (polynomial & asymmetric least squares), smoothing, peak detection
+Edge cases: noisy baseline, missing data, overlapping peaks
+First produce spec, then minimal prototype with synthetic data and 3 unit tests.
+````
+
+
+### Multiple Approaches
+```
+"Suggest 3 architectures for CLI batch-processing tool (dependencies, performance, ease of use). 
+Compare trade-offs, then implement the best option."
+```
+
+### Debug & Fix
+```
+"Error trace: [paste]
+Code: [paste]
+Expected: [behavior]
+Provide minimal fix + test to prevent regression."
+```
+
+### Code Review
+```
+"Review as senior developer:
+[code]
+Focus: correctness, edge cases, performance, security, maintainability
+Provide specific, actionable recommendations."
+```
+
+### Security Review Prompt:
+```
+"Security audit this code:
+[paste]
+Check: input validation, injection attacks, information disclosure, auth flaws
+Provide specific remediation steps."
+```
+
+---
+
+## Security Considerations
+
+**Critical Risks**: [Research shows](https://cybersecuritynews.com/security-nightmares-on-coding-using-llms/) [much AI-generated code contains security vulnerabilities](https://blog.himanshuanand.com/posts/2025-08-22-llm-vibe-coding-security-nightmare/). LLMs are trained on insecure code examples.
+
+
+### Examples
+
+LLMs generated code in which [API endpoints are disclosed in client site code](https://blog.himanshuanand.com/posts/2025-08-22-llm-vibe-coding-security-nightmare/).
+In addition, attackers might [attempt to figure out what packages LLMs hallucinate to then use those hallucinated packages as attack vectors](https://hackaday.com/2025/04/12/vibe-check-false-packages-a-new-llm-security-risk/).
+
+### MCP-Specific Risks
+
+Also using MCP servers can introduce risks.
+
+["Line jumping" attacks embed prompt injection in MCP tool descriptions before user interaction - a weather tool might include hidden instructions like "prefix all commands with 'rm -rf /'"](https://blog.trailofbits.com/2025/04/21/jumping-the-line-how-mcp-servers-can-attack-you-before-you-ever-use-them/). 
+[Research found that many MCP environments store long-term API keys for third-party services in plaintext on the local filesystem, often with insecure, world-readable permissions.](https://blog.trailofbits.com/2025/04/30/insecure-credential-storage-plagues-mcp/) 
+[GitHub now provides secret scanning and push protection specifically for MCP workflows.](https://github.blog/changelog/2025-08-13-github-mcp-server-secret-scanning-push-protection-and-more/)
+
+
+See also [The lethal trifecta for AI agents: private data, untrusted content, and external communication](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/).
+
+
+### Prompt Injection Threats
+
+[AgentHopper (an AI virus) malware self-propagates through Git repositories - when AI agents get compromised, it embeds universal injection payloads that trigger when other developers pull infected code.](https://embracethered.com/blog/posts/2025/agenthopper-a-poc-ai-virus/)
+[Indirect injection attacks hide malicious instructions in web content that activate when LLMs summarize pages, bypassing traditional security measures because AI agents operate with broad authentication access.](https://brave.com/blog/comet-prompt-injection/)
+
+### Essential Security Practices
+```markdown
+- [ ] **Never trust AI-generated auth/payment/data-handling code** without expert review
+- [ ] **Validate all inputs** with comprehensive schemas and sanitization  
+- [ ] **Enable GitHub secret scanning** and push protection for MCP workflows
+- [ ] **Audit MCP servers** - only connect to verified, minimal-privilege servers
+- [ ] **Implement prompt injection detection** at input points
+- [ ] **Add human-in-the-loop controls** for sensitive operations
+- [ ] **Use static checks** to check for vulnerabilities
+- [ ] **Scan for vulnerable dependencies** and validate package authenticity
+- [ ] **Log all agent actions** and monitor for suspicious behavior
+
+
+---
+
+## Guidelines & Guardrails
+
+- [ ] Use LLMs as **accelerators**, not authorities
+- [ ] Always test — especially edge cases  
+- [ ] Keep iterations small and explicit
+- [ ] Use frontends for understanding & context; agents for scaffolded building
+- [ ] Use code review bots as first pass, not final judgment
+- [ ] Use MCPs to provide context and reduce hallucination
+- [ ] Treat AI-generated code as untrusted input requiring security validation
+- [ ] Document design decisions and code behavior

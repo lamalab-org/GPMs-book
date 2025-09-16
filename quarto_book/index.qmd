@@ -105,3 +105,4 @@ This book covers the following topics:
 
 ### How do we use LLMs?
 - [Example on LLMs for Literature Search](tutorial-literature.qmd)
+- [How LLMs LLMs can help improving your text?](writting_tutorial.qmd)

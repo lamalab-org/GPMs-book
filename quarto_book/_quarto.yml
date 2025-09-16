@@ -27,6 +27,7 @@ book:
   - part: "How do we use LLMs?"
     chapters:
     - tutorial-literature.qmd
+    - writting_tutorial.qmd
 bibliography: references.bib
 format:
   html:

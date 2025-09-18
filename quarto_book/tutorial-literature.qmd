@@ -41,6 +41,11 @@ It is fast, but will only give superficial answers to scientific questions.
 
 ![](./media/figures/tutorials/perplexity.png)
 
+::: {.callout-tip}
+## Google search vs. LLM-assisted search
+
+We most often use conventional search engines such as Google if we know what we search for (e.g. we want to look up opening hours of something). LLM-assisted search tools (Perplexity, but also ChatGPT with web search) are best in cases where we do not even exactly know what we search for. 
+:::
 
 ## Answering scientific questions
 

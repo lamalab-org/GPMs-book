@@ -32,7 +32,7 @@ We mostly use frontends (Claude, ChatGPT) for interactive work; use agents or "c
 
 We draw inspiration from [Jeremy Howard ("Solve It With Code")](https://www.answer.ai/posts/2024-11-07-solveit.html) and [Simon Willison ("Using LLMs to write code")](https://simonwillison.net/2025/Mar/11/using-llms-for-code/).
 
----
+
 
 ## What we do & why
 
@@ -42,7 +42,6 @@ We draw inspiration from [Jeremy Howard ("Solve It With Code")](https://www.answ
 - **MCPs for context**: Use Model Context Protocol tools like [context7](https://context7.com/) to provide LLMs with up-to-date API documentation and project context.
 - When using **Claude Code** or agents, first use another LLM to write **detailed instruction / spec**: tests to write, constraints, error cases, style, behavior.
 
----
 
 ## Essential Practices
 
@@ -56,7 +55,6 @@ We draw inspiration from [Jeremy Howard ("Solve It With Code")](https://www.answ
 - **Use very detailed instructions when using an agent**: We often use one LLM to write the spec/instructions, then feed that into another or into an agent for implementation.
 - **Leverage MCPs**: Connect tools like context7 for real-time API docs, codebase context, and dependency information.
 
----
 
 ## Workflow 
 
@@ -78,7 +76,7 @@ We draw inspiration from [Jeremy Howard ("Solve It With Code")](https://www.answ
 6. **Review & Improve**  
    Use bots + human review to catch style, inefficiencies, potential pitfalls.
 
----
+
 
 ## Tool-Specific Guidance
 
@@ -143,7 +141,6 @@ Check: input validation, injection attacks, information disclosure, auth flaws
 Provide specific remediation steps."
 ```
 
----
 
 ## Security Considerations
 
@@ -173,7 +170,7 @@ See also [The lethal trifecta for AI agents: private data, untrusted content, an
 [Indirect injection attacks hide malicious instructions in web content that activate when LLMs summarize pages, bypassing traditional security measures because AI agents operate with broad authentication access.](https://brave.com/blog/comet-prompt-injection/)
 
 ### Essential Security Practices
-```markdown
+
 - [ ] **Never trust AI-generated auth/payment/data-handling code** without expert review
 - [ ] **Validate all inputs** with comprehensive schemas and sanitization  
 - [ ] **Enable GitHub secret scanning** and push protection for MCP workflows

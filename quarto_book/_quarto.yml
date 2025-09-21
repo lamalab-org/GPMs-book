@@ -28,6 +28,7 @@ book:
     chapters:
     - tutorial-literature.qmd
     - tutorial-coding.qmd
+    - tutorial-writing.qmd
     - tutorial-privacy.qmd
 bibliography: references.bib
 format:

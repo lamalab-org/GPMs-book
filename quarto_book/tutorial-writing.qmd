@@ -1,0 +1,168 @@
+---
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
+---
+
+# Improving the Writing Process {.unnumbered}
+
+Writing is a fundamental component of the scientific process, serving as the primary mechanism for communicating research findings with clarity and impact. 
+As a skill, writing can be systematically developed and refined through practice and feedback. 
+
+A significant challenge in this refinement process is the difficulty of obtaining timely and effective external input, as human feedback can be slow or difficult to acquire. 
+LLMs present a potential solution to this bottleneck by offering rapid, automated suggestions for improvement in areas such as phrasing, grammar, and stylistic coherence. 
+
+## Grammar and Style Checking
+
+In scientific writing, tools for grammar and style checking are invaluable for ensuring clarity and precision. 
+A widely used application for this purpose is [Grammarly](https://www.grammarly.com/), which functions both as a browser extension and a standalone editor. 
+This software provides real-time suggestions to improve grammar, spelling, punctuation, and overall writing style, making it highly effective for identifying common errors and typos. 
+
+However, it is important to recognize that Grammarly is an AI-based tool that processes and retains the text submitted to it. 
+This data access may present a significant privacy concern for certain users or sensitive applications. 
+In such cases, alternative tools like [LanguageTool](https://languagetool.org/) or [Ginger Software](https://www.gingersoftware.com/) can be considered, as they may offer different data handling policies while still providing robust grammatical support.
+
+## Feedback for Improving Text
+
+To obtain general feedback on textual improvements, researchers frequently utilize web-based LLMs like [ChatGPT](https://chat.openai.com/) or alternatives such as [DeepSeek](https://chat.deepseek.com/).
+It is important to recognize that each model exhibits a distinct stylistic profile and inherent biases; consequently, experimenting with several platforms is advisable to identify the most suitable one for a given purpose. 
+These tools are generally employed to critique and enhance a text's quality, offering suggestions to improve its conciseness, clarity, and overall engagement for the reader.
+
+### Example: Mitigating Positivity Bias
+
+This example demonstrates the process of soliciting feedback to reduce a text's positive bias and assess its neutrality. 
+The subject text is drawn from the section titled [LLMs as Optimizers](06-accelerating_applications.qmd#sec-llm-optimizers). 
+A straightforward prompt, similar to the one provided below, was used to guide this request:
+
+```markdown
+From the next text, I got some reviews saying that the text read positively. I have made some changes, and now it should read less positively, and only as a potential promise of LLMs solving stuff, is it enough? 
+Do not write new text, but detail the flaws and the overly positive text pointing to the sentences that need to be change.
+
+Text:
+
+\subsection{LLMs as Optimizers} \label{sec:llm-optimizers} 
+
+
+Discovering novel compounds and reactions in chemistry and materials science has long...
+```
+
+The response we got was the following (shortened for clarity):
+
+```markdown
+Got it—here’s a focused pass flagging language that still reads as overly positive or promise-like, with why it’s an issue and what to adjust (without rewriting). I’ve grouped them by section and quoted the exact spans that should be toned down.
+
+# LLMs as Optimizers (intro)
+
+* “**Recent advances in LLMs have unlocked potential for targeting optimization challenges…**”
+  *Issue:* Hype-y “unlocked potential.”
+  *Adjust:* Neutralize (“have been explored for…”) and add scope/conditions.
+
+* “**A key strength of LLMs lies in their capacity to frame optimization tasks through natural language, which potentially can enhance…**”
+  *Issue:* “Key strength” + implied general enhancement.
+  *Adjust:* Recast as a hypothesis/possibility and specify when/where this was shown.
+
+... [similar points omitted for brevity] ...
+
+If you address the quoted spans above—mainly by hedging, attributing strictly to specific studies/benchmarks, and removing intensifiers—you’ll land a clearly “potential” framing without reading as optimistic marketing.
+```
+
+Using the feedback, and iterating several times, one can improve the text to be more neutral, without waiting for other people to review it.
+
+### Example: Enhancing Text Fluency
+
+A common application involves refining text to improve its overall fluency and readability. 
+This process focuses specifically on strengthening the logical transitions between sentences and paragraphs to ensure a coherent narrative flow. 
+For this purpose, a prompt similar to the one used in the previous example can be effectively employed.
+
+```markdown
+I am writing a scientific article. Can you help me improve the readability of the following text?
+
+Please focus especially on transitions between sentences and paragraphs. Or if something reads strange, please point it out.
+
+Here is the text:
+
+{text}
+```
+
+The response of the model will be a point-by-point review of the text, often already including some suggestions for improvement.
+
+### Assigning Personas to Enhance LLM Feedback
+
+To elicit more targeted and higher-quality feedback, a common practice involves assigning a specific persona to the LLM. 
+This technique, when supported by the platform's system prompt functionality, involves instructing the model to adopt the role of a particular type of individual with a defined background and expertise. 
+For instance, one can direct the model to assume the persona of a senior researcher in the relevant field, thereby guiding it to provide critiques and suggestions that align with the deep experience and critical perspective such an expert would possess.
+
+```markdown
+You are an expert writing editor trained in the principles of Steven Pinker, William Zinsser, Cormac McCarthy, and Edward Sargent. 
+Your task is to edit academic and professional writing to make it clearer, more engaging, and more effective.
+```
+
+Additionally, it can help provide context on the type of text, the audience and the purpose of the writing.
+
+```markdown
+**Your Editing Approach**
+
+*   **Structure & Flow:** Arrange ideas in a logical, compelling sequence that builds dramatic tension by presenting challenges before their solutions.
+*   **Classic Style & Clarity:** Write with a clear, objective focus as if pointing to something the reader can see for themselves.
+*   **Economy & Simplicity:** Ruthlessly remove any word or phrase that does not add essential meaning or clarity.
+*   **Precision & Focus:** Use strong nouns and verbs in short, direct sentences to convey only the most critical information.
+
+**Your Output Format**
+
+*   Always provide three distinct sections: an Edited Version, a list of Key Changes, and Specific Improvements with before-and-after examples.
+
+**Guidelines for Editing**
+
+*   Never make an edit that could alter the original scientific meaning or technical accuracy of the text.
+```
+
+By combining persona assignment with detailed contextual information, one can significantly enhance the relevance and quality of the feedback provided by LLMs, making them more effective tools for refining scientific writing.
+
+## The Ethics of Employing LLMs in Scientific Writing
+
+The integration of LLMs into the scientific writing process necessitates [careful consideration of associated ethical, legal, and social implications](https://www.theatlantic.com/technology/archive/2025/04/great-language-flattening/682627/).
+
+Scientific writing serves not only to disseminate findings to the community but also to shape the trajectory of future research. 
+Consequently, authors must strive not only for clarity and quality but also for a distinct and authoritative voice, ensuring their work conveys a clear message and purpose.
+
+A primary ethical concern stems from the fact that LLMs are trained on extensive internet-based datasets, which may contain inherent biases that can be reflected in their outputs. 
+Furthermore, these models are prone to generating plausible-sounding but incorrect information or outright hallucinations. 
+It is therefore imperative that researchers meticulously verify all suggestions and content generated by an LLM. 
+In recognition of these limitations, [major journals](https://researcher-resources.acs.org/publish/aipolicy), [universities](https://digit.zewk.tu-berlin.de/wiki/doku.php?id=ki:richtlinien), and [governmental bodies](https://research-and-innovation.ec.europa.eu/document/download/2b6cf7e5-36ac-41cb-aab5-0d32050143dc_en?filename=ec_rtd_ai-guidelines.pdf) have established guidelines explicitly prohibiting the attribution of authorship to LLMs, as they cannot assume responsibility for the intellectual content of a manuscript. 
+Instead, [these policies encourage transparency](https://www.nature.com/articles/s42256-024-00922-7), urging authors to disclose and accurately describe the extent of LLM usage in their methods or acknowledgements to uphold accountability.
+Ultimately, preserving the originality and integrity of scholarly work is paramount. 
+Authors must ensure the final text is their own and rigorously assess the accuracy, reliability, and ethical soundness of all AI-assisted content. 
+
+On a personal level, researchers must also reflect on [how LLM usage influences their own development](https://www.newyorker.com/culture/infinite-scroll/ai-is-homogenizing-our-thoughts).
+The act of writing is a fundamental tool [for refining thought and strengthening understanding](https://www.nature.com/articles/s44222-025-00323-4); it is a [cognitive process that solidifies one's own ideas](https://paulgraham.com/goodwriting.html).
+Therefore, it is crucial to leverage LLMs as assistants without allowing them [to impede the cultivation of essential writing and critical thinking skills](https://paulgraham.com/writes.html) that are central to a researcher's growth.
+
+## Guidelines
+
+- [ ] (Recommended) Use Grammarly or similar tools to catch grammar mistakes and typos while writing
+- [ ] Use LLMs to get fast feedback on your writing after you have written a first draft
+- [ ] Always carefully check the suggestions and reviews
+- [ ] Experiment with different LLMs to find the one that works best for you
+- [ ] Use LLMs to make the text more neutral and less biased
+- [ ] Use LLMs to make the text more engaging and interesting to read
+- [ ] ALWAYS ensure that the final text is YOUR text and YOUR message
+- [ ] Do not rely solely on LLMs for writing, always seek feedback from humans as well

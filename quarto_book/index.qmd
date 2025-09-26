@@ -104,7 +104,8 @@ This book covers the following topics:
 -  [Glossary](glossary.qmd)
 
 ### How do we use LLMs?
+- [Improving Your Learning Experience with LLMs](tutorial-learning.qmd)
 - [Example on LLMs for Literature Search](tutorial-literature.qmd)
-- [Example on LLMs for coding](tutorial-coding.qmd)
-- [How LLMs LLMs can help improving your text?](tutorial-writing.qmd)
+- [Example on LLMs for Coding](tutorial-coding.qmd)
+- [How Can LLMs Help Improving Your Text?](tutorial-writing.qmd)
 - [Concerns and Recommendations on Privacy](tutorial-privacy.qmd)

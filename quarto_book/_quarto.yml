@@ -26,6 +26,7 @@ book:
   - glossary.qmd
   - part: "How do we use LLMs?"
     chapters:
+    - tutorial-learning.qmd
     - tutorial-literature.qmd
     - tutorial-coding.qmd
     - tutorial-writing.qmd

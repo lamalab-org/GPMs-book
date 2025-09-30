@@ -23,7 +23,7 @@ acronyms:
   fromfile: ./acronyms.yml
 ---
 
-# How to Learn Things Using LLMs
+# How to Learn Things Using LLMs {.unnumbered}
 
 LLMs can often help make the process of learning new materials easier and more enjoyable. 
 They can help in different stages of learning such as gatehring materials, creating a learning plan, clarifying and reviewing topics, and even testing what you have learned.
@@ -46,7 +46,7 @@ We recomend prompting the LLM twice: once without any web-search and once with w
 Once you find a few resources and want to decide which one to use, you can ask the LLM to give you a list of differences or pros and cons for each resource. 
 In addition to more traditional resources like textbooks, you can also try to look for online lectures or YouTube videos.
 
-## Creating a Learning Plan
+### Creating a Learning Plan
 
 Sometimes you know what you want to learn but you don't know where/how to begin. You can ask an LLM to help create a structured learning plan for you. It will often start at the beginner-friendly topics and progressively get into more advanced topics.
 

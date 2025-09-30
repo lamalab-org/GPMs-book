@@ -23,7 +23,7 @@ acronyms:
   fromfile: ./acronyms.yml
 ---
 
-# How to Learn Things Using LLMs
+# How to Learn Things Using LLMs {.unnumbered}
 
 LLMs can often help make the process of learning new materials easier and more enjoyable. 
 They can help in different stages of learning such as gatehring materials, creating a learning plan, clarifying and reviewing topics, and even testing what you have learned.

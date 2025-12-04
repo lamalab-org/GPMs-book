@@ -36,54 +36,49 @@ solely on the final objectives, e.g., "*Unexplained rise of
 antimicrobial resistance in Pseudomonas. Formulate hypotheses, design
 confirmatory in vitro assays, and suggest repurposing candidates for
 liver-fibrosis drugs*". Such systems navigate partially or entirely
-through all components of the scientific process outlined in
-@fig-applications, and detailed in the subsequent sections.
+through all components of the scientific process outlined in @fig-applications, and detailed in the subsequent sections.
 
-While significant applications emerge in \acr{ml} and programming, scientific
-implementations remain less explored.
+While there are plenty of demonstrations of such systems in
+\acr{ml} and programming,
+scientific implementations remain less explored.
 
 ### Coding and ML Applications of AI Scientists
 
-Notable frameworks, including `Co-Scientist` \[@gottweis2025towards\],
-and `\acr{ai}``-Scientist`
-\[@yamada2025ai\], aim to automate the entire \acr{ml} research pipeline, typically employing
-multi-agent architectures (described in detail in
-[@sec-multi-agent]) where specialized agents manage distinct
+Frameworks such as `Co-Scientist` \[@gottweis2025towards\], and
+`\acr{ai}-Scientist`
+\[@yamada2025ai\] aim to automate the entire \acr{ml} research pipeline. They typically use
+multi-agent architectures (described in detail in @sec-multi-agent) where specialized agents manage distinct
 phases of the scientific method \[@schmidgall2025agentrxiv\]. Critical
 to these systems is self-reflection
 \[@renze2024self0reflection\]---iterative evaluation and criticism of
 results within validation loops. However, comparative analyses reveal
 that \acr{llm}-based
 evaluations frequently overscore outputs relative to human assessments
-\[@huang2023mlagentbench0; @chan2024mle; @starace2025paperbench0\].
-From an engineering perspective, alternative approaches focus
-specifically on iterative code optimization, enabling systems to refine
-their codebases \[@zhang2025darwin\] or generate improved agents
-autonomously \[@hu2024automated\]. In another work, `AlphaEvolve`
-\[@novikov2025alphaevolve\], which is an \acr{llm} operating within a
-\acr{ga} environment,
-found novel algorithms for matrix multiplication (which had seen no
-innovation in fifty years) and sorting.
+\[@huang2023mlagentbench0; @chan2024mle; @starace2025paperbench0\]. An
+alternative is to couple these systems with evolutionary algorithms.
+`AlphaEvolve` \[@novikov2025alphaevolve\] is an
+\acr{llm} operating
+within a \acr{ga}
+environment and discovered novel algorithms for matrix multiplication
+(which had remained unchanged for fifty years) and sorting.
 
 ### Chemistry and Related Fields
 
-In chemistry, proposed systems show promising results. `Robin`
+In chemistry, proposed systems showed some initial sparks. `Robin`
 identified ripasudil as a treatment for \acr{damd} \[@ghareeb2025robin0\]---despite pending
-clinical trials and the general debate for these systems about novelty
-of their findings\[@Listgarten2024perpetual\]. However, automation of
-experiment execution poses a major constraint for the chemistry-focused
-\acr{ai}-scientists due to
-hardware requirements, making computational chemistry the most feasible
-subfield in which agents have successfully run simple quantum
-simulations \[@Zou2025ElAgente\]. Further, the
-\acr{llm}s powering these
-systems exhibit limited chemical knowledge \[@mirza2024large\]. Despite
-this, `ether0` \[@narayanan2025training\]---the first
-chemistry-specialized reasoning \acr{llm} (see
-[@sec-rl] for
+clinical trials and the general debate for these systems about the
+novelty of their findings\[@Listgarten2024perpetual\]. However,
+automation of experiment execution poses a major constraint for the
+chemistry-focused \acr{ai}-scientists due to hardware requirements,
+making computational chemistry the most feasible subfield in which
+agents have successfully run simple quantum simulations
+\[@Zou2025ElAgente\]. Further, the \acr{llm}s powering these systems exhibit limited
+chemical knowledge \[@mirza2024large\]. Despite this, `ether0`
+\[@narayanan2025training\]---the first chemistry-specialized reasoning
+\acr{llm} (see @sec-rl for
 a deeper discussion on reasoning models)---demonstrated strong
 capabilities in molecular design and accurate reaction prediction,
-positioning it as a promising foundation for chemistry-focused
+positioning it as a possible foundation for chemistry-focused
 \acr{ai} scientists.
 
 ### Are these Systems Capable of Real Autonomous Research?
@@ -94,109 +89,196 @@ autonomous end-to-end research remains debatable \[@son2025ai\]. Even
 when generating hypotheses that appear novel and impactful, their
 execution and reporting of these ideas, as demonstrated by
 @si2025ideation1execution, yield results deemed less attractive than
-those produced by humans. Additionally, this autonomy raises a critical
-question: *What should the role of \acr{ai} in science be?* While these systems can
-generate hypotheses, conduct experiments, and produce publication-ready
-manuscripts, their integration demands careful consideration (refer to
-[@sec-ethics] for further discussion about moral concerns
-around these systems). Beyond the vision of fully autonomous scientists,
-\acr{gpm}s---primarily
-\acr{llm}s---are already
-utilized across most scientific workflow components, for which
-\acr{llm}s have proven
-useful for some. These elements are shown in
-@fig-applications, and we discuss next.
+those produced by humans. Additionally, while \acr{ai} autonomous systems can generate
+hypotheses, conduct experiments, and produce publication-ready
+manuscripts, their integration requires careful consideration (refer to @sec-ethics
+for further discussion on moral concerns
+surrounding these systems).
+
+### Limitations
+
+Despite impressive demos, current "\acr{ai} scientists" systems are still hindered by
+fundamental limitations. Their literature synthesis is often shallow,
+and they have weak novelty checks, with audits of tools showing that
+they can misclassify familiar ideas as "new", and generally struggle to
+ground claims in prior work \[@beel2025evaluating\]. Execution is
+equally fraught; automated pipelines exhibit fragile performance, and
+silent errors that self-review cannot catch \[@luo2025automate3\],
+necessitating expert oversight and validation \[@gottweis2025towards\].
+In chemistry, beyond idea generation, the hardest problems are
+infrastructural: closing the loop in real labs still runs into
+orchestration and integration headaches, heterogeneous instrument
+\acr{api}s, messy data
+plumbing-issues \[@Canty2025science; @fehlis2025accelerating\], and
+safety and governance concerns \[@Leong2024steering\]. Finally,
+evaluation is immature (refer to @sec-trad_benchmarks
+for a deeper discussion on these
+evaluation methods): benchmarks for autonomous agents remain narrow and
+inconsistent, making it hard to trust self-reported improvements or
+generalize beyond tightly curated demos \[@yehudai2025survey\].
+
+### Open Challenges
+
+- **Capability**: Developing reliable long-horizon planning with
+  verifiable execution traces \[@starace2025paperbench0\], evaluated on
+  standardized, domain-grounded benchmarks \[@yehudai2025survey\].
+
+- **Evaluation Beyond \acr{llm}-as-Judge**: Persistent biases and
+  instability call for human-grounded protocols, adversarial test sets,
+  and cross-lab replication \[@thakur2024judging;
+  @starace2025paperbench0\].
+
+- **Infrastructure**: Evolving literature operations from generic
+  \acr{rag} to auditable
+  claim-evidence graphs, contradiction mining, and robust novelty
+  checks.
+
+- **Trust & Governance**: Ensuring trustworthy autonomy through
+  calibrated uncertainty quantification and clear authorship policies
+  aligned with scholarly norms \[@ACS_AI_Policy_2024\].
 
 ::: {#fig-applications}
+![](media/figures/rescaled_figures/chemrev_figure11.png){width="100%"}
 
-![](media/figures/rescaled_figures/chemrev_figure11.png){width=100%}
-
-**Overview of the scientific process**. The outer elements represent the typical scientific research process: from gathering information and generating hypotheses based on the observations, to executing experiments and analyzing the results. The terms that are in the center represent data-driven "shortcuts" that "accelerate" the typical scientific method. All stages represented in the figure are discussed in detail in the following sections.
+**Overview of the scientific process**. The
+outer elements represent the typical scientific research process: from
+gathering information and generating hypotheses based on the
+observations, to executing experiments and analyzing the results. The
+terms that are in the center represent data-driven “shortcuts” that
+“accelerate” the typical scientific method. All stages represented in
+the figure are discussed in detail in the following
+sections.
 :::
+
+*True acceleration of chemical research and the ultimate goal of fully
+autonomous science require \acr{ai} systems that can operate across the
+entire scientific workflow. The stages outlined in
+[1](#fig:applications){reference-type="ref+Label"
+reference="fig:applications"}---from hypothesis generation to
+experimental execution and final reporting---represent the core of this
+process. While \acr{gpm}s,
+especially \acr{llm}s, show
+promise in individual components, for \acr{ai} to evolve from a showcase into a driver
+of fully autonomous research, it must master the entire workflow,
+seamlessly navigating between each of these stages.*
 
 ## Existing GPMs for Chemical Science
 
 The development of \acr{gpm}s for chemical science represents a departure
 from traditional single-task approaches. Rather than fine-tuning
-pre-trained models for specific applications such as property prediction
-or molecular generation, these chemistry-aware language models are
-intentionally designed to perform multiple chemical tasks
-simultaneously. This multitask paradigm offers several advantages:
-shared representations across related chemical
-problems\[@dimitrios2023unifying\], improved data efficiency through
-transfer learning between tasks\[@lim2021predicting\], and the potential
-for emergent capabilities that arise from joint training across diverse
-chemical domains\[@livne2024nach0\].
+pre-trained models for specific tasks such as property prediction or
+molecular generation, these chemistry-aware models are intentionally
+designed to be capable of performing different chemical tasks. This
+multitask learning unifies related chemical tasks, boosting data
+efficiency and enabling emergent capabilities through joint training
+across domains. @tbl-existing_gpms shows an overview of the existing
+\acr{gpm}s in the chemical
+sciences.
 
-### Multitask Learning Frameworks
+::: {#tbl-existing_gpms}
+  **Model**                              **Architecture**                                                                                                         **Training**                                                                                                                                                                                                      **Representative Tasks**                                                                                                 **Representative Systems**
+  -------------------------------------- ------------------------------------------------------------------------------------------------------------------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------ -------------------------------
+  `DARWIN 1.5` \[@xie2025darwin\]        decoder-only transformer (LLaMA) with 7B parameters                                                                      fine-tuning on \acr{qa}s; multi-task fine-tuning on language-interfaced classification and regression tasks                                                                                                       materials property prediction from natural language prompts                                                              inorganic materials
+  `ChemLLM` \[@zhang2024chemllm\]        decoder-only transformer (InternLM2) with 7B parameters                                                                  instruction-tuning on template-based using \acr{sft} or \acr{dpo}                                                                                                                                                 multi-topic chemistry \acr{qa}                                                                                           organic molecules & reactions
+  `nach0` \[@livne2024nach0\]            encoder-decoder transformer (T5) with 250M or 780M parameters                                                            pre-trained using \acr{ssl} on scientific literature and \acr{smiles} strings; instruction-tuned                                                                                                                  natural language to \acr{smiles}; small-molecule property prediction                                                     organic molecules & reactions
+  `LLaMat` \[@mishra2024foundational\]   decoder-only transformer (LLaMA) with 7B parameters                                                                      continued pre-training on materials literature and crystallographic data                                                                                                                                          materials information extraction; understanding and generating \acr{cif}s                                                inorganic materials
+  `ChemDFM` \[@zhao2024chemdfm\]         decoder-only transformer (LLaMA) with 13B parameters                                                                     pre-trained on 34B tokens from chemistry papers and textbooks; instruction-tuned with \acr{qa} and \acr{smiles}                                                                                                   \acr{smiles} to text; molecule/reaction property prediction                                                              organic molecules & reactions
+  `ether0` \[@narayanan2025training\]    decoder-only transformer (Mistral-Small) with 24B parameters; \acr{moe}                                                  \acr{sft} on reasoning traces, then \acr{rl}                                                                                                                                                                       molecular editing; one-step retrosynthesis; reaction prediction                                                          organic molecules & reactions
 
-`DARWIN 1.5` pioneered the multitask approach by fine-tuning `Llama-7B`
-through a two-stage process \[@xie2025darwin\]. Initially trained on
-332k scientific question-answer pairs to establish foundational
-scientific reasoning, the model subsequently underwent multitask
-learning to perform property prediction-related regression and
-classification tasks concurrently.
+**Non-comprehensive list of existing \acr{gpm}s in chemical sciences.** Most current
+  models are trained on a mixture of general and domain-specific
+  corpora. Models are sorted by the order they appear in the main text.
+:::
 
-Building on similar principles, `nach0` introduced a unified
-encoder-decoder transformer architecture for cross-domain chemical tasks
-\[@livne2024nach0\]. Pre-trained using \acr{ssl} on both natural language and chemical
-data, `nach0` tackles diverse downstream applications including
-molecular structure generation, chemical property prediction, and
-reaction prediction. Notably, the authors found that combining
-chemistry-specific tasks outperformed models trained on distinct task
-groups, suggesting that chemical reasoning benefits from focused domain
-integration.
+### Domain Pre-Training and Multitask Learning
 
-In the materials domain, @qu2023leveraging developed a language-driven
-materials discovery framework that uses transformer-based embeddings
-(e.g., `MatBERT`\[@wan2024tokens\]) to represent and generate novel
-crystal structures. Candidates are first recalled via similarity in
-embedding space, then ranked using a multitask multi-gate
-\acr{moe} model that
-predicts the desired properties jointly. Their method successfully
-identifies novel high-performance materials (e.g., halide perovskites)
-and demonstrates that language representations encode latent knowledge
-for task-agnostic materials design.
+`DARWIN 1.5` used a multitask approach to fine-tune `Llama-7B` through a
+two-stage process \[@xie2025darwin\]. In the first step, the base model
+was fine-tuned on $332k$ scientific \acr{qa} pairs to establish foundational
+scientific reasoning. Subsequently, the model underwent multitask
+learning on $22$ different regression and classification tasks based on
+experimental datasets. `DARWIN 1.5`'s core idea is the use of
+\acr{lift} (see @sec-model_adaptation) on diverse materials tasks to induce
+cross-task transfer during training. However, in some cases, the results
+revealed negative task-interaction, i.e., some tasks had diminished
+performance under multi-tasking.
 
-#### Domain-Specific Pre-Training Strategies
+`ChemLLM` followed a similar approach to `DARWIN 1.5`: template-based
+instruction tuning (ChemData) on $~7M$ \acr{qa} pairs. \[@zhang2024chemllm\].
 
-A second category of \acr{gpm}s emphasizes deep domain knowledge through
-specialized pre-training. `LLaMat` employed \acr{peft} specifically on crystal structure data in
-\acr{cif} format,
-enabling the generation of thermodynamically stable structures
-\[@mishra2024foundational\].
+While the above examples focus on combining different in-domain tasks,
+`nach0` coupled natural language with chemical data \[@livne2024nach0\],
+based on a unified encoder-decoder transformer architecture. The model
+was pre-trained using \acr{ssl} on a combination of
+\acr{smiles} strings
+and natural language from scientific literature, and then
+instruction-tuned on chemistry and \acr{nlp} tasks. This allows `nach0` to translate
+between natural language and \acr{smiles}, in addition to tasks like
+\acr{qa}, information
+extraction, and molecule/reaction generation.
 
-`ChemDFM` scales this concept significantly, implementing domain
+`LLaMat` employed \acr{peft} to continue the pre-training on crystal
+structure data in \acr{cif} format, enabling the generation of
+thermodynamically stable structures \[@mishra2024foundational\].
+
+`ChemDFM` scaled this concept significantly, implementing domain
 pre-training on over 34 billion tokens from chemical textbooks and
-research articles \[@zhao2024chemdfm\]. Through comprehensive
-instruction tuning, `ChemDFM` familiarizes itself with chemical notation
-and patterns, distinguishing it from more materials-focused approaches
-like `LLaMat` through its broader chemical knowledge base.
-
-`ChemLLM` further refined this approach by introducing template-based
-instruction tuning (ChemData) to optimize property-guided molecular
-generation \[@zhang2024chemllm\].
+research articles \[@zhao2024chemdfm\]. After that, through
+comprehensive instruction tuning, `ChemDFM` familiarizes itself with
+chemical notation and patterns, distinguishing it from more
+materials-focused approaches like `LLaMat` through its broader chemical
+knowledge base.
 
 #### Reasoning-Based Approaches
 
 A recent development in chemical \acr{gpm}s incorporates explicit reasoning
-capabilities. `ether0` demonstrates this approach as a 24 billion
-parameter reasoning model trained on over 640k experimentally-grounded
-chemistry problems across diverse tasks, including retrosynthesis,
-solubility editing, and property prediction \[@narayanan2025training\].
-Unlike previous models, `ether0` uses \acr{rl} (see
-[@sec-rl]) to
-develop reasoning behaviors like verification and backtracking,
-demonstrating that structured problem-solving approaches can
-significantly improve performance on complex chemical tasks while
-maintaining grounding in experimental data.
+capabilities. The `ether0` model demonstrated this approach as a 24
+billion-parameter reasoning model trained on over 640k
+chemically-verifiable problems (e.g., through code) across 375 tasks,
+including single-step retrosynthesis, molecular editing, and reaction
+prediction \[@narayanan2025training\]. Unlike previous models,
+`ether0`'s training used a novel \acr{rl} approach (see @sec-rl).
+First, `DeepSeek-R1` was prompted to create long
+\acr{cot} traces ending
+in a \acr{smiles}.
+These traces were used to fine-tune a pre-trained `Mistral-Small-24B`
+using \acr{sft},
+resulting in a "base reasoner" model. This model underwent
+\acr{rl} using
+\acr{grpo} on several
+verifiable chemical tasks to create "specialist" models---one for each
+task. High-quality outputs from these specialist models were selected
+and used to fine-tune the "base reasoner" to create a "generalist"
+model, capable of reasoning about all the tasks. In the last step, the
+generalist model undergoes another round of \acr{rl} on the chemical tasks to improve the
+performance. This method shows that structured problem-solving
+approaches can significantly improve performance on complex chemical
+tasks without the need for massive domain-specific corpora.
 
 These diverse approaches illustrate the evolving landscape of chemical
-\acr{gpm}s, each balancing
-broad applicability with domain-specific precision. Still, most
+\acr{gpm}s. Still, most
 applications of \acr{gpm}s
-focus on using these models for one specific application and we will
+focus on using such models for one specific application, and we will
 review those in the following.
+
+### Limitations
+
+Chemical \acr{gpm}s are
+emerging, but we lack systematic understanding of how to build effective
+ones.
+
+The tokenization question remains unresolved. Domain-specific tokenizers
+might improve data efficiency, but they prevent reuse of models trained
+on general text datasets. The tradeoff remains unclear.
+
+A deeper challenge exists: we might lack sufficient high-quality data.
+Existing chemical datasets are much smaller than those used in domains
+like mathematics @sec-data-section. The literature reports only successes.
+Failed experiments, discarded results, and negative outcomes never
+appear in published datasets. More critically, chemical practitioners
+rely on tacit knowledge\[@Polanyi_2009\]---expertise acquired through
+experience that experts cannot fully articulate. This implicit
+understanding remains absent from existing datasets.
 
 ## Knowledge Gathering {#sec-information_gathering}
 
@@ -204,113 +286,114 @@ The rate of publishing keeps growing, and as a result, it is
 increasingly challenging to manually collect all relevant knowledge,
 potentially stymying scientific progress.\[@schilling2025text;
 @Chu_2021\] Even though knowledge collection might seem like a simple
-task, it often involves multiple different steps, visually described in
-@fig-knowledge_gathering. We split the discussion in this
-section in two: structured data extraction and question answering.
-Example queries for both sections are in
-@fig-knowledge_gathering B.
-
-::: {#fig-knowledge_gathering}
-
-![](media/figures/rescaled_figures/chemrev_figure12.png){width=100%}
-
-**A. a representation of a typical agent for scientific queries.** The \acr{llm} is the central piece of the system, surrounded by typical tools that improve its question-answering capabilities, together forming an agentic system. The tools represented in this figure are semantic search, citation traversal, evidence gathering, and question answering. Semantic search finds relevant documents. Evidence gathering ranks and filters chunks of text using \acr{llm}s. The citation traversal tool provides model access to citation graphs, enabling accurate referencing of each chunk and facilitating the discovery of additional sources. Finally, the question-answering tool (an <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span>) collects all the information found by other tools and generates a final response to a user's query. This part the figure is inspired by the `PaperQA2` agent.[@skarlinski2024language] **B.** two examples of applications discussed in this section.
-:::
+task, it often involves multiple steps, visually described in @fig-knowledge_gathering A. Here, we focus on structured data
+extraction and question answering. Example queries for both sections are in @fig-knowledge_gathering B.
 
 ### Semantic Search
 
 A step that is key to most, if not all, knowledge-gathering tasks is
-\acr{rag}, discussed in
-more detail in [@sec-rag]. Most commonly, this involves semantic search,
+\acr{rag}, discussed in 
+more detail in @sec-rag. Most commonly, this involves semantic search,
 intended to identify chunks of text with similar meaning. The difference
 between semantic search and conventional search lies in how each
 approach interprets queries. The latter operates through lexical
 matching---whether exact or fuzzy---focusing on the literal words and
-their variations. Semantic search, however, goes deeper by interpreting
-the underlying meaning and contextual relationships within the content.
+their variations. Semantic search, however, focuses on the underlying
+meaning and contextual relationships within the content.
 
-To enable semantic search, documents are stored in vector databases
-using embedding vectors (see
-[@sec-embeddings]).\[@bojanowski2017enriching\] They represent
-the content of a document as a vector in a learned vector space and
-hence allow for similarity search by vector comparison (e.g., using
-cosine similarity for small databases or more sophisticated algorithms
-like \acr{hnsw} for
-large databases\[@malkov2018efficient\]).
+To enable semantic search, documents are converted into embeddings (see @sec-embeddings) \[@bojanowski2017enriching\]. They allow
+for similarity search by vector comparison (e.g., using cosine
+similarity for small databases or more sophisticated algorithms like
+\acr{hnsw} for large
+databases\[@malkov2018efficient\]).
 
 In chemistry, semantic search has been used extensively to classify and
 identify chemical text.\[@Guo2021; @beltagy2019scibert0;
 @trewartha2022quantifying\]
 
+::: {#fig-knowledge_gathering}
+![](media/figures/rescaled_figures/chemrev_figure12.png){width="100%"}
+
+**A. A representation of a typical agent for
+scientific queries.** The \acr{llm} is the central piece of
+the system, surrounded by typical tools that improve its
+question-answering capabilities, together forming an agentic system. The
+tools represented in this figure are semantic search, citation
+traversal, evidence gathering, and question answering. Semantic search
+finds relevant documents. Evidence gathering ranks and filters chunks of
+text using \acr{llm}s. The citation traversal
+tool provides model access to citation graphs, enabling accurate
+referencing of each chunk and facilitating the discovery of additional
+sources. Finally, the question-answering tool (an \acr{llm})
+collects all the information found by other tools and generates a final
+response to a user’s query. This part of the figure is inspired by the
+`PaperQA2` agent.[@skarlinski2024language]
+**B.** Two examples of applications are discussed in this
+section. **C.** worked example using the
+`FutureHouse`’s platform (the Crow agent). “used in 1.1”
+indicates that this reference has been used in the final response of the
+model[@skarlinski2025futurehouse].
+:::
+
 ### Structured Data Extraction
 
-Semantic search can help us find relevant resources. However, for many
-applications it can be useful to collect data in a structured form,
-e.g., tables with fixed columns. Obtaining such a dataset based on
+For many applications, it can be useful to collect data in a structured
+form, e.g., tables with fixed columns. Obtaining such a dataset by
 extracting data from the literature using \acr{llm}s is currently one of the most practical
-avenues for the use of \acr{llm}s in the chemical sciences
-\[@schilling2025text\]. Currently, \acr{llm}s are used in various forms for this
-application.
+avenues for \acr{llm}s in
+the chemical sciences \[@schilling2025text\].
 
 #### Data Extraction Using Prompting
 
 For most applications, zero-shot prompting should be the starting point.
-In this context, zero-shot prompting has been used to extract data about
-organic reactions\[@rios2025llm; @vangala2024suitability;
+Zero-shot prompting has been used to extract data about organic
+reactions\[@rios2025llm; @vangala2024suitability;
 @Patiny2023automatic\], synthesis procedures for metal-organic
-frameworks\[@zheng2023chatgpt\], polymers\[@schilling2024using;
-@gupta2024data\], solar cells\[@shabih2025automated\], or materials
-data\[@polak2024extracting; @hira2024reconstructing;
-@kumar2025mechbert; @wu2025large; @huang2022batterybert\].
+frameworks\[@zheng2023chatgpt\], polymer data\[@schilling2024using;
+@gupta2024data\], or other materials data\[@polak2024extracting;
+@hira2024reconstructing; @kumar2025mechbert; @wu2025large;
+@huang2022batterybert\].
 
 #### Fine-tuning Based Data Extraction
 
-If a commercial model needs to be run very often, it can be more
+If a (commercial) model needs to be run very often, it can be more
 cost-efficient to fine-tune a smaller, open-source model compared to
-prompting a large model. In addition, models might lack specialized
-knowledge and might not follow certain style guides, which can be
-introduced with fine-tuning. @ai2024extracting fine-tuned the
-`LLaMa-2-7B` model to extract procedural chemical reaction data from
-\acr{uspto}, and
-converted it to a \acr{json} format compatible with the schema of
-\acr{ord}\[@Kearnes_2021\], achieving an overall
-accuracy of more than $90\%$. In a different work, @zhang2024fine
-fine-tuned `GPT-3.5-Turbo` to recognize and extract chemical entities
-from \acr{uspto}.
-Fine-tuning improved the performance of the base model on the same task
-by more than $15\%$. Similarly, @dagdelen2024structured proposed a
-human-in-the-loop data annotation process, where humans correct the
-outputs from an \acr{llm}
-extraction instead of extracting data from scratch.
+prompting a large model (see @sec-distillation). In addition, models might lack
+specialized knowledge and might not follow certain style guides, which
+can be introduced with fine-tuning. @ai2024extracting fine-tuned the
+`LLaMa-2-7B` model to extract chemical reaction data from
+\acr{uspto} into a
+\acr{json} format
+compatible with the schema of \acr{ord}\[@Kearnes_2021\], achieving an overall
+accuracy of more than $90\%$. In a different approach, @zhang2024fine
+fine-tuned a closed-source model --- `GPT-3.5-Turbo` to recognize and
+extract chemical entities from \acr{uspto}. Fine-tuning improved the performance of
+the base model on the same task by more than $15\%$.
+@dagdelen2024structured went beyond the afore-mentioned methods by
+using a human-in-the-loop data annotation process. Here, humans
+corrected the outputs from an \acr{llm} extraction instead of annotating data
+from scratch.
 
 #### Agents for Data Extraction
 
-Agents ([@sec-agents]) have shown their potential in data extraction,
+Agents (@sec-agents) have shown their potential in data extraction,
 though to a limited extent.\[@chen2024autonomous; @kang2024chatmof\]
 For example, @ansari2024agent introduced `Eunomia`, an agent that
-autonomously extracts structured materials science data from scientific
-literature without requiring fine-tuning, demonstrating performance
-comparable to or better than fine-tuned methods. Their agent is an
+autonomously extracts structured materials data from scientific
+literature without requiring fine-tuning. Their agent is an
 \acr{llm} with access to
 tools such as chemical databases (e.g., the `Materials Project`
-database) and research papers from various sources.
+database) and research papers from various sources. The document search
+tool leverages an \acr{api}-based embedding model to find the top-k
+most relevant passages based on semantic similarity. Other tools used
+include the chain-of-verification tool, which queries the agent
+independently (to avoid bias) in order to generate verification queries
+and finally produces a verified response.
 
 While the authors claim this approach simplifies dataset creation for
 materials discovery, the evaluation is limited to a narrow set of
 materials science tasks (mostly focusing on \acr{mof}s), indicating the need for the creation of
 agent evaluation tools.
-
-#### Limitations
-
-The ability to extract data from sources other than text is important
-since a large amount of data is only stored in plots, tables, and
-figures. Despite some initial simple proofs of concept
-\[@Zheng2024image\], the main bottleneck presently is the limited
-understanding of image data compared to text data in multimodal
-models.\[@alampara2024probing\] The promise of agents lies in their
-ability to interact with tools (that can also interpret multimodal
-data). Moreover, their ability to self-reflect could automatically
-improve wrong results.\[@du2023improving\]
 
 ### Question Answering
 
@@ -322,22 +405,50 @@ retrieving additional documents).
 
 An example of a system that can do that is `PaperQA`. This agentic
 system contains tools for search, evidence-gathering, and question
-answering as well as for traversing citation graphs, which are shown in
-@fig-knowledge_gathering. The evidence-gathering tool
+answering as well as for traversing citation graphs, which are shown in @fig-knowledge_gathering. The evidence-gathering tool
 collects the most relevant chunks of information via the semantic search
-and performs \acr{llm}-based re-ranking of these chunks (i.e.
+and performs \acr{llm}-based re-ranking of these chunks (i.e.,
 the \acr{llm} changes the
 order of the chunks depending on what is needed to answer the query).
 Subsequently, only the top-$n$ most relevant chunks are kept. To further
 ground the responses, citation traversal tools (e.g., Semantic
 Scholar\[@kinney2023semantic\]) are used. These leverage the citation
 graph as a means of discovering supplementary literature references.
-Ultimately, to address the user's query, a question-answering tool is
-employed. It initially augments the query with all the collected
-information before providing a definitive answer. The knowledge
-aggregated by these systems could be used to generate new hypotheses or
-challenge existing ones. Thus, in the next section, we focus on this
-aspect.
+Ultimately, to address the user's query, a question-answering tool (a
+specially prompted \acr{llm}) is employed. It initially augments the
+query with all the collected information before providing a definitive
+answer. The knowledge aggregated by these systems could be used to
+generate new hypotheses or challenge existing ones.
+
+### Limitations
+
+\acr{llm}s and
+\acr{llm}-based systems
+are valuable information-gathering tools, but they have critical
+limitations. Their knowledge becomes outdated immediately after
+training. Without additional tools, they cannot identify when retrieved
+sources have been retracted or corrected.
+
+Effective knowledge gathering requires human-\acr{ai} collaboration. Current systems struggle
+to ask relevant clarifying questions.\[@choudhury2025bed0llm0\]
+Domain-specific benchmarks for evaluating this capability remain absent,
+hindering progress in developing truly interactive knowledge-gathering
+agents.
+
+### Open Challenges
+
+Critical challenges remain unresolved:
+
+- **Multimodal Understanding.** Current models cannot reliably extract
+  data from plots, tables, and figures.\[@alampara2024probing;
+  @gupta2022discomat0\] This severely limits data extraction because
+  substantial chemical knowledge exists only in visual formats. Improved
+  multimodal capabilities are essential for comprehensive literature
+  mining.
+
+- **Source Quality Assessment.** Selecting high-quality sources, that
+  are also relevant to the scientific query, remains an open challenge,
+  with scholarly metrics alone being insufficient.
 
 ## Hypothesis Generation {#sec-hypothesis-gen}
 
@@ -357,8 +468,7 @@ to automate and enhance idea generation across scientific domains
 \[@oneill2025sparks\]. However, such approaches face significant
 challenges due to the inherently open-ended nature of scientific
 discovery \[@stanley2017openendedness\]. Open-ended domains, as
-discussed in
-[@sec-data-section], risk intractability, as an unbounded
+discussed in @sec-data-section, risk intractability, as an unbounded
 combinatorial space of potential variables, interactions, and
 experimental parameters complicates systematic exploration
 \[@clune2019ai0gas0\]. Moreover, the quantitative evaluation of the
@@ -376,7 +486,7 @@ hypothesis formulation process \[@Gu2025forecasting;
 @arlt2024meta0designing\], primarily leveraging multi-agent systems
 \[@jansen2025codescientist0; @kumbhar2025hypothesis\]. In such
 frameworks, agents typically retrieve prior knowledge to contextualize
-previous related work---grounding hypothesis generation in existing
+previous related work, grounding hypothesis generation in existing
 literature \[@naumov2025dora; @ghareeb2025robin0;
 @gu2024interesting\]. A key challenge, however, lies in evaluating the
 generated hypotheses. While some studies leverage
@@ -384,14 +494,13 @@ generated hypotheses. While some studies leverage
 novelty or interestingness \[@zhang2024omni0\], recent work has
 introduced critic agents---specialized components designed to monitor
 and iteratively correct outputs from other agents---into multi-agent
-frameworks (see
-[@sec-multi-agent]). For instance, @Ghafarollahi2024
+frameworks (see @sec-multi-agent). For instance, @Ghafarollahi2024
 demonstrated how integrating such critics enables systematic hypothesis
 refinement through continuous feedback mechanisms.
 
 However, the reliability of purely model-based evaluation remains
 contentious. @si2025llms argued that relying on a
-\acr{gpm} to evaluate
+\acr{llm} to evaluate
 hypotheses lacks robustness, advocating instead for human assessment.
 This approach was adopted in their work, where human evaluators
 validated hypotheses produced by their system, finding more novel
@@ -402,18 +511,16 @@ entire research \acr{ml}
 process, from hypothesis generation to article writing. Their system's
 outputs were submitted to workshops at the \acr{iclr} 2025, with one contribution ultimately
 accepted. However, the advancements made by such works are currently
-incremental instead of unveiling new, paradigm-shifting research (see
-@fig-hypothesis-generation).
+incremental instead of unveiling new, paradigm-shifting research (see @fig-hypothesis-generation).
 
 ### Chemistry-Focused Hypotheses
 
-In scientific fields such as chemistry and materials science, hypothesis
-generation requires domain intuition, mastery of specialized
-terminology, and the ability to reason through foundational concepts
-\[@miret2024llms\]. To address potential knowledge gaps in
-\acr{llm}s,
-@wang2023scimon0 proposed a few-shot learning approach (see
-[@sec-prompting]) for hypothesis generation and compared it
+In chemistry and materials science, hypothesis generation requires
+domain intuition, mastery of specialized terminology, and the ability to
+reason through foundational concepts \[@miret2024llms\]. To address
+potential knowledge gaps in \acr{llm}s, @wang2023scimon0 proposed a few-shot
+learning approach (see @sec-prompting)
+for hypothesis generation and compared it
 with model fine-tuning for the same task. Their method strategically
 incorporates in-context examples to supplement domain knowledge while
 discouraging over-reliance on existing literature. For fine-tuning, they
@@ -439,10 +546,20 @@ demonstrating efficient synthesis of ideas presumably not present in its
 training corpus.
 
 ::: {#fig-hypothesis-generation}
+![](media/figures/rescaled_figures/chemrev_figure13.png){width="100%"}
 
-![](media/figures/rescaled_figures/chemrev_figure13.png){width=100%}
-
-**Overview of \acr{llm}-based hypothesis generation**. Current methods are based on <span data-acronym-label="llm" data-acronym-form="singular+short">llm</span>-sampling methods in which an \acr{llm} proposes new hypotheses. The generated hypotheses are evaluated in terms of novelty and impact either by another \acr{llm} or by a human. Then, through experimentation, the hypotheses are transformed into results which showcase that current \acr{llm}s cannot produce groundbreaking ideas, limited to their training corpus, resulting in the best cases, in incremental work. This is shown metaphorically with the puzzle. The "pieces of chemical knowledge" based on the hypothesis produced by \acr{llm}s are already present in the "chemistry puzzle", not unveiling new parts of it.
+**Overview of \acr{llm}-based hypothesis
+generation**. Current methods are based on \acr{llm}-sampling methods in which
+an \acr{llm} proposes new hypotheses.
+The generated hypotheses are evaluated in terms of novelty and impact
+either by another \acr{llm} or by a human. Then,
+through experimentation, the hypotheses are transformed into results
+which showcase that current \acr{llm}s cannot produce
+groundbreaking ideas, limited to their training corpus, resulting in the
+best cases, in incremental work. This is shown metaphorically with the
+puzzle. The “pieces of chemical knowledge” based on the hypothesis
+produced by \acr{llm}s are already present in the
+“chemistry puzzle”, not unveiling new parts of it.
 :::
 
 ### Are LLMs Actually Capable of Novel Hypothesis Generation?
@@ -457,31 +574,31 @@ experience---which is currently impossible for most
 
 Current progress in \acr{ml} illustrates these limitations
 \[@kon2025exp0bench0; @gu2024interesting\]. Although some studies claim
-success in \acr{ai}-generated ideas accepted at workshops in
-\acr{ml} conferences via
-double-blind review \[@zhou2025tempest0\], these achievements are
-limited. First, accepted submissions often focus on coding tasks, one of
-the strongest domains for \acr{llm}s. Second, workshop acceptances are less
-competitive than main conferences, as they prioritize early-stage ideas
-over rigorously validated contributions. In chemistry, despite some
-works showing promise on these systems \[@yang2025moose0chem20\],
-\acr{llm}s struggle to
-propose functional hypotheses \[@si2025ideation1execution\]. Their
-apparent success often hinges on extensive sampling and iterative
-refinement, rather than genuine conceptual innovation.
+success, as \acr{ai}-generated ideas being accepted at
+workshops in \acr{ml}
+conferences via double-blind review \[@zhou2025tempest0\], these
+achievements are limited. First, accepted submissions often focus on
+coding tasks, one of the strongest domains for
+\acr{llm}s. Second,
+workshop acceptances are less competitive than main conferences, as they
+prioritize early-stage ideas over rigorously validated contributions. In
+chemistry, despite some works showing promise on these systems
+\[@yang2025moose0chem20\], \acr{llm}s struggle to propose innovative hypotheses
+\[@si2025ideation1execution\]. Their apparent success often hinges on
+extensive sampling and iterative refinement, rather than genuine
+conceptual innovation.
 
 As @Kuhn1962Structure argued, generating groundbreaking ideas demands
 challenging prevailing paradigms---a capability missing in current
 \acr{ml} models (they are
 trained to make the existing paradigm more likely in training rather
-than questioning their training data), as shown in
-@fig-hypothesis-generation. Thus, while accidental
+than questioning their training data), as shown in @fig-hypothesis-generation. Thus, while accidental
 discoveries can arise from non-programmed events (e.g., Fleming's
 identification of penicillin \[@Fleming1929antibacterial;
 @Fleming1945penicillin\]), transformative scientific advances typically
 originate from deliberate critique of existing knowledge
 \[@popper1959logic; @Lakatos1970falsification\]. In addition, very
-often breakthroughs can also not be achieved by optimizing for a simple
+often breakthroughs can not be achieved by optimizing for a simple
 metric---as we often do not fully understand the problem and, hence,
 cannot design a metric.\[@stanley2015greatness\] Despite some
 publications suggesting that \acr{ai} scientists already exist, such claims are
@@ -495,11 +612,32 @@ problems \[@Carlson2006millennium\]).
 
 Finally, ethical considerations become critical as hypothesis generation
 grows more data-driven and automated. Adherence to legal and ethical
-standards must guide these efforts (see
-[@sec-safety]) \[@danish_gov2024hypothesis\].
+standards must guide these efforts (see @sec-safety \[@danish_gov2024hypothesis\].
 
-With a hypothesis in hand, the next step is often to run an experiment
-to test it.
+### Limitations
+
+Current \acr{llm}-driven
+systems lack the kind of creativity needed for paradigm-shifting
+hypotheses, tending to rearrange training data and retrieved content
+rather than propose genuinely new mechanisms. As a result, the
+evaluation of such outputs is also fragile, because using proxy metrics
+for "novelty" or "impact" that poorly track real scientific value can be
+deceiving. Finally, the problem's open-ended nature @sec-data-section makes systematic benchmarking ill-posed.
+
+### Open Challenges
+
+- **Scalable Evaluation**: The open-ended assessment of a hypothesis's
+  potential impact remains a core challenge, as current methods are
+  difficult to scale, costly, and inefficient due to a heavy reliance on
+  human input \[@nie2025assessing\].
+
+- **The Integration Gap**: A critical disconnect persists between
+  hypothesis generation and automated experimental validation,
+  especially in fields like chemistry.
+
+- **The Paradigm Limitation**: The underlying operational constraints of
+  current modeling approaches inherently favor incremental progress over
+  transformative breakthroughs.
 
 ## Experiment Planning {#sec-planning}
 
@@ -518,179 +656,167 @@ and improving plans over time based on ongoing results.\[@chen2022deep\]
 
 ### Conventional Planning
 
-Early experimental planning in chemistry relied on human intuition and
-domain expertise. One example of this is retrosynthesis. Since the
-1960s, systems like \acr{lhasa} \[@corey1972computer\] began automating
-retrosynthesis using hand-coded rules and heuristics\[@warr2014short\].
-Later tools, such as `Chematica`\[@grzybowski2018chematica\], expanded
-these efforts by integrating larger template libraries and optimization
-strategies. As reaction data grew in volume and complexity, manual rule
-encoding became unsustainable. Platforms like ASKCOS\[@tu2025askcos\]
-integrated \acr{gnn}s and
-neural classifiers to predict reactivity and suggest conditions,
-enabling actionable synthetic routes.
-
-All applications, however, face the problem that planning is difficult
-because search spaces are combinatorially large and evaluating potential
-paths, in principle, requires a model that can perfectly predict the
-outcomes of different actions. Conventional approaches often rely on
-various forms of search algorithms such as \acr{bfs}, \acr{dfs}, \acr{mcts} \[@segler2017towards\]. Those, however,
-are often still not efficient enough to tackle long-horizon planning for
-complex problems.
+Early chemical planning systems, such as \acr{lhasa} \[@corey1972computer\] and
+`Chematica`\[@grzybowski2018chematica\], relied on simple rules and
+templates. In particular, `Chematica` used heuristic-guided graph search
+with rule-based transforms and scoring functions to prune and prioritize
+routes. Modern systems, like ASKCOS\[@tu2025askcos\], explicitly use
+search algorithms such as \acr{bfs}, \acr{mcts}\[@segler2017towards\] to explore the
+combinatorially large space. But these planning search algorithms remain
+inefficient for long-horizon or complex planning tasks.
+\[@liu2024entropy; @zhao2024efficient\]
 
 ### LLMs to Decompose Problems into Plans
 
 \acr{gpm}s, in particular
 \acr{llm}s, can potentially
-assist in planning with two modes of thinking. Deliberate
-(system-2-like) thinking can be used to score potential options or to
-decompose problems into plans. Intuitive (system-1-like) thinking can be
-used to efficiently prune search spaces. These two modes align with
-psychological frameworks known as system-1 and system-2 thinking.
+assist in planning with two modes of thinking. Deliberate thinking can
+be used to score potential options or to decompose problems into plans.
+Intuitive thinking can be used to efficiently prune search spaces. These
+two modes align with psychological frameworks known as system-1
+(intuitive) and system-2 (deliberate) thinking.
 \[@kahneman2011thinking\] In the system-1 thinking,
 \acr{llm}s support rapid
 decision-making by leveraging heuristics and pattern recognition to
 quickly narrow down options. In contrast, system-2 thinking represents a
-slower, more analytical process, in which \acr{llm}s solve complex tasks---such as logical
-reasoning and planning---by explicitly generating step-by-step
-reasoning. \[@ji2025test\]
+slower, more analytical process, in which \acr{llm}s solve complex tasks by explicitly
+generating step-by-step reasoning. \[@ji2025test\]
 
-Decomposing a goal into actionable milestones relies on this deliberate,
-system-2-style reasoning, enabling the model to evaluate alternatives
-and structure plans effectively. A variety of strategies have been
-proposed to improve the reasoning capabilities of
-\acr{llm}s during
-inference. Methods such as \acr{cot} and least-to-most prompting guide models
-to decompose problems into interpretable steps, improving transparency
-and interpretability. However, their effectiveness in planning is
-limited by error accumulation and linear thinking
-patterns.\[@stechly2024chain\] To address these limitations, recent
-test-time strategies such as repeat sampling and tree search have been
-proposed to enhance planning capabilities in \acr{llm}s. Repeated sampling allows the model to
-generate multiple candidate reasoning paths, encouraging diversity in
-thought and increasing the chances of discovering effective subgoal
-decompositions. \[@wang2024planning\] Meanwhile, tree search methods
-like \acr{tot} and
+@fig-planning_example shows how a \acr{llm} applies this deliberate, system-2-style
+reasoning to decompose a chemical problem into a sequence of planned
+steps. A variety of strategies have been proposed to improve the
+reasoning capabilities of \acr{llm}s during inference. Methods such as
+\acr{cot} and
+least-to-most prompting guide models to decompose. However, their
+effectiveness in planning is limited by error accumulation and linear
+thinking patterns.\[@stechly2024chain\] To address these limitations,
+recent test-time strategies such as repeat sampling and tree search have
+been proposed. Repeated sampling allows the model to generate multiple
+candidate reasoning paths, encouraging diversity in thought and
+increasing the chances of discovering effective subgoal decompositions.
+\[@wang2024planning\] Meanwhile, tree search methods like
+\acr{tot} and
 \acr{rap} treat reasoning
-as a structured search, also using algorithms like
+as a structured search, using algorithms like
 \acr{mcts} to explore
 and evaluate multiple solution paths, facilitating more global and
 strategic decision-making. \[@hao2023reasoning\]
 
-Beyond purely linguistic reasoning, \acr{llm}s have also been used to interpret
-natural-language queries and to translate them into structured planning
-steps, as demonstrated by systems like \acr{llm}+P\[@liu2023llm\] and
-\acr{llm}-DP\[@dagan2023dynamic\], which integrated
-\acr{llm}s with classical
-planners to convert planning problems into \acr{pddl}. \acr{llm}s have also been applied to generate
-structured procedures from limited observations. For example, in quantum
-physics, a model was trained to infer reusable experimental templates
-from measurement data, producing Python code that generalized across
-system sizes. \[@arlt2024meta0designing\] This demonstrates how
-\acr{llm}s can support
-scientific planning by synthesizing high-level protocols from low-level
-evidence, moving beyond symbolic reasoning to executable plan
-generation.
+\acr{llm}s have also been
+applied to generate structured procedures from limited observations. For
+example, in quantum physics, a model was trained to infer reusable
+experimental templates from measurement data, producing Python code that
+generalized across system sizes. \[@arlt2024meta0designing\]
+
+::: {#fig-planning_example}
+![](media/figures/rescaled_figures/Chemrev_planning_example.png){width="100%"}
+
+**An example of using \acr{llm} for chemical planning to
+decompose problem**. \acr{llm} decomposes a chemical
+problem into sequential steps with detailed procedures. We manually
+evaluate the plan step by step, and highlight the problematic steps in
+text boxes, each linked to the corresponding reason. Plan was generated
+by ChatGPT-5.**
+:::
 
 ### Pruning of Search Spaces
 
 Pruning refers to the process of eliminating unlikely or suboptimal
-options during the search to reduce the computational burden. Because
-the number of potential pathways can grow exponentially, exhaustive
-search may be computationally intensive. Classical planners employ
-heuristics, value functions, or logical filters to perform
-pruning\[@bonet2012action\]. \acr{llm}s can emulate pruning through learned
-heuristics, intuitive judgment, or context-driven evaluation,
-\[@gao2025synergizing\] reflecting system-1 thinking.
-@fig-planning
-illustrates how \acr{llm}s
-can support experimental planning by selectively pruning options.
-Rule-based heuristics derived from domain knowledge can automatically
-discard routes involving unfavorable motifs, such as chemically strained
-rings or complex aromatic scaffolds. Meanwhile,
-\acr{llm}s can emulate an
+options during the search to reduce the computational burden. Classical
+planners employ heuristics, value functions, or logical filters to
+perform pruning\[@bonet2012action\].
+
+@fig-planning illustrates how \acr{llm}s
+can support experimental planning by pruning options by emulating an
 expert chemist's intuition by discarding synthetic routes that appear
 unnecessarily long, inefficient, or mechanistically implausible.
 
 To further enhance planning efficacy, \acr{llm}s can be augmented with external tools that
 estimate the feasibility or performance of candidate plans, enabling
-targeted pruning of the search space before costly execution. In
-`ChemCrow`, the \acr{llm}
-collaborated with specialized chemical tools with knowledge about
-molecular and reaction properites. While `ChemCrow` does not explicitly
-generate and prune a large pool of candidate plans, these tools serve as
-real-time evaluators that help the model avoid unfeasible or inefficient
-directions during synthesis or reaction planning.
+targeted pruning of the search space before costly execution.
 
-In addition to external tools, \acr{llm}s can also engage in self-correction, a
-reflective strategy that identifies and prunes flawed reasoning steps
-within their own outputs. This introspective pruning supports more
-robust and coherent planning by discarding faulty intermediate steps
-before they affect final decisions. As such, self-correction offers a
-lightweight yet effective mechanism for narrowing the solution space in
-complex reasoning tasks. At the highest level of oversight,
-human-in-the-loop frameworks introduce expert feedback to guide pruning
-decisions. The `ORGANA` system\[@darvish2025organa\] integrated chemist
-feedback into the planning process, helping define goals, resolve
-ambiguities, and eliminate invalid directions.
+Beyond external tools, \acr{llm}s can self-correct by pruning flawed
+reasoning steps to produce more coherent plans. At a higher level of
+oversight, human-in-the-loop frameworks such as
+`ORGANA`\[@darvish2025organa\] incorporate expert chemist feedback to
+refine goals, resolve ambiguities, and eliminate invalid directions.
+Example [\[example:chemcrow_organa\]](#example:chemcrow_organa){reference-type="ref"
+reference="example:chemcrow_organa"} presents examples illustrating how
+planning extends to real laboratory practice.
 
 ::: {#fig-planning}
+![](media/figures/rescaled_figures/chemrev_figure14.png){width="100%"}
 
-![](media/figures/rescaled_figures/chemrev_figure14.png){width=100%}
-
-**\acr{gpm}-guided retrosynthesis route planning and pruning**. \acr{gpm}s can systematically evaluate and prune retrosynthetic routes using multiple reasoning capabilities to discriminate between viable and problematic approaches. The partially overlapping arrows at the start of each route indicate multiple steps. **Route A**: This route was pruned by heuristic reasoning due to the unfavorable aromatic core construction. **Route B**: This route was selected as it successfully passes all <span data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span> planning checks, demonstrating optimal synthetic feasibility. **Route C**: This route was pruned by external tools due to the poor region-selectivity of the oxidation step. **Route D**: This route was pruned based on learned intuition, as it represents an inefficient multistep pathway; the route could just start with phenol instead of synthesizing it.
+**\acr{gpm}-guided retrosynthesis
+route planning and pruning**. \acr{gpm}s can systematically evaluate
+and prune retrosynthetic routes using multiple reasoning capabilities to
+discriminate between viable and problematic approaches. The partially
+overlapping arrows at the start of each route indicate multiple steps.
+**Route A**: This route was pruned by heuristic reasoning
+due to the unfavorable aromatic core construction. **Route
+B**: This route was selected as it successfully passes all <span
+data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span>
+planning checks, demonstrating optimal synthetic feasibility.
+**Route C**: This pathway was pruned by external tools due
+to the poor regio-selectivity of the oxidation step. **Route
+D**: This route was pruned based on learned intuition, as it
+represents an inefficient multistep pathway; the route could just start
+with phenol instead of synthesizing it.
 :::
 
-### Evaluation
+### Limitations
 
-While pruning accelerates planning, its effectiveness depends on
-reliable evaluation---the ability to judge whether a candidate plan is
-valid or promising. However, evaluating planning quality is particularly
-challenging in scientific fields such as chemistry and biology. Many
-alternative plans may achieve the same goal, so evaluation is inherently
-ambiguous in the absence of a comprehensive world model. In open-ended
-domains, evaluation is often conducted manually. For example, `ChemCrow`
-\[@bran2024augmenting\] relied on expert review to assess the
-correctness and plausibility of generated outputs. More dynamic
-evaluations can be performed in simulated or real embodied environments
-\[@song2023llm; @choi2024lota\], offering interactive feedback on
-feasibility. In parallel, automatic evaluation methods are emerging. For
-example, `BioPlanner`\[@o2023bioplanner\] used pseudocode-based
-evaluation, comparing \acr{llm}-generated protocols to expert-written
-pseudocode representations to assess plausibility and correctness
-without requiring manual review or physical execution.
+@fig-planning_example demonstrates how
+\acr{llm}s can generate
+sophisticated-looking plans that conceal critical flaws, making complex,
+long-horizon chemical planning tasks particularly difficult to execute
+reliably \[@Cao2025LargeLM\]. A limitation is that they often produce
+outputs that appear chemically plausible but are invalid or unsafe, due
+to their optimization for linguistic plausibility rather than chemical
+correctness and their lack of mechanistic
+understanding\[@Bran2023TransformersAL; @Evans2021TruthfulAD\] Second,
+errors can also propagate from external tools like retrosynthesis
+planners, whose data and algorithmic shortcomings constrain reliability
+\[@Li2025ChemHASHA\]. Finally, a broader limitation is the lack of
+grounding in experimental feedback, which creates persistent gaps
+between theoretical planning and practical feasibility.
+
+### Open Challenges
+
+- **Reasoning Complexity Beyond Knowledge Retrieval**: Complex chemistry
+  problems require long, tightly interconnected chains of reasoning,
+  where minor errors can cascade and require understanding of dynamic
+  interactions such as temperature effects on molecular behavior.
+  Current \acr{llm}s lack
+  effective reasoning structures to guide domain-specific reasoning.
+  \[@Ouyang2023StructuredCR; @Tang2025ChemAgentSL\]
+
+- **Evaluation and Feedback Bottleneck**: Current evaluation methods are
+  often performed manually or indirectly, either relying on expert
+  review as in `ChemCrow` \[@bran2024augmenting\] or on pseudocode-based
+  comparisons as in `BioPlanner`.\[@o2023bioplanner\] Integrating
+  feedback remains an open direction for improving the practical
+  feasibility of generated plans.
 
 ## Experiment Execution
 
 Once an experimental plan is available, whether from a human scientist's
-idea or a sophisticated AI model, the next step is to execute it.
-Regardless of its source, the plan must be translated into concrete,
-low-level actions for execution. One of the main challenges of lab
-automation is to convert the high-level and abstract experimental plan
-into real-world operations carried out by the experimental hardware
-(liquid-handing systems, robotic arms, instruments, etc.).
+idea or an AI model, the next step is to execute it. Regardless of its
+source, the plan must be translated into concrete, low-level actions for
+execution.
 
 It is worth noting that, despite their methodological differences,
 executing experiments *in silico* (running simulations or code) and *in
 vitro* are not fundamentally different---both follow an essentially
 identical workflow: Plan $\rightarrow$ Instructions $\rightarrow$
-Execution $\rightarrow$ Analysis. In a computer simulation, a researcher
-writes a program (plan), which is then compiled or interpreted into
-machine code (instructions) for the \acr{cpu}, executed to produce data, and finally
-the outputs are analyzed. In an automated laboratory, the scientist
-specifies a protocol (plan), which must be translated into instrument
-commands (instructions), executed on a robotic platform, followed by the
-analysis of sensor data or assay results. Both scenarios require careful
-translation of abstract steps into concrete actions, as well as further
-decision-making based on the acquired results.
+Execution $\rightarrow$ Analysis.
 
 The execution of *in silico* experiments can be reduced to two essential
 steps: preparing input files and running the computational code;
 \acr{gpm}s can be used in
 both steps.\[@Liu2025ASA; @Mendible-Barreto2025DynaMate;
 @Zou2025ElAgente; @Campbell2025MDCrow\] @Jacobs2025orca found that
-using a combination of fine-tuning, \acr{cot} and \acr{rag} (see
-[@sec-model_adaptation]) can improve the performance of
+using a combination of fine-tuning, \acr{cot} and \acr{rag} (see @sec-model_adaptation) can improve the performance of
 \acr{llm}s in generating
 executable input files for the quantum chemistry software
 *ORCA*\[@ORCA5\], while @Gadde2025chatbot created `AutosolvateWeb`, an
@@ -698,103 +824,82 @@ executable input files for the quantum chemistry software
 that assists users in preparing input files for
 \acr{qmmm} simulations
 of explicitly solvated molecules and running them on a remote computer.
-Examples of \acr{gpm}-based autonomous agents (see
-[@sec-agents]) capable of performing the entire computational
+Examples of \acr{llm}-based autonomous agents (see @sec-agents) capable of performing the entire computational
 workflow (i.e., preparing inputs, executing the code, and analyzing the
 results) are `MDCrow` \[@Campbell2025MDCrow\] (for molecular dynamics)
 and `El Agente Q` \[@Zou2025ElAgente\] (for quantum chemistry).
 
-\acr{gpm}s can also assist
-in automating *in vitro* experiments. We can draw parallels from
-programming language paradigms---compiled vs. interpreted (see
-@fig-exec A)---to
-better understand how \acr{gpm}s can be useful in different approaches of
-experiment automation. In compiled languages (like `C++` or `Fortran`),
-the entire code is converted ahead of time by another program called the
-"compiler" into binary machine code, which is directly executable by the
-hardware. In interpreted languages (like `Python` or `JavaScript`), a
-program called the "interpreter" reads the instructions line-by-line
-during runtime, translating and executing them on the fly. Compiled
-languages offer high performance and early error detection, making them
-ideal for performance-critical systems, but they require a separate
-compilation step and are less flexible during development. Interpreted
-languages are easier to use, debug, and modify on the fly, which makes
-them great for rapid development and scripting, but they generally run
-slower and catch errors only at runtime. Similarly, we can broadly
-categorize different approaches to experiment automation into two
-different groups: "compiled automation" and "interpreted automation"
-(see @fig-exec B).
-In the compiled approach, the entire protocol is translated---either by
-a human or a \acr{gpm}---to low-level instructions before
-execution, while in interpreted automation, the
-\acr{gpm} plays a central
-role, acting as the "interpreter" and executing the protocol step by
-step. As we show below, it can be instructive to use this perspective
-when discussing approaches to automate experiment execution with
-\acr{gpm}s.
+Emerging examples show \acr{gpm}s assisting in *in vitro* experiment
+automation. Programming language paradigms---compiled vs. interpreted (@fig-exec A)---provide a useful analogy for understanding
+different automation approaches.
+
+Compiled languages (`C++`, `Fortran`) convert entire programs to machine
+code before execution. Interpreted languages (`Python`, `JavaScript`)
+translate and execute instructions line-by-line at runtime. The tradeoff
+is that compiled languages offer higher performance and early error
+detection but require separate compilation steps. Interpreted languages
+enable rapid development and on-the-fly modification, but run slower and
+catch errors only during execution.
+
+Similarly, experiment automation follows two paradigms
+(@fig-exec B):
+"compiled automation" translates entire protocols---by human or
+\acr{gpm}---into
+low-level instructions before execution. "Interpreted automation" uses
+the \acr{gpm} as runtime
+interpreter, executing protocols step-by-step.
 
 ::: {#fig-exec}
+![](media/figures/rescaled_figures/chemrev_figure15+16.png)
 
-![](media/figures/rescaled_figures/chemrev_figure15+16.png){width=100%}
-
-**Programming languages vs. lab automation. A) programming paradigms**: In compiled languages, the entire source code is translated ahead of time to machine code by the compiler. This stand-alone code is then given to the \acr{os}, which is responsible for scheduling and distributing tasks to the hardware. In interpreted languages, the interpreter reads and translates each line of the source code to machine code and hands it to the \acr{os} for execution. **B) automation paradigms**: In the compiled approach, a <span data-acronym-label="gpm" data-acronym-form="singular+short">gpm</span> formalizes the protocol, a compiler, such as the chempiler[@steiner2019organic], translates the formalized protocol to hardware-specific low-level steps, which the controller then executes—a central hub tasked with scheduling and distributing commands to chemical hardware. In the interpreted approach, a \acr{gpm}, acting as the interpreter, first breaks down the protocol into specific steps, then sends them (via an \acr{api}) for execution one by one. The strength of interpreted systems is dynamic feedback: after the execution of each step, the \acr{gpm} receives a signal (e.g., data, errors), which can influence its behavior for the next steps.
+**Programming languages vs. lab automation. A)
+programming paradigms**: In compiled languages, the entire source
+code is translated ahead of time to machine code by the compiler. This
+stand-alone code is then given to the \acr{os}, which is responsible for
+scheduling and distributing tasks to the hardware. In interpreted
+languages, the interpreter reads and translates each line of the source
+code to machine code and hands it to the \acr{os} for execution. **B)
+automation paradigms**: In the compiled approach, a \acr{gpm}
+formalizes the protocol, a compiler, such as the
+Chempiler[@steiner2019organic], translates the formalized protocol to
+hardware-specific low-level steps, which the controller then executes—a
+central hub tasked with scheduling and distributing commands to chemical
+hardware. In the interpreted approach, a \acr{gpm}, acting as the
+interpreter, first breaks down the protocol into specific steps, then
+sends them (via an \acr{api}) for execution one by one.
+The strength of interpreted systems is dynamic feedback: after the
+execution of each step, the \acr{gpm} receives a signal (e.g.,
+data, errors), which can influence its behavior for the next
+steps.
 :::
 
 ### Compiled Automation
 
-In the case of "compiled automation", the experiment protocol needs to
-be formalized in a high-level or \acr{dsl} that describes exactly what operations to
-perform in what order. A chemical compiler (or "chempiler"
-\[@steiner2019organic\]) then converts this high-level protocol into
-low-level code for the specific lab hardware, which is then executed by
-robotic instruments, orchestrated by a controller (refer to the caption
-of @fig-exec B).
+In "compiled automation", protocols are formalized in high-level
+languages or \acr{dsl}s. A
+chemical compiler ("chempiler"\[@mehr2020universal\]) converts these
+into low-level hardware instructions, which robotic instruments then
+execute (@fig-exec B).
 
-#### Protocol Languages
+While `Python` scripts serve as the *de facto* protocol language,
+specialized \acr{dsl}s
+provide more structured representations.\[@wang2022ulsa;
+@ananthanarayanan2010biocoder; @autoprotocol2023; @Park2023CMDL\] For
+example, \acr{chidl}\[@mehr2020universal; @xdl2023spec\]
+describes protocols using abstract commands (`Add`, `Stir`, `Filter`)
+and chemical objects (`Reagents`, `Vessels`). The `Chempiler` translates
+\acr{chidl} scripts
+into platform-specific instructions based on the physical laboratory
+configuration.
 
-While `Python`-based scripts are frequently used as the *de facto*
-protocol language due to `Python`'s accessibility and
-flexibility,\[@pylabrobot; @vriza2023polybot; @wang2025polybot\]
-specialized languages (\acr{dsl}s) have also been developed to provide more
-structured and semantically rich representations of experimental
-procedures.\[@wang2022ulsa; @ananthanarayanan2010biocoder;
-@autoprotocol2023; @Park2023CMDL\] One of the prominent examples of
-such languages is \acr{chidl}\[@xdl2023spec\], developed as part of the
-Chemputer architecture \[@steiner2019organic; @mehr2020universal;
-@hammer2021chemputation\]. \acr{chidl} uses a \acr{json}-like format, and the experimental
-protocol is described by defining `Reagents`, `Vessels`, etc, and using
-abstract chemical commands such as `Add`, `Stir`, `Filter`, etc. In the
-next step, the `Chempiler` software takes this
-\acr{chidl} script and
-a description of the physical connectivity and composition of the
-automated platform as a graph and translates it into
-\acr{chasm} which is
-specific to the platform (akin to machine code). In practice,
-\acr{chidl} has been
-used to automate multi-step organic syntheses with yields comparable to
-manual experiments.\[@mehr2020universal\]
-
-Developing experimental protocols in a formal language is a non-trivial
-task, often requiring specialized coding expertise. Within the compiled
-approach, the role of the \acr{gpm} is to translate natural-language
-protocols into their formalized, machine-readable
-counterparts.\[@Lamas2024DSLXpert; @jiang2024protocode;
-@conrad2025lowering; @inagaki2023robotic\] @Vaucher2020AutoExtraction
-used an encoder-decoder transformer model to convert English
-experimental procedures to structured sequences of pre-defined synthesis
-actions (e.g., `MakeSolution`, `SetTemperature`, `Extract`). They
-pre-trained the model on $2$M sentence-action pairs extracted by a
-rule-based \acr{nlp}
-algorithm and then fine-tuned it on manually annotated samples to
-improve accuracy. The model achieved exact sentence-pair matching in
-$61\%$ of the test samples and had more than $75\%$ overlap in $82\%$ of
-them. Although this approach accelerates automated protocol extraction
-from chemical literature, the output format is not directly suitable for
-execution.
-
-@Pagel2024LLMChemputer introduced a multi-agent workflow (based on
-`GPT-4`) that can address this issue and convert unstructured chemistry
-papers into executable code. The first agent extracts all
+Writing protocols in formal languages requires coding expertise. Here,
+\acr{gpm}s translate
+natural-language protocols into machine-readable
+formats.\[@Lamas2024DSLXpert; @jiang2024protocode;
+@conrad2025lowering; @inagaki2023robotic;
+@Vaucher2020AutoExtraction\] @Pagel2024LLMChemputer introduced a
+multi-agent workflow (based on `GPT-4`) that can convert unstructured
+chemistry papers into executable code. The first agent extracts all
 synthesis-relevant text, including supporting information; a procedure
 agent then sanitizes the data and tries to fill the gaps from chemical
 databases (using \acr{rag}); another agent translates procedures
@@ -814,127 +919,54 @@ prompt, and prompts the \acr{llm} again---iterating this process until a
 valid \acr{chidl}
 script is produced.
 
-Similar to how compiled software can be recompiled for different
-platforms, compiled automation is hardware-agnostic: by using
-appropriate compilation, a well-defined protocol can---at least in
-principle---be run on different robotic systems as long as they have the
-required capabilities.\[@rauschen2024universal;
-@strieth-kalthoff2024delocalized; @wilbraham2021chemPU\] In practice,
-however, inconsistencies in hardware interfaces and software standards
-across the lab automation community make cross-platform execution
-challenging.
-
-The main limitations of compiled approaches are the flip side of their
-strengths: low flexibility and adaptability. Any logic or
-decision-making must either be explicitly encoded within the
-protocol---necessitating meticulous scripting---or delegated to an
-external control layer.\[@mehr2023digitizing; @leonov2024integrated\]
-If something unexpected occurs (a pump clogging, a reaction taking
-longer than expected), the pre-compiled protocol cannot easily adjust in
-real-time, and human intervention or a complete recompile might be
-needed.
-
 ### Interpreted Automation
 
-Interpreted programming languages support higher levels of abstraction,
-enabling the use of more general and flexible command structures.
-Similarly, since \acr{gpm}s
-can translate high-level goals into concrete steps\[@ahn2022can;
-@huang2022language\], they can act as an "interpreter" between the
-experimental intent and lab hardware. For instance, given an instruction
-"titrate the solution until it turns purple", a
-\acr{gpm} agent (see
-[@sec-agents]) can break it down into smaller steps and
-convert each step to executable code, allowing it to perform incremental
-additions of titrant and read a color sensor, looping until the
-condition is met. This conversion of concrete steps to code happens at
-runtime; it is not pre-compiled. We refer to such systems as
-"interpreted automation" systems. In contrast to the deterministic,
-preplanned nature of compiled systems, interpreted architectures
-introduce real-time decision-making. As each action completes, the
-system collects sensor data (instrument readings, spectra, error
-messages, etc.) which the agent analyzes and decides on the next action.
-This allows for dynamic branching and conditional logic during the
-experiment execution.
+Interpreted programming languages support higher abstraction levels
+through flexible command structures. Similarly,
+\acr{gpm}s can translate
+high-level goals into concrete steps,\[@ahn2022can;
+@huang2022language\] acting as "interpreters" between experimental
+intent and lab hardware.
 
-`Coscientist` \[@boiko2023autonomous\] is an \acr{llm}-based chemistry assistant built around
-`GPT-4` that can autonomously design and execute experiments. It can
-take high-level goals and call tools to write code in real-time in order
-to control an Opentrons OT-2 liquid-handling robot. The architecture
-included a web-search module, a documentation module (to read instrument
-manuals), a `Python` execution module (to run generated code in a
-sandbox), and an experiment execution module that sends code to actual
-lab equipment. If an error occurred, the system would get feedback and
-`GPT-4` would debug its own code. `Coscientist` successfully planned and
-executed multistep syntheses with minimal human intervention. For
-example, it efficiently optimized a palladium cross-coupling reaction
-with minimal human input, outperforming a standard Bayesian optimizer
-baseline in finding high-yield conditions.
+For example, given "titrate the solution until it turns purple", a
+\acr{gpm} agent @sec-agents can break this into executable steps at
+runtime: add titrant incrementally, read color sensor, loop until
+condition met. This is "interpreted automation"---conversion happens
+during execution, not before.
 
-Another example is `ChemCrow` \[@bran2024augmenting\], a `GPT-4`-based
-agent augmented with $18$ expert-designed tools for tasks like compound
-lookup, spectral analysis, and retrosynthesis. `ChemCrow` can perform
-tasks across synthesis planning, drug discovery, and materials design by
-invoking external software for things like retrosynthesis, property
-prediction, database queries, etc. It planned and executed the syntheses
-of an insect repellent, \acr{deet}, and three different organocatalysts and
-even guided the discovery of a new chromophore dye.
+The key advantage is real-time decision-making. After each action, the
+system analyzes sensor data (readings, spectra, errors) and selects the
+next step. This enables dynamic branching and conditional logic
+impossible in pre-compiled protocols.
 
-The interpreted paradigm is highly generalizable; in principle, the same
-\acr{llm} agent
-controlling a chemistry experiment could be re-purposed to a biology or
-materials experiment with minimal reprogramming because it operates at
-the level of intent and semantic understanding. However, fully
-autonomous labs featuring interpreted automation are still experimental
-themselves---ensuring their reliability and accuracy remains an open
-challenge.
+`Coscientist`\[@boiko2023autonomous\] demonstrates interpreted
+automation using `GPT-4` to control liquid-handling robots. The system
+searches the web for protocols, reads instrument documentation, writes
+`Python` code in real-time, and executes experiments on physical
+hardware. When errors occur, `GPT-4` debugs its own code. `Coscientist`
+successfully optimized palladium cross-coupling reactions, outperforming
+Bayesian optimization in finding high-yield conditions.
 
-Despite being labeled as "autonomous," both systems mentioned above
-often need prompting nudges and human correction. In addition, these
-models can replicate known procedures and use databases, but they lack
-an understanding of mechanisms or underlying principles. Another issue
-is full reproducibility and long-term experiment tracking. Since the
-\acr{gpm}'s response
-might not be deterministic, small changes in prompts can yield different
-results and closed-source models like `GPT-4` can change over time.
-Hallucinations remain a risk, especially in planning complex or
-sensitive reactions. In addition, allowing an agent to control hardware
-brings safety considerations; the flexibility of
-\acr{gpm}s means that they
-can devise unanticipated actions. Designing safety nets for these
-systems is an active area of research. (see
-[@sec-safety])
+`ChemCrow`\[@bran2024augmenting\] augments `GPT-4` with $18$
+expert-designed tools for tasks including compound lookup, spectral
+analysis, and retrosynthesis. It planned and executed syntheses of
+\acr{deet} and three
+thiourea organocatalysts
+(example [\[example:chemcrow_organa\]](#example:chemcrow_organa){reference-type="ref"
+reference="example:chemcrow_organa"}), and collaborated with chemists to
+discover a new chromophore.
 
 ### Hybrid Approaches
 
-Between the two extremes of fully compiled vs. fully interpreted
-automation lies a hybrid approach that seeks to combine the best of both
-paradigms: the safety and reliability of compiled protocols and the
-\acr{ai}-driven
-flexibility of interpreted systems.
-
-The key difference from purely interpreted systems is that during each
-experiment run, the plan is fixed, ensuring safety and reproducibility,
-but between runs, the plan can dynamically change based on the
-\acr{gpm}'s
-interpretation of results. Once the initial plan (ideally devised by the
-same \acr{gpm} in a
-previous step) is provided to a hybrid system, instead of reducing it to
-smaller steps and directly sending the instructions to a laboratory one
-at a time, the protocol is first formalized---i.e., it is translated to
-a formal machine-readable format such as \acr{chidl}. Once validated, the formalized protocol
-is compiled and executed. After the completion of execution, the
-\acr{gpm} receives the
-results and decides what experiment to perform next. This cycle repeats,
-creating an autonomous optimization or discovery loop.
-
-This hybrid strategy is attractive because it provides a safety net
-against mistakes made by the \acr{gpm} interpreter; any generated procedure must
-pass through a formalization and verification stage before real
-execution, and therefore, erroneous or hallucinated steps can be caught.
-For example, if the interpreter hallucinated adding 1000 mL of a solvent
-but the hardware has only 100 mL capacity, it can be flagged as an
-error.
+Between fully compiled and fully interpreted automation lies a hybrid
+approach that combines the safety and reliability of compiled protocols
+with the AI-driven flexibility of interpreted systems. Each experiment
+run follows a fixed plan for safety and reproducibility, but between
+runs, the plan can adapt based on the GPM's interpretation of results.
+This design provides a safeguard against interpreter errors, since every
+generated procedure passes through formal verification before
+execution---catching issues like a hallucinated instruction to add
+1000 mL of solvent to a 100 mL flask.
 
 `ORGANA` \[@darvish2025organa\] is an \acr{llm}-based robotic assistant following this
 hybrid paradigm. It allows human chemists to describe their experimental
@@ -947,74 +979,69 @@ natural-language description of a chemistry experiment into a
 which can be executed on a compatible platform. In one case, `ORGANA`
 carried out a multistep electrochemistry procedure---polishing
 electrodes, running an experiment, and analyzing the data---involving 19
-substeps that it coordinated in parallel. If an unexpected observation
+substeps that it coordinated in parallel (see
+example [\[example:chemcrow_organa\]](#example:chemcrow_organa){reference-type="ref"
+reference="example:chemcrow_organa"}). If an unexpected observation
 occurred (e.g., a solution does not change color when expected), the
 system can notice via image analysis and modify the plan or alert the
-user. In user studies, `ORGANA` significantly reduced the manual labor
-and frustration for chemists, who could offload tedious tasks and trust
-the agent to handle low-level decisions.
+user. In user studies, `ORGANA` reduced the manual labor and frustration
+for chemists, who could offload tedious tasks and trust the agent to
+handle low-level decisions.
 
-### Comparison and Outlook
+### Limitations
 
-While compiled paradigms continue to provide the backbone for reliable
-automation, interpreted paradigms will drive exploratory research, where
-adaptability is key. Hybrid systems are likely to be the bridge that
-brings \acr{ai} into
-mainstream lab operations, ensuring that flexibility comes with
-accountability. A brief comparison of the three mentioned approaches is
-given in @tbl-execution_comparison.
+Current automation systems remain prototypes.
 
-::: {#tbl-execution_comparison}
-  **Feature**                         **Compiled**                            **Interpreted**                             **Hybrid**
-  ---------------------- -------------------------------------- ------------------------------------------- --------------------------------------
-  Flexibility             [Low]{style="color: NegativeColor"}      [High]{style="color: PositiveColor"}                     Medium
-  Adaptivity              [None]{style="color: NegativeColor"}   [Real-time]{style="color: PositiveColor"}                Iterative
-  Reproducibility         [High]{style="color: PositiveColor"}                    Medium                     [High]{style="color: PositiveColor"}
-  Safety                  [High]{style="color: PositiveColor"}      [Low]{style="color: NegativeColor"}                     Medium
-  Setup Overhead                         Medium                    [High]{style="color: NegativeColor"}      [High]{style="color: NegativeColor"}
-  Industrial Readiness    [Low]{style="color: NegativeColor"}       [Low]{style="color: NegativeColor"}      [Low]{style="color: NegativeColor"}
+Interpreted systems require frequent human intervention despite autonomy
+claims. They replicate known procedures but lack mechanistic
+understanding. Non-deterministic \acr{gpm} responses create reproducibility
+issues---small prompt changes yield different results, and closed-source
+models evolve unpredictably. Hallucinations risk incorrect planning for
+complex reactions. Hardware control introduces safety concerns: flexible
+\acr{gpm}s can devise
+unanticipated actions, requiring robust safeguards
+(@sec-safety).
 
-  **Comparison of the Compiled, Interpreted, and Hybrid Automation
-  Paradigms**. Each approach has its strengths and weaknesses. Compiled
-  systems favor reliability, interpreted systems allow for more
-  flexibility, while hybrid systems try to strike a balance.
-:::
+Compiled systems offer reliability but require extensive upfront
+formalization. The effort to translate protocols into formal languages
+often outweighs automation benefits for typical laboratory workflows.
 
-[]{#tbl-execution_comparison label="tbl-execution_comparison"}
+### Open Challenges
 
-While we are essentially witnessing the rise of self-driving
-laboratories, autonomous experimentation systems present a range of
-challenges.\[@Tom2024SDL; @Seifrid2022SDL\] First, translating
-high-level natural-language goals into precise laboratory actions
-remains difficult, as \acr{gpm}s can misinterpret ambiguous instructions,
-leading to invalid or unsafe procedures. This problem is compounded by
-the lack of universally adopted standards for protocol formalization;
-while languages like \acr{chidl} show promise, inconsistencies in
-abstraction, device compatibility, and community uptake limit
-interoperability. Real-time execution adds further complexity, as
-systems must detect and respond to failures or unexpected behaviors;
-however, general-purpose validation mechanisms and recovery strategies
-remain underdeveloped. Hardware integration is another bottleneck;
-current commercial robotic platforms are prohibitively expensive and lab
-environments often rely on a patchwork of instruments with proprietary
-interfaces, and building robust, unified control layers demands
-considerable engineering overhead. Another challenge is multi-modality
-in chemistry; chemists use a wide variety of data (e.g., spectra, TLC
-plates, SEM images). Without integrating these forms of output, models
-will be limited in their decision-making. Finally, ensuring
-reproducibility and regulatory compliance requires that every step be
-logged, validated, and traceable at the level required for clinical or
-industrial adoption (see
-[@sec-safety]. These challenges must be addressed in tandem to
-move from experimental demonstrations toward reliable, scalable, and
-trustworthy autonomous laboratories.
+Self-driving laboratories orchestrated by \acr{gpm}s face technical challenges requiring
+research advances:\[@Tom2024SDL; @Seifrid2022SDL\]
+
+- **Grounding Natural Language to Laboratory Actions.** Translating
+  ambiguous natural-language instructions ("heat gently") into precise,
+  safe operations requires developing validation layers that detect
+  physically impossible or hazardous actions before hardware execution.
+
+- **Universal Protocol Standards.** No widely adopted formalization
+  standard exists. While languages like \acr{chidl} show promise, achieving
+  interoperability across platforms requires community consensus on
+  abstraction levels and device interfaces. \acr{mcp}s offer a potential path forward by
+  enforcing consistent interfaces between \acr{gpm}s, instruments, and verification layers.
+
+- **Autonomous Error Recovery.** Current systems cannot autonomously
+  diagnose and recover from experimental failures. Developing
+  general-purpose failure detection mechanisms and recovery strategies
+  would enable truly autonomous operation.
+
+- **Multimodal Integration.** Chemists use diverse data types---spectra,
+  chromatograms, TLC plates, and microscopy images. Integrating these
+  modalities into \acr{gpm} decision-making loops remains
+  technically challenging but essential for human-level experimental
+  reasoning.
+
+- **Verification and Provenance.** Industrial and clinical applications
+  require complete experimental provenance: every decision logged with
+  reasoning traces, all parameters recorded, and outcomes traceable to
+  specific model versions (@sec-safety).
 
 ## Data Analysis
 
-The analysis of spectroscopic and experimental data in chemistry remains
-a predominantly manual process. Even seemingly straightforward steps,
-such as plotting or summarizing results, demand repeated manual
-intervention.
+The analysis of experimental data in chemistry remains a predominantly
+manual process.
 
 One key challenge that makes automation particularly difficult is the
 extreme heterogeneity of chemical data sources. Laboratories often rely
@@ -1023,51 +1050,51 @@ standardized, or unique in configuration.\[@jablonka2022making\] These
 devices output data in incompatible, non-standardized, or poorly
 documented formats, each requiring specialized processing pipelines.
 Despite efforts like `JCAMP-DX` \[@McDonald1988standard\],
-standardization attempts remain scarce and have generally failed to gain
-widespread use. This diversity makes rule-based or hard-coded solutions
-largely infeasible, as they cannot generalize across the long tail of
-edge cases and exceptions found in real-world workflows.
+standardization attempts remain limited and have generally failed to
+gain widespread use. This diversity makes rule-based or hard-coded
+solutions largely infeasible, as they cannot generalize across the long
+tail of edge cases and exceptions found in real-world workflows.
 
-However, this exact complexity makes data analysis in chemistry a
-promising candidate for \acr{gpm}s. They are designed to operate flexibly
-across diverse tasks and formats, relying on implicit knowledge captured
-from broad training data. In other domains, @narayan2022can showed that
-models like `GPT-3 DaVinci` can already perform classical data
-processing tasks such as cleaning, transformation, and error detection
-through prompting alone. @kayali2023chorus introduced `Chorus` that
-shows that \acr{llm}s can
-analyze heterogeneous tabular data without task-specific training.
-`Chorus` demonstrates that by converting tables into a standardized text
-format and using zero-shot prompting (i.e., prompts with no examples),
-\acr{llm}s can flexibly
-analyze tables even when they differ in structure, column names, or data
-types.
+This complexity makes chemical data analysis a promising application for
+\acr{gpm}s
+(@fig-analysis). These models handle diverse tasks and
+formats using implicit knowledge from broad training data. In other
+domains, \acr{llm}s have
+successfully processed heterogeneous tabular data and performed
+classical data analysis without task-specific
+training.\[@narayan2022can; @kayali2023chorus\]
 
-::: {#fig-anaylsis}
+::: {#fig-analysis}
+![](media/figures/rescaled_figures/chemrev_figure17.png){width="100%"}
 
-![](media/figures/rescaled_figures/chemrev_figure17.png){width=100%}
-
-**Static conventional data analysis workflow vs. dynamic \acr{gpm} generated workflow**. The chemical analysis can be done with a variety of possible instruments and techniques, resulting in a large number of possible output data formats. The \acr{gpm} can use these diverse, raw data and process it into easy-to-understand plots, analysis and reports. A hard-coded workflow, in contrast, is specifically made to analyze one specific data format and spectra and produces a fixed output format, e.g., the \acr{smiles} of the analyzed molecule.
+**Static conventional data analysis workflow
+vs. dynamic \acr{gpm} generated
+workflow**. Chemical analysis can be performed with a variety of
+instruments and techniques, resulting in many possible output data
+formats. The \acr{gpm} can use these diverse, raw
+data and process them into easy-to-understand plots, analysis, and
+reports. A hard-coded workflow, in contrast, is specifically made to
+analyze one specific data format and spectra and produces a fixed output
+format, e.g., the \acr{smiles} of the analyzed
+molecule.
 :::
 
-### Prompting
+In chemistry, however, only a handful of studies have so far
+demonstrated similar capabilities. Early evaluations showed that
+\acr{gpm}s can support
+basic workflows such as the classification of \acr{xps} signals based on peak positions and
+intensities.\[@Fu2025large; @decurt2024large\]
 
-Initial evaluations demonstrated that \acr{gpm}s can support basic data analysis workflows.
-\[@Fu2025large\] For example, in chemistry, this enabled the
-classification of \acr{xps} signals \[@decurt2024large\] based on
-peak positions, intensities, or characteristic spectral patterns).
-
-Spectroscopic data are not always available in structured textual form.
-In many practical cases, it appears as raw plots or images, making
-direct interpretation by \acr{vlm}s a more natural starting point for automated
+Spectroscopic data often appear as raw plots or images, making direct
+interpretation by \acr{vlm}s a more natural starting point for automated
 analysis. A broad assessment of \acr{vlm}-based spectral analysis was introduced
 with the `MaCBench` benchmark \[@alampara2024probing\], which
 systematically evaluates how \acr{vlm}s interpret experimental data in chemistry
 and materials science---including various types of spectra such as
 \acr{ir},
 \acr{nmr}, and
-\acr{xrd}q---directly
-from images. They showed that while \acr{vlm}s can correctly extract isolated features
+\acr{xrd}---directly from
+images. They showed that while \acr{vlm}s can correctly extract isolated features
 from plots, the performance substantially drops in tasks requiring
 deeper spatial reasoning. To overcome these limitations,
 @kawchak2024high explored two-step pipelines that decouple visual
@@ -1077,71 +1104,73 @@ and second, a \acr{llm}
 analyzes these outputs to propose a molecular structure based on the
 molecular formula.
 
-### Agentic Systems
+More complex agentic systems extend beyond single-step analysis and
+attempt to orchestrate entire workflows. For example,
+@ghareeb2025robin0 developed a multi-agent system for assisting
+biological research with hypothesis generation (see fig-hypothesis-generation) and experimental analysis. Its
+data analysis agent `Finch` autonomously processes raw or preprocessed
+biological data, such as \acr{rna} sequencing or flow cytometry, by
+executing code in Jupyter notebooks and producing interpretable outputs.
+Currently, only these two data types are supported, and expert-designed
+prompts are still required to ensure reliable results.
 
-Beyond zero-shot prompting of \acr{gpm}s, one can develop agentic systems that
-combine multiple analysis steps end-to-end. In this regard,
-@ghareeb2025robin0 developed `Robin`---a multi-agent system for
-assisting biological research with hypothesis generation (see
-@fig-hypothesis-generation) and experimental analysis. The
-data analysis agent `Finch` performs autonomous analysis of raw or
-preprocessed experimental data, such as \acr{rna} sequencing and flow cytometry. Given a
-user prompt (e.g., "\acr{rna} sequencing differential expression
-analysis"), `Finch` executes code in a Jupyter notebook to process the
-data, apply relevant statistical methods, and generate interpretable
-outputs. For flow cytometry, this includes gating strategies and
-significance testing, while for \acr{rna} sequencing, it encompasses differential
-expression and gene ontology enrichment analysis. Currently, only these
-two data types are supported, and expert-designed prompts are still
-required to ensure reliable results.
-
-Recent work extends agentic systems beyond single-step data evaluation
-toward executing and optimizing entire workflows. @mandal2024autonomous
-introduced `AILA` (Artificially Intelligent Lab Assistant) utilizing
+Similarly, @mandal2024autonomous introduced `AILA`, which utilizes
 \acr{llm}-agents to plan,
-code, execute, and revise complete \acr{afm} analysis pipelines. The system handles
-tasks such as image processing, defect detection, clustering, and
-extraction of physical parameters. Compared to systems like `Finch`,
-`AILA` shifts the focus from generating summaries to performing and
-improving full experimental analyses with minimal user input while
-maintaining transparency and reproducibility through code and reports.
+execute, and iteratively refine full \acr{afm} analysis pipelines. Compared to earlier
+prototypes, this systems emphasize transparency and reproducibility by
+producing both code and reports. The system handles tasks such as image
+processing, defect detection, clustering, and the extraction of physical
+parameters.
 
-### Current Limitations
+### Limitations
 
 While \acr{gpm}s offer
 promising capabilities for automating scientific data analysis, several
-limitations remain. Recent evaluations such as `FMs4Code`
-\[@tian2024scicode\] have shown that even state-of-the-art models like
-`GPT-4-Turbo` and `Claude 2` frequently produce syntactically correct
-but semantically incorrect code when tasked with common data analysis
-steps, such as reading files, applying filters, or generating plots.
-Typical issues include incorrect column usage, or inconsistent output
-formatting.
+concrete limitations remain. Recent evaluations such as `SciCode`
+\[@tian2024scicode\] have shown that even \acr{sota} like `GPT-4-Turbo` frequently produce
+syntactically correct but semantically incorrect code, for instance, in
+common data analysis steps such as reading files, applying filters, or
+generating plots.
 
-These technical shortcomings are reinforced by the model's sensitivity
-to prompt formulation. As demonstrated by @Yan2020auto and
-@alampara2024probing, minor changes in wording or structure can lead to
-significantly different outputs, highlighting a lack of robustness in
-prompt-based control.
+These technical shortcomings are further amplified by sensitivity to
+prompt formulation. As demonstrated by @Yan2020auto and
+@alampara2024probing, even minor changes in wording or structure can
+lead to drastically different results, highlighting a lack of robustness
+in prompt-based control.
 
-Together, these findings suggest that while foundation models can
-generalize across diverse data formats and analysis types, their current
-performance is not yet sufficient for fully autonomous use in scientific
-analysis settings. Robust prompting strategies, post-generation
-validation, and human oversight remain essential components in practice.
+In practice, this means that robust prompting strategies, systematic
+validation, and human oversight remain essential components of any
+current deployment.
+
+### Open Challenges
+
+Looking forward, several open challenges remain unresolved.
+
+- **True Chemical Reasoning**: It remains unclear whether current
+  \acr{llm}s can perform
+  genuine chemical analysis rather than relying on pattern-matching or
+  shallow feature extraction. \[@alampara2024probing;
+  @alampara2025task\]
+
+- **Seamless Laboratory Integration**: No commercial systems yet provide
+  robust, end-to-end interoperability with the diverse analytical
+  instruments used in chemistry laboratories. Existing research
+  prototypes support only limited data types and still depend heavily on
+  expert curation. \[@ghareeb2025robin0; @mandal2024autonomous\]
+
+- **Standardization and Real-World Validation**: Achieving
+  production-ready systems requires progress not only in model
+  robustness but also in data and protocol standardization, hardware
+  integration, and thorough testing under realistic laboratory
+  conditions. \[@testini2025measuring\]
 
 ## Reporting
 
 To share insights obtained from data analysis, one often converts them
-into scientific reports. Also, in this step, \acr{gpm}s can take a central role, which we discuss
-in the following.
-
-Reporting refers to converting scientific results into shareable
-reports, scientific publications, blogs, and other forms of content.
-This section describes two main applications of
-\acr{llm}s in scientific
-reporting: converting data into explanations and the first steps towards
-using these models as fully-fledged writing assistants.
+into scientific publications or other forms of content, such as reports
+or blogs. In this step, \acr{gpm}s can also take a central role. While writing
+assistance has been showcased in past works, it remains limited in scope
+and real-world impact.
 
 ### From Data to Explanation
 
@@ -1149,62 +1178,59 @@ The lack of explainability of \acr{ml} predictions generates skepticism among
 experimental chemists\[@wellawatte2025human\], hindering the wider
 adoption of such models.\[@wellawatte2022model\] One promising approach
 to address this challenge is to convey explanations of model predictions
-in natural language. An approach proposed by @wellawatte2025human is to
-couple \acr{llm}s with
-feature importance analysis tools, such as \acr{shap} or \acr{lime}. In this framework,
-\acr{llm}s can additionally
-interact with tools such as \acr{rag} over `arxiv` to provide evidence-based
-explanations.
+in natural language. An approach proposed by @wellawatte2025human
+involves coupling \acr{llm}s with feature importance analysis tools,
+such as \acr{shap} or
+\acr{lime}. In this
+framework, the \acr{llm}
+performs three key functions: First, it translates technical feature
+names into more accessible language. Second, using
+\acr{rag} over scientific
+literature, it retrieves relevant excerpts that explain the
+physicochemical relationships between identified molecular features and
+target properties. Third, it synthesizes these components into coherent
+natural language explanations that not only identify which structural
+features correlate with the property of interest, but also hypothesize
+*why* these relationships exist based on established chemical principles
+from the literature.
 
-### Writing Assistance
+#### Writing Assistance
 
-When considering \acr{ml}-based assistance in scientific writing,
-we can distinguish two primary modes: systems that aid authors during
-the active writing process and tools that optimize or refine scientific
-articles after initial drafting.
+\acr{llm}s can assist with
+syntax improvement, redundancy identification,\[@khalifa2024using\]
+figure and table captioning,\[@hsu2021scicap; @selivanov2023medical\]
+caption-figure matching,\[@hsu2023gpt04\] and alt-text
+generation.\[@singh2024figura11y\] Models can be personalized for
+specific audiences or writing styles.\[@li2023teach\]
 
-The former refers to the use of writing copilots that can suggest syntax
-improvement, identify text redundancies,\[@khalifa2024using\] caption
-figures and tables\[@hsu2021scicap; @selivanov2023medical\], or provide
-caption-figure match evaluation\[@hsu2023gpt04\], but also more specific
-applications like writing alt-text (descriptive text that explains the
-meaning and purpose of an image in digital
-content)\[@singh2024figura11y\].
+\acr{llm}s has also been
+shown to potentially help complete submission checklists.
+@goldberg2024usefulness found $70\%$ of
+\acr{neurips} 2025
+authors found \acr{llm}
+assistance useful for checklist completion, with the same fraction
+revising their submissions based on model feedback.
 
-Under the latter mode, \acr{gpm} can be used to assist non-native English
-speakers with scientific writing \[@giglio2023use\]. It could even allow
-authors to write in their native language and use
-\acr{gpm} for
-communicating scientific results in English.
+### Limitations
 
-Another application of \acr{llm} is to assist with completing checklists
-before submitting a publication. For example, @goldberg2024usefulness
-benchmark the use of \acr{llm}s in completing the author checklist for the
-\acr{neurips} 2025.
-They concluded that $70\%$ of the authors found the
-\acr{llm}-assistant
-useful, with the same fraction indicating they would revise their own
-checklist based on the model feedback.
+\acr{llm} explanations
+appear credible but often lack faithfulness to underlying
+reasoning.\[@agarwal2024faithfulness\] Models can reinforce existing
+biases through training data or prompting
+strategies.\[@kobak2025delving\] While \acr{llm}s can process large datasets, they miss
+subtle artifacts and anomalies human researchers detect, and struggle
+distinguishing correlation from causation.\[@jin2023large\]
 
-### Vision
+### Open Challenges
 
-Few have ventured into fully automating the writing
-process.\[@yamada2025ai\] While at its inception, reporting using
-\acr{gpm} has tremendous
-potential. In @fig-writing_with_ml we showcase how the future of reporting
-could look like if we were to integrate \acr{gpm} at each step of the process.
+- **Provenance Tracking Systems.** Developing methods to trace every
+  claim back to specific training examples or retrieved sources. This
+  requires architectures that maintain explicit links between generated
+  text and source materials, enabling verification of attribution
+  completeness.
 
-::: {#fig-writing_with_ml}
-
-![](media/figures/rescaled_figures/chemrev_figure18.png){width=100%}
-
-**Vision for \acr{gpm} in reporting, a visualization of the scientific writing process**. <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> can be used at every stage of the process. For creating the pre-print, we can utilize the multimodal capabilities of these models to write detailed captions for figures. For the peer-review process, we can harness the ability of \acr{gpm}s to summarize and prioritize information (e.g., design a time-efficient plan to address the peer review). When converting a document from a peer-reviewed pre-print, we often need to implement the publisher's requirements. In this case, we can make use of agentic systems that would assist with minor text fixes or document restructuring.
-:::
-
-An idea entertained by @li2023teach in the context of education is
-personalized writing. However, it is still widely unexplored in its
-goal: to make science accessible to everyone. A personalized model that
-learns user preferences and domain expertise can be used to deliver the
-message of a scientific article in simpler terms. As a result, we might
-observe a rise in cross-domain scientific collaborations and a rising
-interest in science.
+- **Authorship Frameworks.** Defining contribution taxonomies that
+  specify when \acr{llm}
+  use constitutes co-authorship versus tool use. Journals and
+  institutions need consensus guidelines for disclosure, attribution,
+  and accountability when \acr{llm}s assist in research reporting.

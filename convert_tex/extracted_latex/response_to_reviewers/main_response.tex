@@ -1,0 +1,243 @@
+\documentclass[
+10pt,
+a4paper,
+oneside,
+headinclude,footinclude, % Extra spacing for the header and footer
+]{scrartcl}
+
+\usepackage{float}
+\usepackage[]{hyperref}
+\usepackage{tcolorbox}
+\usepackage[dvipsnames]{xcolor} % Load xcolor with dvipsnames before classicthesis
+
+\usepackage[
+nochapters, % Turn off chapters since this is an article
+beramono, % Use the Bera Mono font for monospaced text (\texttt)
+eulermath,% Use the Euler font for mathematics
+dottedtoc % Dotted lines leading to the page numbers in the table of contents
+]{classicthesis} % The layout is based on the Classic Thesis style
+
+\usepackage{csquotes}
+\usepackage{mhchem}
+\usepackage{fontawesome}
+\usepackage{arsclassica} % Modifies the Classic Thesis package
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage{graphicx} % Required for including images
+\usepackage{enumitem} % Required for manipulating the whitespace between and within lists
+\usepackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
+\usepackage{siunitx}
+\DeclareSIUnit\molar{M}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{afterpage}
+\usepackage{color}
+\definecolor{coolblack}{rgb}{0.0, 0.18, 0.39}
+% package needed for optional arguments
+\usepackage{xifthen}
+\usepackage{cleveref}
+\usepackage{xspace}
+\usepackage{xurl}
+% define counters for reviewers and their points
+\newcounter{reviewer}
+\setcounter{reviewer}{0}
+\newcounter{point}[reviewer]
+\setcounter{point}{0}
+
+\hypersetup{hidelinks,colorlinks=false,linkcolor=black}
+\usepackage[labelfont=bf]{caption}
+\usepackage[nonumberlist,acronym]{glossaries-extra}
+\input{../glossary}
+\makenoidxglossaries 
+\setabbreviationstyle[acronym]{long-short}
+\input{../acronyms}
+
+% This refines the format of how the reviewer/point reference will appear.
+\renewcommand{\thepoint}{P\,\thereviewer.\arabic{point}}
+
+% command declarations for reviewer points and our responses
+\newcommand{\reviewersection}{\stepcounter{reviewer} \bigskip \hrule
+                  \section*{Reviewer \thereviewer}}
+
+\newenvironment{point}
+   {\refstepcounter{point} \bigskip \noindent {\textbf{Reviewer~Point~\thepoint} } ---\ }
+   {\par }
+
+\newcommand{\shortpoint}[1]{\refstepcounter{point}  \bigskip \noindent
+    {\textbf{Reviewer~Point~\thepoint} } ---~#1\par }
+
+\newenvironment{reply}
+   {\medskip \noindent \color{coolblack} \textbf{Reply}:\ \itshape  }
+   {\medskip }
+
+\newcommand{\shortreply}[2][]{\medskip \noindent \textcolor{coolblack}{\textbf{Reply}:\  #2
+    \ifthenelse{\equal{#1}{}}{}{ \hfill \footnotesize (#1)}}%
+    \medskip}
+
+
+
+\newcommand{\nougat}{Nougat\xspace}
+\newcommand{\marker}{Marker\xspace}
+\newcommand{\gptfouro}{GPT-4o\xspace}
+\newcommand{\gptfourvision}{GPT-4 Vision\xspace}
+\newcommand{\gptfour}{GPT-4\xspace}
+\newcommand{\gptthreefive}{GPT-3.5\xspace}
+\newcommand{\gptthreeturbo}{GPT-3.5 Turbo\xspace}
+\newcommand{\gptthree}{GPT-3\xspace}
+\newcommand{\claudethree}{Claude 3\xspace}
+\newcommand{\claudethreeopus}{Claude 3 Opus\xspace}
+\newcommand{\claudethreefivesonnet}{Claude 3.5 Sonnet\xspace}
+\newcommand{\llamathree}{Llama 3\xspace}
+\newcommand{\llamathreeseventy}{Llama 3-70B\xspace}
+\newcommand{\llamathreetwoninety}{Llama 3.2-90B\xspace}
+\newcommand{\llamatwo}{Llama 2\xspace}
+\newcommand{\llamatwoseven}{Llama 2-7B\xspace}
+\newcommand{\geminipro}{Gemini Pro\xspace}
+\newcommand{\llamavision}{Llama 3.2 90B Vision\xspace}
+
+\newcommand{\macbench}{MaCBench\xspace}
+\newcommand{\uspplot}{US Patent plots\xspace}
+\newcommand{\chembench}{ChemBench\xspace}
+
+\renewcommand{\thefootnote}{\roman{footnote}}
+
+
+\renewcommand{\thefigure}{R\arabic{figure}}
+\renewcommand{\thetable}{R\arabic{table}}
+
+
+\definecolor{examplered}{RGB}{100, 127, 188}
+
+
+\usepackage{float}
+\newfloat{example}{htbp}{loe}
+\floatname{example}{Example}
+
+\newcommand{\OnlineMaterial}[2]{%
+  \href{#2}{\textcolor{linkcolor}{\faGlobe\, Online Material |  #1}}%
+}
+
+
+\renewcommand{\thefootnote}{\roman{footnote}}
+
+\usepackage{tikz}
+\usepackage{annotate-equations}
+
+\definecolor{PositiveColor}{RGB}{25, 74, 129}   % SeaGreen
+\definecolor{NegativeColor}{RGB}{102, 17, 36}   % Firebrick
+\definecolor{TemperatureColor}{RGB}{255, 140, 0}   % DarkOrange
+\definecolor{SimilarityColor}{RGB}{70, 130, 180}   % SteelBlue
+\definecolor{OverallColor}{RGB}{75, 0, 130}   % Indigo
+
+\definecolor{StateColor}{RGB}{25, 74, 129} % Blue
+\definecolor{ActionColor}{RGB}{102, 17, 36 } % maroon
+\definecolor{PolicyColor}{RGB}{179, 28, 43} % red red
+\definecolor{RewardColor}{RGB}{244, 165, 130} % orange
+
+\definecolor{promptblue}{HTML}{194a81}
+\definecolor{promptlightblue}{HTML}{92c4de}
+\newcommand{\modelname}[1]{\texttt{#1}}
+
+\usepackage{tikz}
+\tcbuselibrary{listings, breakable}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newtcolorbox[auto counter]{promptbox}[2][]{
+    title = {LLM Prompt Example~\thetcbcounter: #2},
+    breakable,
+    colback=white,
+    colframe=promptblue,
+    colbacktitle=promptblue,
+    fonttitle=\bfseries,
+    boxrule=0.5mm,
+    left=2mm,
+    right=2mm,
+    top=4mm,
+    bottom=4mm,
+    middle=10mm,
+    #1
+}
+% Tell cleveref how to reference prompt boxes
+\crefname{tcb@cnt@promptbox}{prompt example}{prompt examples}
+\Crefname{tcb@cnt@promptbox}{Prompt Example}{Prompt Examples}
+
+\definecolor{examplered}{RGB}{100, 127, 188}
+
+\usepackage{float}
+\newfloat{example}{htbp}{loe}
+\floatname{example}{Example}
+\newtcolorbox[auto counter]{examplebox}[2][]{
+    title = {Example~\thetcbcounter: #2},
+    breakable,
+    colback=white,
+    colframe=examplered,
+    colbacktitle=examplered,
+    fonttitle=\bfseries,
+    boxrule=0.5mm,
+    left=2mm,
+    right=2mm,
+    top=4mm,
+    bottom=4mm,
+    middle=10mm,
+    #1
+}
+% Tell cleveref how to reference these boxes
+\crefname{tcb@cnt@examplebox}{example}{examples}
+\Crefname{tcb@cnt@examplebox}{Example}{Examples}
+\crefname{example}{example}{examples}
+\Crefname{example}{Example}{Examples}
+\crefname{point}{point}{points}
+\Crefname{point}{Point}{Points}
+
+
+\usepackage[backend=biber,style=chem-acs, doi=true, articletitle=true, isbn=false, date=year, url=true, autopunct=true]{biblatex}
+\addbibresource{../references.bib}
+
+\makeatletter
+\renewbibmacro*{textcite}{%
+  \iffieldequals{namehash}{\cbx@lasthash}
+    {\usebibmacro{cite:comp}}
+    {\usebibmacro{cite:dump}%
+     \ifbool{cbx:parens}
+       {\bibclosebracket\global\boolfalse{cbx:parens}}
+       {}%
+     \iffirstcitekey
+       {}
+       {\textcitedelim}%
+     \usebibmacro{cite:init}%
+     \ifnameundef{labelname}
+       {\printfield[citetitle]{labeltitle}}
+       {\printnames{labelname}}%
+     \addspace
+     \ifnumequal{\value{citecount}}{1}
+       {\usebibmacro{prenote}}
+       {}%
+     \mkbibsuperscript{\usebibmacro{cite:comp}}%
+     \stepcounter{textcitecount}%
+     \savefield{namehash}{\cbx@lasthash}}}
+\makeatother
+
+\begin{document}
+
+\section*{Response to the reviewers}
+
+
+\reviewersection
+\input{reviewer_1}
+
+\newpage
+\reviewersection
+\input{reviewer_2}
+
+\newpage
+\reviewersection
+\input{reviewer_3}
+
+\newpage
+\section*{Editorial requests}
+\input{editor_request}
+
+\newpage
+\printbibliography
+
+
+\end{document}

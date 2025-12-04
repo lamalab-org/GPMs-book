@@ -12,6 +12,7 @@
 \usepackage{booktabs}
 \usepackage{tcolorbox}
 \usepackage[version=4]{mhchem}
+\usepackage{siunitx}
 \usepackage{float}
 
 \usepackage{array}
@@ -31,7 +32,7 @@
     \includegraphics[width=0.30\textwidth,
                      keepaspectratio]{#1}}}
 
-\title{\textsf{General purpose models for the chemical sciences}}
+\title{\textsf{General-Purpose Models for the Chemical Sciences: LLMs and Beyond}}
 
 \input{authors.tex}
 \begin{document}
@@ -40,9 +41,9 @@
 
 \begin{abstract}
     \noindent Data-driven techniques have a large potential to transform and accelerate the chemical sciences. 
-    However, chemical sciences also pose the unique challenge of very diverse, small, fuzzy datasets that are difficult to leverage in conventional machine learning approaches completely. 
-    A new class of models, general-purpose models (GPMs) such as large language models, have shown the ability to solve tasks they have not been directly trained on, and to flexibly operate with low amounts of data in different formats.
-    In this review, we discuss fundamental building principles of GPMs and review recent applications of those models in the chemical sciences across the entire scientific process.
+    However, chemical sciences also pose the unique challenge of very diverse, small, fuzzy datasets that are difficult to leverage in conventional machine learning approaches. 
+    A new class of models, which can be summarized under the term general-purpose models (GPMs) such as large language models, has shown the ability to solve tasks they have not been directly trained on, and to flexibly operate with low amounts of data in different formats.
+    In this review, we discuss fundamental building principles of GPMs and review recent and emerging applications of those models in the chemical sciences across the entire scientific process.
     While many of these applications are still in the prototype phase, we expect that the increasing interest in GPMs will make many of them mature in the coming years. 
 \end{abstract}
 \pagebreak
@@ -65,7 +66,7 @@ This work was supported by the Carl-Zeiss Foundation.
  
 \noindent M. S.-W.\ was supported by Intel and Merck via the AWASES research center. 
 
-\noindent A.M.'s work was funded by the SOL-AI project, funded as part of the Helmholtz Foundation Model Initiative of the Helmholtz Association. 
+\noindent A.M.'s work was supported by the Helmholtz Association within the framework of the Helmholtz Foundation Model Initiative (SOL-AI project).
 
 \noindent G.P.'s work was supported by the HPC Gateway measure of the Helmholtz Association.
 
@@ -75,7 +76,7 @@ This work was supported by the Carl-Zeiss Foundation.
 \noindent We thank Mimi Lavin and Maximilian Greiner for their feedback on a draft of this article.
 
 \section*{Author contributions}
-N. A.\ was the primary contributor for the \enquote{Building principles of GPMs} section. Including its writing and figures (excluding the \enquote{adapting and using GPMs} subsection). N. A.\ also reviewed the \enquote{Introduction,} \enquote{Shape and structure of chemical data,} \enquote{Evals,} \enquote{Implication of GPMs,} and \enquote{Property prediction and material generation in accelerating applications} sections. \\
+N. A.\ was the primary contributor for the \enquote{Building principles of GPMs} section. Including its writing and figures (excluding the \enquote{Model Level Adaptation} subsection). N. A.\ also reviewed the \enquote{Introduction,} \enquote{Shape and structure of chemical data,} \enquote{Evals,} \enquote{Implication of GPMs,} and \enquote{Property prediction and material generation in accelerating applications} sections. \\
 
 \noindent A. A.\ was the primary contributor to the \enquote{existing \glspl{gpm} for chemical science}, \enquote{property prediction}, \enquote{molecule and materials generation}, \enquote{retrosynthesis}, \enquote{safety}, and \enquote{ethics} sections, including their writing and figures. Edited introduction, evaluations, architectures, knowledge gathering, experiment execution, and education sections. \\ 
 
@@ -90,19 +91,36 @@ N. A.\ was the primary contributor for the \enquote{Building principles of GPMs}
 
 \noindent G.P.\ was the primary contributor to the \enquote{Adapting and Using General Purpose Models} section, including its writing and table. G.P.\ additionally reviewed the \enquote{The Shape and Structure of Chemical Data,} \enquote{Data Analysis,} \enquote{Reporting} and \enquote{Molecular and Material Generation} sections. \\
 
-\noindent A.A.A.\ was the primary contributor to the \enquote{Experiment Execution} section, including its figure, and a minor contributor to the post-training subsection. A.A.A.\ reviewed the \enquote{Introduction,} \enquote{Experiment Planning,} \enquote{Molecule/Materials Generation} and \enquote{Education} sections, edited \enquote{The Shape and Structure of Chemical Data} and part of \enquote{Building principles of GPMs} sections, created the glossary, and ensured that most references can be easily accessed via a DOI or URL. \\
+\noindent A.A.A.\ was the primary contributor to the \enquote{Experiment Execution} section, including its figure, and a minor contributor to the post-training subsection. A.A.A.\ reviewed the \enquote{Introduction,} \enquote{Experiment Planning,} \enquote{Molecule/Materials Generation} and \enquote{Education} sections, edited \enquote{Existing GPMs for Chemical Science}, \enquote{The Shape and Structure of Chemical Data} and part of \enquote{Building Principles of GPMs} sections, created the glossary, cleaned the references and ensured that most of them can be easily accessed via a DOI or a URL. \\
 
-\noindent K.M.J.\ initiated and led the project. K.M.J.\ edited all sections. 
+\noindent K.M.J.\ initiated and led the project. K.M.J.\ reviewed and edited all sections. 
 
 \section*{Conflicts of Interest}
 K.M.J.\ has been a paid contractor for OpenAI as part of the Red-Teaming Network.
 
 \clearpage
+\input{sections/biographies}
+
+\clearpage
 \printbibliography
+
+\clearpage
+\begin{center}
+    \centering
+    \includegraphics[]{figures/6768232_File000004_130826907.pdf} \\
+    \textbf{Table of contents figure.}
+  %  \label{fig:placeholder}
+\end{center}
 
 \clearpage
 \glsaddall
 \printnoidxglossary[type=\acronymtype, sort=letter]
-\printnoidxglossary[type=main, title=Glossary]
+\begin{figure}[H]
+    \centering
+    \includegraphics[]{figures/glossary_icons.pdf}
+    \caption{\textbf{Meaning of icons reused in our figures.}}
+    \label{fig:icon-glossary}
+\end{figure}
+\printnoidxglossary[type=main, title=Glossary] \label{glossary}
 \end{document}
  

@@ -29,15 +29,17 @@ acronyms:
 
 Assessing modern \acr{gpm}s
 is challenging due to their broad applicability across diverse domains.
-Unlike traditional models, which are designed for specific tasks and can
-be directly tested on well-defined objectives \[@raschka2018model\], it
-is impractical to evaluate \acr{gpm}s on every possible capability. As a result,
-many evaluations rely on structured benchmarks that measure proficiency
-in key areas such as mathematics, chemistry, and language understanding
-\[@tikhonov2023post\]. However, such benchmarks often fall short in
-capturing open-ended problem-solving or emergent abilities that arise
-without explicit training for them and are sensitive to factors such as
-prompt phrasing and task framing \[@Siska2024\].
+Unlike specialized \acr{ml} models, which are designed for specific
+tasks and can be directly tested on well-defined objectives
+\[@raschka2018model\], it is impractical to evaluate
+\acr{gpm}s on every
+possible capability. As a result, many evaluations rely on structured
+benchmarks that measure proficiency in key areas such as mathematics,
+chemistry, and language understanding \[@tikhonov2023post\]. However,
+such benchmarks often fall short in capturing open-ended problem-solving
+or emergent abilities that arise without explicit training for them and
+are sensitive to factors such as prompt phrasing and task framing
+\[@Siska2024; @Andriushchenko2024agent\].
 
 Early benchmarks primarily focused on evaluating specialized models
 based on their ability to predict molecular properties from molecular
@@ -56,13 +58,16 @@ consider the specific context and nature of each task. Rather than
 relying solely on static benchmarks, there is a growing demand for
 assessments that dynamically account for the diversity of chemical tasks
 and the specific capabilities required to solve them---mirroring the
-multifaceted potential of \acr{gpm}s in chemistry.
-[@tbl-chemistry_benchmarks; @fig-benchmarks] gives an overview
+multifaceted potential of \acr{gpm}s in chemistry. At the same time, the
+broadened scope of evaluation introduces additional choices about what
+and how to measure, which increases complexity. In the following
+section, we therefore discuss some of the most important of these
+choices in more detail. @tbl-chemistry_benchmarks gives an overview
 of some benchmarks that have been used in the chemical sciences.
 
 ::: {#tbl-chemistry_benchmarks}
-  **Benchmark name**                       **Overall topic**                                                                                                                                 **Curation method**   **Count**
-  ---------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------- --------------------- -----------
+  **Benchmark name**                       **Overall topic**                                                                                                                                 **Curation method**   **Approx. count**
+  ---------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------- --------------------- -------------------
   CAMEL - Chemistry \[@li2023camel\]       General Chemistry \acr{mcq}                                                                        A, L                  20 K
   ChemBench \[@mirza2024large\]            General Chemistry \acr{mcq}, Reasoning                                                             M                     2.7 K
   ChemIQ \[@runcie2025assessing\]          Molecule Naming, Reasoning, Reaction Generation, Spectrum Interpretation                                                                          A                     796
@@ -78,12 +83,12 @@ of some benchmarks that have been used in the chemical sciences.
   SciAssess \[@cai2024sciassess0\]         General Chemistry MCQ, Information Extraction, Reasoning                                                                                          A, M                  2 K
   SciKnowEval \[@feng2024sciknoweval0\]    General Chemistry MCQ, Information Extraction, Reasoning, Lab Safety, Experimental Chemistry                                                      A, L                  18.3 K
 
-  **Non-comprehensive overview of chemistry benchmarks**. Overview of
-  chemistry benchmarks including the topics covered, the curation method
-  (automated, using \acr{llm}s, manual), and the number of questions. We
-  limit our scope here to benchmarks (and exclude other evaluation
-  methods), since they constitute the most actively used and publicly
-  available resources in the field at present.
+**Non-comprehensive overview of chemistry benchmarks**. Overview of
+  chemistry benchmarks, including the topics covered, the curation
+  method (automated, using \acr{llm}s, manual), and the approximate number of
+  questions. We limit our scope here to benchmarks (and exclude other
+  evaluation methods), since they constitute the most actively used and
+  publicly available resources in the field at present.
 :::
 
 ::: tablenotes
@@ -93,10 +98,21 @@ curation.
 :::
 
 ::: {#fig-benchmarks}
+![](media/figures/rescaled_figures/chemrev_figure8.png){width="100%"}
 
-![](media/figures/rescaled_figures/chemrev_figure8.png){width=100%}
-
-**Comparison of measurement specificity and application relevance of chemistry benchmarks.** This figure presents a subjective, qualitative positioning of selected chemistry-related benchmarks along the axes of application relevance and measurement specificity (the extent to which a benchmark evaluates well-defined and objectively measurable outputs—such as physical or chemical properties—rather than more ambiguous tasks like answering general chemistry trivia or \acr{mcq}). The icons indicate whether a benchmark incorporates multimodal inputs (e.g., images or spectra), when it is actively maintained (based on GitHub activity within the past 6 months), and if it supports end-to-end evaluation via a clearly described pipeline with code provided by the authors.
+**Comparison of measurement specificity and
+application relevance of chemistry benchmarks.** This figure
+presents a subjective, qualitative positioning of selected
+chemistry-related benchmarks along the axes of application relevance and
+measurement specificity (the extent to which a benchmark evaluates
+well-defined and objectively measurable outputs—such as physical or
+chemical properties—rather than more ambiguous tasks like answering
+general chemistry trivia or \acr{mcq}). The icons indicate
+whether a benchmark incorporates multimodal inputs (e.g., images or
+spectra), if it is actively maintained (based on GitHub activity within
+the past 6 months), and if it supports end-to-end evaluation via a
+clearly described pipeline with code provided by the
+authors.
 :::
 
 ## Design of Evaluations {#sec-eval_design}
@@ -117,9 +133,9 @@ generate valid \acr{smiles} strings may test surface-level structure
 learning but fails to assess whether the model understands chemical
 reactivity or synthesis planning. Many methods fall into the trap of
 assessing proxy tasks instead of meaningful competencies, which leads to
-misleading progress. However, it is important to note that proxy tasks
-are often chosen because measurements at higher fidelity are more
-expensive or time-consuming to construct.
+misleading reports of progress. However, it is important to note that
+proxy tasks are often chosen because measurements at higher fidelity are
+more expensive or time-consuming to construct.
 
 #### Data and Biases
 
@@ -142,30 +158,38 @@ clearly stated scope and limitations.
 #### Scoring Mechanism
 
 ::: {#fig-scoring}
+![](media/figures/final_figures/chembench_scoring.png){width="100%"}
 
-![](media/figures/final_figures/chembench_scoring.png){width=100%}
-
-**`ChemBench` [@mirza2024large] rankings based on different scoring metrics**: All metrics are a sum, weighted sum, or maximum values over all \acr{mcq}s. The weighted sums are calculated by taking the manually rated difficulty (basic, immediate, advanced) of the question into account. For equal weighting, all categories are weighted equally, regardless of the number of questions. The metric "all correct" is a binary metric indicating if a given answer is completely correct. For normalized Hamming (max), the normalized maximum value of the Hamming loss of each model was taken. We find that the ranking of models changes if we change the metric, or even just the aggregation—showcasing the importance of proper and transparent evaluation design.
+**`ChemBench` [@mirza2024large] rankings
+based on different scoring metrics**: All metrics are a sum,
+weighted sum, or maximum values over all \acr{mcq}s. The weighted sums are
+calculated by taking the manually rated difficulty (basic, immediate,
+advanced) of the question into account. For equal weighting, all
+categories are weighted equally, regardless of the number of questions.
+The metric “all correct” is a binary metric indicating if a given answer
+is completely correct. For normalized Hamming (max), the normalized
+maximum value of the Hamming loss of each model was taken. We find that
+the ranking of models changes if we change the metric, or even just the
+aggregation—showcasing the importance of proper and transparent
+evaluation design.
 :::
 
 The way model performance is scored has a direct impact on how results
 are interpreted and compared. Leaderboards and summary statistics often
 shape which models are considered state-of-the-art, making even small
 design choices in scoring, such as metric selection, aggregation, or
-treatment of uncertainty, highly consequential (see
-@fig-scoring).
+treatment of uncertainty, highly consequential (see @fig-scoring).
 Inconsistent or poorly designed scoring can lead to misleading
-conclusions or unfair comparisons. Metric selection and aggregation
-critically shape evaluation outcomes. For example, in tasks where
-multiple correct answers are possible different evaluation strategies
-yield different insights: a permissive metric may assign partial credit
-for each correct option selected, while a stricter "all-or-nothing"
-metric only gives credit if the full set of correct choices is
-identified without any mistakes. The former captures varying levels of
-performance, while the latter enforces a binary pass or fail threshold.
-Aggregation strategies, such as task averaging or difficulty-based
-weighting, further influence the overall score and can substantially
-shift model rankings.
+conclusions or unfair comparisons. For example, in tasks where multiple
+correct answers are possible, different evaluation strategies yield
+different insights: a permissive metric may assign partial credit for
+each correct option selected, while a stricter "all-or-nothing" metric
+only gives credit if the full set of correct choices is identified
+without any mistakes. The former captures varying levels of performance,
+while the latter enforces a binary pass or fail threshold. Aggregation
+strategies, such as task averaging or difficulty-based weighting,
+further influence the overall score and can substantially shift model
+rankings.
 
 #### Statistical significance and uncertainty estimation
 
@@ -196,7 +220,56 @@ understand the scope and reliability of the reported results.
 @alampara2025lessons proposed evaluation cards as a structured format
 to transparently report all relevant details of an evaluation, including
 design choices, assumptions, and known limitations, making it easier for
-others to interpret, reproduce, and build upon the results.
+others to interpret, reproduce, and build upon the results. See example @nte-best_practices for some of the best practices while
+building benchmarks.
+
+::: {#nte-best_practices .callout-note title="Best practices for robust model evaluation"}
+**Setup and Reporting**
+
+- Ensure full reproducibility: document all steps from data preparation
+  to scoring.
+
+- Fix and report: model checkpoint or \acr{api} version, date and time, inference
+  settings (e.g., temperature, context length).
+
+- Store all evaluation assets (prompts, datasets, scripts) under version
+  control for traceability.
+
+- Clearly define: evaluation goal, task scope, data origin, and
+  underlying assumptions.
+
+**Validation and Sanity Checks**
+
+- Check for potential training data leakage by testing partial
+  completions or measuring accuracy drop under paraphrasing
+  \[@duarte2024detecting\].
+
+- Use clear-cut factual questions phrased in multiple ways to test
+  consistency.
+
+- Include prompts containing obvious errors (e.g., "benzene is not
+  aromatic") to probe factual robustness.
+
+- Perform repeated runs with different random seeds or sampling
+  temperatures to estimate uncertainty.
+
+**Bias and Construct Validity**
+
+- Verify that tasks measure intended skills (reasoning vs. recall).
+
+- Balance question difficulty; include control and counterfactual items.
+
+- Check dataset composition for chemical space or label bias.
+
+**Publication and Communication**
+
+- Double-check factual claims against trusted references.
+
+- Report both metrics and qualitative error patterns.
+
+- Use structured evaluation cards \[@alampara2025lessons\] for
+  transparency.
+:::
 
 ## Evaluation Methodologies {#sec-eval_methods}
 
@@ -224,19 +297,22 @@ or biases.\[@alampara2025lessons; @skalse2022defining\]
 
 To systematically evaluate \acr{gpm}s, various methods (so-called estimators)
 have been developed, yet their application in chemistry remains limited.
-Broadly, these approaches summarized in
-@fig-estimators can be categorized into traditional
+Broadly, these approaches can be categorized into traditional
 benchmarks, challenges and competitions, red teaming and capability
-discovery, real-world deployment studies and ablation studies and
+discovery, real-world deployment studies, ablation studies, and
 systematic testing. Each evaluation method has its own strengths and
 limitations, and no single approach can comprehensively capture a
 model's performance across all potential application scenarios.
 
 ::: {#fig-estimators}
+![](media/figures/rescaled_figures/chemrev_figure10.png){width="100%"}
 
-![](media/figures/rescaled_figures/chemrev_figure10.png){width=100%}
+**Comparison of Evaluation Methodologies**: This figure compares five common evaluation methodologies for \acr{gpm}s across the dimensions of resource intensity (required human and computational effort), scalability (ease of applying the method across tasks and models), automation potential (need for manual intervention), real-world applicability (alignment with practical use cases), and
+numerical reducibility (ability to express results quantitatively).
+Checkmarks indicate a strength in the respective dimension, crosses
+denote a limitation, and dashes represent a neutral
+position.
 
-**Comparison of Evaluation Methodologies**: This figure compares five common evaluation methodologies for <span data-acronym-label="gpm" data-acronym-form="plural+short">gpms</span> across the dimensions of resource intensity (required human and computational effort), scalability (ease of applying the method across tasks and models), automation potential (need for manual intervention), real-world applicability (alignment with practical use cases), and numerical reducibility (ability to express results quantitatively). Checkmarks indicate a strength in the respective dimension, crosses denote a limitation, and dashes represent a neutral position.
 :::
 
 #### Traditional Benchmarks {#sec-trad_benchmarks}
@@ -245,29 +321,27 @@ Traditional benchmarks can provide a fast and scalable evaluation of the
 models. In the context of \acr{ml}, a benchmark typically refers to a
 curated collection of tasks or questions alongside a defined evaluation
 protocol, which allows different models to be compared under the same
-conditions. Despite their advantages, summarized in
-@fig-estimators, benchmarks come with several limitations.
-They often struggle to capture real-world impact, as they evaluate
-models in controlled environments that may not reflect the complexity
-and open-endedness of real-world applications. Current chemistry
-benchmarks like ChemBench\[@mirza2024large\] and CAMEL -
-Chemistry\[@li2023camel\] mostly fall on the pragmatic side of the
-measurement spectrum, as they are designed for comparison and
-decision-making rather than assessing inherent model properties.
-Classical benchmarks such as `MoleculeNet` \[@wu2018moleculenet\]
-typically target molecular properties---such as solubility or binding
-affinity---that are experimentally measurable and representationally
-grounded. However, their evaluation setup, which relies on static and
-narrowly defined datasets, often fails to capture real-world
-applicability.
+conditions. Despite their advantages, summarized in @fig-estimators, benchmarks come with limitations. They
+often struggle to capture real-world impact, as they evaluate models in
+controlled environments that may not reflect the complexity and
+open-endedness of real-world applications. Current chemistry benchmarks
+like ChemBench\[@mirza2024large\] and CAMEL - Chemistry\[@li2023camel\]
+mostly fall on the pragmatic side of the measurement spectrum, as they
+are designed for comparison and decision-making rather than assessing
+inherent model properties. Classical benchmarks such as `MoleculeNet`
+\[@wu2018moleculenet\] typically target molecular properties---such as
+solubility or binding affinity---that are experimentally measurable and
+representationally grounded. However, their evaluation setup, which
+relies on static and narrowly defined datasets, often fails to capture
+real-world applicability.
 
 An additional disadvantage of traditional benchmarks is ease of
 overfitting, where models are optimized for high scores rather than
-genuine improvements. This problem is closely linked to data
-leakage---also known as test set pollution---which refers to the
-unintentional incorporation of test set information into the training
-process. Such leakage can distort performance estimates, especially when
-models are trained on publicly available
+genuine improvements in real-world applications. This problem is closely
+linked to data leakage---also known as test set pollution---which refers
+to the unintentional incorporation of test set information into the
+training process. Such leakage can distort performance estimates,
+especially when models are trained on publicly available
 benchmarks.\[@thompson2025chatbots\] This exposure increases the risk
 that models learn to perform well on specific benchmark questions rather
 than developing a deeper, more generalizable understanding of the
@@ -333,7 +407,7 @@ predefined tasks. However, a major challenge is the lack of systematic
 comparability. Results often depend on specific test strategies and are
 harder to quantify across models. Currently, most red teaming is
 conducted by human experts, making it a time-consuming process.
-Automated approaches are emerging to scale these evaluations,
+Automated approaches are emerging to scale these evaluations
 \[@ge2023mart0\], but in domains like chemistry, effective automation
 requires models to possess deep scientific knowledge, which remains a
 significant challenge.
@@ -350,17 +424,16 @@ to identify alternatives to harmful substances.\[@urbina2022dual\]
 #### Real-World Deployment Studies
 
 Real-world deployment studies evaluate models in practical use settings,
-such as testing a \acr{gpm} in a laboratory environment.
-\[@he2020deployment\] Unlike controlled benchmarks, these studies
-provide insights into how models perform in dynamic, real-world
-conditions, capturing challenges that predefined evaluations may
-overlook. For example, a generative model might be used to suggest
-synthesis routes that are then tested experimentally, revealing failures
-due to overlooked side reactions or missing reaction feasibility.
-However, they come with significant drawbacks: they are highly
-time-consuming, and systematic comparisons between models are difficult,
-as real-world environments introduce variability that is hard to
-control.
+such as testing a \acr{gpm} in a laboratory environment. Unlike
+controlled benchmarks, these studies provide insights into how models
+perform in dynamic, real-world conditions, capturing challenges that
+predefined evaluations may overlook. For example, a generative model
+might be used to suggest synthesis routes that are then tested
+experimentally, revealing failures due to overlooked side reactions or
+missing reaction feasibility. However, they come with significant
+drawbacks: they are highly time-consuming, and systematic comparisons
+between models are difficult, as real-world environments introduce
+variability that is hard to control.
 
 To date, such evaluations remain rare in the chemical sciences.
 
@@ -385,7 +458,7 @@ shallow heuristics rather than deep understanding. These structured
 ablations highlight specific failure modes and inform targeted
 improvements in prompt design and training strategies.
 
-## Future Directions
+## Future Directions {#sec-evals-future}
 
 ### Emerging Evaluations Needs
 
@@ -409,17 +482,17 @@ fixed answers, real-world scientific inquiry is inherently
 open-ended.\[@mitchener2025bixbench0\] This not only demands flexible
 and adaptive evaluation schemes but also raises deeper questions about
 what constitutes scientific understanding in generative models. This
-becomes even more important as agent-based systems
-([@sec-agents] gain traction---models that do not simply
+becomes even more important as agent-based systems @sec-agents
+gain traction---models that do not simply
 respond to prompts but autonomously plan, reason, and execute multistep
 tasks in interaction with tools, databases, and lab environments.
 \[@cao2024agents; @mandal2024autonomous\] Simple input-output
 benchmarks are insufficient; instead, we need frameworks that can track
 progress in dynamic, goal-driven settings, where multiple valid
-solutions may exist.
+solutions may exist. \[@nie2025assessing\]
 
-In parallel to capability assessments, the evaluation of safety (see
-[@sec-safety]) is becoming increasingly important---especially
+In parallel to capability assessments, the evaluation of safety (see @sec-safety
+is becoming increasingly important---especially
 as \acr{gpm}s gain access
 to sensitive scientific knowledge and tools.\[@bran2024augmenting;
 @boiko2023autonomous\] Current safety evaluations often rely on manual
@@ -450,6 +523,5 @@ more open-ended, adaptive evaluations.
 A more feasible path may lie in promoting transparent documentation of
 evaluation choices and developing meta-evaluation tools that assess the
 validity, coverage, and robustness of different approaches. Emerging
-frameworks such as \acr{irt} offer promising directions for such
-reflective evaluations, enabling nuanced insights beyond surface-level
-metrics. \[@schilling2025lifting\]
+frameworks such as \acr{irt} offer promising directions.
+\[@schilling2025lifting\]

@@ -39,7 +39,7 @@ For answering general questions we often default to [Perplexity](https://www.per
 This is based on web search and can compile answers to questions based on the search results.
 It is fast, but will only give superficial answers to scientific questions.
 
-![](./media/figures/tutorials/perplexity.png)
+<img src="./media/figures/tutorials/perplexity.png" alt="" / width="100%">
 
 ::: {.callout-tip}
 ## Google search vs. LLM-assisted search
@@ -54,19 +54,19 @@ We most often use conventional search engines such as Google if we know what we 
 
 For surveying scientific papers, we often use the [FutureHouse Plaform](https://www.platform.futurehouse.org). On there, they have different agents. 
 
-![](./media/figures/tutorials/falcon.png)
+<img src="./media/figures/tutorials/falcon.png" alt="" / width="100%">
 
 ### Asta 
 
 An alternative tool, [Asta](https://asta.allen.ai/chat), built by Ai2 can perform similar search and we often use it in combination with the FutureHouse Plaform.
 
-![](./media/figures/tutorials/allenai.png)
+<img src="./media/figures/tutorials/allenai.png" alt="" / width="100%">
 
 ### OpenAI Deep Research (💵)
 
 Especially with [GPT-5 Pro, Deep Research](https://chatgpt.com/) can sometimes deliver impressive results. 
 
-![](./media/figures/tutorials/deep_research.png)
+<img src="./media/figures/tutorials/deep_research.png" alt="" / width="100%">
 
 
 ## "Consuming papers"

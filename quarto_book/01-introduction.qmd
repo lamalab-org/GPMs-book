@@ -25,14 +25,15 @@ acronyms:
 
 # Introduction
 
-Much emphasis and hope is placed on \acr{ml} to accelerate the rate of scientific
-progress.\[@jablonka2020big; @Butler_2018; @yano2022case; @Yao_2022;
-@De_Luna_2017; @wang2023scientific\] Recent progress in the field has
-demonstrated, for example, the ability of \acr{ml} models to make predictions for multiscale
+Machine Learning (ML) shows promise to
+accelerate the rate of scientific progress.\[@jablonka2020big;
+@Butler_2018; @yano2022case; @Yao_2022; @De_Luna_2017;
+@wang2023scientific\] Recent progress in the field has demonstrated,
+for example, the ability of \acr{ml} models to make predictions for multiscale
 systems,\[@charalambous2024holistic; @yang2020machine;
 @Deringer_2021\] to perform experiments by interacting with laboratory
 equipment \[@boiko2023autonomous; @coley2019robotic\], to autonomously
-collect data from the scientific literature,\[@schilling2025text;
+collect data from scientific literature,\[@schilling2025text;
 @zhang2024fine; @dagdelen2024structured\] and to make predictions with
 high accuracy.\[@jablonka2024leveraging; @jablonka2023machine;
 @jung2024automatic; @Rupp_2012; @Keith_2021; @Wu_2024\]
@@ -48,24 +49,25 @@ requiring models that bridge molecular behavior to macroscopic
 properties. Representationally, even a single observation (e.g., a
 \^13C-NMR spectrum) can be encoded in chemically equivalent formats: a
 string \[@alberts2024unraveling\], vector \[@mirza2024elucidating\], or
-image\[@alberts2024unraveling\]. However, these representations are not
+image\[@alberts2024unraveling\]. However, such representations are not
 computationally equivalent and have been empirically shown to produce
-diverse model outputs.\[@atz2024prospective; @alampara2024probing;
+different model outputs.\[@atz2024prospective; @alampara2024probing;
 @wu2024t; @skinnider2024invalid\]
 
 Additionally, \acr{ml} for
-chemistry is challenged by what we term "hidden variables". These can be
-thought of as the parameters in an experiment that remain largely
-unaccounted for (e.g., their importance is unknown or they are difficult
-to control for), but could have a significant impact on experimental
-outcomes. One example are seasonal variations in ambient laboratory
-conditions that are typically not controlled for and, if at all, only
-communicated in private accounts.\[@Nega_2021\] In addition to that,
-chemistry is believed to rely on a large amount of *tacit knowledge*,
-i.e., knowledge that cannot be readily verbalized.\[@Taber_2014;
-@Polanyi_2009\] Tacit chemical knowledge includes the subtle nuances of
-experimental procedures, troubleshooting techniques, and the ability to
-anticipate potential problems based on past experiences.
+chemistry is challenged by what one can term "hidden variables". These
+can be thought of as the parameters in an experiment that remain largely
+unaccounted for (e.g., their importance is unknown, or they are
+difficult to control for), but could have a significant impact on
+experimental outcomes. One example is seasonal variations in ambient
+laboratory conditions that are typically not controlled for and, if at
+all, only communicated in private accounts.\[@Nega_2021\] In addition to
+that, chemistry is believed to rely on a large amount of *tacit
+knowledge*, i.e., knowledge that cannot be readily
+verbalized.\[@Taber_2014; @Polanyi_2009\] Tacit chemical knowledge
+includes the subtle nuances of experimental procedures, troubleshooting
+techniques, and the ability to anticipate potential problems based on
+experience.
 
 These factors---the diversity, scale, and tacity---clearly indicate that
 the full complexity of chemistry cannot be captured using standard
@@ -74,23 +76,83 @@ data.\[@jablonka2022making\] Fully addressing the challenges imposed by
 chemistry requires the development of \acr{ml} systems that can handle diverse, "fuzzy",
 data instances and have transferable capabilities to leverage low
 amounts of data.\
-*Foundation Models* are such models that can easily adapt to new
-settings and deal with diverse, fuzzy inputs. The first comprehensive
-description of such models was provided by @bommasani2021opportunities,
-who also coined the term "foundation models". In the chemical
-literature, this term has different connotations. We make the
-distinction between \acr{gpm}s such as \acr{llm}s \[@zhang2024chemllm; @guo2025deepseek;
-@openai2023gpt04; @anthropic2025system; @livne2024nach0;
-@brown2020language\] and domain-specific models with
-\acr{sota} performance
-in a subset of tasks, such as machine-learning interatomic
-potentials.\[@ahmad2022chemberta; @floge2024oneprot;
-@batatia2023foundation; @Chen_2022; @unke2021machine\]
+"Foundation model" has become a popular term for large pretrained models
+that serve as a basis for various downstream tasks. The first
+comprehensive description of such models was provided by
+@bommasani2021opportunities, who also coined the term "foundation
+models". In the chemical literature, this term has different
+connotations. In many cases, however, the term is used to represent a
+domain-specific, state-of-the-art model limited to one input modality
+(e.g., amino acid sequences, crystal structures). Here, we make the
+distinction between what we term \acr{gpm}s, such as \acr{llm}s \[@zhang2024chemllm; @guo2025deepseek;
+@openai2023gpt04; @anthropic2025system; @brown2020language\] and
+domain-specific models with \acr{sota} performance in a subset of tasks, such as
+machine-learning interatomic potentials.\[@batatia2023foundation;
+@Chen_2022; @unke2021machine\] We adopt the term
+\acr{gpm}s to avoid the
+semantic overlap caused by "foundation model" and to signal the breadth
+of applicability that we seek to emphasize.
 
-As we will show in the following, \acr{gpm}s---models designed to generalize across a
-wide range of tasks and domains with minimal task-specific
-modifications, typically pre-trained on vast and diverse datasets (see
-[@sec-taxonomy])---are better equipped than domain-specific
-models to leverage diverse, fuzzy inputs. Thus, this review article
-focuses on their potential to shape the future of research in the
-chemical sciences.\[@white2023future\]
+A \acr{gpm} is a model
+that has been pre-trained on a broad, heterogeneous corpus spanning
+multiple data modalities (text, images, graphs) or representations
+(e.g., common names, 3D coordinates, molecular images). It can be
+applied to a wide spectrum of downstream tasks that differ in objective
+(classification, regression, generation, reasoning), input format, and
+domain---ranging from natural-language processing to chemistry and
+vision---with little or no task-specific fine-tuning. A
+\acr{gpm} supports
+zero-shot, few-shot, or transfer learning and can serve as the core
+component of autonomous agents.
+
+::: {#tbl-gpm}
++------------------------------+-----------------------------+-------------------------------------------------+
+| **Category**                 | **Typical Characteristics** | **Representative Examples**                     |
++:=============================+:============================+:================================================+
+| \acr{gpm}s                   | Pre-trained on a large      | **Autoregressive:** GPT-4,\[@openai2023gpt04\]  |
+|                              | heterogeneous corpus        | LLaMA,\[@grattafiori2024llama\]                 |
+|                              | spanning multiple           | Galactica\[@taylor2022galactica\]               |
+|                              | modalities. Supports        |                                                 |
+|                              | zero/few-shot               | **Diffusion-based:** Gemini                     |
+|                              | generalization and can be   | Diffusion,\[@deepmind_geminidiffusion_2025\]    |
+|                              | fine-tuned for diverse      | Inception Mercury\[@inceptionlabs2025mercury0\] |
+|                              | chemistry tasks. Capable of |                                                 |
+|                              | autonomous agent behavior,  | **Other:** Mamba-based\[@gu2023mamba0\] models  |
+|                              | including planning and      |                                                 |
+|                              | execution.                  |                                                 |
++------------------------------+-----------------------------+-------------------------------------------------+
+| Domain-Specific Foundation   | Trained on curated,         | AlphaFold,\[@AlphaFold2021\]                    |
+| Models                       | domain-specific datasets    | ESM,\[@lin2022language\]                        |
+|                              | (e.g., protein structures,  | MACE-MP-0\[@batatia2023foundation\],            |
+|                              | crystal structures).        | MatterSim\[@yang2024mattersim\],                |
+|                              | Achieve state-of-the-art    | MolecularTransformer\[@schwaller2019molecular\] |
+|                              | performance in narrow task  |                                                 |
+|                              | sets, but are typically not |                                                 |
+|                              | multimodal or generalizable |                                                 |
+|                              | to unrelated chemistry      |                                                 |
+|                              | problems.                   |                                                 |
++------------------------------+-----------------------------+-------------------------------------------------+
+| Specialized Chemistry        | Domain-specific models      | Graph-based reaction outcome predictors,        |
+| Pipelines                    | combined with rule-based or | \acr{qspr} models using     |
+|                              | rely on hand-crafted        | Morgan fingerprints, \acr{gpr} on               |
+|                              | transferability beyond the  | \acr{nmr} shifts           |
++------------------------------+-----------------------------+-------------------------------------------------+
+
+**Illustrative examples of GPMs, domain-specific foundation models,
+and specialized chemistry ML pipelines**. The table depicts the
+definition of \acr{gpm}
+with examples for such models, as well as comparisons with
+domain-specific models and chemistry pipelines. Note that a
+\acr{gpm} does not
+necessarily output text.
+:::
+
+@tbl-gpm gives
+examples of how this definition can be applied. By decoupling the notion
+of "general-purpose" from any specific architecture or modality, we aim
+to foster creative exploration of models that are better aligned with
+the data characteristics and scientific goals of chemistry. We hope to
+contribute to this by addressing chemists and computer scientists, by
+providing technical background, a consistent terminology, and explaining
+key technical terminology in a [glossary](#glossary) at the end of the
+manuscript.

@@ -1504,7 +1504,7 @@ def main():
     )
     parser.add_argument(
         "--zip-file",
-        default="general_purpose_models_chemrev.zip",
+        default="overleaf.zip",
         help="Zip file containing LaTeX source (will be extracted if provided)",
     )
     parser.add_argument(

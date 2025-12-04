@@ -11,20 +11,20 @@ As Karl Popper argued, scientific discovery defies rigid logical frameworks \aut
 \subsubsection{Initial Sparks}
 
 Recent efforts in the \gls{ml} community have sought to simulate the hypothesis formulation process \autocite{Gu2025forecasting, arlt2024meta0designing}, primarily leveraging multi-agent systems \autocite{jansen2025codescientist0, kumbhar2025hypothesis}. 
-In such frameworks, agents typically retrieve prior knowledge to contextualize previous related work---grounding hypothesis generation in existing literature \autocite{naumov2025dora, ghareeb2025robin0, gu2024interesting}. 
+In such frameworks, agents typically retrieve prior knowledge to contextualize previous related work, grounding hypothesis generation in existing literature \autocite{naumov2025dora, ghareeb2025robin0, gu2024interesting}. 
 A key challenge, however, lies in evaluating the generated hypotheses. 
 While some studies leverage \glspl{llm} to evaluate novelty or interestingness \autocite{zhang2024omni0}, recent work has introduced critic agents---specialized components designed to monitor and iteratively correct outputs from other agents---into multi-agent frameworks (see \Cref{sec:multi-agent}). 
 For instance, \textcite{Ghafarollahi2024} demonstrated how integrating such critics enables systematic hypothesis refinement through continuous feedback mechanisms.
 
 However, the reliability of purely model-based evaluation remains contentious. 
-\textcite{si2025llms} argued that relying on a \gls{gpm} to evaluate hypotheses lacks robustness, advocating instead for human assessment. 
+\textcite{si2025llms} argued that relying on a \gls{llm} to evaluate hypotheses lacks robustness, advocating instead for human assessment. 
 This approach was adopted in their work, where human evaluators validated hypotheses produced by their system, finding more novel \gls{llm}-produced hypotheses compared to the ones proposed by humans.
 Notably, \textcite{yamada2025ai} advanced the scope of such systems by automating the entire research \gls{ml} process, from hypothesis generation to article writing. 
-Their system’s outputs were submitted to workshops at the \gls{iclr} 2025, with one contribution ultimately accepted. However, the advancements made by such works are currently incremental instead of unveiling new, paradigm-shifting  research (see \Cref{fig:hypothesis-generation}).
+Their system’s outputs were submitted to workshops at the \gls{iclr} 2025, with one contribution ultimately accepted. However, the advancements made by such works are currently incremental instead of unveiling new, paradigm-shifting research (see \Cref{fig:hypothesis-generation}).
 
 \subsubsection{Chemistry-Focused Hypotheses}
 
-In scientific fields such as chemistry and materials science, hypothesis generation requires domain intuition, mastery of specialized terminology, and the ability to reason through foundational concepts \autocite{miret2024llms}. 
+In chemistry and materials science, hypothesis generation requires domain intuition, mastery of specialized terminology, and the ability to reason through foundational concepts \autocite{miret2024llms}. 
 To address potential knowledge gaps in \glspl{llm}, \textcite{wang2023scimon0} proposed a few-shot learning approach (see \Cref{sec:prompting}) for hypothesis generation and compared it with model fine-tuning for the same task. 
 Their method strategically incorporates in-context examples to supplement domain knowledge while discouraging over-reliance on existing literature. 
 For fine-tuning, they designed a loss function that penalizes possible biases---e.g., given the context \enquote{hierarchical tables challenge numerical reasoning}, the model would be penalized if it generated an overly generic prediction like \enquote{table analysis} instead of a task-specific one---when trained on such examples. 
@@ -35,7 +35,7 @@ To avoid data contamination, their benchmark exclusively uses papers published a
 Ground-truth hypotheses were derived from articles in high-impact journals (e.g., Nature, Science) and validated by domain-specialized PhD researchers.
 By iteratively providing the model with context from prior studies, \modelname{GPT-4o} achieved coverage of over $80\%$ of the evaluation set’s hypotheses while accessing only $4\%$ of the retrieval corpus, demonstrating efficient synthesis of ideas presumably not present in its training corpus.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
         \includegraphics[width=1\textwidth]{figures/rescaled_figures/chemrev_figure13.pdf}
     \caption{\textbf{Overview of \gls{llm}-based hypothesis generation}. 
@@ -48,16 +48,30 @@ By iteratively providing the model with context from prior studies, \modelname{G
 
 Automatic hypothesis generation is often regarded as the Holy Grail of automating the scientific process \autocite{coley2020autonomous}. However, achieving this milestone remains challenging, as generating novel and impactful ideas requires questioning current scientific paradigms \autocite{Kuhn1962Structure}---a skill typically refined through years of experience---which is currently impossible for most \gls{ml} systems.
 
-Current progress in \gls{ml} illustrates these limitations \autocite{kon2025exp0bench0, gu2024interesting}. Although some studies claim success in \gls{ai}-generated ideas accepted at workshops in \gls{ml} conferences via double-blind review \autocite{zhou2025tempest0}, these achievements are limited. 
+Current progress in \gls{ml} illustrates these limitations \autocite{kon2025exp0bench0, gu2024interesting}. Although some studies claim success, as \gls{ai}-generated ideas being accepted at workshops in \gls{ml} conferences via double-blind review \autocite{zhou2025tempest0}, these achievements are limited. 
 First, accepted submissions often focus on coding tasks, one of the strongest domains for \glspl{llm}. Second, workshop acceptances are less competitive than main conferences, as they prioritize early-stage ideas over rigorously validated contributions. 
-In chemistry, despite some works showing promise on these systems \autocite{yang2025moose0chem20}, \glspl{llm} struggle to propose functional hypotheses \autocite{si2025ideation1execution}.
+In chemistry, despite some works showing promise on these systems \autocite{yang2025moose0chem20}, \glspl{llm} struggle to propose innovative hypotheses \autocite{si2025ideation1execution}.
 Their apparent success often hinges on extensive sampling and iterative refinement, rather than genuine conceptual innovation.
 
 As \textcite{Kuhn1962Structure} argued, generating groundbreaking ideas demands challenging prevailing paradigms---a capability missing in current \gls{ml} models (they are trained to make the existing paradigm more likely in training rather than questioning their training data), as shown in \Cref{fig:hypothesis-generation}. 
-Thus, while accidental discoveries can arise from non-programmed events (e.g., Fleming’s identification of penicillin \autocite{Fleming1929antibacterial, Fleming1945penicillin}), transformative scientific advances typically originate from deliberate critique of existing knowledge \autocite{popper1959logic, Lakatos1970falsification}. In addition, very often breakthroughs can also not be achieved by optimizing for a simple metric---as we often do not fully understand the problem and, hence, cannot design a metric.\autocite{stanley2015greatness}
+Thus, while accidental discoveries can arise from non-programmed events (e.g., Fleming’s identification of penicillin \autocite{Fleming1929antibacterial, Fleming1945penicillin}), transformative scientific advances typically originate from deliberate critique of existing knowledge \autocite{popper1959logic, Lakatos1970falsification}. In addition, very often breakthroughs can not be achieved by optimizing for a simple metric---as we often do not fully understand the problem and, hence, cannot design a metric.\autocite{stanley2015greatness}
 Despite some publications suggesting that \gls{ai} scientists already exist, such claims are supported only by narrow evaluations that yield incremental progress \autocite{novikov2025alphaevolve}, not paradigm-shifting insights. For \gls{ai} to evolve from research assistants into autonomous scientists, it must demonstrate efficacy in addressing societally consequential challenges, such as solving complex, open-ended problems at scale (e.g., \enquote{millennium} math problems
 \autocite{Carlson2006millennium}).
 
 Finally, ethical considerations become critical as hypothesis generation grows more data-driven and automated. Adherence to legal and ethical standards must guide these efforts (see \Cref{sec:safety}) \autocite{danish_gov2024hypothesis}.
 
-With a hypothesis in hand, the next step is often to run an experiment to test it. 
+
+\subsubsection{Limitations}
+
+Current \gls{llm}-driven systems lack the kind of creativity needed for paradigm-shifting hypotheses, tending to rearrange training data and retrieved content rather than propose genuinely new mechanisms. As a result, the evaluation of such outputs is also fragile, because using proxy metrics for \enquote{novelty} or \enquote{impact} that poorly track real scientific value can be deceiving. Finally, the problem’s open-ended nature (\Cref{sec:data-section}) makes systematic benchmarking ill-posed.
+
+
+\subsubsection{Open Challenges}
+
+\begin{itemize}
+    \item \textbf{Scalable Evaluation}: The open-ended assessment of a hypothesis's potential impact remains a core challenge, as current methods are difficult to scale, costly, and inefficient due to a heavy reliance on human input \autocite{nie2025assessing}.
+    \item \textbf{The Integration Gap}: A critical disconnect persists between hypothesis generation and automated experimental validation, especially in fields like chemistry.
+    \item \textbf{The Paradigm Limitation}: The underlying operational constraints of current modeling approaches inherently favor incremental progress over transformative breakthroughs.
+\end{itemize}
+
+% With a hypothesis in hand, the next step is often to run an experiment to test it. 

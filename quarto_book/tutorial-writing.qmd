@@ -87,7 +87,7 @@ If you address the quoted spans above—mainly by hedging, attributing strictly 
 
 Using the feedback, and iterating several times, one can improve the text to be more neutral, without waiting for other people to review it.
 
-### Example: Enhancing Text Fluency
+## Example: Enhancing Text Fluency
 
 A common application involves refining text to improve its overall fluency and readability. 
 This process focuses specifically on strengthening the logical transitions between sentences and paragraphs to ensure a coherent narrative flow. 

@@ -41,6 +41,7 @@
 \usepackage{csquotes}
 \usepackage{cleveref}
 \usepackage{siunitx}
+\DeclareSIUnit\molar{M}
 \usepackage{geometry}
 \usepackage{multirow}
 \geometry{left=3.7cm, right=3.7cm}
@@ -59,19 +60,19 @@
 
 \usepackage{sectsty} 
 
-% \sectionfont{\color{tumblue}\selectfont\sffamily}
-% \subsectionfont{\color{tumblue}\selectfont\sffamily}
-% \subsubsectionfont{\color{tumblue}\selectfont\sffamily}
+\sectionfont{\color{tumblue}\selectfont\sffamily}
+\subsectionfont{\color{tumblue}\selectfont\sffamily}
+\subsubsectionfont{\color{tumblue}\selectfont\sffamily}
 \paragraphfont{\selectfont\sffamily}
-%\subparagraphfont{\color{gray}\selectfont\sffamily}
+\subparagraphfont{\color{gray}\selectfont\sffamily}
 
 
 \renewcommand*{\Authfont}{\sf}
 \renewcommand*{\Affilfont}{\sf}
 
 
-% \definecolor{halfgray}{gray}{0.55}
-% \renewcommand\labelitemi{\color{halfgray}$\bullet$} 
+\definecolor{halfgray}{gray}{0.55}
+\renewcommand\labelitemi{\color{halfgray}$\bullet$} 
 
 %\usepackage{kpfonts}
 
@@ -116,8 +117,8 @@
 
 \errorcontextlines=50
 
-%\definecolor{linkcolor}{RGB}{0, 102, 204} % Define the link color
-\definecolor{linkcolor}{RGB}{0, 0, 0}
+% \definecolor{linkcolor}{RGB}{0, 102, 204} % Define the link color
+% \definecolor{linkcolor}{RGB}{0, 0, 0}
 % \hypersetup{
 %     colorlinks=true,
 %     linkcolor=linkcolor,
@@ -168,8 +169,8 @@
 \usepackage[most]{tcolorbox}
 \tcbuselibrary{listings, breakable}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
-\newtcolorbox{promptbox}[1][]{
-    title = LLM Prompt Example,
+\newtcolorbox[auto counter]{promptbox}[2][]{
+    title = {LLM Prompt Example~\thetcbcounter: #2},
     breakable,
     enhanced,
     colback=white,
@@ -184,6 +185,51 @@
     middle=10mm,
     #1
 }
+% Tell cleveref how to reference prompt boxes
+\crefname{tcb@cnt@promptbox}{prompt example}{prompt examples}
+\Crefname{tcb@cnt@promptbox}{Prompt Example}{Prompt Examples}
+
+\definecolor{examplered}{RGB}{100, 127, 188}
+
+% \newtcolorbox{examplebox}[1]{
+%     title = {#1},
+%     breakable,
+%     enhanced,
+%     colback=white,
+%     colframe=examplered,
+%     colbacktitle=examplered,
+%     fonttitle=\bfseries,
+%     boxrule=0.5mm,
+%     left=2mm,
+%     right=2mm,
+%     top=4mm,
+%     bottom=4mm,
+%     middle=10mm,
+% }
+\usepackage{float}
+\newfloat{example}{htbp}{loe}
+\floatname{example}{Example}
+\newtcolorbox[auto counter]{examplebox}[2][]{
+    title = {Example~\thetcbcounter: #2},
+    breakable,
+    enhanced,
+    colback=white,
+    colframe=examplered,
+    colbacktitle=examplered,
+    fonttitle=\bfseries,
+    boxrule=0.5mm,
+    left=2mm,
+    right=2mm,
+    top=4mm,
+    bottom=4mm,
+    middle=10mm,
+    #1
+}
+% Tell cleveref how to reference these boxes
+\crefname{tcb@cnt@examplebox}{example}{examples}
+\Crefname{tcb@cnt@examplebox}{Example}{Examples}
+\crefname{example}{example}{examples}
+\Crefname{example}{Example}{Examples}
 
 %25, 74, 129 Blue
 %102, 17, 36 maroon

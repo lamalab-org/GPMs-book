@@ -1,0 +1,204 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{6}{section.1}%
+\contentsline {section}{\numberline {2}The Shape and Structure of Chemical Data}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Shape of Scientific Data}{7}{subsection.2.1}%
+\contentsline {paragraph}{Irreducible \DIFdelbegin {\color {red}\sout@orig {complexity}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Complexity}}\DIFaddend }{7}{section*.3}%
+\contentsline {paragraph}{Emergent \DIFdelbegin {\color {red}\sout@orig {complexity}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Complexity}}\DIFaddend }{8}{section*.5}%
+\contentsline {subsection}{\numberline {2.2}Scale of Chemical Data}{9}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Dataset Creation}{10}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Filtering}{11}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Synthetic Data}{12}{subsubsection.2.3.2}%
+\contentsline {paragraph}{Rule-based \DIFdelbegin {\color {red}\sout@orig {augmentation}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Augmentation}}\DIFaddend }{12}{section*.9}%
+\contentsline {paragraph}{Generative \DIFdelbegin {\color {red}\sout@orig {augmentation}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Augmentation}}\DIFaddend }{13}{section*.10}%
+\contentsline {subsection}{\numberline {2.4}{\color {blue}\uwave {Future Directions}}}{13}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Building Principles of GPMs}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Taxonomy of Foundation Models}{14}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Representations}{14}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Common Representations of Molecules and Materials}{15}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Tokenization}{21}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Embeddings}{22}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}General Training Workflow}{22}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Pre-training: Learning the Shape of Data}{24}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Self-Supervision}{25}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Families of Self-Supervised Learning}{25}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Generative Methods}{26}{subsubsection.3.4.3}%
+\contentsline {paragraph}{Masked Modeling}{26}{section*.13}%
+\contentsline {paragraph}{Next Token Prediction}{27}{section*.14}%
+\contentsline {paragraph}{Denoising}{28}{section*.15}%
+\contentsline {subsubsection}{\numberline {3.4.4}Contrastive Learning}{29}{subsubsection.3.4.4}%
+\contentsline {paragraph}{Instance Discrimination}{29}{section*.16}%
+\contentsline {paragraph}{Clustering-based Contrastive Learning}{31}{section*.17}%
+\contentsline {subsection}{\numberline {3.5}\DIFdelbegin {\color {red}\sout@orig {The Holy Grail of }}\DIFdelend Building Good Internal Representation}{31}{subsection.3.5}%
+\contentsline {paragraph}{Parallels between Generative and Contrastive Objectives}{31}{section*.18}%
+\contentsline {paragraph}{Pre-training beyond \gls {ssl}}{32}{section*.19}%
+\contentsline {subsection}{\numberline {3.6}Fine-Tuning: Learning the Coloring of Data}{32}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Post-Supervised Adaptation: Learning to Align and Shape Behavior}{33}{subsection.3.7}%
+\contentsline {paragraph}{The Challenge of Reward Design}{34}{section*.20}%
+\contentsline {paragraph}{The \gls {llm} as a Policy}{34}{section*.21}%
+\contentsline {paragraph}{Updating the LLM Policy}{36}{section*.22}%
+\contentsline {paragraph}{Inference and Sampling from the Adapted Model}{36}{section*.23}%
+\contentsline {subsection}{\numberline {3.8}Example Architectures}{37}{subsection.3.8}%
+\contentsline {paragraph}{\gls {lstm}}{38}{section*.25}%
+\contentsline {paragraph}{Transformer}{39}{section*.26}%
+\contentsline {paragraph}{Mamba}{40}{section*.27}%
+\contentsline {paragraph}{\gls {gnn}}{40}{section*.28}%
+\contentsline {subsection}{\numberline {3.9}Multimodality}{41}{subsection.3.9}%
+\contentsline {subsubsection}{\numberline {3.9.1}Multimodal Integration in Chemistry}{42}{subsubsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.10}Optimizations}{44}{subsection.3.10}%
+\contentsline {subsubsection}{\numberline {3.10.1}Mixture-of-Experts}{45}{subsubsection.3.10.1}%
+\contentsline {subsubsection}{\numberline {3.10.2}Quantization and Mixed Precision}{46}{subsubsection.3.10.2}%
+\contentsline {subsubsection}{\numberline {3.10.3}Parameter-Efficient Tuning}{47}{subsubsection.3.10.3}%
+\contentsline {subsubsection}{\numberline {3.10.4}Distillation}{47}{subsubsection.3.10.4}%
+\contentsline {subsection}{\numberline {3.11}Model Level Adaptation}{48}{subsection.3.11}%
+\contentsline {paragraph}{Prompting}{48}{section*.30}%
+\contentsline {paragraph}{Fine-tuning}{49}{section*.31}%
+\contentsline {subsection}{\numberline {3.12}System-level Integration: Agents}{49}{subsection.3.12}%
+\contentsline {subsubsection}{\numberline {3.12.1}Core Components of an Agentic System}{51}{subsubsection.3.12.1}%
+\contentsline {paragraph}{Cognitive Engine}{51}{section*.33}%
+\contentsline {paragraph}{Tool Augmentations (Execution)}{51}{section*.34}%
+\contentsline {paragraph}{Memory \& \gls {rag} }{51}{section*.35}%
+\contentsline {subsubsection}{\numberline {3.12.2}Approaches for Building Agentic System}{52}{subsubsection.3.12.2}%
+\contentsline {paragraph}{Specialization and Division of Labor}{53}{section*.36}%
+\contentsline {paragraph}{Refinement of Answers}{54}{section*.37}%
+\contentsline {paragraph}{Context Compression through Parallelism}{54}{section*.38}%
+\contentsline {paragraph}{Swarm Intelligence and Parallel Exploration}{54}{section*.39}%
+\contentsline {subsection}{\numberline {3.13}{\color {blue}\uwave {Models vs.\ Systems}}}{54}{subsection.3.13}%
+\contentsline {section}{\numberline {4}Evaluations}{55}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The Evolution of Model Evaluation}{55}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Design of Evaluations}{55}{subsection.4.2}%
+\contentsline {paragraph}{Desired Properties for Evaluations}{55}{section*.42}%
+\contentsline {paragraph}{Data and Biases}{57}{section*.43}%
+\contentsline {paragraph}{Scoring Mechanism}{57}{figure.caption.45}%
+\contentsline {paragraph}{Statistical significance and uncertainty estimation}{57}{section*.46}%
+\contentsline {paragraph}{Reproducibility and Reporting}{57}{section*.47}%
+\contentsline {subsection}{\numberline {4.3}Evaluation Methodologies}{60}{subsection.4.3}%
+\contentsline {paragraph}{Representational vs.\ Pragmatic Evaluations}{60}{section*.48}%
+\contentsline {paragraph}{Estimator Types}{60}{section*.49}%
+\contentsline {paragraph}{Traditional Benchmarks}{60}{section*.51}%
+\contentsline {paragraph}{Challenges and Competitions}{62}{section*.52}%
+\contentsline {paragraph}{Red Teaming and Capability Discovery}{63}{section*.53}%
+\contentsline {paragraph}{Real-World Deployment Studies}{63}{section*.54}%
+\contentsline {paragraph}{Ablation Studies and Systematic Testing}{64}{section*.55}%
+\contentsline {subsection}{\numberline {4.4}Future Directions}{64}{subsection.4.4}%
+\contentsline {paragraph}{Emerging Evaluations Needs}{64}{section*.56}%
+\contentsline {paragraph}{Standardization Efforts}{65}{section*.57}%
+\contentsline {section}{\numberline {5}Applications}{65}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Automating the Scientific Workflow}{65}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Coding and ML Applications of AI Scientists}{65}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Chemistry and Related Fields}{66}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Are these Systems Capable of Real Autonomous Research?}{66}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}{\color {blue}\uwave {Limitations}}}{66}{subsubsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.5}{\color {blue}\uwave {Open Challenges}}}{67}{subsubsection.5.1.5}%
+\contentsline {subsection}{\numberline {5.2}Existing GPMs for Chemical Science}{67}{subsection.5.2}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Multitask Learning Frameworks}}}{68}{section*.59}%
+\contentsline {paragraph}{{\color {blue}\uwave {Domain Pre-Training and Multitask Learning}}}{68}{section*.61}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Domain-Specific Pre-Training Strategies}}}{69}{section*.62}%
+\contentsline {paragraph}{Reasoning-Based Approaches}{69}{section*.63}%
+\contentsline {subsubsection}{\numberline {5.2.1}{\color {blue}\uwave {Limitations}}}{70}{subsubsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.3}Knowledge Gathering}{70}{subsection.5.3}%
+\contentsline {paragraph}{Semantic Search}{71}{section*.64}%
+\contentsline {subsubsection}{\numberline {5.3.1}Structured Data Extraction}{73}{subsubsection.5.3.1}%
+\contentsline {paragraph}{Data Extraction Using Prompting}{73}{section*.66}%
+\contentsline {paragraph}{Fine-tuning Based Data Extraction}{73}{section*.67}%
+\contentsline {paragraph}{Agents for Data Extraction}{73}{section*.68}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Limitations}}}{74}{section*.69}%
+\contentsline {subsubsection}{\numberline {5.3.2}Question Answering}{74}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}{\color {blue}\uwave {Limitations}}}{74}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}{\color {blue}\uwave {Open Challenges}}}{74}{subsubsection.5.3.4}%
+\contentsline {subsection}{\numberline {5.4}Hypothesis Generation}{75}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Initial Sparks}{75}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Chemistry-Focused Hypotheses}{76}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Are LLMs Actually Capable of Novel Hypothesis Generation?}{77}{subsubsection.5.4.3}%
+\contentsline {subsubsection}{\numberline {5.4.4}{\color {blue}\uwave {Limitations}}}{78}{subsubsection.5.4.4}%
+\contentsline {subsubsection}{\numberline {5.4.5}{\color {blue}\uwave {Open Challenges}}}{78}{subsubsection.5.4.5}%
+\contentsline {subsection}{\numberline {5.5}Experiment Planning}{78}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}Conventional Planning}{79}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}LLMs to Decompose Problems into Plans}{79}{subsubsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.3}Pruning of Search Spaces}{80}{subsubsection.5.5.3}%
+\contentsline {subsubsection}{\numberline {5.5.4}\DIFdelbegin {\color {red}\sout@orig {Evaluation}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Limitations}}\DIFaddend }{82}{subsubsection.5.5.4}%
+\contentsline {subsubsection}{\numberline {5.5.5}{\color {blue}\uwave {Open Challenges}}}{83}{subsubsection.5.5.5}%
+\contentsline {subsection}{\numberline {5.6}Experiment Execution}{83}{subsection.5.6}%
+\contentsline {subsubsection}{\numberline {5.6.1}Compiled Automation}{87}{subsubsection.5.6.1}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Protocol Languages}}}{87}{section*.74}%
+\contentsline {subsubsection}{\numberline {5.6.2}Interpreted Automation}{88}{subsubsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.3}Hybrid Approaches}{90}{subsubsection.5.6.3}%
+\contentsline {subsubsection}{\numberline {5.6.4}{\color {red}\sout@orig {Comparison and Outlook}}}{90}{subsubsection.5.6.4}%
+\contentsline {subsubsection}{\numberline {5.6.4}{\color {blue}\uwave {Limitations}}}{97}{subsubsection.5.6.4}%
+\contentsline {subsubsection}{\numberline {5.6.5}{\color {blue}\uwave {Open Challenges}}}{97}{subsubsection.5.6.5}%
+\contentsline {subsection}{\numberline {5.7}Data Analysis}{98}{subsection.5.7}%
+\contentsline {subsubsection}{\numberline {5.7.1}{\color {red}\sout@orig {Prompting}}}{98}{subsubsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.1}{\color {red}\sout@orig {Agentic Systems}}}{100}{subsubsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.1}\DIFdelbegin {\color {red}\sout@orig {Current }}\DIFdelend Limitations}{100}{subsubsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.2}{\color {blue}\uwave {Open Challenges}}}{101}{subsubsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.8}Reporting}{101}{subsection.5.8}%
+\contentsline {subsubsection}{\numberline {5.8.1}{\color {red}\sout@orig {From Data to Explanation}}}{101}{subsubsection.5.8.1}%
+\contentsline {paragraph}{{\color {blue}\uwave {From Data to Explanation}}}{101}{section*.76}%
+\contentsline {subsubsection}{\numberline {5.8.1}{\color {red}\sout@orig {Writing Assistance}}}{102}{subsubsection.5.8.1}%
+\contentsline {paragraph}{{\color {blue}\uwave {Writing Assistance}}}{102}{section*.77}%
+\contentsline {subsubsection}{\numberline {5.8.1}\DIFdelbegin {\color {red}\sout@orig {Vision}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Limitations}}\DIFaddend }{102}{subsubsection.5.8.1}%
+\contentsline {subsubsection}{\numberline {5.8.2}{\color {blue}\uwave {Open Challenges}}}{102}{subsubsection.5.8.2}%
+\contentsline {section}{\numberline {6}{\color {red}\sout@orig {Accelerating Applications}}}{103}{section.6}%
+\contentsline {section}{\numberline {6}{\color {blue}\uwave {Accelerating Applications}}}{104}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Property Prediction}{104}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Prompting}{104}{subsubsection.6.1.1}%
+\contentsline {paragraph}{{\color {red}\sout@orig {as Feature Extractors}}}{106}{section*.79}%
+\contentsline {subsubsection}{\numberline {6.1.2}Fine-Tuning}{108}{subsubsection.6.1.2}%
+\contentsline {paragraph}{\gls {lift}}{108}{section*.81}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Foundational }}{\color {red}\sout@orig {and }}}{109}{section*.82}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Limitations}}}{109}{section*.83}%
+\contentsline {subsubsection}{\numberline {6.1.3}Agents}{110}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}\DIFdelbegin {\color {red}\sout@orig {Core }}\DIFdelend Limitations}{111}{subsubsection.6.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.5}{\color {blue}\uwave {Open Challenges}}}{112}{subsubsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.2}Molecular and Material Generation}{112}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Generation}{113}{subsubsection.6.2.1}%
+\contentsline {paragraph}{Prompting}{113}{section*.86}%
+\contentsline {paragraph}{Fine-Tuning}{113}{section*.87}%
+\contentsline {paragraph}{Diffusion and Flow Matching}{114}{section*.88}%
+\contentsline {paragraph}{Reinforcement Learning and Preference Optimization}{115}{section*.89}%
+\contentsline {paragraph}{Agents}{116}{section*.90}%
+\contentsline {subsubsection}{\numberline {6.2.2}Validation}{116}{subsubsection.6.2.2}%
+\contentsline {paragraph}{General validation}{116}{section*.91}%
+\contentsline {paragraph}{Conditional Generation Validation}{117}{section*.92}%
+\contentsline {subsubsection}{\numberline {6.2.3}{\color {blue}\uwave {Limitations}}}{117}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}{\color {blue}\uwave {Open Challenges}}}{117}{subsubsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.3}Retrosynthesis}{117}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}{\color {blue}\uwave {Limitations}}}{119}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}{\color {blue}\uwave {Open Challenges}}}{119}{subsubsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.4}\DIFdelbegin {\color {red}\sout@orig {LLMs }}\DIFdelend \DIFaddbegin {\color {blue}\uwave {GPMs }}\DIFaddend as Optimizers}{120}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}LLMs as Surrogate Models}{121}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}LLMs as Next Candidate Generators}{122}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}LLMs as Prior Knowledge Sources}{123}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.4}\DIFdelbegin {\color {red}\sout@orig {How to Face }}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Approaching }}\DIFaddend Optimization Problems\DIFdelbegin {\color {red}\sout@orig {?}}\DIFdelend }{123}{subsubsection.6.4.4}%
+\contentsline {subsubsection}{\numberline {6.4.5}{\color {blue}\uwave {Limitations}}}{124}{subsubsection.6.4.5}%
+\contentsline {subsubsection}{\numberline {6.4.6}{\color {blue}\uwave {Open Challenges}}}{124}{subsubsection.6.4.6}%
+\contentsline {section}{\numberline {7}Implications of GPMs: Education, Safety, and Ethics}{124}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Education}{125}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}{\color {red}\sout@orig {Vision}}}{125}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}{\color {red}\sout@orig {Current Status}}}{126}{subsubsection.7.1.1}%
+\contentsline {paragraph}{{\color {red}\sout@orig {General Systems}}}{126}{section*.94}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Specialized Systems}}}{127}{section*.95}%
+\contentsline {subsubsection}{\numberline {7.1.1}\DIFdelbegin {\color {red}\sout@orig {Outlook and }}\DIFdelend Limitations}{127}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}{\color {blue}\uwave {Open Challenges}}}{128}{subsubsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.2}Safety}{128}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}\DIFdelbegin {\color {red}\sout@orig {Evaluating }}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Chemical-Specific }}\DIFaddend Risk Amplification\DIFdelbegin {\color {red}\sout@orig {in the Chemical Discovery Cycle}}\DIFdelend }{129}{subsubsection.7.2.1}%
+\contentsline {paragraph}{\DIFdelbegin {\color {red}\sout@orig {Dual Use}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Information Access and Synthesis Planning}}\DIFaddend }{129}{section*.97}%
+\contentsline {paragraph}{Hallucinations \DIFaddbegin {\color {blue}\uwave {in Chemical Contexts}}\DIFaddend }{131}{section*.98}%
+\contentsline {paragraph}{\DIFdelbegin {\color {red}\sout@orig {Indirect Cyberattack Risk}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Autonomous Laboratory Risks}}\DIFaddend }{131}{section*.99}%
+\contentsline {subsubsection}{\numberline {7.2.2}Existing Approaches to Safety}{131}{subsubsection.7.2.2}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Challenges in Developing Safeguards}}}{132}{section*.100}%
+\contentsline {subsubsection}{\numberline {7.2.3}Solutions}{132}{subsubsection.7.2.3}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Regulatory Framework for Chemical }}{\color {red}\sout@orig {Models}}}{133}{section*.101}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Existing Institutional Efforts}}}{133}{section*.102}%
+\contentsline {paragraph}{{\color {red}\sout@orig {Future Institutional Oversight and Transparency}}}{133}{section*.103}%
+\contentsline {subsection}{\numberline {7.3}Ethics}{134}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Environmental Impact \DIFdelbegin {\color {red}\sout@orig {and Climate Ethics}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {of GPMs}}\DIFaddend }{135}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Copyright Infringement and Plagiarism Concerns}{135}{subsubsection.7.3.2}%
+\contentsline {subsubsection}{\numberline {7.3.3}\DIFdelbegin {\color {red}\sout@orig {Bias and Discrimination}}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Biases}}\DIFaddend }{135}{subsubsection.7.3.3}%
+\contentsline {paragraph}{Solutions}{136}{section*.104}%
+\contentsline {subsubsection}{\numberline {7.3.4}\DIFdelbegin {\color {red}\sout@orig {Democratization of }}\DIFdelend \DIFaddbegin {\color {blue}\uwave {Access and }}\DIFaddend Power \DIFaddbegin {\color {blue}\uwave {Concentration}}\DIFaddend }{136}{subsubsection.7.3.4}%
+\contentsline {section}{\numberline {8}Outlook and Conclusions}{136}{section.8}%
+\contentsline {paragraph}{{\color {blue}\uwave {Applicability of GPMs}}}{136}{section*.106}%
+\contentsline {paragraph}{{\color {blue}\uwave {Open Questions}}}{137}{section*.107}%
+\contentsline {paragraph}{{\color {blue}\uwave {Looking Ahead}}}{138}{section*.108}%
+\contentsline {section}{Acronyms}{187}{section*.113}%
+\contentsline {section}{Glossary}{192}{section*.116}%

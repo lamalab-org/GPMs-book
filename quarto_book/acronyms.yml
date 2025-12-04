@@ -121,6 +121,9 @@ acronyms:
   - key: gpr
     shortname: GPR
     longname: Gaussian process regression
+  - key: grpo
+    shortname: GRPO
+    longname: group-relative policy optimization
   - key: hnsw
     shortname: HNSW
     longname: hierarchical navigable small world
@@ -187,6 +190,9 @@ acronyms:
   - key: mae
     shortname: MAE
     longname: mean absolute error
+  - key: mcp
+    shortname: MCP
+    longname: model context protocol
   - key: mcq
     shortname: MCQ
     longname: multiple-choice question
@@ -202,6 +208,9 @@ acronyms:
   - key: mlip
     shortname: MLIP
     longname: machine-learning interatomic potential
+  - key: mlm
+    shortname: MLM
+    longname: masked language model
   - key: moe
     shortname: MoE
     longname: mixture of experts
@@ -265,6 +274,9 @@ acronyms:
   - key: qmmm
     shortname: QM/MM
     longname: quantum mechanics/molecular mechanics
+  - key: qspr
+    shortname: QSPR
+    longname: quantitative structure-property relationships
   - key: rag
     shortname: RAG
     longname: retrieval-augmented generation
@@ -295,6 +307,9 @@ acronyms:
   - key: roc_auc
     shortname: ROC-AUC
     longname: receiver operating characteristic --- area under the curve
+  - key: sdl
+    shortname: SDL
+    longname: self-driving lab
   - key: selfies
     shortname: SELFIES
     longname: self-referencing embedded strings

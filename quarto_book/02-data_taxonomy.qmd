@@ -27,21 +27,21 @@ acronyms:
 
 ## Shape of Scientific Data
 
-Data is the essential asset in data-driven techniques. To understand the
-successes and failures of \acr{ml} models, it is instructive to explore how
+To understand the successes and failures of \acr{ml} models, it is instructive to explore how
 the structure of different datasets shapes the learning capabilities of
-different models. One useful lens for doing so is to consider how
-complex a system is (i.e., how many variables are needed to describe it)
-and what fraction of these variables are explicit. One might see the set
-of variables that are required to describe a system as the state space.
-A state space encompasses all possible states of a system, similar to
-concepts in \acr{sm}.
+models. One useful lens for doing so is to consider how complex a system
+is (i.e., how many variables are needed to describe it) and what
+fraction of these variables are explicit. One might see the set of
+variables required to describe a system as the state space. A state
+space encompasses all possible states of a system, similar to concepts
+in \acr{sm}.
+
 However, in contrast to many other problems, we often cannot explicitly
 enumerate all variables and their potential values in relevant chemical
 systems. Commonly, many of the essential factors describing a system are
 implicit ("known unknowns" or "unknown unknowns").
 
-### Irreducible complexity
+### Irreducible Complexity
 
 @fig-shape_of_data illustrates how the state space of
 chemistry tends to grow more implicit as we move from describing single
@@ -52,47 +52,41 @@ atom via the Schrödinger equation. As we scale up to larger systems such
 as macromolecular structures or condensed phases, we have to deal with
 more "known unknowns" and "unknown unknowns".\[@martin2022bridging\] For
 example, it is currently impossible to model a full packed-bed reactor
-at the atomistic scale because the size of the problem scales with the
-number of parameters that can be tuned. Often, it becomes infeasible to
-explicitly label all variables and their values. We can describe such
-complexity as "irreducible"\[@Pietsch_2017\], in contrast to "emergent"
-complexity that emerges from systems that can be described with simple
-equations, such as a double pendulum.
+at the atomistic scale because the problem scales with the number of
+parameters that can be tuned. Often, it becomes infeasible to explicitly
+label all variables and their values. We can describe such complexity as
+"irreducible"\[@Pietsch_2017\], in contrast to "emergent" complexity
+that emerges from systems that can be described with simple equations,
+such as a double pendulum.
 
 ::: {#fig-shape_of_data}
 ![](media/figures/rescaled_figures/chemrev_figure1.png){width=100%}
 
-**State space description for chemistry at different scales**. We illustrate how the number of hidden variables (gray) is growing with scale and complexity. For simple systems we can explicitly write down all variables and their values and perfectly describe the system. For more complex systems—closer to practical applications—we can no longer do that. Many more variables cannot be explicitly enumerated.
+**State space description for chemistry at different
+scales**. We illustrate how the number of hidden variables (gray)
+is growing with scale and complexity. For simple systems, we can
+explicitly write down all variables with their values and perfectly
+describe the system. For more complex systems—closer to practical
+applications—we can no longer do that. Many more variables cannot be
+explicitly enumerated.
 :::
 
-For phenomena characterized by irreducible complexity, success is often
-serendipitous. As pointed out by @rulev2017serendipity, chemical
-literature commonly contains terms such as "to our surprise",
-"remarkable reactivity", or "unusual performance", which may reflect the
-complexity of scientific questions and the diminishing explainability of
-observed results.
-
-#### Emergent complexity
+#### Emergent Complexity
 
 In contrast to irreducible complexity, there is a subset of chemical
 problems for which all relevant parameters can explicitly be listed, but
-the complexity emerges from the intricate, potentially chaotic,
-interactions among them. A well-known example is the
-Belousov-Zhabotinsky reaction, \[@Cassani2021BZ\] which exhibits
-oscillations and pattern formation as a result of a complex chemical
-reaction network. Individual chemical reactions within the network are
-simple, but their interactions create a dynamic, self-organizing system
-with properties not seen in the individual components. An example of how
-fast the parameter space can grow was provided by
-@NEURIPS2024_53704142, who show that a single reaction type and a few
-hundred molecular building blocks can create tens of thousands of
-possible solutions. When scaling up to only five reaction types, the
-exploration of the entire space can become intractable, estimated at
-approximately $10^{22}$ solutions. When optimization objectives are
-involved---finding the shortest synthesis pathway or maximizing the
-yield---such problems are often NP-hard, meaning that no known
-polynomial-time algorithms can guarantee optimal solutions, though
-various heuristic and approximation methods can provide good solutions.
+the complexity emerges from the potentially chaotic interactions among
+them. A well-known example is the Belousov-Zhabotinsky reaction,
+\[@Cassani2021BZ\] which exhibits oscillations and pattern formation as
+a result of a complex chemical reaction network. Individual chemical
+reactions within the network are simple, but their interactions create a
+dynamic, self-organizing system with properties not seen in the
+individual components. An example of how fast such a parameter space can
+grow was provided by @NEURIPS2024_53704142, who show that a single
+reaction type and a few hundred molecular building blocks can create
+tens of thousands of possible solutions. When scaling up to only five
+reaction types, the exploration of the entire space can become
+intractable, estimated at approximately $10^{22}$ solutions.
 
 Knowing the ratio between explicit and implicit parameters helps in
 selecting the appropriate model architecture. If most of the variance is
@@ -108,7 +102,7 @@ relationships are not known. In those cases, flexible
 \acr{gpm}s with soft
 inductive biases---which guide the model toward preferred solutions
 without enforcing strict constraints on the solution
-space\[@wilson2025deep\]---are more suitable. \acr{llm}s fall into this category.
+space\[@wilson2025deep\]---are more suitable. \acr{gpm}s such as \acr{llm}s fall into this category.
 
 ## Scale of Chemical Data
 
@@ -117,21 +111,21 @@ burden of proof through experimental validation.\[@zunger2019beware\]
 However, there is often a mismatch between the realities of a chemistry
 lab and the datasets on which \acr{ml} models for chemistry are trained. Much of
 current data-driven modeling in chemistry focuses on a few large,
-structured, and highly-curated datasets where most of the variance is
-explicit (reducible complexity). Such datasets, `QM9` for
-example,\[@ramakrishnan2014quantum\] often come from quantum-chemical
+structured, and highly curated datasets, where most of the variance is
+explicit (reducible complexity). Such datasets, for example
+`QM9`,\[@ramakrishnan2014quantum\] often come from quantum-chemical
 computations. Experimental chemistry, however, tends to have a
 significantly higher variance and a greater degree of irreducible
 complexity. In addition, since data generation is often expensive,
-datasets are small, and because science is about doing new things for
-the first time, many datasets also contain at least some unique
-variables.
+datasets are small. Because science is about doing new things for the
+first time, many datasets also contain at least some unique variables.
 
 Considering the largest chemistry text dataset,
-`ChemPile`,\[@mirza2025chempile0\] we can look at how the largest
-subsets fare in comparison to the smallest ones (see
-@tbl-small_large_datasets). The largest dataset is
-approximately three million times larger than the smallest one.
+`ChemPile`,\[@mirza2025chempile0\] which was produced by curating
+diverse datasets, we find that the largest dataset is approximately
+three million times larger than the smallest one (see
+[1](#tab:small_large_datasets){reference-type="ref+Label"
+reference="tab:small_large_datasets"}).
 
 ::: {#tbl-small_large_datasets}
 +----------------------------------------------------+-------------------+
@@ -162,43 +156,46 @@ the smallest unit of text that a \acr{ml} model can process), with the small
 datasets significantly increasing the diversity.
 :::
 
-[]{#tbl-small_large_datasets label="tbl-small_large_datasets"}
-
 The prevalence of many small, specialized datasets over large ones is
 commonly referred to as "the long tail problem".\[@heidorn2008shedding\]
 
 ::: {#fig-scale_of_data}
 ![](media/figures/final_figures/2_DATA_cumulative_histogram.png){width=100%}
 
-**Cumulative token count based on the ChemPile tabular datasets [@mirza2025chempile0]**. We compare the approximate token count for three datasets: Llama-3 training dataset,[@grattafiori2024llama] openly available chemistry papers in the ChemPile-Paper dataset, and the ChemPile-LIFT dataset. As can be seen, by aggregating the collection of tabular datasets converted to text format in the ChemPile-LIFT subset, we can achieve the same order of magnitude as the collection of open chemistry papers. However, without smaller datasets, we cannot capture the breadth and complexity of chemistry data, which is essential for training \acr{gpm}. The tokenization method for both ChemPile and Llama-3 is provided in the respective papers.
+**Cumulative token count based on the
+`ChemPile` tabular datasets [@mirza2025chempile0].**
+We compare the approximate token count for three datasets:
+`Llama-3` training dataset,[@grattafiori2024llama] openly
+available chemistry papers in the `ChemPile-Paper` dataset,
+and the `ChemPile-LIFT` dataset. As can be seen, by
+aggregating the collection of tabular datasets converted to text format
+in the `ChemPile-LIFT` subset, we can achieve the same order
+of magnitude as the collection of open chemistry papers. However,
+without smaller datasets, we cannot capture the breadth and complexity
+of chemistry data, which is essential for training \acr{gpm}s.
+The tokenization method for both `ChemPile` and
+`Llama-3` is provided in the respective papers.
 :::
 
 This can be seen in @fig-scale_of_data. We show that while a few datasets are
 large, the majority of the corpus consists of small but collectively
 significant and chemically diverse datasets. The actual tail of chemical
-data is even larger, as
-@fig-scale_of_data only shows the distribution for manually
+data is even larger, as @fig-scale_of_data only shows the distribution for manually
 curated tabular datasets and not all data actually created in the
-chemical sciences. Given that every dataset in the long tail relies on
-unique sources of variance---it is very difficult to leverage this long
-tail with conventional \acr{ml} techniques. However, the promise of
-\acr{gpm}s such as
-\acr{llm}s is that they can
-very flexibly integrate and jointly model the diversity of small
-datasets that exist in the chemical sciences.
+chemical sciences. Given that every dataset in the long tail has its
+unique characteristics---it is difficult to leverage this long tail with
+conventional \acr{ml}
+techniques. However, the promise of \acr{gpm}s is that they can flexibly integrate and
+jointly model the diversity of small datasets that exist in the chemical
+sciences.
 
-## Dataset Creation
+## Dataset Creation {#sec-dataset_creation}
 
-Before a model can be trained or tested, suitable data must first be
-collected. It is important to note that when working with
-\acr{gpm}s, data can---but
-should not---be directly ingested in a raw format and requires some form
-of pre-processing. Training \acr{gpm}s typically requires a large and diverse
-dataset, compiled in a form that can be efficiently ingested by the
-training pipeline.
+Training models requires data. For \acr{gpm}s, the training data must be large and
+diverse. While raw data can be ingested directly, pre-processed data
+often works better.
 
-Strategies for doing so can be broadly categorized into two groups (see
-@fig-data_protocols). One can utilize a "top-down" approach
+Strategies for compiling data fall into two groups (see @fig-data_protocols). One can utilize a "top-down" approach
 where a large and diverse pool of data---e.g., results from web-crawled
 resources such as `CommonCrawl`\[@commoncrawl\]---is filtered using
 custom-built procedures (e.g., using regular expressions or
@@ -215,52 +212,49 @@ very popular in \acr{ml}
 for chemistry.
 
 In practice, a combination of both approaches is often used. In most
-cases, key techniques include filtering and the generation of synthetic
-data.
+cases, key techniques include filtering and generating synthetic data.
 
 ::: {#fig-data_protocols}
 ![](media/figures/rescaled_figures/chemrev_figure3.png){width=100%}
-
-**Dataset creation protocols**. In "top-down" approaches, we curate a large corpus of data, which can be used to train \acr{gpm}s. The "bottom-up" approach starts from a problem definition, and the dataset can be collected via literature mining and experiments. Both approaches can make use of synthetic data to increase the data size and diversity.
+**Dataset creation protocols**. In “top-down”
+approaches, we curate a large corpus of data, which can be used to train
+\acr{gpm}s. The “bottom-up” approach
+starts from a problem definition, and the dataset can be collected via
+literature mining and experiments. Both approaches can use synthetic
+data to increase the data size and diversity.
 :::
 
 ### Filtering
 
-\acr{gpm}s are currently
-trained on very large datasets, enabled by the availability of
-ever-growing computational resources.\[@krizhevsky2012imagenet;
-@kaplan2020scaling; @hooker2020hardware; @dotan2019value0laden\] The
-Internet has been the primary source of dataset construction for
-\acr{gpm}s. While initially
-the focus was on training on maximally large datasets, empirical
-evidence has shown that smaller, higher-quality datasets can lead to
-better results.\[@gunasekar2023textbooks; @marion2023less\] For
-example, @shao2024deepseekmath0 filtered `CommonCrawl` for mathematical
-text using a combination of regular expressions and a custom,
-iteratively trained classification model\[@bojanowski2017enriching\]. An
-alternative approach was pursued by @thrush2024improving who introduced
-a training-free framework. In this method, the pre-training text was
-chosen by measuring the correlation of each web-domain's perplexity (a
-metric that measures how well a language model predicts a sequence of
-text)---as scored by $90$ publicly-available \acr{llm}s---with downstream benchmark accuracy,
-keeping only the high-correlation domains.
+While initially the focus was on training on maximally large
+datasets---enabled by the availability of ever-growing computational
+resources.\[@krizhevsky2012imagenet; @kaplan2020scaling;
+@hooker2020hardware; @dotan2019value0laden\]---empirical evidence has
+shown that smaller, higher-quality datasets can lead to better
+results.\[@gunasekar2023textbooks; @marion2023less\] For example,
+@shao2024deepseekmath0 filtered `CommonCrawl` for mathematical text
+using a combination of regular expressions and a custom, iteratively
+trained classification model. An alternative approach was pursued by
+@thrush2024improving who introduced a training-free framework. In this
+method, the pre-training text was chosen by measuring the correlation of
+each web-domain's perplexity (a metric that measures how well a language
+model predicts a sequence of text)---as scored by $90$
+publicly-available \acr{llm}s---with downstream benchmark accuracy.
 
-In the chemical domain, `ChemPile`\[@mirza2025chempile0\] is the only
-open-source, pre-training scale dataset, that underwent several
-filtering steps. For example, a large subset of the papers in
-`ChemPile-Paper` come from the `Europe PMC` dataset. To filter for
+In the chemical domain, `ChemPile`\[@mirza2025chempile0\] is an
+open-source, pre-training scale dataset that underwent several filtering
+steps. For example, a large subset of the papers in `ChemPile-Paper`
+comes from the `Europe PMC` dataset.\[@EuropePMC\] To filter for
 chemistry papers, a custom classification model was trained from scratch
 using topic-labeled data from the `CAMEL`\[@li2023camel\] dataset. To
-evaluate the accuracy of the model ($\text{F1-score}=0.77$),
-expert-annotated data was used.
+evaluate the accuracy of the model, expert-annotated data was used.
 
 ### Synthetic Data {#sec-syn-data}
 
-Instead of only relying on existing datasets, one can also leverage
-techniques for generating synthetic data. Generation of synthetic data
-is often required to augment scarce real-world data, but can also be
-used to achieve the desired model behavior (e.g., invariance in
-image-based models).
+Instead of only relying on existing datasets, one can also generate
+synthetic data. Generation of synthetic data is often required to
+augment scarce real-world data, but can also be used to achieve the
+desired model behavior (e.g., invariance in image-based models).
 
 These approaches can be grouped into rule-based and generative methods.
 Rule-based methods apply manually defined transformations---such as
@@ -269,7 +263,7 @@ same instance to a model. In contrast, generative augmentation creates
 new data by applying transformations learned through a
 \acr{ml} model.
 
-#### Rule-based augmentation
+#### Rule-based Augmentation
 
 The transformations applied for generating new data in rule-based
 approaches vary depending on the modality (e.g., image, text, or audio).
@@ -277,30 +271,28 @@ The most common application of rule-based techniques is on images, via
 image transformations such as distortion, rotation, blurring, or
 cropping.\[@shorten2019survey\] In chemistry, tools like
 `RanDepict`\[@brinkhaus2022randepict\] have been used to create enriched
-datasets of chemical representations. These tools generate human-like
-drawings of chemical structures that mimic the common illustrations
-found in scientific literature or even in patents (e.g., by applying
-image templates from different publishers, or emulating the style of
-older manuscripts) and further augment them using conventional
-image-augmentation techniques.
+datasets of chemical representations. These tools generate drawings of
+chemical structures that mimic the common illustrations found in
+scientific literature or even in patents (e.g., by applying image
+templates from different publishers, or emulating the style of older
+manuscripts).
 
 Rule-based augmentations can also be applied to text. Early approaches
-involved simple operations like random word swapping, random synonym
+involved operations like random word swapping, random synonym
 replacement, and random deletions or insertions, which are often labeled
 "easy augmentation" methods.\[@shorten2021text; @wei2019eda0\]
 
 In chemistry, text templates have been used.\[@xie2023darwin;
 @mirza2025chempile0; @jablonka2024leveraging;
 @vanherck2025assessment\] Such templates define a sentence structure
-with semantically configurable fields, which are then filled using
-structured tabular data. However, it is still unclear how to best
-construct such templates, as studies have shown that the same data shown
-in different templates can lead to distinct generalization
-behavior.\[@gonzales2024evaluating\]
+with configurable fields, which are then filled using structured tabular
+data. However, it is still unclear how to best construct such templates,
+as studies have shown that the same data shown in different templates
+can lead to distinct generalization behavior.\[@gonzales2024evaluating\]
 
 We can also apply rule-based augmentation for specific molecular
-representations (for more details on representations see
-[@sec-common_representations]). For example, the same molecule
+representations (for more details about representations see @sec-common_representations).
+For example, the same molecule
 can be represented with multiple different, yet valid
 \acr{smiles} strings.
 @bjerrum2017smiles used this technique to augment a predictive model,
@@ -312,32 +304,29 @@ at least a $10\%$ improvement was observed compared to their single
 counterparts. Such techniques can be applied to other molecular
 representations (e.g., \acr{iupac} names or
 \acr{selfies}), but
-historically, \acr{smiles} has been used more often. As a result,
-its augmentations have been studied more
-extensively.\[@kimber2021maxsmi; @born2023chemical;
-@arus2019randomized\]
+historically, \acr{smiles} has been used more
+often.\[@kimber2021maxsmi; @born2023chemical; @arus2019randomized;
+@Tetko_Karpov_VanDeursen_Godin_2020\]
 
 A broad array of augmentation techniques has been applied to spectral
 data---from simple noise addition\[@ke2018convolutional;
 @moreno2022application\] to physics-informed augmentations (e.g.,
 through DFT simulations).\[@oviedo2019fast; @gao2020general\]
 
-#### Generative augmentation
+#### Generative Augmentation
 
-In some cases, however, it is not possible to write down the rules. For
+In some cases, it is not possible to write down augmentation rules. For
 instance, it is not obvious how text can be transformed into different
 styles using rules alone. Recent advances in deep learning have
-facilitated another, more flexible, approach to synthetic data
-generation. \[@maini2024rephrasing\] A simple technique is to apply
-contextual augmentation \[@kobayashi2018contextual\], which implies the
-sampling of synonyms from a probability distribution of a
-\acr{lm}. Another
-technique is "back translation",\[@edunov2018understanding\] a process
-in which text is translated to another language and then back into the
-original language to generate semantically similar variants. While this
-technique is typically used within the same
-language,\[@lu2024mathgenie0\] it can also be extended to multilingual
-setups\[@hong2024cantonmt0\].
+facilitated a more flexible approach to synthetic data generation.
+\[@maini2024rephrasing\] A simple technique is to apply contextual
+augmentation \[@kobayashi2018contextual\], which implies the sampling of
+synonyms from a probability distribution of a \acr{lm}. Another technique is "back
+translation",\[@edunov2018understanding\] a process in which text is
+translated to another language and then back into the original language
+to generate semantically similar variants. While this technique is
+typically used within the same language,\[@lu2024mathgenie0\] it can
+also be extended to multilingual setups\[@hong2024cantonmt0\].
 
 Other recent approaches have harnessed
 auto-formalization\[@NEURIPS2022_d0c6bc64\], a \acr{llm}-powered approach that can turn
@@ -348,10 +337,29 @@ advance mathematical capabilities in \acr{lm}s.\[@xin2024deepseek; @trinh2024sol
 
 A drawback of generatively augmented data is that its validity is
 cumbersome to assess at scale, unless it can be verified automatically
-by a computer program. For example, it was demonstrated that an
+by a computer program. In addition, it was demonstrated that an
 increasing ratio of synthetic data can facilitate model
 collapse.\[@kazdan2024collapse; @shumailov2024ai\]
 
-Having reviewed the data sources and generation methods, we will, in the
-following, discuss architectures and training approaches for
-\acr{gpm}s.
+## Future Directions
+
+A primary obstacle in the development of \acr{gpm}s for chemistry is the immense scale of data
+required for pre-training, which reaches into the trillions of tokens.
+This demand is illustrated by models like `Llama 3`, trained on 15
+trillion tokens. Yet the largest open-source chemistry corpus available
+contains only approximately 75 billion tokens.\[@mirza2025chempile0\]
+Beyond its insufficient volume, this dataset is constrained by
+restrictive licenses and is not ideally suited for the primary
+pre-training phase. Furthermore, existing data resources lack
+documentation of negative or failed experiments and reasoning data
+related to routine laboratory tasks. The absence of such data impedes
+the development of robust chemistry problem-solving and planning
+capabilities in \acr{gpm}s.
+This situation stands in contrast to fields like mathematics, where
+initiatives such as DeepSeek have successfully leveraged large,
+domain-specific datasets---for instance, 120 billion math tokens---for
+continual pre-training \[@shao2024deepseekmath0\].
+
+Despite the apparent difficulty of amassing diverse data on this scale,
+we contend that this challenge is accessible through a coordinated
+community effort.

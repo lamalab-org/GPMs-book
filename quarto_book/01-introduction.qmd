@@ -47,7 +47,7 @@ demanding data sampled at resolutions tailored to each time regime.
 Spatially, systems range from the atomic to the industrial scale,
 requiring models that bridge molecular behavior to macroscopic
 properties. Representationally, even a single observation (e.g., a
-\^13C-NMR spectrum) can be encoded in chemically equivalent formats: a
+^13^C-NMR spectrum) can be encoded in chemically equivalent formats: a
 string \[@alberts2024unraveling\], vector \[@mirza2024elucidating\], or
 image\[@alberts2024unraveling\]. However, such representations are not
 computationally equivalent and have been empirically shown to produce
@@ -154,5 +154,5 @@ to foster creative exploration of models that are better aligned with
 the data characteristics and scientific goals of chemistry. We hope to
 contribute to this by addressing chemists and computer scientists, by
 providing technical background, a consistent terminology, and explaining
-key technical terminology in a [glossary](#glossary) at the end of the
+key technical terminology in a [glossary](glossary.qmd) at the end of the
 manuscript.

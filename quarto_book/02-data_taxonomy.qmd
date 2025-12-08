@@ -123,9 +123,7 @@ first time, many datasets also contain at least some unique variables.
 Considering the largest chemistry text dataset,
 `ChemPile`,\[@mirza2025chempile0\] which was produced by curating
 diverse datasets, we find that the largest dataset is approximately
-three million times larger than the smallest one (see
-[1](#tab:small_large_datasets){reference-type="ref+Label"
-reference="tab:small_large_datasets"}).
+three million times larger than the smallest one (see @tbl-small_large_datasets).
 
 ::: {#tbl-small_large_datasets}
 +----------------------------------------------------+-------------------+
@@ -216,6 +214,7 @@ cases, key techniques include filtering and generating synthetic data.
 
 ::: {#fig-data_protocols}
 ![](media/figures/rescaled_figures/chemrev_figure3.png){width=100%}
+
 **Dataset creation protocols**. In “top-down”
 approaches, we curate a large corpus of data, which can be used to train
 \acr{gpm}s. The “bottom-up” approach

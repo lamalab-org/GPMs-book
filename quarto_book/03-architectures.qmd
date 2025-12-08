@@ -42,7 +42,7 @@ values. At its core, all information within a computer is represented as
 bits (zeros and ones). Bits are grouped into bytes (8 bits), and meaning
 is assigned to these sequences through encoding schemes like `ASCII` or
 `UTF-8`. Everything---text, a pixel in an image, or even a chemical
-structure---can be stored as sequences of bytes. For example, "H2O" can
+structure---can be stored as sequences of bytes. For example, "H~2~O" can
 be translated into the byte sequence, "H", "2", "O". However, using raw
 byte sequences for \acr{ml} presents significant computational
 inefficiency as representing chemical entities requires long byte
@@ -55,9 +55,9 @@ they may struggle to perform well on unseen inputs.
 
 A more efficient mapping that is built on top of the underlying byte
 representation is \acr{ohe}. Instead of working with variable-length
-byte sequences, we create a fixed vocabulary ({H2O, CO2, HCl}) where
+byte sequences, we create a fixed vocabulary ({H~2~O, CO~2~, HCl}) where
 each discrete category (in this case, molecule) gets a unique vector:
-H2O becomes \[1, 0, 0\], CO2 becomes \[0, 1, 0\], and so on. This
+H~2~O becomes \[1, 0, 0\], CO~2~ becomes \[0, 1, 0\], and so on. This
 provides unambiguous, computationally manageable representations. As the
 number of categories grows, one-hot vectors become increasingly long and
 sparse, making them computationally inefficient---particularly for large
@@ -101,19 +101,19 @@ computational efficiency (see @tbl-representation_table).
   \acr{smiles} \[@weininger1988smiles\]                                Stoichiometry, bonding                                                     Massive public corpora and tooling support, however, there are several valid strings per molecule, and it does not contain spatial information.                                                                                                               `CC(=O)OC1=CC=CC=C1C(=O)O`, `O=C(O)c1ccccc1OC(C)=O`, *etc.*
   \acr{selfies} \[@krenn2020self\]; \[@cheng2023group\]                Stoichiometry, bonding                                                     100% syntactic and semantic validity by construction, including meaningful grouping.                                                                                                                                                                          `[C][C][=Branch1][C][=O][O][C][=C][C][=C][C][=C][Ring1][=Branch1][C][=Branch1][C][=O][O]`
   \acr{inchi}                                                          Stoichiometry, bonding                                                     Canonical one-to-one identifier; encodes stereochemistry layers.                                                                                                                                                                                              `InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)`
-  Graphs                                                               Stoichiometry, bonding, geometry                                           Strong inductive bias that works with gnns. Symmetry-equivariant variants available. Long-range interactions are implicit.                                                                                                                                    ![](media/figures/Aspirin.png)
+  Graphs                                                               Stoichiometry, bonding, geometry                                           Strong inductive bias that works with \acr{gnn}s. Symmetry-equivariant variants available. Long-range interactions are implicit.                                                                                                                                    ![](media/figures/Aspirin.png)
   xyz representation                                                   Stoichiometry, geometry                                                    Exact spatial detail. It is high dimensional, and orientation alignment is needed.                                                                                                                                                                            1.2333 0.5540 0.7792 O -0.6952 -2.7148 -0.7502 O 0.7958 -2.1843 0.8685 O 1.7813 0.8105 -1.4821 O -0.0857 0.6088 0.4403 C ...
   Multimodal                                                           Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining   Combines complementary signals; boosts robustness and coverage. It is hard to implement, the complexity scales with the amount of representations, some modalities are data-scarce, and the information encoded totally depends on the modalities included.   ![](media/figures/free_spectrum.png)
   \acr{cif} \[@hall1991crystallographic\]                              Stoichiometry, bonding, geometry, periodicity                              Standardized and widely supported, however, it carries heterogeneous keyword sets and parser overhead                                                                                                                                                         `data_Si _symmetry_space_group_name_H-M ’P 1’ _cell_length_a 3.85 …_cell_angle_alpha 60.0 …_symmetry_Int_Tables_number 1 _chemical_formula_structural Si _chemical_formula_sum Si2 _cell_volume 40.33 _cell_formula_units_Z 2 loop_ _symmetry_equiv_pos_site_id _symmetry_equiv_pos_as_xyz 1 ’x, y, z’ loop_ _atom_type_symbol _atom_type_oxidation_number Si0+ 0.0loop_ _atom_site_type_symbol _atom_site_label _atom_site_symmetry_multiplicity _atom_site_fract_x …_atom_site_occupancy Si0+ Si0 1 0.75 0.75 0.75 1.0 Si0+ Si1 1 0.0 0.0 0.0 1.0`
   Condensed \acr{cif} \[@gruver2024finetuned; @antunes2024crystal\]    Stoichiometry, geometry, symmetry, periodicity                             Good for crystal generation tasks. It omits occupancies and defects, custom tooling is needed, and only works for crystals                                                                                                                                    `3.8 3.8 3.8 59 59 59 Si0+ 0.75 0.75 0.75 Si0+ 0.00 0.00 0.00`
   \acr{slices} \[@Xiao_2023\]                                          Stoichiometry, bonding, periodicity                                        Invertible, symmetry-invariant and compact for general crystals. However, it carries ambiguity for disordered sites                                                                                                                                           `Si Si 0 1 + + + 0 1 + + o 0 1 + o + 0 1 o + +`
   \acr{localenv} \[@alampara2024mattext\]                              Stoichiometry, bonding, symmetry, coarse graining                          Treats each coordination polyhedron as a "molecule", it is transferable and compact; but it ignores long-range order and its reconstruction requires post-processing                                                                                          `R-3m Si (2c) [Si][Si]([Si])[Si]`
-  Natural-language description \[@ganose2019robocrystallographer\]     Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining   It is human-readable and more intuitive tokenizable by llms. However, trying to encode all the information can lead to verbose, ambiguous descriptions.                                                                                                       "Silicon crystallizes in the diamond-cubic structure, a lattice you can picture as two face-centred-cubic frameworks gently interpenetrating..."
+  Natural-language description \[@ganose2019robocrystallographer\]     Stoichiometry, bonding, geometry, symmetry, periodicity, coarse graining   It is human-readable and tokenizable in a meaningful way by pretrained \acr{llm}s. However, trying to encode all the information can lead to verbose, ambiguous descriptions.                                                                                       "Silicon crystallizes in the diamond-cubic structure, a lattice you can picture as two face-centred-cubic frameworks gently interpenetrating..."
 
   **Comparison of common molecular representations**. For the encoded
   information contained by each representation, we followed the criteria
   used by \[@alampara2024mattext\]. The examples shown are *aspirin* for
-  elemental composition, \acr{iupac} name, \acr{smiles}, \acr{selfies}, , graphs, 3D coordinates; and
+  elemental composition, \acr{iupac} name, \acr{smiles}, \acr{selfies}, \acr{inchi}, graphs, 3D coordinates; and
   *silicon* for \acr{cif}, condensed \acr{cif}, \acr{slices}, \acr{localenv}, and natural-language description. Two
   non-canonical \acr{smiles} are shown to illustrate ambiguity. The
   examples for 3D coordinates, \acr{cif}, and natural-language description are
@@ -206,7 +206,7 @@ also by its experimental or simulated spectra (e.g.,
 \acr{ir}), or even a
 microscopy image. Each of these modalities provides a complementary
 layer of information. A more detailed section on using multiple
-representations is presented in sec-multimodal_chemistry.
+representations is presented in @sec-multimodal_chem.
 
 ### Tokenization
 
@@ -244,9 +244,7 @@ Tokenization strategies for caffeine SMILES (`CN1C=NC2=C1C(=O)N(C(=O)N2C)C`):
 
 - Character-level: [`C`, `N`, `1`, `C`, `=`, `N`, `C`, `2`, `=`, `C`,
   `1`, `C`, `(`, `=`, `O`, `)`, `N`, `(`, ...]
-
 - Chemical fragments: [`CN1C=NC2=C1`, `C(=O)`, `N(`, `C(=O)`, ...]
-
 
 The choice affects what the model learns. Character-level requires
 learning chemical rules from scratch, while fragment-level embeds
@@ -385,7 +383,7 @@ randomly pick from this manifold, you get noise or non-physical
 molecules) to a structured manifold, where if you sample from this
 distribution (the black Swiss roll) you get a valid molecule. For
 example, the model might learn commonly occurring structures, scientific
-notations, and scientific terms (see example @nte-self_supervision). Furthermore, it might construct
+notations, and scientific terms (see @nte-self_supervision). Furthermore, it might construct
 hierarchical relationships between these concepts, such as those between
 chemical compounds, elements, and their properties. This distributional
 learning empowers the model to make predictions about new examples by
@@ -399,11 +397,8 @@ activity:
 
 - The model learns that structures like `CC(=O)OC1=CC=CC=C1C(=O)O`
   (aspirin) are chemically valid
-
 - It learns that rings like benzene `C1=CC=CC=C1` appear frequently
-
 - It discovers that certain functional groups often co-occur
-
 - It learns some statistical patterns (carbon forms 4 bonds, oxygen
   forms 2)
 
@@ -444,6 +439,7 @@ into two main families: generative and contrastive (see @fig-types_ssl).
 
 ::: {#fig-types_ssl}
 ![](media/figures/rescaled_figures/chemrev_figure5.png){width="100%"}
+
 **Main families in \acr{ssl}s**. The figure
 illustrates the two primary \acr{ssl} approaches, each using
 different strategies to generate pseudo-labels from the data itself.
@@ -455,7 +451,7 @@ analogous to masked modeling (more details in @sec-masked_modeling); (2)
 *Learning from context*, which is the basis for next token
 prediction (more details in @sec-next_token_prediction); and (3)
 *Learning to denoise*, where the model reconstructs a clean input
-from a corrupted version. (see @sec-denoising) **Contrastive Learning
+from a corrupted version (see @sec-denoising). **Contrastive Learning
 (Bottom Panel):** This family learns by comparing samples. The
 model is trained to pull representations of similar samples together
 while pushing dissimilar ones apart. Examples include: (1) *Aligning
@@ -528,8 +524,7 @@ contextual information provided by preceding tokens. Because text
 unfolds naturally in a sequence, it offers the reference information the
 model needs to learn. This approach has been applied to chemical and
 material representations by treating molecular string representations
-(\acr[smiless]{smiles},
-\acr[selfiess]{selfies}, etc.)
+(\acr{smiles}s, \acr{selfies}s, etc.)
 or material representations as sequences \[@adilov2021generative;
 @wang2023cmolgpt; @schwaller2019molecular; @alampara2024mattext\].
 During training, the model optimization procedure constantly adjusts the
@@ -662,24 +657,21 @@ molecule.
 ::: {#nte-contrastive .callout-note title="Learning chemical similarity through contrast"}
 Consider these three molecules:
 
-Molecule A: Aspirin `(CC(=O)OC1=CC=CC=C1C(=O)O)`
+- Molecule A: Aspirin `(CC(=O)OC1=CC=CC=C1C(=O)O)`
+- Molecule B: Salicylic acid `(OC1=CC=CC=C1C(=O)O)`
+- Molecule C: Glucose `(OC[C@H]1OC(O)[C@H](O)[C@@H](O)[C@@H]1O)`\
 
-Molecule B: Salicylic acid `(OC1=CC=CC=C1C(=O)O)`
-
-Molecule C: Glucose `(OC[C@H]1OC(O)[C@H](O)[C@@H](O)[C@@H]1O)`\
 Contrastive learning might:
 
 - Pull A and B together (both contain benzene ring + carboxylic acid)
-
 - Push A and C apart (completely different structures and properties)
-
 - Learn that aromatic compounds cluster separately from sugars
 
 The model learns that structural similarity often correlates with
 chemical properties.
 :::
 
-#### Clustering-based Contrastive Learning {#sec:clustering_cl}
+#### Clustering-based Contrastive Learning {#sec-clustering_cl}
 
 Clustering approaches leverage the idea that similarity often translates
 to closeness in the feature space. Methods like `DeepCluster`
@@ -721,14 +713,10 @@ non-canonical string representations.
 While it might seem that generative and contrastive
 \acr{ssl}s methods optimize
 different things, their underlying goals can be equivalent. A generative
-masked language model learns the conditional probability (see
-[\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
-reference="eq:infonce"}) , aiming to assign a high probability to the
+masked language model learns the conditional probability (see @nte-infonce), aiming to assign a high probability to the
 correct masked token by effectively discriminating it from other
 vocabulary tokens. The `InfoNCE` loss in contrastive learning can be
-viewed as a log-loss for a $(K+1)$-way classification task (see
-[\[eq:infonce\]](#eq:infonce){reference-type="ref+Label"
-reference="eq:infonce"}). Here, the model learns to identify the
+viewed as a log-loss for a $(K+1)$-way classification task (see @nte-infonce). Here, the model learns to identify the
 positive pair $f(x_i^+)$ as matching $f(x_i)$ from a set including
 $f(x_i^+)$ and $K$ negative features $f(x_j^-)$. Both approaches
 effectively learn to select the "correct" item (a token or a positive
@@ -891,7 +879,7 @@ that could be the number of steps, predicted yield, reagent cost, etc.
 This score can directly come from the feedback of real chemists
 (\acr{rlhf}), or from a
 small model trained to predict human preference scores or pre-defined
-criteria (see another example @nte-rl_objective
+criteria (see another example @nte-rl
 of optimizing solar cells with
 \acr{rl} ).
 
@@ -916,19 +904,19 @@ explicitly taught these strategies. \[@xu2025towards\]
 
 ::: {#nte-rl .callout-note title="Optimizing solar cells"}
 **Goal:** Design perovskites that are both stable (high thermal/phase
-stability) and high-performing (optimal bandgap for light absorption).
+stability) and high-performing (optimal bandgap for light absorption).\
 
 **State:** Current partial perovskite formula (e.g., ABX3 lattice with
 partial cation/anion substitutions).\
+
 **Action:** Substitute the next ion or additive (e.g., replace A-site
 with Cs+ or add Cl- dopant).\
+
 **Reward:**
 
 - `+1` for stability (e.g., based on Goldschmidt tolerance factor).
-
 - `+1` for bandgap tuning (`1.5 to 1.8 eV` ideal for single-junction
   cells).
-
 - `-1` for defect proneness (e.g., halide migration).
 
 **Episode Example:**
@@ -936,11 +924,9 @@ with Cs+ or add Cl- dopant).\
 - Start with PbI2 scaffold (B and X sites) $\rightarrow$ add MA+
   (methylammonium) at A-site $\rightarrow$ Reward: `+0.5` (good initial
   bandgap but low stability due to organic volatility).
-
 - Co-substitute with Cs+ and FA+ (formamidinium) $\rightarrow$ Reward:
   `+1.7` (improved tolerance factor \>`0.9`, stable mixed-cation
   perovskite with approx.   `1.6 eV` bandgap).
-
 - Over-dope with excess Br- $\rightarrow$ Reward: `-0.7` (widens bandgap
   too much \>`1.8 eV`, reducing PCE; also increases defects).
 
@@ -1002,15 +988,15 @@ This diagram illustrates four distinct neural network architectures
 (\acr{lstm}, Transformer, Mamba, and
 \acr{gnn}), highlighting their
 unique approaches to input representation, information processing, and
-output pooling. \acr{lstm}s sequentially process
+output pooling. **\acr{lstm}s** sequentially process
 tokens, accumulating information in a final hidden state with an
-inductive bias towards sequential arrangement. Transformers, conversely,
+inductive bias towards sequential arrangement. **Transformers**, conversely,
 use multi-head attention and positional encodings to capture global
 interactions simultaneously, offering minimal inductive bias but
-enabling rich contextual understanding. Mamba combines local
+enabling rich contextual understanding. **Mamba** combines local
 convolutional processing with selective state space modeling to
 efficiently focus on chemically relevant parts, also typically using a
-final hidden state. \acr{gnn}s leverage the inherent graph
+final hidden state. **\acr{gnn}s** leverage the inherent graph
 structure of molecules, where atoms are nodes and bonds are edges, to
 model local chemical environments through message passing, followed by
 graph-level pooling to create a unified representation. Each approach
@@ -1242,21 +1228,18 @@ structural and textual knowledge.
 
 A chemist finds an unknown white powder in a food sample that is highly soluble in water
 and tastes sweet. Chemist wants to identify it:\
+
 **Input Modalities:**
 
 - **$^{13}$C-NMR spectrum:** Shows peaks in the 60--100 ppm region,
   characteristic of carbons bonded to oxygen.
-
 - **$^{1}$H-NMR spectrum:** Multiple peaks in the 3--5 ppm region with
   complex splitting patterns, indicating protons on oxygen-bearing
   carbons.
-
 - **IR spectrum:** Broad, intense peak at 3000--3500 cm$^{-1}$ (O-H
   stretching), peaks around 2900 cm$^{-1}$ (C-H stretching), strong
   peaks at 1000--1150 cm$^{-1}$ (C-O stretching, ether and alcohol).
-
 - **Mass spectrometry:** Molecular ion peak at `m/z = 180`.
-
 - **Text description:** "White crystalline solid, sweet taste, highly
   soluble in water, found in food sample".
 
@@ -1264,12 +1247,10 @@ and tastes sweet. Chemist wants to identify it:\
 
 - **MS + IR $\rightarrow$** Molecular formula C6H12O6 with multiple
   hydroxyl groups (polyol).
-
 - **NMR $\rightarrow$** Chemical shifts and splitting patterns
   consistent with a cyclic structure containing multiple oxygen-bearing
   carbons; presence of anomeric signals suggests equilibrium between
   ring forms.
-
 - **Text + Chemical Knowledge $\rightarrow$** Sweet taste and high water
   solubility point to a simple sugar (monosaccharide).
 
@@ -1672,6 +1653,7 @@ draw upon to achieve complex objectives.
 
 ::: {#fig-agent-loop}
 ![](media/figures/rescaled_figures/chemrev_figure7.png){width="100%"}
+
 **The execution-cognition-perception capabilities of
 an \acr{llm}-agent:** This
 figure illustrates how agents orchestrate complex problems. At the core,
@@ -1792,45 +1774,32 @@ data."
 
 1.  **THINK:** "Unknown white solid. Need to analyze all spectra
     systematically."
-
 2.  **ACT:** Analyze `IR` spectrum tool $\rightarrow$ Output peak data
     (3000  cm--3500  cm broad, 1680  cm sharp, 1600  cm, 1500  cm).
-
 3.  **ACT:** Analyze `MS` tool $\rightarrow$ Output peak data
     (`Top 3 peaks (135.0, 26.48)`, `(106.9, 0.43)`, `(120.4, 0.31)`).
-
 4.  **OBSERVE:** "Broad `O-H` stretch suggests carboxylic acid. Sharp
     `C=O` at `1680` indicates aromatic carboxylic acid. Aromatic `C=C`
     stretches confirm benzene ring, and `MS` tool suggests molecular
     formula C8H8O2."
-
 5.  **THINK:** "Aromatic carboxylic acid with C8H8O2\... probably
     substituted benzoic acid. Need to determine substitution pattern."
-
 6.  **ACT:** Run \^1H `NMR` integration tool $\rightarrow$ Input
     chemical shifts (`7.8 ppm` doublet, `7.3 ppm` doublet, `2.4 ppm`
     singlet, `12.1 ppm` broad).
-
 7.  **OBSERVE:** "Two aromatic doublets suggest para-disubstitution.
     Singlet at `2.4 ppm` integrates for `3H` --- likely CH3. Broad peak
     at `12.1 ppm` confirms COOH."
-
 8.  **THINK:** "Para-disubstituted benzene with CH3 and COOH groups.
     Could be *p*-toluic acid."
-
 9.  **ACT:** Search chemical database for "`para-methylbenzoic acid`".
-
 10. **OBSERVE:** "`4-methylbenzoic acid` (*p*-toluic acid) matches:
     C8H8O2, `mp` 180 ° C."
-
 11. **ACT:** Run structure validation tool $\rightarrow$ Compare
     predicted vs. observed spectra.
-
 12. **OBSERVE:** "Predicted \^1H `NMR`: $\delta$ `7.9 (d, 2H)`,
     `7.2 (d, 2H)`, `2.4 (s, 3H)`, `12.0 (br, 1H)`. Perfect match!"
-
 13. **ACT:** Cross-reference `MS` fragmentation pattern tool.
-
 14. **OBSERVE:** "Base peak at `m/z 91` (tropylium ion, loss of COOH),
     molecular ion at `136`. Consistent with *p*-toluic acid
     fragmentation."

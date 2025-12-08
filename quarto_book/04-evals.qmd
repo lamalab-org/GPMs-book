@@ -68,8 +68,8 @@ of some benchmarks that have been used in the chemical sciences.
 ::: {#tbl-chemistry_benchmarks}
   **Benchmark name**                       **Overall topic**                                                                                                                                 **Curation method**   **Approx. count**
   ---------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------- --------------------- -------------------
-  CAMEL - Chemistry \[@li2023camel\]       General Chemistry \acr{mcq}                                                                        A, L                  20 K
-  ChemBench \[@mirza2024large\]            General Chemistry \acr{mcq}, Reasoning                                                             M                     2.7 K
+  CAMEL - Chemistry \[@li2023camel\]       General Chemistry \acr{mcq}                                                                                                                       A, L                  20 K
+  ChemBench \[@mirza2024large\]            General Chemistry \acr{mcq}, Reasoning                                                                                                            M                     2.7 K
   ChemIQ \[@runcie2025assessing\]          Molecule Naming, Reasoning, Reaction Generation, Spectrum Interpretation                                                                          A                     796
   ChemLLM \[@zhang2024chemllm\]            Molecule Naming, Property Prediction, Reaction Prediction, Reaction Conditions Prediction, Molecule & Reaction Generation, Molecule Description   A, L                  4.1 K
   ChemLLMBench \[@guo2023large\]           Molecule Naming, Property Prediction, Reaction Prediction, Reaction Conditions Prediction, Molecule & Reaction Generation                         A, L                  800
@@ -228,13 +228,10 @@ building benchmarks.
 
 - Ensure full reproducibility: document all steps from data preparation
   to scoring.
-
 - Fix and report: model checkpoint or \acr{api} version, date and time, inference
   settings (e.g., temperature, context length).
-
 - Store all evaluation assets (prompts, datasets, scripts) under version
   control for traceability.
-
 - Clearly define: evaluation goal, task scope, data origin, and
   underlying assumptions.
 
@@ -243,30 +240,23 @@ building benchmarks.
 - Check for potential training data leakage by testing partial
   completions or measuring accuracy drop under paraphrasing
   \[@duarte2024detecting\].
-
 - Use clear-cut factual questions phrased in multiple ways to test
   consistency.
-
 - Include prompts containing obvious errors (e.g., "benzene is not
   aromatic") to probe factual robustness.
-
 - Perform repeated runs with different random seeds or sampling
   temperatures to estimate uncertainty.
 
 **Bias and Construct Validity**
 
 - Verify that tasks measure intended skills (reasoning vs. recall).
-
 - Balance question difficulty; include control and counterfactual items.
-
 - Check dataset composition for chemical space or label bias.
 
 **Publication and Communication**
 
 - Double-check factual claims against trusted references.
-
 - Report both metrics and qualitative error patterns.
-
 - Use structured evaluation cards \[@alampara2025lessons\] for
   transparency.
 :::

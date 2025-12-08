@@ -45,7 +45,7 @@ scientific implementations remain less explored.
 ### Coding and ML Applications of AI Scientists
 
 Frameworks such as `Co-Scientist` \[@gottweis2025towards\], and
-`\acr{ai}-Scientist`
+`AI-Scientist`
 \[@yamada2025ai\] aim to automate the entire \acr{ml} research pipeline. They typically use
 multi-agent architectures (described in detail in @sec-multi-agent) where specialized agents manage distinct
 phases of the scientific method \[@schmidgall2025agentrxiv\]. Critical
@@ -152,9 +152,7 @@ sections.
 
 *True acceleration of chemical research and the ultimate goal of fully
 autonomous science require \acr{ai} systems that can operate across the
-entire scientific workflow. The stages outlined in
-[1](#fig:applications){reference-type="ref+Label"
-reference="fig:applications"}---from hypothesis generation to
+entire scientific workflow. The stages outlined in @fig-applications---from hypothesis generation to
 experimental execution and final reporting---represent the core of this
 process. While \acr{gpm}s,
 especially \acr{llm}s, show
@@ -328,9 +326,9 @@ sources. Finally, the question-answering tool (an \acr{llm})
 collects all the information found by other tools and generates a final
 response to a user’s query. This part of the figure is inspired by the
 `PaperQA2` agent.[@skarlinski2024language]
-**B.** Two examples of applications are discussed in this
-section. **C.** worked example using the
-`FutureHouse`’s platform (the Crow agent). “used in 1.1”
+**B. Two examples of applications are discussed in this
+section.** **C. Worked example using the
+`FutureHouse`’s platform (the Crow agent).** “Used in 1.1”
 indicates that this reference has been used in the final response of the
 model[@skarlinski2025futurehouse].
 :::
@@ -612,7 +610,7 @@ problems \[@Carlson2006millennium\]).
 
 Finally, ethical considerations become critical as hypothesis generation
 grows more data-driven and automated. Adherence to legal and ethical
-standards must guide these efforts (see @sec-safety \[@danish_gov2024hypothesis\].
+standards must guide these efforts (see @sec-safety)\[@danish_gov2024hypothesis\].
 
 ### Limitations
 
@@ -622,7 +620,7 @@ hypotheses, tending to rearrange training data and retrieved content
 rather than propose genuinely new mechanisms. As a result, the
 evaluation of such outputs is also fragile, because using proxy metrics
 for "novelty" or "impact" that poorly track real scientific value can be
-deceiving. Finally, the problem's open-ended nature @sec-data-section makes systematic benchmarking ill-posed.
+deceiving. Finally, the problem's open-ended nature (@sec-evals) makes systematic benchmarking ill-posed.
 
 ### Open Challenges
 
@@ -661,7 +659,7 @@ Early chemical planning systems, such as \acr{lhasa} \[@corey1972computer\] and
 templates. In particular, `Chematica` used heuristic-guided graph search
 with rule-based transforms and scoring functions to prune and prioritize
 routes. Modern systems, like ASKCOS\[@tu2025askcos\], explicitly use
-search algorithms such as \acr{bfs}, \acr{mcts}\[@segler2017towards\] to explore the
+search algorithms such as \acr{bfs} or \acr{mcts}\[@segler2017towards\] to explore the
 combinatorially large space. But these planning search algorithms remain
 inefficient for long-horizon or complex planning tasks.
 \[@liu2024entropy; @zhao2024efficient\]
@@ -682,7 +680,7 @@ quickly narrow down options. In contrast, system-2 thinking represents a
 slower, more analytical process, in which \acr{llm}s solve complex tasks by explicitly
 generating step-by-step reasoning. \[@ji2025test\]
 
-@fig-planning_example shows how a \acr{llm} applies this deliberate, system-2-style
+@fig-planning_example shows how an \acr{llm} applies this deliberate, system-2-style
 reasoning to decompose a chemical problem into a sequence of planned
 steps. A variety of strategies have been proposed to improve the
 reasoning capabilities of \acr{llm}s during inference. Methods such as
@@ -712,11 +710,11 @@ generalized across system sizes. \[@arlt2024meta0designing\]
 ![](media/figures/rescaled_figures/Chemrev_planning_example.png){width="100%"}
 
 **An example of using \acr{llm} for chemical planning to
-decompose problem**. \acr{llm} decomposes a chemical
+decompose problem**. The \acr{llm} decomposes a chemical
 problem into sequential steps with detailed procedures. We manually
 evaluate the plan step by step, and highlight the problematic steps in
 text boxes, each linked to the corresponding reason. Plan was generated
-by ChatGPT-5.**
+by ChatGPT-5.
 :::
 
 ### Pruning of Search Spaces
@@ -740,8 +738,7 @@ reasoning steps to produce more coherent plans. At a higher level of
 oversight, human-in-the-loop frameworks such as
 `ORGANA`\[@darvish2025organa\] incorporate expert chemist feedback to
 refine goals, resolve ambiguities, and eliminate invalid directions.
-Example [\[example:chemcrow_organa\]](#example:chemcrow_organa){reference-type="ref"
-reference="example:chemcrow_organa"} presents examples illustrating how
+Example at @nte-chemcrow_organa presents examples illustrating how
 planning extends to real laboratory practice.
 
 ::: {#fig-planning}
@@ -885,10 +882,10 @@ While `Python` scripts serve as the *de facto* protocol language,
 specialized \acr{dsl}s
 provide more structured representations.\[@wang2022ulsa;
 @ananthanarayanan2010biocoder; @autoprotocol2023; @Park2023CMDL\] For
-example, \acr{chidl}\[@mehr2020universal; @xdl2023spec\]
+example, χDL\[@mehr2020universal; @xdl2023spec\]
 describes protocols using abstract commands (`Add`, `Stir`, `Filter`)
 and chemical objects (`Reagents`, `Vessels`). The `Chempiler` translates
-\acr{chidl} scripts
+χDL scripts
 into platform-specific instructions based on the physical laboratory
 configuration.
 
@@ -903,7 +900,7 @@ chemistry papers into executable code. The first agent extracts all
 synthesis-relevant text, including supporting information; a procedure
 agent then sanitizes the data and tries to fill the gaps from chemical
 databases (using \acr{rag}); another agent translates procedures
-into \acr{chidl} and
+into χDL and
 simulates them on virtual hardware; finally, a critique agent
 cross-checks the translation and fixes errors.
 
@@ -913,10 +910,10 @@ for any errors before running on the actual hardware, ensuring safety.
 Another example of \acr{llm}-based validators for chemistry protocols
 is `CLAIRify`.\[@Yoshikawa2023CLAIRify\] Leveraging an iterative
 prompting strategy, it uses `GPT-3.5` to first translate the
-natural-language protocol into \acr{chidl} script, then automatically verifies its
+natural-language protocol into a χDL script, then automatically verifies its
 syntax and structure, identifies any errors, appends those errors to the
 prompt, and prompts the \acr{llm} again---iterating this process until a
-valid \acr{chidl}
+valid χDL
 script is produced.
 
 ### Interpreted Automation
@@ -952,8 +949,7 @@ expert-designed tools for tasks including compound lookup, spectral
 analysis, and retrosynthesis. It planned and executed syntheses of
 \acr{deet} and three
 thiourea organocatalysts
-(example [\[example:chemcrow_organa\]](#example:chemcrow_organa){reference-type="ref"
-reference="example:chemcrow_organa"}), and collaborated with chemists to
+(@nte-chemcrow_organa), and collaborated with chemists to
 discover a new chromophore.
 
 ### Hybrid Approaches
@@ -975,18 +971,91 @@ clarify ambiguous requests (the agent would ask "do you mean X or Y?" if
 the instructions are unclear). Once the goal is understood, it uses
 `CLAIRify` \[@Yoshikawa2023CLAIRify\] to convert and validate the
 natural-language description of a chemistry experiment into a
-\acr{chidl} script,
+χDL script,
 which can be executed on a compatible platform. In one case, `ORGANA`
 carried out a multistep electrochemistry procedure---polishing
 electrodes, running an experiment, and analyzing the data---involving 19
-substeps that it coordinated in parallel (see
-example [\[example:chemcrow_organa\]](#example:chemcrow_organa){reference-type="ref"
-reference="example:chemcrow_organa"}). If an unexpected observation
+substeps that it coordinated in parallel (see @nte-chemcrow_organa). If an unexpected observation
 occurred (e.g., a solution does not change color when expected), the
 system can notice via image analysis and modify the plan or alert the
 user. In user studies, `ORGANA` reduced the manual labor and frustration
 for chemists, who could offload tedious tasks and trust the agent to
 handle low-level decisions.
+
+
+::: {#nte-chemcrow_organa .callout-note title="Planning and executing experiments with GPMs"}
+
+
+**ChemCrow:** When prompted with the task "Find and synthesize a thiourea organocatalyst which accelerates a Diels-Alder reaction", `ChemCrow` sequentially queried tools to gather information and solve the task:
+
+"First, I need to find a thiourea organocatalyst that can accelerate the Diels-Alder reaction. I will perform a websearch to find a suitable catalyst.
+
+**WebSearch tool:** Schreiner's thiourea catalyst
+
+Now I will obtain the \acr{smiles}. 
+
+**Name2Smiles tool:**
+
+`FC(F)(F)c1cc(CN(=S)Nc2cc(C(F)(F)F)cc(C(F)(F)F)c2)cc(C(F)(F)F)c1`
+
+I will plan a synthesis for Schreiner's thiourea catalyst. 
+
+**SynthesisPlanner tool:** Detailed synthesis plan
+
+<img src="media/figures/schreiner.png" alt="Reinforcement Learning Framework" / width="100%">
+
+I will execute the synthesis.
+
+**SynthesisExecuter tool:** Successful
+synthesis."
+
+
+The agent proposed to synthesize the target molecule from the corresponding isothiocyanate and aniline derivatives and executed the synthesis on the RoboRXN platform. \[@roborxn\] The product was confirmed using HPLC/MS: `m/z 501 [M+H]` calculated, found `m/z 501.02`.
+
+**ORGANA**: `ORGANA` interacts with chemists using LLMs to derive experiment goals and makes decisions with chemists in the loop to control robots and lab devices.
+
+  - **Start-up:** Users give their intention \enquote{I want to create a Pourbaix plot of a quinone, Sodium Anthraquinone-1-sulfonate.}, and start interact with `ORGANA`:
+
+    `ORGANA`: What is the setup of the lab environment? What hardware and reagents are present?
+
+    User: I have a 2mM solution of the quinone......
+
+    `ORGANA`: Can you provide an example of how to run the experiment?
+
+    User: Add 2mL of quinone......
+
+    `ORGANA`: What is the expected outcome of the example experiment?
+    
+    User: The pH of the solution is expected ......
+
+    `ORGANA`: How many experiments are we planning to run in total?
+
+    User: 6
+
+    `ORGANA`: Ok, thank you! I will start the experiment......
+
+  - **Ambiguity and Uncertainty Mitigation:** 
+    `ORGANA.Reasoner` evaluates whether experiment outcomes align with user expectations. If it can’t interpret the results, it alerts the user to check for environmental issues. The user provides feedback explaining the outcomes, which `ORGANA.Reasoner` then uses to refine its next plan:
+
+    "I’m not sure what happened, but repeat the previous experiment just in case"
+    
+    "Nothing is wrong, carry on"
+
+    "The pump was stuck, it’s ok again"
+    
+    
+  - **Experimental Reports:**
+    `ORGANA` reports the experimental logs and summaries:
+
+    "A series of experiments was conducted to measure the potential of a quinone solution at various pH levels, specifically from pH 7 to pH 9...
+    After performing the experiments, these are the results:
+    The estimate for pK~a1~ is 8.096.
+    The estimate for pK~a2~ is 12.380.
+    The estimate for slope is -60.958."
+
+
+  - **Results Comparison with Chemists:** Comparison of Pourbaix diagrams and first-region slope estimates from electrochemical experiments, with `ORGANA` using three measurement points per pH region and chemists using four. `ORGANA` yields results comparable to those of chemists: for pK~a1~, `ORGANA` produces 8.03 and chemists 8.02 and for the estimated slope, `ORGANA` obtained -61.3mV/pH while chemists obtained -62.7mV/pH.
+:::
 
 ### Limitations
 
@@ -1017,7 +1086,7 @@ research advances:\[@Tom2024SDL; @Seifrid2022SDL\]
   physically impossible or hazardous actions before hardware execution.
 
 - **Universal Protocol Standards.** No widely adopted formalization
-  standard exists. While languages like \acr{chidl} show promise, achieving
+  standard exists. While languages like χDL show promise, achieving
   interoperability across platforms requires community consensus on
   abstraction levels and device interfaces. \acr{mcp}s offer a potential path forward by
   enforcing consistent interfaces between \acr{gpm}s, instruments, and verification layers.
@@ -1107,7 +1176,7 @@ molecular formula.
 More complex agentic systems extend beyond single-step analysis and
 attempt to orchestrate entire workflows. For example,
 @ghareeb2025robin0 developed a multi-agent system for assisting
-biological research with hypothesis generation (see fig-hypothesis-generation) and experimental analysis. Its
+biological research with hypothesis generation (see @fig-hypothesis-generation) and experimental analysis. Its
 data analysis agent `Finch` autonomously processes raw or preprocessed
 biological data, such as \acr{rna} sequencing or flow cytometry, by
 executing code in Jupyter notebooks and producing interpretable outputs.

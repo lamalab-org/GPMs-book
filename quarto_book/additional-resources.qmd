@@ -1,0 +1,45 @@
+---
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    anchor-sections: true
+    other-links:
+    - text: Visit our website
+      href: https://lamalab.org/
+      icon: globe
+    - text: Follow us on X (Twitter)
+      href: https://x.com/jablonkagroup
+      icon: twitter-x
+    - text: We are hiring!
+      href: https://forms.fillout.com/t/eoGA7AhnAKus
+      icon: person-badge
+    - text: Contact us
+      href: mailto:contact@lamalab.org
+      icon: mailbox
+acronyms:
+  insert_loa: false 
+  insert_links: false  
+  fromfile: ./acronyms.yml
+---
+
+
+
+# Additional Resources
+
+If you want to gain your first Hands-on experience with LLMs see our Tutorial below.
+
+## Building your own RAG System
+
+This tutorial shows you how to build a RAG (Retrieval Augmented Generation) System from scratch. The tutorial is available in German:
+[RAG Tutorial (German)](https://lamalab-org.github.io/rag-tutorial/)
+
+## LLM Tutorial
+In these tutorials, we will build some key pieces for recent applications of transformers, in particular LLMs, in chemistry and materials science from scratch.
+The code and materials are available here:
+[LLM Tutorial Repository](https://github.com/lamalab-org/llm-tutorial)
+
+## Data Extraction Tutorial
+In this tutorial, we focus on extracting structured data from scientific text, a key step for many downstream applications in chemistry and materials science.
+The tutorial is available here:
+[Data Extraction Tutorial Repository](https://github.com/lamalab-org/data-extraction-tutorial)

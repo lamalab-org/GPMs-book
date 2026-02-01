@@ -25,7 +25,7 @@ acronyms:
 
 
 
-# Additional Resources
+# Additional Resources {.unnumbered}
 
 If you want to gain your first Hands-on experience with LLMs see our Tutorial below.
 

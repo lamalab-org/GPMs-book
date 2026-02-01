@@ -31,6 +31,7 @@ book:
     - tutorial-coding.qmd
     - tutorial-writing.qmd
     - tutorial-privacy.qmd
+    - additional-resources.qmd
 bibliography: references.bib
 format:
   html:

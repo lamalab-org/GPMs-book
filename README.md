@@ -3,14 +3,14 @@
 ![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)
 [![Platform](https://img.shields.io/badge/platform-web-blueviolet?style=flat-square)](https://gpmbook.lamalab.org/)
-[![arXiv](https://img.shields.io/badge/arXiv-2507.07456-b31b1b.svg)](https://arxiv.org/abs/2507.07456)
+[![DOI](https://img.shields.io/badge/DOI-10.1021%2Facs.chemrev.5c00583-blue?style=flat-square)](https://doi.org/10.1021/acs.chemrev.5c00583)
 
 ## 📘 Read the Review
 
 You can read the review directly on
 or access it as a collaborative online book at:
 
-👉 [arXiv](https://arxiv.org/pdf/2507.07456)
+👉 [Chemical Reviews](https://pubs.acs.org/doi/full/10.1021/acs.chemrev.5c00583)
 
 👉 [Online Book](https://gpmbook.lamalab.org/)
 

@@ -79,11 +79,19 @@ K.M.J. has been a paid contractor for OpenAI as part of the Red-Teaming Network.
 If you find this work useful, please cite it using:
 
 ```bibtex
-@article{alampara2025general,
-  title   = {General purpose models for the chemical sciences},
-  author  = {Nawaf Alampara and Anagha Aneesh and Martiño Ríos-García and Adrian Mirza and Mara Schilling-Wilhelmi and Ali Asghar Aghajani and Meiling Sun and Gordan Prastalo and Kevin Maik Jablonka},
-  year    = {2025},
-  journal = {arXiv preprint arXiv: 2507.07456}
+@article{Alampara2026,
+  title = {General-Purpose Models for the Chemical Sciences: LLMs and Beyond},
+  volume = {126},
+  ISSN = {1520-6890},
+  url = {http://dx.doi.org/10.1021/acs.chemrev.5c00583},
+  DOI = {10.1021/acs.chemrev.5c00583},
+  number = {4},
+  journal = {Chemical Reviews},
+  publisher = {American Chemical Society (ACS)},
+  author = {Alampara,  Nawaf and Aneesh,  Anagha and Ríos-García,  Martiño and Mirza,  Adrian and Schilling-Wilhelmi,  Mara and Aghajani,  Ali Asghar and Sun,  Meiling and Prastalo,  Gordan and Jablonka,  Kevin Maik},
+  year = {2026},
+  month = feb,
+  pages = {2484–2549}
 }
 ```
 
